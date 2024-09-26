@@ -3,7 +3,7 @@
 <section class="content-header">
     <h1>
       Category Post
-      <small>Carete</small>
+      <small>Update</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
@@ -18,13 +18,13 @@
     <div class="row">
 
     <div class="box box-primary">
-        <form action="{{ route('updatedatacategorypost',$categorypost->id_category) }}" method="POST">
+        <form action="" method="POST">
             @csrf
             <div class="box-body">
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label for="name">Name <span class="text-danger">(*)</span></label>
-                        <input type="text" class="form-control" name="namecategory" value="{{ $categorypost->name }}" placeholder="Name ......">
+                        <input type="text" class="form-control" name="namecategory" value="" placeholder="Name ......">
                      
                     </div>
                 </div>
@@ -32,13 +32,13 @@
                     <div class="form-group">
                         <div class="form-group">
                             <label>Description</label>
-                            <textarea class="form-control" name="descriptioncategory" rows="3" placeholder="Enter ...">{{ $categorypost->discription }}</textarea>
+                            <textarea class="form-control" name="descriptioncategory" rows="3" placeholder="Enter ..."></textarea>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="box-footer" >
-                <a href="{{ route('indexcategorypost') }}" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
+                <a href="" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Submit</button>
             </div>
             </div>

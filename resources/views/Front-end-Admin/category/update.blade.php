@@ -3,7 +3,7 @@
     <section class="content-header">
         <h1>
             CateGory
-            <small>Create</small>
+            <small>Update</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href=""><i class="fa fa-dashboard"></i>Home</a></li>
@@ -23,32 +23,34 @@
                         <div class="col-sm-8">
                             <div class="form-group {{ $errors->first('category_name') ? 'has-error' : '' }}">
                                 <label for="name">Name<span class="text-danger">(*)</span></label>
-                                <input type="text" class="form-control" name="category_name" value="{{$category->name}}"
+                                <input type="text" class="form-control" name="category_name" value=""
                                        placeholder="Name ......"
                                        required>
-                                @if ($errors->first('category_name'))
+                                {{-- @comment --}}
+                                {{-- @if ($errors->first('category_name'))
                                     <span class="text-danger">{{ $errors->first('category_name') }}</span>
-                                @endif
+                                @endif --}}
                             </div>
                             <div class="form-group {{ $errors->first('category_description') ? 'has-error' : '' }}">
                                 <label>Description<span class="text-danger">(*)</span></label>
                                 <textarea class="form-control" name="category_description" rows="3"
-                                          placeholder="Enter ..." required>{{$category->discription}}</textarea>
-                                @if ($errors->first('category_description'))
+                                          placeholder="Enter ..." required></textarea>
+                                {{-- @comment --}}
+
+                                {{-- @if ($errors->first('category_description'))
                                     <span class="text-danger">{{ $errors->first('category_description') }}</span>
-                                @endif
+                                @endif --}}
                             </div>
-                            <div class="form-group">
+
+                            {{-- @comment --}}
+                            {{-- <div class="form-group">
                                 <label for="fileInput">Image</label>
                                 <input type="file" class="form-control-file" id="fileInput" name="category_image">
-                            </div>
-                            <div>
-                                <img src="{{ asset($category->image) }}" alt="Ảnh hiện tại" height="300px">
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="box-footer">
-                        <a href="{{ route('indexcategory') }}" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
+                        <a href="" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
                         <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Submit</button>
                     </div>
                 </form>

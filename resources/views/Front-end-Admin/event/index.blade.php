@@ -23,7 +23,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title"><a href="{{ route('addEvent') }}" class="btn btn-primary">Thêm mới </a></h3>
+                        <h3 class="box-title"><a href="" class="btn btn-primary">Thêm mới </a></h3>
                         <div class="box-tools">
                             <form action="#">
                                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -52,8 +52,8 @@
                                 <th>Updated At</th>
                                 <th>Action</th>
                             </tr>
-
-                            @if($events->total() > 0)
+                            {{-- @comment --}}
+                            {{-- @if($events->total() > 0)
                                 @php
                                     $count = 0;
                                 @endphp
@@ -88,7 +88,7 @@
                                 <tr>
                                     <td colspan="11" class="text-center">Rất tiếc, không có dữ liệu</td>
                                 </tr>
-                            @endif
+                            @endif --}}
 
                             </tbody>
                         </table>
@@ -103,7 +103,9 @@
         <!-- Phân trang bắt đầu -->
         <div id="pageNavPosition" class="text-right">
             <ul class="pagination">
-                @if ($events->onFirstPage())
+                {{-- @comment --}}
+
+                {{-- @if ($events->onFirstPage())
                     <li class="disabled"><span>&laquo;</span></li>
                 @else
                     <li><a href="{{ $events->previousPageUrl() }}" rel="prev">&laquo;</a></li>
@@ -119,7 +121,7 @@
                     <li><a href="{{ $events->nextPageUrl() }}" rel="next">&raquo;</a></li>
                 @else
                     <li class="disabled"><span>&raquo;</span></li>
-                @endif
+                @endif --}}
             </ul>
         </div>
         <!-- Phân trang kết thúc -->

@@ -24,7 +24,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title"><a href="{{ route('addcategorypost') }}" class="btn btn-primary">Thêm
+                        <h3 class="box-title"><a href="" class="btn btn-primary">Thêm
                                 mới </a></h3>
                         <div class="box-tools">
                             <form action="#">
@@ -51,8 +51,8 @@
                                 <th>Time</th>
                                 <th>Action</th>
                             </tr>
-
-                            @if($categorypost->total() > 0)
+                            {{-- @comment --}}
+                            {{-- @if($categorypost->total() > 0)
                                 @php
                                     $count = 0;
                                 @endphp
@@ -64,9 +64,11 @@
                                         <tr>
                                             <td>{{ $count }}</td>
 
-                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->name }}</td> --}}
+
+                                            {{-- @comment --}}
                                             {{-- <td><span class="{{ $item->getType($item->atb_type)['class'] }}"></span></td> --}}
-                                            <td>{{ $item->discription }}</td>
+                                            {{-- <td>{{ $item->discription }}</td>
                                             <td>
                                                 @if ($item->checkstatus == 1)
                                                     <a href="{{ route('showorhidecategorypost',['id'=>$item->id_category]) }}"
@@ -92,14 +94,16 @@
                                 @endif
                             @else
                                 <h3>Rất tiêc, dữ liệu không tìm thấy</h3>
-                            @endif
+                            @endif --}}
 
                             </tbody>
                         </table>
                         <div id="pageNavPosition" class="text-right">
                             <ul class="pagination">
+                                {{-- @comment --}}
+
                                 <!-- Hiển thị link đến trang trước (Previous Page) -->
-                                @if ($categorypost->onFirstPage())
+                                {{-- @if ($categorypost->onFirstPage())
                                     <li class="disabled"><span>&laquo;</span></li>
                                 @else
                                     <li><a href="{{ $categorypost->previousPageUrl() }}" rel="prev">&laquo;</a></li>
@@ -117,7 +121,7 @@
                                     <li><a href="{{ $categorypost->nextPageUrl() }}" rel="next">&raquo;</a></li>
                                 @else
                                     <li class="disabled"><span>&raquo;</span></li>
-                                @endif
+                                @endif --}}
                             </ul>
                         </div>
                     </div>

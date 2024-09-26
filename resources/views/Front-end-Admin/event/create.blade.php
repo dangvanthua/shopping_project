@@ -12,7 +12,8 @@
         </ol>
     </section>
     <section class="content">
-        @if($errors->any())
+        {{-- @comment --}}
+        {{-- @if($errors->any())
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -21,14 +22,14 @@
                 </ul>
             </div>
         @endif
-        <div class="row">
+        <div class="row"> --}}
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Add New Event</h3>
                     </div>
                     <div class="box-body">
-                        <form action="{{ route('storeEvent') }}" method="POST" enctype="multipart/form-data">
+                        <form action="" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Name</label>

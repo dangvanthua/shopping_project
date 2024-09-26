@@ -18,7 +18,7 @@
     <div class="row">
 
     <div class="box box-primary">
-        <form action="{{ route('adddatacategorypost') }}" method="POST">
+        <form action="" method="POST">
             @csrf
             <div class="box-body">
                 <div class="col-sm-12">
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="box-footer" >
-                <a href="{{ route('indexcategorypost') }}" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
+                <a href="" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Submit</button>
             </div>
             </div>
