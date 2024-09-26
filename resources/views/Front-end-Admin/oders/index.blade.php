@@ -21,20 +21,22 @@
               <div class="box-header">
                     <div class="box-title">
                         <form action="" method="GET" class="form-inline">
-                            <input type="text" value="{{ Request::get('id') }}" class="form-control" name="id" placeholder="ID">
-                            <input type="text" value="{{ Request::get('email') }}" class="form-control" name="email" placeholder="Email ...">
+                            <input type="text" value="" class="form-control" name="id" placeholder="ID">
+                            <input type="text" value="" class="form-control" name="email" placeholder="Email ...">
                             {{-- <select name="type" class="form-control">
                                 <option value="0">__Phân Loại Khách__</option>
                                 <option value="1" {{ Request::get('type') == 1 ? "selected='selected'" : "" }}>Thành Viên</option>
                                 <option value="2" {{ Request::get('type') == 2 ? "selected='selected'" : "" }}>Khách</option>
                             </select> --}}
-                            <select name="status" class="form-control">
+
+                            {{-- @comment --}}
+                            {{-- <select name="status" class="form-control">
                                 <option value="0">__Trạng Thái__</option>
                                 <option value="1" {{ Request::get('status') == 1 ? "selected='selected'" : "" }}>Tiếp Nhận</option>
                                 <option value="2" {{ Request::get('status') == 2 ? "selected='selected'" : "" }}>Đang Vận Chuyển</option>
                                 <option value="3" {{ Request::get('status') == 3 ? "selected='selected'" : "" }}>Đã Bàn Giao</option>
                                 <option value="-1" {{ Request::get('status') == -1 ? "selected='selected'" : "" }}>Hủy Bỏ</option>
-                            </select>
+                            </select> --}}
                             <button type="submit" class="btn btn-success"><i class="fa fa-search"> </i> Search</button>
                         </form>
                     </div>
@@ -53,7 +55,8 @@
                       <th>Time</th>
                       <th>Action</th>
                     </tr>
-                    @if(isset($transactions))
+                    {{-- @comemnt --}}
+                    {{-- @if(isset($transactions))
                         @foreach ($transactions as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>
@@ -64,7 +67,8 @@
                                         <li>Phone: {{ $item->tst_phone }}</li>
                                         <li>Address: {{ $item->tst_address }}</li>
                                     </ul>
-                                </td>
+                                </td> --}}
+                                {{-- @chua can --}}
                                 {{-- <td>
                                     @if ($item->tst_user_id)
                                         <span class="label label-warning">Thành Viên</span>
@@ -72,7 +76,9 @@
                                         <span class="label label-default">Khách</span>
                                     @endif
                                 </td> --}}
-                                <td>{{ number_format($item->tst_total_money,0,',','.') }}</td>
+
+                                {{-- @comemnt --}}
+                                {{-- <td>{{ number_format($item->tst_total_money,0,',','.') }}</td>
                                 <td>
                                     <span class="label label-{{ $item->getStatus($item->tst_status)['class'] }}">
                                         {{ $item->getStatus($item->tst_status)['name'] }}
@@ -83,7 +89,7 @@
                                         {{ $item->tst_type == config('contants.PTTT.THUONG') ? 'Thường' : 'Online' }}
                                     </span>
                                 </td>
-                                {{-- <td>{{ date("d/m/Y H:i:s", strtotime($item->created_at)) }}</td> --}}
+                                <td>{{ date("d/m/Y H:i:s", strtotime($item->created_at)) }}</td>
                                 <td>
                                     <a href="" class="btn btn-xs btn-info js-preview-transaction"><i class="fa fa-eye"></i>View</a>
 
@@ -112,7 +118,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                    @endif
+                    @endif --}}
                   </tbody>
                 </table>
               </div>
@@ -130,7 +136,7 @@
 
 
   </section>
-    {{--  <div class="modal fade fade" id="modal-preview-transaction" >
+     <div class="modal fade fade" id="modal-preview-transaction" >
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -151,10 +157,10 @@
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-    </div>  --}}
+    </div>
   <!-- /.content -->
 @endsection
-{{--  @section('script')
+ @section('script')
     <script>
         $('.js-preview-transaction').click(function(e){
             e.preventDefault();
@@ -190,4 +196,4 @@
             })
         });
     </script>
-@endsection  --}}
+@endsection 

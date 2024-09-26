@@ -154,9 +154,9 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="{{ route('manageruser') }}" data-toggle="tooltip" data-placement="bottom"
+                <li class="active"><a href="" data-toggle="tooltip" data-placement="bottom"
                                       title="Người Dùng">Người Dùng</a></li>
-                <li><a href="{{ route('showalluser') }}" data-toggle="tooltip" data-placement="bottom"
+                <li><a href="" data-toggle="tooltip" data-placement="bottom"
                        title="ĐIỂM DANH">ĐIỂM DANH</a></li>
                 <li><a href="" data-toggle="tooltip" data-placement="bottom" title="TIỀN LƯƠNG">TIỀN LƯƠNG</a></li>
                 <li><a href="" data-toggle="tooltip" data-placement="bottom" title="LỊCH CÔNG TÁC">LỊCH CÔNG TÁC</a>
@@ -169,7 +169,7 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown">
-                        <li><a href="{{ route('admin.logout') }}" data-toggle="tooltip" data-placement="bottom"
+                        <li><a href="" data-toggle="tooltip" data-placement="bottom"
                                title="ĐĂNG XUẤT"><b>Đăng xuất <i class="fas fa-sign-out-alt"></i></b></a></li>
                     </ul>
                 </li>
@@ -185,16 +185,16 @@
     </form>
     <b>CHỨC NĂNG CHÍNH:</b><Br>
     <div class="container mt-5">
-        <form id="searchForm" action="{{ route('searchUser') }}" method="GET">
+        <form id="searchForm" action="" method="GET">
             <input type="text" id="searchInput" name="searchTerm" class="form-control" placeholder="Nhập từ khóa tìm kiếm...">
             <button type="submit" class="btn btn-primary mt-2">Tìm kiếm</button>
         </form>
     </div>
-    <a href="{{ route('showRegisterForm') }}" class="nv btn add-new" data-toggle="tooltip"
+    <a href="" class="nv btn add-new" data-toggle="tooltip"
        data-placement="top" title="Thêm Người dùng">
         <i class="fas fa-user-plus"></i>
     </a>
-    <a href="{{ route('orderByName') }}" class="nv" data-toggle="tooltip" data-placement="top"
+    <a href="" class="nv" data-toggle="tooltip" data-placement="top"
        title="Lọc Dữ Liệu">
         <i class="fa fa-filter" aria-hidden="true"></i>
     </a>
@@ -210,7 +210,8 @@
     </div>
     <table class="table table-bordered" id="myTable">
         <div class="container">
-            @if(session('success'))
+            {{-- @comment --}}
+            {{-- @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
@@ -220,7 +221,7 @@
                 <div class="alert alert-danger">
                     {{ session('error') }}
                 </div>
-            @endif
+            @endif --}}
         </div>
         <thead>
         <tr class="ex">
@@ -237,7 +238,8 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($users as $user)
+            {{-- @comment --}}
+        {{-- @foreach($users as $user)
             <tr>
                 <td>{{ $user->user_id }}</td>
                 <td>{{ $user->name }}</td>
@@ -267,14 +269,15 @@
                     </form>
                 </td>
             </tr>
-        @endforeach
+        @endforeach --}}
         </tbody>
     </table>
 
     <!-- Phân trang bắt đầu -->
     <div id="pageNavPosition" class="text-right">
         <ul class="pagination">
-            @if ($users->onFirstPage())
+        {{-- @comemnt --}}
+            {{-- @if ($users->onFirstPage())
                 <li class="disabled"><span>&laquo;</span></li>
             @else
                 <li><a href="{{ $users->previousPageUrl() }}" rel="prev">&laquo;</a></li>
@@ -290,7 +293,7 @@
                 <li><a href="{{ $users->nextPageUrl() }}" rel="next">&raquo;</a></li>
             @else
                 <li class="disabled"><span>&raquo;</span></li>
-            @endif
+            @endif --}}
         </ul>
     </div>
     <!-- Phân trang kết thúc -->
@@ -316,7 +319,9 @@
                 e.preventDefault();
                 const searchTerm = $('#searchInput').val().trim();
                 if (searchTerm !== '') {
-                    window.location.href = "{{ route('searchUser') }}?searchTerm=" + searchTerm;
+                    // window.location.href = "" + searchTerm;
+                    window.location.href = "" + searchTerm;
+
                 }
             });
         });
