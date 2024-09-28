@@ -1,4 +1,4 @@
-@extends('layout.master_admin')
+@extends('LayOut.admin-dashboard.master_admin')
 @section('content')
 <section class="content-header">
     <h1>
@@ -6,8 +6,8 @@
       <small>Carete</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="{{ route('admin.index') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="{{ route('admin.slide.index') }}">Slide</a></li>
+      <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="">Slide</a></li>
       <li class="active">Create</li>
 
     </ol>
@@ -18,7 +18,7 @@
     <div class="row">
 
     <div class="box box-primary">
-        <form role="form" action="{{ route('admin.slide.store') }}" method="POST" enctype="multipart/form-data">
+        <form role="form" action="" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="box-body">
                 <div class="col-sm-7">
@@ -26,18 +26,14 @@
                         <div class="form-group {{ $errors->first('sd_title') ? 'has-error' : '' }}">
                             <label for="name">Title <span class="text-danger">(*)</span></label>
                             <input type="text" class="form-control" name="sd_title" placeholder="Name ......">
-                            @if ($errors->first('sd_title'))
                                 <span class="text-danger">{{ $errors->first('sd_title') }}</span>
-                            @endif
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group {{ $errors->first('sd_link') ? 'has-error' : '' }}">
                             <label for="link">Links <span class="text-danger">(*)</span></label>
                             <input type="text" class="form-control" name="sd_link" placeholder="link ......">
-                            @if ($errors->first('sd_link'))
                                 <span class="text-danger">{{ $errors->first('sd_link') }}</span>
-                            @endif
                         </div>
                     </div>
                     <div class="col-sm-12">
@@ -57,9 +53,8 @@
                                 <div class="form-group {{ $errors->first('sd_sort') ? 'has-error' : '' }}">
                                     <label for="name">Sort </label>
                                     <input type="text" class="form-control" name="sd_sort" placeholder="0">
-                                    @if ($errors->first('sd_sort'))
                                         <span class="text-danger">{{ $errors->first('sd_sort') }}</span>
-                                    @endif
+
                                 </div>
                             </div>
                         </div>
@@ -70,7 +65,7 @@
                         <div class="form-group">
                             <label>Ảnh Mới</label>
                             <div style="margin-bottom:10px" >
-                                <img id="image_preview_container" src="{{ asset('admin/product.jpg') }}" class="img-thumbnail" style="width: 100%;height:300px" alt=""></div>
+                                <img id="image_preview_container" src="" class="img-thumbnail" style="width: 100%;height:300px" alt=""></div>
                                 <input type="file" name="sd_image" id="image"  class="js-upload">
                         </div>
                     </div>
@@ -80,7 +75,7 @@
 
             </div>
             <div class="box-footer">
-                <a href="{{ route('admin.slide.index') }}" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
+                <a href="" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Submit</button>
             </div>
             </div>

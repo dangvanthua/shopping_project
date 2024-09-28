@@ -1,4 +1,4 @@
-@extends('layout.master_admin')
+@extends('LayOut.admin-dashboard.master_admin')
 @section('content')
 
 <section class="content-header">
@@ -15,38 +15,38 @@
      <div class="row" style="margin-bottom: 20px">
 
         <div class="col-sm-8">
-            {{-- <div class="box-title">
+            <div class="box-title">
                 <form action="" method="GET" class="form-inline">
                     <select name="mt" class="form-control">
                         <option value="">_ Tháng trong năm _</option>
-                        @for ($i = 1; $i <=12; $i++)
-                            <option value="{{$i}}" {{ Request::get('mt') == $i ? "selected='selected'" : "" }}>Tháng {{$i}}</option>
-                        @endfor
+
+                            <option value="">Tháng</option>
+
                     </select>
                     <button type="submit" class="btn btn-success"><i class="fa fa-search"> </i> Search</button>
                      <button type="submit" name="export" value="true" class="btn btn-info">
                         <i class="fa fa-save"> </i> Export
-                    </button> 
+                    </button>
                 </form>
-            </div><br> --}}
+            </div><br>
             {{-- @@todo --}}
-            {{-- <figure class="highcharts-figure">
-                <div id="container2" 
-                data-list-day="{{ $listDay }}" 
-                data-money-default="{{ $arrRevenueTransactionMonthDefault }}"
-                data-money-process="{{ $arrRevenueTransactionMonthProcess }}"
-                data-money-success="{{ $arrRevenueTransactionMonthSuccess }}"
-                data-money-cancel="{{ $arrRevenueTransactionMonthCancel }}"
-                data-mt = "{{ $mt }}"
+            <figure class="highcharts-figure">
+                <div id="container2"
+                data-list-day=""
+                data-money-default=""
+                data-money-process=""
+                data-money-success=""
+                data-money-cancel=""
+                data-mt = ""
                 ></div>
-            </figure> --}}
+            </figure>
         </div>
         {{-- @@todo --}}
-        {{-- <div class="col-sm-4">
+        <div class="col-sm-4">
             <figure class="highcharts-figure">
-                <div id="container" data-json="{{ $statusTransaction }}"></div>
+                <div id="container" data-json=""></div>
             </figure>
-        </div> --}}
+        </div>
     </div> 
     <div class="row" style="margin-bottom: 20px">
         <div class="col-md-7">

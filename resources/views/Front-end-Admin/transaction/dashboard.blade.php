@@ -19,7 +19,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Tổng Số Đơn Hàng</span>
-               <span class="info-box-number">{{ $countOder }}<small><a href="">(Chi Tiết)</a></small></span> 
+               <span class="info-box-number"><small><a href="">(Chi Tiết)</a></small></span>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@
             <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
             <div class="info-box-content">
               <span class="info-box-text">Sản Phẩm</span>
-               <span class="info-box-number">{{ $countProduct }}<small><a href="">(Chi Tiết)</a></small></span> 
+               <span class="info-box-number"><small><a href="">(Chi Tiết)</a></small></span>
             </div>
           </div>
         </div>
@@ -80,47 +80,40 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(isset($dataDashboard))
-                                    @foreach ($dataDashboard as $item)
                                         <tr>
-                                            <td>{{ $item->id_oder }}</td>
+                                            <td></td>
                                             <td>
                                                 <ul>
-                                                    <li>Name: {{ $item->name }}</li>
-                                                    <li>Email: {{ $item->email }}</li>
-                                                    <li>Phone: {{ $item->phone }}</li>
-                                                    <li>Address: {{ $item->district }}</li>
+                                                    <li>Name: Yes sir</li>
+                                                    <li>Email: </li>
+                                                    <li>Phone: </li>
+                                                    <li>Address: </li>
                                                 </ul>
                                             </td>
                                             
-                                            <td>{{ number_format($item->intomoney,0,',','.') }} VND</td>
+                                            <td> VND</td>
                                             <td>
-                                                @if($item->status == 'Huỷ')
-                                                    <span class="label label-danger" style="cursor: default; pointer-events: none;">
-                                                        {{ $item->status }}
-                                                    </span>
-                                                @else
+                                                    {{-- <span class="label label-danger" style="cursor: default; pointer-events: none;">
+                                                        Ok moi
+                                                    </span> --}}
                                                     <span class="label label-success" style="cursor: default; pointer-events: none;">
-                                                        {{ $item->status }}
+                                                        Yes sir
                                                     </span>
-                                                @endif
+
                                             </td>                                
                                             {{-- <td>đây là thanh toán</td> --}}    
                                             <td>
-                                                <span class="label label-warning" style="cursor: default; pointer-events: none;">
-                                                    {{ $item->payoftype->name }}
+                                                <span class="label label-warning" style="cursor: default; pointer-events: none;"> Yes sir
                                                 </span>
                                             </td>
-                                            <td>{{ $item->created_at }}</td>
+                                            <td>hâh</td>
                                         </tr>
-                                    @endforeach
-                                @endif
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="box-footer clearfix" style="">
-                     <a href="{{ route('indexlistoder') }}" class="btn btn-sm btn-info btn-flat pull-right">Danh Sách Đơn Hàng</a> 
+                     <a href="" class="btn btn-sm btn-info btn-flat pull-right">Danh Sách Đơn Hàng</a>
                 </div>
             </div>
         </div>

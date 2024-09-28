@@ -21,8 +21,8 @@
               <div class="box-header">
                     <div class="box-title">
                         <form action="" method="GET" class="form-inline">
-                            <input type="text" value="{{ Request::get('id') }}" class="form-control" name="id" placeholder="ID">
-                            <input type="text" value="{{ Request::get('email') }}" class="form-control" name="email" placeholder="Email ...">
+                            <input type="text" value="" class="form-control" name="id" placeholder="ID">
+                            <input type="text" value="" class="form-control" name="email" placeholder="Email ...">
                             {{-- <select name="type" class="form-control">
                                 <option value="0">__Phân Loại Khách__</option>
                                 <option value="1" {{ Request::get('type') == 1 ? "selected='selected'" : "" }}>Thành Viên</option>
@@ -30,10 +30,10 @@
                             </select> --}}
                             <select name="status" class="form-control">
                                 <option value="0">__Trạng Thái__</option>
-                                <option value="1" {{ Request::get('status') == 1 ? "selected='selected'" : "" }}>Tiếp Nhận</option>
-                                <option value="2" {{ Request::get('status') == 2 ? "selected='selected'" : "" }}>Đang Vận Chuyển</option>
-                                <option value="3" {{ Request::get('status') == 3 ? "selected='selected'" : "" }}>Đã Bàn Giao</option>
-                                <option value="-1" {{ Request::get('status') == -1 ? "selected='selected'" : "" }}>Hủy Bỏ</option>
+                                <option value="1">Tiếp Nhận</option>
+                                <option value="2">Đang Vận Chuyển</option>
+                                <option value="3">Đã Bàn Giao</option>
+                                <option value="-1">Hủy Bỏ</option>
                             </select>
                             <button type="submit" class="btn btn-success"><i class="fa fa-search"> </i> Search</button>
                         </form>
@@ -52,22 +52,21 @@
                       <th>Time</th>
                       <th>Action</th>
                     </tr>
-                    @if(isset($listOder))
-                        @foreach ($listOder as $item)
                             <tr>
-                                <td>{{ $item->id_oder }}</td>
+                                <td></td>
                                 <td>
                                     <ul>
-                                        <li>Name: {{ $item->name }}</li>
-                                        <li>Email: {{ $item->email }}</li>
-                                        <li>Phone: {{ $item->phone }}</li>
-                                        <li>Address: {{ $item->district }}</li>
+                                        <li>Name: Cao Anh Vũ</li>
+                                        <li>Email:</li>
+                                        <li>Phone:</li>
+                                        <li>Address:</li>
                                     </ul>
                                 </td>
                                 
-                                <td>{{ number_format($item->intomoney,0,',','.') }}</td>
+                                <td></td>
                                 <td>
-                                    @if($item->status == 'Huỷ')
+                                    {{-- @comment --}}
+                                    {{-- @if($item->status == 'Huỷ')
                                         <span class="label label-danger" style="cursor: default; pointer-events: none;">
                                             {{ $item->status }}
                                         </span>
@@ -75,18 +74,18 @@
                                         <span class="label label-success" style="cursor: default; pointer-events: none;">
                                             {{ $item->status }}
                                         </span>
-                                    @endif
+                                    @endif --}}
                                 </td>                                
                                 {{-- <td>đây là thanh toán</td> --}}    
                                 <td>
                                     <span class="label label-warning" style="cursor: default; pointer-events: none;">
-                                        {{ $item->payoftype->name }}
+                                        yes sir
                                     </span>
                                 </td>
                                 
-                                <td>{{ date("d/m/Y H:i:s", strtotime($item->created_at)) }}</td>
+                                <td>{{ date("d/m/Y H:i:s") }}</td>
                                 <td>
-                                    <a href="{{ route('viewdetailuser',['id_oder'=>$item->id_oder]) }}" class="btn btn-xs btn-info js-preview-view"><i class="fa fa-eye"></i>View</a>
+                                    <a href="" class="btn btn-xs btn-info js-preview-view"><i class="fa fa-eye"></i>View</a>
 
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-success btn-xs">Action</button>
@@ -96,29 +95,27 @@
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li>
-                                                <a href="{{ route('deletelistoder',['id_oder'=>$item->id_oder]) }}" class=""><i class="fa fa-trash js-delete-confirm" onclick="return confirm('Bạn chắc chắn là xoá chứ')"></i> Delete</a>
+                                                <a href="" class=""><i class="fa fa-trash js-delete-confirm" onclick="return confirm('Bạn chắc chắn là xoá chứ')"></i> Delete</a>
                                             </li>
                                             <li class="divider"></li>
                                             <li>
-                                                <a href="{{ route('updatelisroder',['id_oder'=>$item->id_oder,'status' => 'Đang vận chuyển']) }}"><i class="fa fa-ban"> Đang Vận Chuyển</i></a>
+                                                <a href=""><i class="fa fa-ban"> Đang Vận Chuyển</i></a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('updatelisroder',['id_oder'=>$item->id_oder,'status' => 'Đã bàn giao']) }}"><i class="fa fa-ban"> Đã Bàn Giao</i></a>
+                                                <a href=""><i class="fa fa-ban"> Đã Bàn Giao</i></a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('updatelisroder',['id_oder'=>$item->id_oder,'status' => 'Huỷ']) }}"><i class="fa fa-ban"> Hủy</i></a>
+                                                <a href=""><i class="fa fa-ban"> Hủy</i></a>
                                             </li>
                                         </ul>
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
-                    @endif
                   </tbody>
                 </table>
               </div>
               <!-- /.box-body -->
-              {!! $listOder->links() !!}
+              {{-- {!! $listOder->links() !!} --}}
               <div></div>
             </div>
             <!-- /.box -->

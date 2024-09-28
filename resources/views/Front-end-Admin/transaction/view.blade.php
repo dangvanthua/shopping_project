@@ -32,19 +32,19 @@
                                     </tr>
                                     <tr>
                                         <td>Tên KH</td>
-                                        <td><span >{{ $listOder->name }}</span></td>
+                                        <td><span >Yes sir</span></td>
                                     </tr>
                                     <tr>
                                         <td>Email KH</td>
-                                        <td><span >{{ $listOder->email }}</span></td>
+                                        <td><span ></span></td>
                                     </tr>
                                     <tr>
                                         <td>Phone KH</td>
-                                        <td><span >{{ $listOder->phone }}</span></td>
+                                        <td><span ></span></td>
                                     </tr>
                                     <tr>
                                         <td>Địa Chỉ KH</td>
-                                        <td><span >{{ $listOder->district }}</span></td>
+                                        <td><span ></span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -66,15 +66,15 @@
                                     </tr>
                                     <tr>
                                         <td>Trạng Thái</td>
-                                        <td><span class="badge bg-light-blue">{{ $listOder->status }}</span></td>
+                                        <td><span class="badge bg-light-blue"></span></td>
                                     </tr>
                                     <tr>
                                         <td>Tông Tiền Đơn Hàng</td>
-                                        <td><span class="badge bg-red">{{ number_format($listOder->intomoney,0,',','.') }} VND</span></td>
+                                        <td><span class="badge bg-red"> VND</span></td>
                                     </tr>
                                     <tr>
                                         <td>Ngày Mua Đơn Hàng</td>
-                                        <td><span >{{ $listOder->created_at }}</span></td>
+                                        <td><span >Yes sir</span></td>
                                     </tr>
                                     {{-- <tr>
                                         <td>Chức Vụ</td>
@@ -123,7 +123,7 @@
                 
                 <div class="col-md-12">
                     <div class="box-footer" style="text-align: center;">
-                        <a href="{{ route('indexlistoder') }}" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
+                        <a href="" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
                         {{-- <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Submit</button> --}}
                     </div>
                 </div>
