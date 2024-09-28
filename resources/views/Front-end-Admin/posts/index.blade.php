@@ -24,7 +24,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title"><a href="{{ route('addpost') }}" class="btn btn-primary">Thêm mới </a>
+                        <h3 class="box-title"><a href="" class="btn btn-primary">Thêm mới </a>
                         </h3>
                         {{-- <h3 class="box-title"><a href="{{ route('addpost') }}" class="btn btn-primary">Danh mục bài viết </a></h3> --}}
                         <div class="box-tools">
@@ -52,11 +52,12 @@
                                 <th>Times</th>
                                 <th>Action</th>
                             </tr>
-                            @php
+                            {{-- @comment --}}
+                            {{-- @php
                                 $count = 0;
-                            @endphp
+                            @endphp --}}
 
-                            @if ($posts->total() > 0)
+                            {{-- @if ($posts->total() > 0)
                                 @if(isset($posts))
                                     @foreach ($posts as $item)
                                         @php
@@ -83,12 +84,14 @@
                                 @endif
                             @else
                                 <h3>Rất tiếc, không tìm thấy dữ liệu</h3>
-                            @endif
+                            @endif --}}
 
                             </tbody>
                         </table>
+
+                        {{-- @comment --}}
                         <div id="pageNavPosition" class="text-right">
-                            <ul class="pagination">
+                            {{-- <ul class="pagination">
                                 <!-- Hiển thị link đến trang trước (Previous Page) -->
                                 @if ($posts->onFirstPage())
                                     <li class="disabled"><span>&laquo;</span></li>
@@ -109,7 +112,7 @@
                                 @else
                                     <li class="disabled"><span>&raquo;</span></li>
                                 @endif
-                            </ul>
+                            </ul> --}}
                         </div>
                     </div>
                     <!-- /.box-body -->

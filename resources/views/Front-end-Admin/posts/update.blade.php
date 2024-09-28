@@ -16,7 +16,7 @@
     <section class="content">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-            <form action="{{ route('updatedatapost',$posts->id_post) }}" method="POST" enctype="multipart/form-data">
+            <form action="" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="col-md-7">
                     <div class="box box-danger">
@@ -26,24 +26,26 @@
                         <div class="box-body">
                             <div class="form-group ">
                                 <label for="a_name">Name</label>
-                                <input type="text" name="name" class="form-control" value="{{ $posts->name }}"
+                                <input type="text" name="name" class="form-control" value=""
                                     placeholder="Name ....">
 
                             </div>
                             <div class="form-group ">
                                 <label>Description</label>
-                                <textarea class="form-control" name="description" rows="3" placeholder="Enter ...">{{ $posts->description }}</textarea>
+                                <textarea class="form-control" name="description" rows="3" placeholder="Enter ..."></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Danh mục bài viết</label>
                                 <select name="category_id" class="form-control">
-                                    @foreach ($categorypost as $item)
+                                    {{-- @comment --}}
+
+                                    {{-- @foreach ($categorypost as $item)
                                         @if ($item->checkstatus == 1)
                                             <option value="{{ $item->id_category }}"
                                                 @if ($item->id_category == $selectedCategoryId) selected @endif>{{ $item->name }}
                                             </option>
                                         @endif
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                             </div>
                         </div>
@@ -67,7 +69,7 @@
                                 <input type="file" name="avatar" id="image" class="js-upload">
                             </div> --}}
                             <div class="form-group">
-                                <img src="{{ asset($posts->avatar) }}" alt="Ảnh hiện tại" height="300px" width="350px">
+                                <img src="" alt="Ảnh hiện tại" height="300px" width="350px">
                                 {{-- <label for="new_avatar">Chọn ảnh mới (nếu có)</label> --}}
                                 <input type="file" name="avatar" id="image" class="js-upload">
                             </div>
@@ -82,14 +84,14 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Nội Dung</label>
-                                <textarea class="form-control" id="editor_js" name="content" rows="3" placeholder="Enter ...">{{ $posts->content }}</textarea>
+                                <textarea class="form-control" id="editor_js" name="content" rows="3" placeholder="Enter ..."></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="box-footer" style="text-align: center;">
-                        <a href="{{ route('indexpost') }}" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
+                        <a href="" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
                         <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Submit</button>
                     </div>
                 </div>

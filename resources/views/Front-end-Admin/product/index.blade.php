@@ -19,10 +19,10 @@
         <div class="col-xs-12">
             <div class="box">
               <div class="box-header">
-                    <h3 class="box-title"><a href="{{ route('addproduct') }}" class="btn btn-primary">Thêm mới </a></h3>
+                    <h3 class="box-title"><a href="" class="btn btn-primary">Thêm mới </a></h3>
                 </div>
                 <div class="box-title">
-                    <form action="{{ url('SearchProduct') }}" method="GET" class="form-inline">
+                    <form action="" method="GET" class="form-inline">
                         <input type="text" value="{{ Request::get('id_product') }}" class="form-control" name="id" placeholder="ID">
                         <input type="text" value="{{ Request::get('name') }}" class="form-control" name="name" placeholder="name ...">
                         <select name="category" class="form-control">
@@ -53,7 +53,7 @@
                 </div>
               <!-- /.box-header -->
                 <div id="js-data">
-                    @include('admin.product.data')
+                    @include('Front-end-Admin.product.data')
                 </div>
               <!-- /.box-body -->
               <div></div>

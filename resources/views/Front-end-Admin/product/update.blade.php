@@ -14,32 +14,34 @@
     </section>
  
     <section class="content">
-        
+
         <div class="row">
-        
-            <form action="{{ url('updateproduct',['productId' => $products->id_product]) }}" method="POST" enctype="multipart/form-data">
+
+            <form action="" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="col-md-7">
                     <div class="box box-danger">
                         <div class="box-header with-border">
                             <h3 class="box-title">Thông tin cơ bản</h3>
                         </div>
+
                         <div class="box-body">
-                            @if (session('status'))
+                            {{-- @comment --}}
+                            {{-- @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}
                             </div>
-                        @endif
+                            @endif --}}
                             <div class="form-group">
                                 <label for="pro_name">Name</label>
-                                <input type="text" name="name" class="form-control" placeholder="Name ...." value="{{$products->name}}">
+                                <input type="text" name="name" class="form-control" placeholder="Name ...." value="">
                             </div>
 
                             <div class="form-group col-sm-6">
                                 <label for="pro_price">Giá</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-                                <input type="number" name="price" class="form-control" value="{{$products->price}}" >
+                                <input type="number" name="price" class="form-control" value="" >
                                     <span class="input-group-addon"></span>
                                 </div>
                                 <small id="emailHelp" class="form-text text-muted "></small>
@@ -50,7 +52,7 @@
                                 <label for="pro_sale">% Giảm Giá</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">$</span>
-                                    <input type="number" name="discount" class="form-control"  value="{{$products->discount}}">
+                                    <input type="number" name="discount" class="form-control"  value="">
                                     <span class="input-group-addon"><i class="fa fa-check"></i></span>
                                 </div>
 
@@ -58,7 +60,7 @@
 
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea class="form-control"  name="description" rows="3" placeholder="Enter ...">{{$products->description}}</textarea>
+                                <textarea class="form-control"  name="description" rows="3" placeholder="Enter ..."></textarea>
                             </div>
                        
                             <div class="form-group">
@@ -95,7 +97,7 @@
                             </div>                      
                             <div class="form-group">
                                 <label for="pro_name">Size</label>
-                                <input type="text" name="sizes" class="form-control" value="{{$products->sizes}}" placeholder="Enter sizes separated by commas">
+                                <input type="text" name="sizes" class="form-control" value="" placeholder="Enter sizes separated by commas">
                                 <small class="form-text text-muted">Enter sizes separated by commas (e.g., Small, Medium, Large).</small>
                             </div>
                             
@@ -147,7 +149,7 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Nội Dung</label>
-                                <textarea class="form-control" name="content" rows="3" placeholder="Enter ...">{{$products->content}}</textarea>
+                                <textarea class="form-control" name="content" rows="3" placeholder="Enter ..."></textarea>
                             </div>
                         </div>
                     </div>
@@ -160,7 +162,7 @@
                             <div class="form-group">
                                 <label>Ảnh Mới</label>
                                 <div style="margin-bottom:10px">
-                                    <img id="image_preview_container" src="{{asset($products->image)}}"
+                                    <img id="image_preview_container" src=""
                                         class="img-thumbnail" style="width: 220px;height:200px" alt="">
                                 </div>
                                 <input type="file" name="image" id="image" class="js-upload">
@@ -175,7 +177,7 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <div class="file-loading">
-                                    <input type="file" name="file[]" id="file" multiple class="file" value="{{$products->list_images}}"
+                                    <input type="file" name="file[]" id="file" multiple class="file" value=""
                                         data-overwrite-initial="false" data-min-file-count="0">
                                 </div>
 
@@ -192,14 +194,14 @@
                         <div class="box-body">
                             <div class="form-group col-sm-6">
                                 <label>Số Lượng</label>
-                                <input type="number" name="amount"  value="{{$products->amount}}" class="form-control" placeholder="0">
+                                <input type="number" name="amount"  value="" class="form-control" placeholder="0">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="box-footer" style="text-align: center;">
-                        <a href="{{ route('indexproduct') }}" class="btn btn-danger"><i class="fa fa-undo"></i> Trở
+                        <a href="" class="btn btn-danger"><i class="fa fa-undo"></i> Trở
                             Lại</a>
                         <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Submit</button>
                     </div>

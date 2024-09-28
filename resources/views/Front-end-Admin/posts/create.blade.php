@@ -16,7 +16,7 @@
   <section class="content">
     <!-- Small boxes (Stat box) -->
     <div class="row">
-        @include('admin.posts.form')
+        @include('Front-end-Admin.posts.form')
     </div>
     </div>
     <!-- /.row -->

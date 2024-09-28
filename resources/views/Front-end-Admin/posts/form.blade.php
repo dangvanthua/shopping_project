@@ -1,4 +1,4 @@
-<form action="{{ route('adddatapost') }}" method="POST" enctype="multipart/form-data">
+<form action="" method="POST" enctype="multipart/form-data">
     @csrf
         <div class="col-md-7">
             <div class="box box-danger">
@@ -23,17 +23,18 @@
                             <option value="{{ $item->id_categorypost }}">{{ $item->name }}</option>
                           @endforeach
                         </select>   --}}
-                       
+
+                        {{-- @comemnt --}}
                         <select name="category_id" class="form-control">
-                          @foreach ($categorypost as $item)
+                          {{-- @foreach ($categorypost as $item)
                           @if($item->checkstatus == 1)
                               <option value="{{ $item->id_category }}" >{{ $item->name }}</option>
                           @endif
-                          @endforeach
+                          @endforeach --}}
                           
-                          @error('category_id')
+                          {{-- @error('category_id')
                           <div class="text-danger">{{ $message }}</div>
-                          @enderror
+                          @enderror --}}
                       </select>
                         
                         
@@ -75,7 +76,7 @@
         </div>
         <div class="col-md-12">
             <div class="box-footer" style="text-align: center;">
-                <a href="{{ route('indexpost') }}" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
+                <a href="" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Submit</button>
             </div>
         </div>

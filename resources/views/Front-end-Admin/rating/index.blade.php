@@ -1,4 +1,4 @@
-@extends('layout.master_admin')
+@extends('LayOut.admin-dashboard.master_admin')
 @section('css')
     <style>
         .ratings span i{
@@ -16,8 +16,8 @@
       <small>danh sách đánh giá sản phẩm</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="{{ route('admin.index') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="{{ route('admin.rating.index') }}">Rating</a></li>
+      <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="">Rating</a></li>
       <li class="active">list</li>
 
     </ol>
@@ -29,19 +29,19 @@
         <div class="col-xs-12">
             <div class="box">
               <div class="box-header">
-                {{--  <h3 class="box-title"><a href="{{ route('admin.ratings.create') }}" class="btn btn-primary">Thêm mới </a></h3>  --}}
-                {{--  <div class="box-tools">
+                 <h3 class="box-title"><a href="" class="btn btn-primary">Thêm mới </a></h3>
+                 <div class="box-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
                     <div class="input-group-btn">
                       <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                     </div>
                   </div>
-                </div>  --}}
+                </div>
               </div>
               <!-- /.box-header -->
               <div class="box-body table-responsive no-padding" id="js-datas">
-                @include('admin.rating.data')
+                @include('Front-end-Admin.rating.data')
               </div>
               {{-- {!! $ratings->appends($query)->links() !!} --}}
 
@@ -84,19 +84,19 @@
     <script>
         $(document).ready(function(){
 
-            // $(document).on('click', '.pagination a', function(event){
-            //     event.preventDefault();
-            //     var page = $(this).attr('href').split('page=')[1];
-            //     $('#hidden_page').val(page);
-            //     var column_name = $('#hidden_column_name').val();
-            //     var sort_type = $('#hidden_sort_type').val();
+            $(document).on('click', '.pagination a', function(event){
+                event.preventDefault();
+                var page = $(this).attr('href').split('page=')[1];
+                $('#hidden_page').val(page);
+                var column_name = $('#hidden_column_name').val();
+                var sort_type = $('#hidden_sort_type').val();
 
-            //     var query = $('#serach').val();
+                var query = $('#serach').val();
 
-            //     $('li').removeClass('active');
-            //     $(this).parent().addClass('active');
-            //     fetch_data(page, sort_type, column_name, query);
-            // });
+                $('li').removeClass('active');
+                $(this).parent().addClass('active');
+                fetch_data(page, sort_type, column_name, query);
+            });
 
             $(document).on('click', '.page-link', function(event){
             event.preventDefault(); 

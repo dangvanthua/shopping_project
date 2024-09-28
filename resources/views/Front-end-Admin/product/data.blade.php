@@ -13,9 +13,7 @@
                 <th>Times</th>
                 <th>Action</th>
             </tr>
-            @php
-                $i = 0;
-            @endphp
+
             @if (isset($products))
                 @foreach ($products as $item)
                     @php
@@ -91,7 +89,8 @@
                 <li class="disabled"><span>&raquo;</span></li>
             @endif
         </ul> --}}
-    {{ $products->links() }}
+        {{-- @comment --}}
+    {{-- {{ $products->links() }} --}}
 
     </div> 
 </div>
