@@ -1,4 +1,4 @@
-@extends('layout.master_admin')
+@extends('LayOut.admin-dashboard.master_admin')
 @section('content')
 <section class="content-header">
     <h1>
@@ -6,8 +6,8 @@
       <small>Carete</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="{{ route('admin.index') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="{{ route('admin.menu.index') }}">Menu</a></li>
+      <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="">Menu</a></li>
       <li class="active">Create</li>
 
     </ol>
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="box-footer" >
-                <a href="{{ route('admin.menu.index') }}" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
+                <a href="" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Submit</button>
             </div>
             </div>
