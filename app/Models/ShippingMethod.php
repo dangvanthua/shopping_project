@@ -17,4 +17,11 @@ class ShippingMethod extends Model
         'cost',
         'estimated_time',
     ];
+
+
+    // thiết lập quan hệ giữa shipping_method và order (1-n)
+    public function order()
+    {
+        return $this->hasMany(Order::class,'id_shipping_method');
+    }
 }

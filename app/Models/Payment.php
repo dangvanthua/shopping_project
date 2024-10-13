@@ -16,4 +16,10 @@ class Payment extends Model
         'payment_method',
         'describe',
     ];
+
+    // thiết lập quan hệ giữa order và payment (1-n)
+    public function order()
+    {
+        return $this->hasMany(Order::class,'id_payment');
+    }
 }

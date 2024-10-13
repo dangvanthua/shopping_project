@@ -20,4 +20,18 @@ class ShoppingCart extends Model
         'price',
         'total_price',
     ];
+
+    // thực thi cấu hình quan hệ giữa product và shopping_cart (1-n)
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class,'id_product');
+    }
+
+    // thực thi cấu hình quan hệ customer và shopping_cart (1-n)
+    public function customer()
+    {
+    // thực thi cấu hình quan hệ customer và shopping_cart (1-n)
+        return $this->belongsTo(Customer::class,'id_customer');
+    }
 }

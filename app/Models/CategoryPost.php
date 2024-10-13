@@ -16,4 +16,11 @@ class CategoryPost extends Model
         'name',
         'describe',
     ];
+
+    // thực thi cấu hình quan hệ category_post và post
+
+    public function post()
+    {
+        return $this->hasMany(Post::class,'id_post');
+    }
 }

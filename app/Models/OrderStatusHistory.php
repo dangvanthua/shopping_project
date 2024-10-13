@@ -16,4 +16,10 @@ class OrderStatusHistory extends Model
         'id_order',
         'status',
     ];
+
+    // thiết lập quan hệ giữa oder và oder_status_history (1-n)
+    public function order()
+    {
+        return $this->belongsTo(Order::class,'id_order');
+    }
 }

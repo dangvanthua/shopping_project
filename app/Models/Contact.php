@@ -19,4 +19,10 @@ class Contact extends Model
         'phone',
         'message',
     ];
+
+    // cấu hình quan hệ giữa customer và contact (1-n)
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class,'id_customer');
+    }
 }

@@ -18,4 +18,10 @@ class Discount extends Model
         'start_day',
         'end_day',
     ];
+
+    // thực thi cấu hình quan hệ giữa discount và product (n-n)
+    public function product()
+    {
+        return $this->belongsToMany(Product::class,'product_discount','id_discount','id_product');
+    }
 }

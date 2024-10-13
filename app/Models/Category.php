@@ -16,4 +16,11 @@ class Category extends Model
         'name',
         'describe',
     ];
+
+    // thực thi cấu hình quan hệ giữa product và category
+
+    public function product()
+    {
+        return $this->hasMany(Product::class,'id_product');
+    }
 }
