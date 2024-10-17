@@ -5,20 +5,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Document</title>
-	<link rel="stylesheet" type="text/css" href="{{ asset('shopping/vendor/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('shopping/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('shopping/fonts/iconic/css/material-design-iconic-font.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('shopping/fonts/linearicons-v1.0.0/icon-font.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('shopping/vendor/animate/animate.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('shopping/vendor/css-hamburgers/hamburgers.min.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('shopping/vendor/animsition/css/animsition.min.css') }}"> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('shopping/vendor/select2/select2.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('shopping/vendor/daterangepicker/daterangepicker.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('shopping/vendor/slick/slick.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('shopping/vendor/MagnificPopup/magnific-popup.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('shopping/vendor/perfect-scrollbar/perfect-scrollbar.css') }}"> --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('shopping/css/util.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('shopping/css/main.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{asset('shopping/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('shopping/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('shopping/fonts/iconic/css/material-design-iconic-font.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('shopping/fonts/linearicons-v1.0.0/icon-font.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('shopping/vendor/animate/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('shopping/vendor/css-hamburgers/hamburgers.min.css') }}">
+    <link rel="stylesheet" href="{{asset('shopping/vendor/animsition/css/animsition.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('shopping/vendor/select2/select2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('shopping/vendor/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('shopping/vendor/slick/slick.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('shopping/vendor/MagnificPopup/magnific-popup.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('shopping/vendor/perfect-scrollbar/perfect-scrollbar.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('shopping/css/util.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('shopping/css/main.css') }}">
 </head>
 <body>
 	<header class="header-v4">
