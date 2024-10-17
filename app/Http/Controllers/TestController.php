@@ -10,6 +10,6 @@ class TestController extends Controller
 
     public function testcai()
     {
-        return view('Front-end-Admin.slide.create');
+        return view('Front-end-Admin.index');
     }
 }
