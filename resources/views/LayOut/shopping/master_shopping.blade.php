@@ -22,6 +22,10 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('shopping/vendor/perfect-scrollbar/perfect-scrollbar.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{asset('shopping/css/util.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{asset('shopping/css/main.css') }}">
+
+
+	{{--  --}}
+
 </head>
 
 <body>
@@ -71,23 +75,23 @@
 							</li>
 
 							<li class="active-menu">
-								<a href="product.html">Shop</a>
+								<a href="">Shop</a>
 							</li>
 
 							<li class="label1" data-label1="hot">
-								<a href="shoping-cart.html">Features</a>
+								<a href="">Features</a>
 							</li>
 
 							<li>
-								<a href="blog.html">Blog</a>
+								<a href="">Blog</a>
 							</li>
 
 							<li>
-								<a href="about.html">About</a>
+								<a href="">About</a>
 							</li>
 
 							<li>
-								<a href="contact.html">Contact</a>
+								<a href="">Contact</a>
 							</li>
 						</ul>
 					</div>
@@ -401,12 +405,10 @@
 						</a>
 					</div>
 				</div>
-
 				<div class="col-sm-6 col-lg-3 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
 						Newsletter
 					</h4>
-
 					<form>
 						<div class="wrap-input1 w-full p-b-4">
 							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email"
@@ -625,7 +627,6 @@
 			</div>
 		</div>
 	</div>
-
 	<script src="{{ asset('shopping/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
 	<!--===============================================================================================-->
 	<script src="{{ asset('shopping/vendor/animsition/js/animsition.min.js') }}"></script>
@@ -727,5 +728,9 @@
 	</script>
 	<!--===============================================================================================-->
 	<script src="{{ asset('shopping/js/main.js') }}"></script>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
 
 </html>
