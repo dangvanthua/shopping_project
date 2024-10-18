@@ -7,10 +7,8 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Document</title>
 	<link rel="stylesheet" type="text/css" href="{{asset('shopping/vendor/bootstrap/css/bootstrap.min.css') }}">
-	<link rel="stylesheet" type="text/css"
-		href="{{asset('shopping/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
-	<link rel="stylesheet" type="text/css"
-		href="{{asset('shopping/fonts/iconic/css/material-design-iconic-font.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{asset('shopping/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{asset('shopping/fonts/iconic/css/material-design-iconic-font.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{asset('shopping/fonts/linearicons-v1.0.0/icon-font.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{asset('shopping/vendor/animate/animate.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{asset('shopping/vendor/css-hamburgers/hamburgers.min.css') }}">
