@@ -12,7 +12,7 @@ class AttributeController extends Controller
 
     public function getDataJson()
     {
-        $atttibute = Attribute::all();
-        return response()->json($atttibute);
+        $attributes = Attribute::paginate(1); // Phân trang, mỗi trang 10 item
+        return response()->json($attributes);
     }
 }

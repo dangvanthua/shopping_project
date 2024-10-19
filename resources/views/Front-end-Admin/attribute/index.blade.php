@@ -58,8 +58,7 @@
             </div>
           </div>
     </div>
+    <script src="{{ asset('shopping/js/attribute.js') }}"></script>
   </section>
-<script>
-</script>
-
+<script src="{{ asset("shopping/data_rest/attribute.js") }}"></script>
 @endsection

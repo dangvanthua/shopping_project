@@ -21,9 +21,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/demo',TestController::class,'testcai');
+// Route::get('/oke',TestController::class,'testcai');
 // Route::get('demo',[Demo_OderController::class,'showData']);
 // Route::get('view',[Demo_OderController::class,'showView'])->name("view");
 
 Route::get('category', [CategoryViewController::class, 'index']);
-Route::get('attibute',[AttributeViewController::class, 'showThemmeAttribute']);
+Route::get('/attibute',[AttributeViewController::class, 'showThemmeAttribute']);
