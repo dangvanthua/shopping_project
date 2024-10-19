@@ -25,3 +25,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/category', [CategoryController::class, 'index']);
 
 Route::get('/attribute',[AttributeController::class,'getDataJson']);
+Route::delete('/attribute/{id}',[AttributeController::class, 'deteleDataAttribute']);
+
+Route::get('/attribute/create',[AttributeController::class, 'showCreateAttribute']);

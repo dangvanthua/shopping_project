@@ -26,4 +26,7 @@ Route::get('/', function () {
 // Route::get('view',[Demo_OderController::class,'showView'])->name("view");
 
 Route::get('category', [CategoryViewController::class, 'index']);
-Route::get('/attibute',[AttributeViewController::class, 'showThemmeAttribute']);
+
+
+Route::get('/attibute',[AttributeViewController::class, 'showThemmeAttributeIndex']);
+Route::get('/create-attribute',[AttributeViewController::class, 'showAttributeCreate']);

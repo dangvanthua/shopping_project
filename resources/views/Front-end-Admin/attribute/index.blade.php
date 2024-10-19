@@ -12,14 +12,13 @@
       <li class="active">list</li>
     </ol>
   </section>
-
   <!-- Main content -->
-  <section class="content">
+  <section class="content" id="content-area">
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
               <div class="box-header">
-                <h3 class="box-title"><a href="" class="btn btn-primary">Thêm mới </a></h3>
+                <h3 class="box-title"><a href="" class="btn btn-primary" id="create-attribute">Thêm mới </a></h3>
                 <div class="box-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" id="search-key" class="form-control pull-right" placeholder="Search">
@@ -46,11 +45,10 @@
                     <!-- Dữ liệu sẽ được hiển thị tại đây thông qua JavaScript -->
                   </tbody>
                 </table>
-
                 <!-- Phân trang bắt đầu -->
                 <div id="pageNavPosition" class="text-right">
-                  <ul class="pagination">
-                    <!-- Nội dung phân trang sẽ được hiển thị qua JavaScript -->
+                  <ul class="pagination" id="pagination-links">
+                    <!-- Các nút phân trang sẽ được hiển thị tại đây thông qua JavaScript -->
                   </ul>
                 </div>
                 <!-- Phân trang kết thúc -->
