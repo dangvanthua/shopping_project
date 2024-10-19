@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,10 +14,12 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id_customer');
             $table->string('name');
-            $table->string('email')->unique(); 
-            $table->string('password'); 
-            $table->string('phone'); 
-            $table->string('address');
+            $table->string('email')->unique();
+            $table->timestamp('status');
+            $table->string('password');
+            $table->string('token')->nullable();
+            $table->string('phone');
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }

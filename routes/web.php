@@ -7,6 +7,8 @@ use App\Http\Controllers\Demo_OderController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VerificationController;
+use App\Mail\VerifyEmail;
 
 /*
 |--------------------------------------------------------------------------

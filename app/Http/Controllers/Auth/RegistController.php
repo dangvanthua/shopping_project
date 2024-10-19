@@ -17,15 +17,13 @@ class RegistController extends Controller
         return view('Front-end-Admin.auth.register');
     }
 
-    public function register(Authrequest $request){
-        $info =[
-            'email'=>$request->input('phoneNo'),
-        ];
-        if(Auth::attempt($info)){
-            die();
-        }
-        else{
-            return redirect()->route('register');
-        }
+    public function register(Authrequest $request)
+    {
+        $customer = Customer::create([
+            'name' => $request->input('username'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')), // Mã hóa mật khẩu
+            'phone' => $request->input('phoneNo'),
+        ]);
     }
 }

@@ -34,6 +34,11 @@
                     <input type="text" name="username" placeholder="UserName" class="textBox" autofocus="on" required>
                 </div>
             </div>
+            @if ($errors->has('username'))
+                <div class="error-message" class="alert alert-danger">
+                    {{$errors->first('username')}}
+                </div>
+            @endif
             <!--First name-->
             <!---Email ID---->
             <div class="box">
@@ -43,6 +48,11 @@
                     <input type="email" required name="email" placeholder="Email Id" class="textBox">
                 </div>
             </div>
+            @if ($errors->has('email'))
+                <div class="error-message" class="alert alert-danger">
+                    {{$errors->first('email')}}
+                </div>
+            @endif
             <!--Email ID----->
 
             <!---Phone No.------>
@@ -57,10 +67,10 @@
                 @endif
             </div>
             @if ($errors->has('phoneNo'))
-                    <div class="error-message" class="alert alert-danger">
-                        {{$errors->first('phoneNo')}}
-                    </div>
-                @endif
+                <div class="error-message" class="alert alert-danger">
+                    {{$errors->first('phoneNo')}}
+                </div>
+            @endif
             <!---Phone No.---->
 
 
@@ -72,6 +82,11 @@
                     <input type="Password" required name="password" placeholder="Password" class="textBox">
                 </div>
             </div>
+            @if ($errors->has('password'))
+                <div class="error-message" class="alert alert-danger">
+                    {{$errors->first('password')}}
+                </div>
+            @endif
             <!---Password---->
 
             <!---Confirm Password------>
@@ -83,7 +98,12 @@
                         class="textBox">
                 </div>
             </div>
-            <!---Password---->
+            @if ($errors->has('confirmpassword'))
+                <div class="error-message" class="alert alert-danger">
+                    {{$errors->first('confirmpassword')}}
+                </div>
+            @endif
+            <!---ConfirmPassword---->
 
             <!---Submit Button------>
             <div class="box box-submit">
@@ -280,7 +300,9 @@
             opacity: 1;
         }
     }
+
     .error-message {
         color: red;
+        font-size: 10px;
     }
 </style>
