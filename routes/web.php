@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AttributeViewController;
 use App\Http\Controllers\CategoryViewController;
+use App\Http\Controllers\Auth\RegistController;
 use App\Http\Controllers\Demo_OderController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\TestController;
@@ -30,3 +31,6 @@ Route::get('category', [CategoryViewController::class, 'index']);
 
 
 Route::get('/attibute',[AttributeViewController::class, 'showThemmeAttributeIndex']);
+
+Route::get('/demo',[RegistController::class, 'showRegistrationForm'])->name('register');
+Route::post('/demo',[RegistController::class, 'register'])->name('index.register');

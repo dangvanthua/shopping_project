@@ -22,15 +22,17 @@ class Authrequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phoneNo' => 'required|string|regex:/^0[1-9][0-9]{8}$/',
+            'phoneNo' => 'required|string|regex:/^0[35789][0-9]{8}$/',
         ];
     }
+
     public function messages(): array
     {
         return [
-            'phoneNo.required'=>'Bạn chưa nhập sdt',
-            'phoneNo.string'=>'Không phải chuỗi',
-            'phoneNo.regex'=>'Số điện thoại phải có 10 ký tự, phải có'
+            'phoneNo.required' => 'Bạn chưa nhập số điện thoại',
+            'phoneNo.string' => 'Số điện thoại phải là chuỗi ký tự',
+            'phoneNo.regex' => 'Số điện thoại phải có đúng 10 chữ số và bắt đầu bằng 03, 05, 07, 08 hoặc 09',
         ];
     }
+
 }
