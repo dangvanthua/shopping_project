@@ -12,8 +12,8 @@
 
 <body>
     <div class="logo">
-    <img class="hinh hinh1" src="{{ asset("images/black_logo.png") }}" alt="">
-    <img class="hinh hinh2" src="{{ asset("images/white_logo.png") }}" alt="">
+        <img class="hinh hinh1" src="{{ asset("images/black_logo.png") }}" alt="">
+        <img class="hinh hinh2" src="{{ asset("images/white_logo.png") }}" alt="">
     </div>
     <div class="circle"></div>
     <div class="container">
@@ -21,7 +21,9 @@
             <strong>Register</strong>
         </div>
 
-        <form method="post" autocomplete="on">
+        <form method="post" action="{{ route('index.register') }}" autocomplete="on">
+
+            @csrf
             <!--First name-->
             <div class="box">
                 <label for="userName" class="fl fontLabel"> UserName: </label>
@@ -50,7 +52,15 @@
                 <div class="fr">
                     <input type="text" required name="phoneNo" maxlength="10" placeholder="Phone No." class="textBox">
                 </div>
+                @if ($errors->has('phone'))
+                    <span class="text-danger">{{ $errors->first('phone') }}</span>
+                @endif
             </div>
+            @if ($errors->has('phoneNo'))
+                    <div class="error-message" class="alert alert-danger">
+                        {{$errors->first('phoneNo')}}
+                    </div>
+                @endif
             <!---Phone No.---->
 
 
@@ -77,7 +87,7 @@
 
             <!---Submit Button------>
             <div class="box box-submit">
-                <input type="Submit" name="Submit" class="submit" value="SUBMIT">
+                <input type="submit" name="Submit" class="submit" value="SUBMIT">
             </div>
             <!---Submit Button----->
         </form>
@@ -219,47 +229,58 @@
         top: -1860px;
         animation: circle 9s infinite ease-in-out;
     }
-@keyframes circl1e {
-    0%{
-        left: -125px;
-        top: -1860px;
+
+    @keyframes circl1e {
+        0% {
+            left: -125px;
+            top: -1860px;
+        }
+
+        50% {
+            left: -125px;
+            top: -2070px;
+        }
+
+        100% {
+            left: -125px;
+            top: -1860px;
+        }
     }
-    50%{
-        left: -125px;
-        top: -2070px;
+
+    .logo {
+        position: absolute;
+        top: 45%;
+        left: 30%;
+        transform: translate(-50%, -50%);
     }
-    100%
-    {
-        left: -125px;
-        top: -1860px;
+
+    .hinh {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        width: 700px;
     }
-}
-.logo{
-    position: absolute;
-    top: 45%;
-    left: 30%;
-    transform: translate(-50%,-50%);
-}
-.hinh{
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(-50%,-50%);
-    width: 700px;
-}
-.hinh2{
-    opacity: 1;
-    animation: hinh2 4s infinite ease-in-out;
-}
-@keyframes hinh2 {
-    0%{
+
+    .hinh2 {
         opacity: 1;
+        animation: hinh2 4s infinite ease-in-out;
     }
-    50%{
-        opacity: 0;
+
+    @keyframes hinh2 {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
     }
-    100%{
-        opacity: 1;
+    .error-message {
+        color: red;
     }
-}
 </style>

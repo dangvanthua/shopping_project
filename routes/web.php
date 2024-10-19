@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\RegistController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +22,5 @@ Route::get('/', function () {
 // Route::get('/demo',TestController::class,'testcai');
 Route::get('demo',[TestController::class,'testcai']);
 
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [RegisterController::class, 'register']);
+Route::get('/register', [RegistController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegistController::class, 'register'])->name('index.register');
