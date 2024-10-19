@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttributeViewController;
 use App\Http\Controllers\CategoryViewController;
 use App\Http\Controllers\Demo_OderController;
 use App\Http\Controllers\TestController;
@@ -21,7 +22,8 @@ Route::get('/', function () {
 });
 
 // Route::get('/demo',TestController::class,'testcai');
-Route::get('demo',[Demo_OderController::class,'showData']);
-Route::get('view',[Demo_OderController::class,'showView'])->name("view");
+// Route::get('demo',[Demo_OderController::class,'showData']);
+// Route::get('view',[Demo_OderController::class,'showView'])->name("view");
 
 Route::get('category', [CategoryViewController::class, 'index']);
+Route::get('attibute',[AttributeViewController::class, 'showThemmeAttribute']);

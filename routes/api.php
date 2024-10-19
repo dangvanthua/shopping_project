@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\AtributeController;
+use App\Http\Controllers\Api\AttributeController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Models\Attribute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +23,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/category', [CategoryController::class, 'index']);
+
+Route::get('/attribute',[AttributeController::class,'getDataJson']);
