@@ -247,8 +247,7 @@
                                 </span>
                             </div>
                         </li>
-                        @endforeach
-                        @endif
+                        
                     </ul>
                 </div>
                 <div class="box-footer text-center">
