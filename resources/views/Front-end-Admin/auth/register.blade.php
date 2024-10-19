@@ -15,11 +15,21 @@
     <div class="circle"></div>
     <div class="container">
         <div class="tieude">
-            <strong>Login</strong>
+            <strong>Register</strong>
         </div>
 
         <form method="post" autocomplete="on">
- 
+            <!--First name-->
+            <div class="box">
+                <label for="userName" class="fl fontLabel"> UserName: </label>
+                <div class="new iconBox">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </div>
+                <div class="fr">
+                    <input type="text" name="username" placeholder="UserName" class="textBox" autofocus="on" required>
+                </div>
+            </div>
+            <!--First name-->
             <!---Email ID---->
             <div class="box">
                 <label for="email" class="fl fontLabel"> Email ID: </label>
@@ -30,12 +40,34 @@
             </div>
             <!--Email ID----->
 
+            <!---Phone No.------>
+            <div class="box">
+                <label for="phone" class="fl fontLabel"> Phone No.: </label>
+                <div class="fl iconBox"><i class="fa fa-phone-square" aria-hidden="true"></i></div>
+                <div class="fr">
+                    <input type="text" required name="phoneNo" maxlength="10" placeholder="Phone No." class="textBox">
+                </div>
+            </div>
+            <!---Phone No.---->
+
+
             <!---Password------>
             <div class="box">
                 <label for="password" class="fl fontLabel"> Password: </label>
                 <div class="fl iconBox"><i class="fa fa-key" aria-hidden="true"></i></div>
                 <div class="fr">
                     <input type="Password" required name="password" placeholder="Password" class="textBox">
+                </div>
+            </div>
+            <!---Password---->
+
+            <!---Confirm Password------>
+            <div class="box">
+                <label for="Confirmpassword" class="fl fontLabel"> Confirm Password: </label>
+                <div class="fl iconBox"><i class="fa fa-key" aria-hidden="true"></i></div>
+                <div class="fr">
+                    <input type="Password" required name="confirmpassword" placeholder="Confirm Password"
+                        class="textBox">
                 </div>
             </div>
             <!---Password---->
@@ -181,19 +213,22 @@
         height: 2600px;
         border-radius: 50%;
         left: -125px;
-        top: 60px;
+        top: -1860px;
         animation: circle 9s infinite ease-in-out;
     }
 @keyframes circle {
     0%{
-        top: 60px;
+        left: -125px;
+        top: -1860px;
     }
     50%{
-        top: 270px;
+        left: -125px;
+        top: -2070px;
     }
     100%
     {
-        top: 60px;
+        left: -125px;
+        top: -1860px;
     }
 }
 
