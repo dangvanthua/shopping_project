@@ -11,8 +11,8 @@
 </head>
 
 <body>
-<!-- <img src="{{asset("black_logo.png")}}" alt="" srcset=""> -->
-<div class="circle"></div>
+
+    <div class="circle"></div>
     <div class="container">
         <div class="tieude">
             <strong>Register</strong>
@@ -73,7 +73,7 @@
             <!---Password---->
 
             <!---Submit Button------>
-            <div class="box box-submit" style="background: #454545">
+            <div class="box box-submit">
                 <input type="Submit" name="Submit" class="submit" value="SUBMIT">
             </div>
             <!---Submit Button----->
@@ -98,7 +98,7 @@
         color: #f3f3f3;
         display: grid;
         place-items: center;
-        background: #454545;
+        background: #f7f7f7;
         width: 350px;
         padding-bottom: 20px;
         position: absolute;
@@ -119,7 +119,7 @@
     }
 
     .fontLabel {
-        color: #d8d8d8;
+        color: #535353;
     }
 
     .fr {
@@ -194,7 +194,7 @@
 
     .tieude {
         font-family: 'Montserrat', sans-serif;
-        color: #d8d8d8;
+        color: #535353;
         font-size: 50;
         margin-bottom: 60px;
     }
@@ -206,6 +206,7 @@
     }
 
     .circle {
+        z-index: -1;
         position: fixed;
         background-color: white;
         width: 2600px;
@@ -213,6 +214,22 @@
         border-radius: 50%;
         left: -125px;
         top: -1860px;
+        animation: circle 9s infinite ease-in-out;
     }
-    .im
+@keyframes circle {
+    0%{
+        left: -125px;
+        top: -1860px;
+    }
+    50%{
+        left: -125px;
+        top: -2070px;
+    }
+    100%
+    {
+        left: -125px;
+        top: -1860px;
+    }
+}
+
 </style>
