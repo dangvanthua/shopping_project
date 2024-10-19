@@ -59,7 +59,7 @@
     }
 
     body {
-        background-color: #353535;
+        background-color: #d8d8d8;
     }
 
     .container {
@@ -77,7 +77,7 @@
         padding: 60px 60px 70px 60px;
         font-family: verdana;
         border-radius: 5px;
-        box-shadow: 10px 10px 0px 0px #2e2e2e;
+        box-shadow: 10px 10px 0px 0px #818181;
     }
 
     .fl {
@@ -138,7 +138,7 @@
         color: #f8f8f8;
         width: 110px;
         height: 35px;
-        background: #878787;
+        background: #6c7ae0;
         text-transform: uppercase;
         cursor: pointer;
         border-radius: 3px;
@@ -162,7 +162,7 @@
 
     .tieude {
         font-family: 'Montserrat', sans-serif;
-        color: #535353;
+        color: #6c7ae0;
         font-size: 50;
         margin-bottom: 60px;
     }
