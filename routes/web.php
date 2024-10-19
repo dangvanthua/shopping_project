@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +20,10 @@ Route::get('/', function () {
 });
 
 // Route::get('/demo',TestController::class,'testcai');
-Route::get('demo',[TestController::class,'testcai']);
+Route::get('demo', [TestController::class, 'testcai']);
+
+// Route Event
+Route::get('/events', [EventController::class, 'index'])->name('events.index');
+Route::get('/events/create', [EventController::class, 'create'])->name('create');
+Route::post('/events/store', [EventController::class, 'store'])->name('events.store');
+Route::delete('/events/{id}/delete', [EventController::class, 'destroy'])->name('deleteEvent');
