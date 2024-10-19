@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttributeViewController;
 use App\Http\Controllers\CategoryViewController;
 use App\Http\Controllers\Demo_OderController;
 use App\Http\Controllers\EventController;
@@ -21,14 +22,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/demo',TestController::class,'testcai');
-Route::get('demo', [Demo_OderController::class, 'showData']);
-Route::get('view', [Demo_OderController::class, 'showView'])->name("view");
+// Route::get('/oke',TestController::class,'testcai');
+// Route::get('demo',[Demo_OderController::class,'showData']);
+// Route::get('view',[Demo_OderController::class,'showView'])->name("view");
 
 Route::get('category', [CategoryViewController::class, 'index']);
 
-// Route Event
-Route::get('/events', [EventController::class, 'index'])->name('events.index');
-Route::get('/events/create', [EventController::class, 'create'])->name('create');
-Route::post('/events/store', [EventController::class, 'store'])->name('events.store');
-Route::delete('/events/{id}/delete', [EventController::class, 'destroy'])->name('deleteEvent');
+
+Route::get('/attibute',[AttributeViewController::class, 'showThemmeAttributeIndex']);
