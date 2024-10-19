@@ -79,7 +79,7 @@
                                             <td>{{ $event->end_day }}</td>
                                             <td>{{ $event->created_at }}</td>
                                             <td>{{ $event->updated_at }}</td>
-                                            <td>
+                                            <td style="display: flex; gap: 4px;">
                                                 <a href="#" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
                                                 <form action="{{ route('deleteEvent', ['id' => $event->id_event]) }}" method="POST" style="display:inline;">
                                                     @csrf
