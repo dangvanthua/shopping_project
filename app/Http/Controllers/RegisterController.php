@@ -7,6 +7,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\ValidEmail;
 
 class RegisterController extends Controller
 {
@@ -20,7 +21,7 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         // Validation
-        $this->validator($request->all())->validate();
+        $this->validator(data: $request->all())->validate();
 
         // Tạo người dùng mới
         $user = $this->create($request->all());
@@ -36,9 +37,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:customer'],
-            'phoneNo' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:customer', new ValidEmail()],
+            'phone' => ['required','string','regex:/^0[1-9][0-9]{8}$/',],
             'password' => ['required', 'string', 'min:8'],
             'confirmpassword' => ['required', 'same:password'],
         ]);
@@ -48,7 +49,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return Customer::create([
-            'name' => $data['name'],
+            'name' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

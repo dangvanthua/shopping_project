@@ -216,21 +216,20 @@
         top: -1860px;
         animation: circle 9s infinite ease-in-out;
     }
-
-    @keyframes circle {
-        0% {
-            left: -125px;
-            top: -1860px;
-        }
-
-        50% {
-            left: -125px;
-            top: -2070px;
-        }
-
-        100% {
-            left: -125px;
-            top: -1860px;
-        }
+@keyframes circle {
+    0%{
+        left: -125px;
+        top: -1860px;
     }
+    50%{
+        left: -125px;
+        top: -2070px;
+    }
+    100%
+    {
+        left: -125px;
+        top: -1860px;
+    }
+}
+
 </style>
