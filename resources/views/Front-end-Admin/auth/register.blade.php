@@ -11,7 +11,8 @@
 </head>
 
 <body>
-    <!-- Body of Form starts -->
+<!-- <img src="{{asset("black_logo.png")}}" alt="" srcset=""> -->
+<div class="circle"></div>
     <div class="container">
         <div class="tieude">
             <strong>Register</strong>
@@ -108,9 +109,8 @@
         padding: 60px 60px 70px 60px;
         font-family: verdana;
         border-radius: 5px;
-        box-shadow: white 0px 0px 5px;
+        box-shadow: 10px 10px 0px 0px #2e2e2e;
     }
-
 
     .fl {
         float: left;
@@ -137,9 +137,11 @@
         font-family: verdana;
         font-size: 12px;
     }
-.textBox:focus{
-    outline: none;
-}
+
+    .textBox:focus {
+        outline: none;
+    }
+
     .textBox {
         height: 35px;
         width: 190px;
@@ -202,4 +204,15 @@
         display: grid;
         place-items: center;
     }
+
+    .circle {
+        position: fixed;
+        background-color: white;
+        width: 2600px;
+        height: 2600px;
+        border-radius: 50%;
+        left: -125px;
+        top: -1860px;
+    }
+    .im
 </style>
