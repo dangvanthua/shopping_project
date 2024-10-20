@@ -1,5 +1,4 @@
 @extends('LayOut.admin-dashboard.master_admin')
-
 @section('content')
 <section class="content-header">
     <h1>
@@ -56,7 +55,6 @@
             </div>
           </div>
     </div>
-    <script src="{{ asset('shopping/js/attribute.js') }}"></script>
   </section>
 <script src="{{ asset("shopping/data_rest/attribute.js") }}"></script>
 @endsection

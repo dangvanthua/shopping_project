@@ -33,4 +33,17 @@ class AttributeController extends Controller
     {
         return view('Front-end-Admin.attribute.create')->render();
     }
+
+    public function createDataAttribute(Request $request)
+    {
+        $request->validate([
+            'attributename' => 'required|max:255',
+            'attributedescription' => 'required'
+        ]);
+        $attribute = new Attribute();
+        $attribute->name = $request->input('attributename');
+        $attribute->describe = $request->input('attributedescription');
+        $attribute->save();
+        return response()->json(['message' => 'Thêm mới thành công!'], 200);
+    }
 }

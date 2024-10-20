@@ -28,3 +28,4 @@ Route::get('/attribute',[AttributeController::class,'getDataJson']);
 Route::delete('/attribute/{id}',[AttributeController::class, 'deteleDataAttribute']);
 
 Route::get('/attribute/create',[AttributeController::class, 'showCreateAttribute']);
+Route::post('/attribute/create', [AttributeController::class, 'createDataAttribute']);
