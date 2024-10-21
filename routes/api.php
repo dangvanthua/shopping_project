@@ -29,3 +29,5 @@ Route::delete('/attribute/{id}',[AttributeController::class, 'deteleDataAttribut
 
 Route::get('/attribute/create',[AttributeController::class, 'showCreateAttribute']);
 Route::post('/attribute/create', [AttributeController::class, 'createDataAttribute']);
+
+Route::get('attribute/update/{id}',[AttributeController::class, 'showEditAttribute']);

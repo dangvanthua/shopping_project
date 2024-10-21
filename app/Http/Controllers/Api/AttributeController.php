@@ -34,6 +34,14 @@ class AttributeController extends Controller
         return view('Front-end-Admin.attribute.create')->render();
     }
 
+    public function showEditAttribute($id)
+    {
+        $attribute = Attribute::findOrFail($id);
+        $theme = view('Front-end-Admin.attribute.update',compact('attribute'))->render();
+
+        return response()->json(['html' => $theme],200);
+    }
+
     public function createDataAttribute(Request $request)
     {
         // // Kiểm tra và validate dữ liệu đầu vào

@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <td>${attribute.checkactive ? 'Show' : 'Hide'}</td>
                         <td>${attribute.created_at}</td>
                         <td>
-                            <a href="#" class="btn btn-xs btn-primary">Edit</a>
+                            <a href="" class="btn btn-xs btn-primary js-update-confirm" data-id="${attribute.id_attribute}">Edit</a>
                             <a href="" class="btn btn-xs btn-danger js-delete-confirm" data-id="${attribute.id_attribute}">Delete</a>
                         </td>`;
                     attributeList.appendChild(tr);
@@ -140,16 +140,57 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.log("Đã có lỗi khi load lại trang", error));
     }
 
-    // @thực thi quay lại
-    function backToIndex() {
-        document.getElementById('back-index').addEventListener('click', function (event) {
+
+    // @bắt đầu sự kiện nút edit
+    document.addEventListener('click',function(event){
+        if(event.target.classList.contains('js-update-confirm')){
             event.preventDefault();
-            loadAgainIndex(); // gọi hàm để load lại trang
-        });
+            const data_id = event.target.getAttribute('data-id');
+
+            // thực thi gọi api
+            fetch(`/api/attribute/update/${data_id}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('content-area').innerHTML = data.html;
+            })
+            .catch(error => console.error('Đã xảy ra lỗi', error));
+
+        }
+    });
+
+    // @submit để cập nhật dữ liệu sửa lại
+
+    // function submitToUpdate(data_form)
+    // {
+    //     const form = document.getElementById()
+    // }
+
+
+
+
+    // @thực thi quay lại
+    // function backToIndex() {
+    //     document.getElementById('back-index').addEventListener('click', function (event) {
+    //         event.preventDefault();
+    //         loadAgainIndex(); // gọi hàm để load lại trang
+    //     });
+    // }
+
+
+    // @thực thi edit
+    function loadButtonEdit()
+    {
+        fetch('api/attribute/update').then(respone => respone.text()).then(data => {
+
+            document.getElementById('js-update-confirm').innerHTML = data;
+        }).catch(error => console.log("Đã xảy ra lỗi", error));
     }
+
+
     // Gọi hàm để load dữ liệu lần đầu
     fetchAttributes();
-    backToIndex();
+    loadButtonEdit();
+    // backToIndex();
 
 });
 
