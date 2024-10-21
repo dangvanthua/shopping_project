@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Http\Request;
 use Hash;
 use Illuminate\Support\Facades\Redirect;
@@ -21,6 +21,17 @@ class CategoryProductController extends Controller
     return view('Front-end-Admin.index')->with('Front-end-Admin.all_category_product', $manager_category_product);
    //  return view("Front-end-Admin.all_category_product");
  }
+
+
+ public function all_category_product_api()
+{
+    $all_category_product = DB::table('tbl_category_product')->paginate(2);
+
+    // Trả về dữ liệu dạng JSON cho API
+    return response()->json( $all_category_product);
+}
+
+
  public function save_category_product(Request $request)
 {
     // Custom validation messages
@@ -38,7 +49,6 @@ class CategoryProductController extends Controller
         'category_product_name' => [
             'required',
             'max:50',
-            'regex:/^[\pL\s]+$/u', // Chỉ cho phép chữ cái và khoảng trắng
             'regex:/^\S(.*\S)?$/u', // Không có khoảng trắng trước và sau
             'regex:/^(?!.*\s{2}).*$/u', // Không có hai khoảng trắng liên tiếp
         ],
@@ -85,19 +95,56 @@ public function edit_category_product($category_product_id){
   
    $edit_category_product = DB::table('tbl_category_product')->where('category_id',$category_product_id)->get();
 
-   $manager_category_product  = view('admin.edit_category_product')->with('edit_category_product',$edit_category_product);
+   $manager_category_product  = view('Front-end-Admin.edit_category_product')->with('edit_category_product',$edit_category_product);
 
-   return view('admin_layout')->with('admin.edit_category_product', $manager_category_product);
+   return view('Front-end-Admin.index')->with('Front-end-Admin.edit_category_product', $manager_category_product);
 }
-public function update_category_product(Request $request,$category_product_id){
- 
-   $data = array();
-   $data['category_name'] = $request->category_product_name;
-   $data['category_desc'] = $request->category_product_desc;
-   DB::table('tbl_category_product')->where('category_id',$category_product_id)->update($data);
-   Session::put('message','Cập nhật danh mục sản phẩm thành công');
-   return Redirect::to('all-category-product');
+public function update_category_product(Request $request, $category_product_id)
+{
+    // Custom validation messages
+    $messages = [
+        'category_product_name.required' => 'Không được để trống tên danh mục',
+        'category_product_name.max' => 'Tên danh mục không được dài quá 50 ký tự',
+        'category_product_name.regex' => 'Tên chỉ chứa chữ, không có khoảng trắng trước và sau, không có hai khoảng trắng liên tiếp',
+        'category_product_desc.required' => 'Không được để trống mô tả danh mục',
+        'category_product_desc.max' => 'Mô tả danh mục không được dài quá 1000 ký tự',
+        'category_product_desc.regex' => 'Mô tả chỉ chứa chữ và số, không có khoảng trắng trước và sau, không có hai khoảng trắng liên tiếp',
+    ];
+
+    // Validation rules
+    $rules = [
+        'category_product_name' => [
+            'required',
+            'max:50',
+            
+            'regex:/^\S(.*\S)?$/u', // Không có khoảng trắng trước và sau
+            'regex:/^(?!.*\s{2}).*$/u', // Không có hai khoảng trắng liên tiếp
+        ],
+        'category_product_desc' => [
+            'required',
+            'max:1000',
+            'regex:/^[\pL\d]+$/u', // Chỉ cho phép chữ cái và số
+            'regex:/^\S(.*\S)?$/u', // Không có khoảng trắng trước và sau
+            'regex:/^(?!.*\s{2}).*$/u', // Không có hai khoảng trắng liên tiếp
+        ],
+    ];
+
+    // Validate the request with custom messages
+    $request->validate($rules, $messages);
+
+    // Cập nhật danh mục sản phẩm
+    $data = [
+        'category_name' => $request->category_product_name,
+        'category_desc' => $request->category_product_desc,
+        'category_status' => $request->category_product_status,
+    ];
+
+    DB::table('tbl_category_product')->where('category_id', $category_product_id)->update($data);
+
+    // Set success message and redirect
+    return Redirect::to('all-category-product')->with('message', 'Cập nhật danh mục sản phẩm thành công');
 }
+
 public function delete_category_product($category_product_id){
   
    DB::table('tbl_category_product')->where('category_id',$category_product_id)->delete();

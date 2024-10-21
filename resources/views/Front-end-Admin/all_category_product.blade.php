@@ -89,4 +89,46 @@
     </footer>
   </div>
 </div>
+<script>
+        // Hàm gọi API và hiển thị danh mục sản phẩm
+        function fetchCategories() {
+            fetch('/api/categories')
+                .then(response => response.json())  // Chuyển đổi dữ liệu thành JSON
+                .then(data => {
+                    let categoryList = document.getElementById('category-list');
+                    let html = '<table class="table table-striped b-t b-light">';
+                    html += '<thead><tr><th>Tên danh mục</th><th>Hiển thị</th><th></th></tr></thead><tbody>';
+
+                    // Duyệt qua danh sách danh mục và tạo các dòng HTML tương ứng
+                    data.data.forEach(function(category) {
+                        html += '<tr>';
+                        html += '<td>' + category.category_name + '</td>';
+                        html += '<td>' + (category.category_status === 0 ? 'Hiển thị' : 'Ẩn') + '</td>';
+                        html += '<td><button onclick="deleteCategory(' + category.category_id + ')">Xóa</button></td>';
+                        html += '</tr>';
+                    });
+
+                    html += '</tbody></table>';
+                    categoryList.innerHTML = html; // Hiển thị danh mục lên giao diện
+                })
+                .catch(error => console.error('Error fetching categories:', error));
+        }
+
+        // Gọi hàm fetchCategories khi trang load
+        document.addEventListener('DOMContentLoaded', fetchCategories);
+
+        // Hàm xóa danh mục (nếu cần)
+        function deleteCategory(id) {
+            if (confirm('Bạn có chắc chắn muốn xóa danh mục này?')) {
+                fetch('/api/category/' + id, { method: 'DELETE' })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert('Xóa thành công!');
+                        fetchCategories(); // Tải lại danh sách sau khi xóa
+                    })
+                    .catch(error => console.error('Error deleting category:', error));
+            }
+        }
+    </script>
+
 @endsection
