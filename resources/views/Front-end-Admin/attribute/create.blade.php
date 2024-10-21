@@ -22,6 +22,7 @@
                 </div>
                 <div class="box-footer">
                     <a href="" class="btn btn-danger" id="back-index"><i class="fa fa-undo"></i> Trở Lại</a>
+                    {{-- <button type="submit" class="btn btn-danger" id="back-index"><i class="fa fa-undo"></i> Trở lại</button> --}}
                     <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Thêm mới</button>
                 </div>
             </form>

@@ -60,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-
     // @thực hiện xoá phần tử
     document.addEventListener('click', function (event) {
         if (event.target.classList.contains('js-delete-confirm')) {
@@ -93,13 +92,12 @@ document.addEventListener('DOMContentLoaded', function () {
         loadButtonCreate(); // Gọi hàm loadButtonCreate để tải form "Thêm mới"
     });
 
-    // @thực thi viết
+    // @thực thi thêm vào database
     function loadButtonCreate() {
         fetch('/api/attribute/create')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('content-area').innerHTML = data;
-                // Sau khi form đã được tải lên, gọi hàm submitDataAttribute để lắng nghe submit
                 submitDataAttribute('create-attribute-form');
             })
             .catch(error => console.log("Đã xảy ra lỗi", error));
@@ -132,11 +130,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         });
     }
-    // Gọi hàm để load dữ liệu lần đầu
-    fetchAttributes();
-    backToIndex();
-
-});
 
     //@ thực thi viết hàm load lại trang
     function loadAgainIndex() {
@@ -148,20 +141,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // @thực thi quay lại
-    // function backToIndex() {
-    //     document.getElementById('back-index').addEventListener('click', function (event) {
-    //         event.preventDefault();
-    //         loadAgainIndex(); // gọi hàm để load lại trang
-    //     });
-    // }
     function backToIndex() {
-        const backButton = document.getElementById('back-index');
-        if (backButton) {  // Đảm bảo nút "Quay lại" tồn tại
-            backButton.addEventListener('click', function(event) {
-                event.preventDefault();  // Ngăn chặn hành động mặc định
-                loadAgainIndex();  // Gọi hàm load lại trang index
-            });
-        } else {
-            console.log("Nút 'Quay lại' không tồn tại trong DOM.");
-        }
+        document.getElementById('back-index').addEventListener('click', function (event) {
+            event.preventDefault();
+            loadAgainIndex(); // gọi hàm để load lại trang
+        });
     }
+    // Gọi hàm để load dữ liệu lần đầu
+    fetchAttributes();
+    backToIndex();
+
+});
+
+

@@ -36,14 +36,22 @@ class AttributeController extends Controller
 
     public function createDataAttribute(Request $request)
     {
+        // // Kiểm tra và validate dữ liệu đầu vào
         $request->validate([
             'attributename' => 'required|max:255',
-            'attributedescription' => 'required'
+            'attributedescription' => 'required',
         ]);
+
+        // Tạo mới một bản ghi attribute
         $attribute = new Attribute();
         $attribute->name = $request->input('attributename');
         $attribute->describe = $request->input('attributedescription');
         $attribute->save();
-        return response()->json(['message' => 'Thêm mới thành công!'], 200);
+
+        // Trả về response dưới dạng JSON
+        return response()->json([
+            'message' => 'Thêm mới thành công!',
+            'data' => $attribute
+        ], 200);
     }
 }
