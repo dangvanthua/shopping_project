@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +29,9 @@ Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/create', [EventController::class, 'create'])->name('create');
 Route::post('/events/store', [EventController::class, 'store'])->name('events.store');
 Route::delete('/events/{id}/delete', [EventController::class, 'destroy'])->name('deleteEvent');
+
+// Route User
+Route::get('/auth/forgot-password', [UserController::class, 'showForgotPassword'])->name('auth.password');
+Route::post('/auth/forgot-password', [UserController::class, 'submitFormForgetPassword'])->name('auth.sumitReset');
+Route::get('/auth/get-password/{customer}/{token}', [UserController::class, 'showGetPassword'])->name('auth.getPassword');
+Route::post('/auth/get-password/{customer}/{token}', [UserController::class, 'submitGetPassword'])->name('auth.submitPassword');
