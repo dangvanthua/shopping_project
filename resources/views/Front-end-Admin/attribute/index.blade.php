@@ -22,7 +22,7 @@
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" id="search-key" class="form-control pull-right" placeholder="Search">
                     <div class="input-group-btn">
-                      <button type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+                      <button type="button" class="btn btn-default" id="btn-search"><i class="fa fa-search"></i></button>
                     </div>
                   </div>
                 </div>

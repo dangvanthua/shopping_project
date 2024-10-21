@@ -31,3 +31,6 @@ Route::get('/attribute/create',[AttributeController::class, 'showCreateAttribute
 Route::post('/attribute/create', [AttributeController::class, 'createDataAttribute']);
 
 Route::get('attribute/update/{id}',[AttributeController::class, 'showEditAttribute']);
+Route::put('attribute/update/{id}',[AttributeController::class, 'updateDataAttribute']);
+// tìm kiếm
+Route::get('attribute/search',[AttributeController::class, 'searchAttribute']);

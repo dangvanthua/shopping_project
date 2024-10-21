@@ -142,44 +142,117 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // @bắt đầu sự kiện nút edit
-    document.addEventListener('click',function(event){
-        if(event.target.classList.contains('js-update-confirm')){
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('js-update-confirm')) {
             event.preventDefault();
             const data_id = event.target.getAttribute('data-id');
-
             // thực thi gọi api
             fetch(`/api/attribute/update/${data_id}`)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('content-area').innerHTML = data.html;
-            })
-            .catch(error => console.error('Đã xảy ra lỗi', error));
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('content-area').innerHTML = data.html;
+                    submitToUpdate('form-edit', data_id);
+                })
+                .catch(error => console.error('Đã xảy ra lỗi', error));
 
         }
     });
 
     // @submit để cập nhật dữ liệu sửa lại
-
-    // function submitToUpdate(data_form)
+    // function submitToUpdate(form_id,data_id)
     // {
-    //     const form = document.getElementById()
+    //     const form = document.getElementById(form_id);
+    //     form.addEventListener('submit',function(event){
+    //         event.preventDefault();
+    //         const formData = new FormData(this);
+    //         // api
+    //         fetch(`api/attribute/update/${data_id}`, {
+    //             method: 'PUT',
+    //             body: formData,
+    //             headers: {
+    //             'Accept': 'application/json',
+    //             },
+    //         }).then(respone => respone.json()).then(data => {
+    //             if(data.message)
+    //             {
+    //                 alert("Cập nhật thành công");
+    //                 window.location.href = '/attribute';
+    //             }
+    //             else{
+    //                 alert("Cập nhật chưa thành công");
+    //             }
+    //         }).catch(error => console.error("Đã xảy ra lỗi",error));
+    //     });
     // }
 
+    function submitToUpdate(form_id, data_id) {
+        const form = document.getElementById(form_id);
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Ngăn hành động submit mặc định
+
+            const formData = new FormData(this); // Lấy dữ liệu từ form
+            console.log([...formData]); // In dữ liệu form ra để kiểm tra
+
+            // Gửi dữ liệu cập nhật qua fetch
+            fetch(`/api/attribute/update/${data_id}`, {
+                    method: 'PUT',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert('Cập nhật thành công!');
+                        console.log(data_id);
+                        // window.location.href = '/attribute';
+                    } else {
+                        alert('Cập nhật thất bại, vui lòng thử lại.');
+                    }
+                })
+                .catch(error => console.error('Lỗi khi cập nhật:', error));
+        });
+    }
 
 
+    // function submitUpdateAttribute(form_id, data_id) {
+    //     const form = document.getElementById(form_id);
 
-    // @thực thi quay lại
-    // function backToIndex() {
-    //     document.getElementById('back-index').addEventListener('click', function (event) {
-    //         event.preventDefault();
-    //         loadAgainIndex(); // gọi hàm để load lại trang
+    //     form.addEventListener('submit', function (event) {
+    //         event.preventDefault(); // Ngăn hành động submit mặc định
+
+    //         const formData = new FormData(this); // Lấy dữ liệu từ form
+
+    //         // Gửi dữ liệu cập nhật qua fetch
+    //         fetch(`/api/attribute/update/${data_id}`, {
+    //             method: 'POST', // Chúng ta vẫn để phương thức POST vì có _method là PUT trong form
+    //             body: formData,
+    //             headers: {
+    //                 'Accept': 'application/json',
+    //                 // Nếu bạn sử dụng CSRF token với AJAX:
+    //                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    //             },
+    //         })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             if (data.message) {
+    //                 alert('Cập nhật thành công!');
+    //                 // Quay lại trang index hoặc refresh dữ liệu
+    //                 window.location.href = '/attribute';
+    //             } else {
+    //                 alert('Cập nhật thất bại, vui lòng thử lại.');
+    //             }
+    //         })
+    //         .catch(error => console.error('Lỗi khi cập nhật:', error));
     //     });
     // }
 
 
+
+
     // @thực thi edit
-    function loadButtonEdit()
-    {
+    function loadButtonEdit() {
         fetch('api/attribute/update').then(respone => respone.text()).then(data => {
 
             document.getElementById('js-update-confirm').innerHTML = data;
@@ -187,11 +260,51 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
+    // @hiển thị dữ liệu khi tìm kiếm
+    function showDataSearch(attribute) {
+        const attributeList = document.getElementById('attribute-list');
+        attributeList.innerHTML = '';
+
+        // lặp kết quả
+        attribute.forEach(attribute => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                        <td>${attribute.name}</td>
+                        <td>${attribute.describe}</td>
+                        <td>${attribute.checkactive ? 'Show' : 'Hide'}</td>
+                        <td>${attribute.created_at}</td>
+                        <td>
+                            <a href="" class="btn btn-xs btn-primary js-update-confirm" data-id="${attribute.id_attribute}">Edit</a>
+                            <a href="" class="btn btn-xs btn-danger js-delete-confirm" data-id="${attribute.id_attribute}">Delete</a>
+                        </td>`;
+            attributeList.appendChild(tr);
+        });
+
+    }
+
+    // @ xử lý sự kiện nhấn tìm kiếm
+    document.getElementById('btn-search').addEventListener('click',function(){
+            const query = document.getElementById('search-key').value;
+            //gọi api tìm kiếm
+            fetch(`api/attribute/search?query=${query}`).then(response => response.json()).then(data => {
+                if(data.data.length > 0)
+                {
+                    showDataSearch(data.data);
+                }
+                else{
+                    document.getElementById('attribute-list').innerHTML = '<tr><td colspan="5">Không tìm thấy kết quả</td></tr>';
+                }
+            })
+            .catch(error => {
+                console.error('Có lỗi xảy ra:', error);
+            });
+    })
+
+
+
+
     // Gọi hàm để load dữ liệu lần đầu
     fetchAttributes();
-    loadButtonEdit();
     // backToIndex();
 
 });
-
-
