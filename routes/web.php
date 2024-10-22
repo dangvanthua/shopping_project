@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardViewController;
 use App\Http\Controllers\AttributeViewController;
 use App\Http\Controllers\CategoryViewController;
 use App\Http\Controllers\Demo_OderController;
@@ -21,12 +22,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/oke',TestController::class,'testcai');
+// Route::get('/transaction', [App\Http\Controllers\TestController::class, 'testcai']);
 // Route::get('demo',[Demo_OderController::class,'showData']);
 // Route::get('view',[Demo_OderController::class,'showView'])->name("view");
 
 Route::get('category', [CategoryViewController::class, 'index']);
 
-
 Route::get('/attribute',[AttributeViewController::class, 'showThemmeAttributeIndex']);
-Route::get('/create-attribute',[AttributeViewController::class, 'showAttributeCreate']);
+
+// thực thi với theme dashboard
+Route::get('/dashboard',[AdminDashboardViewController::class, 'showThemeDashBoard']);

@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TestController extends Controller
+class AdminDashboardViewController extends Controller
 {
-    //
-    public function testcai()
+    //Hiện thị theme trang dashboard
+    public function showThemeDashBoard()
     {
         return view('Front-end-Admin.transaction.index');
     }
