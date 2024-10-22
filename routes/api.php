@@ -36,4 +36,5 @@ Route::put('attribute/update/{id}',[AttributeController::class, 'updateDataAttri
 Route::get('attribute/search',[AttributeController::class, 'searchAttribute']);
 
 // thực thi với dashboard
-Route::get('/dashboard',[DashboardController::class,'getDataDashboardJson']);
+Route::get('/dashboard',[DashboardController::class,'getItemDashBoard']);
+// Route::get('dashboard/{id}',[DashboardController::class, 'getItemDashBoard']);

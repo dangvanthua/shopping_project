@@ -40,15 +40,15 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Info</th>
-                                <th>Money</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Tổng tiền</th>
                                 <th>Status</th>
                                 <th>Phương thức TT</th>
                                 <th>Time</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody id="dashboard_list">
+                        <tbody id="dashboard_list" style="height: 100px">
                             <!-- Nội dung sẽ được thêm vào đây bằng JavaScript -->
                         </tbody>
                     </table>
@@ -78,5 +78,5 @@
         </div>
     </div>
 </div>
-<script src="{{ asset(" shopping/data_rest/dashboard.js") }}"></script>
+<script src="{{ asset("shopping/data_rest/dashboard.js") }}"></script>
 @endsection
