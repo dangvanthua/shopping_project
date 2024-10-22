@@ -120,6 +120,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+
+
+// xử lý view mai làm tiếp
+// function getViewItems()
+// {
+//     document.getElementById('').addEventListener('click', function (event) {
+//         event.preventDefault();
+
+//         fetch(`api/view-orders`).then(response => response.json())
+//         .then(data => {
+//             const dashboard = Document.getElementById();
+//         });
+//     });
+// }
+
+
+
+
 // @comment lại
 // viêt sự kiện xem toàn bộ đơn hàng
 // document.getElementById('btn-all-item').addEventListener('click', function (event) {

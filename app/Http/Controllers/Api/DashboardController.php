@@ -9,17 +9,7 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    //Lấy data dưới dạng json
-    public function getDataDashboardJson()
-    {
-        $dashboard = Order::all();
-        return response()->json([
-            'message' => 'Thành công',
-            'data' => $dashboard
-        ]);
-    }
-
-    // lấy giá trị đơn hàng
+    // lấy giá trị đơn hàng dưới dạng json
     public function getItemDashBoard(){
         $items = OrderItem::with('product','order.customer','order.payment')->get();
         return response()->json([
@@ -28,10 +18,18 @@ class DashboardController extends Controller
         ]);
     }
 
-    //
-
-
+    // lấy danh sách đơn hàng
     public function getAllItemDashboard()
+    {
+        $item = OrderItem::with('product','order.customer','order.payment')->get();
+        return response()->json([
+            'message' => 'Thành công',
+            'data' => $item
+        ]);
+    }
+
+    //@ lấy chi tiết đơn hàng
+    public function getViewItemDashboard()
     {
         $item = OrderItem::with('product','order.customer','order.payment')->get();
         return response()->json([

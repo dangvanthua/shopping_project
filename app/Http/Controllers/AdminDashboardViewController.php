@@ -18,4 +18,11 @@ class AdminDashboardViewController extends Controller
         return view('Front-end-Admin.transaction.index');
 
     }
+
+    //@hiện thị view chi tiết
+
+    public function showViewDashBoart()
+    {
+        return view('Front-end-Admin.transaction.view');
+    }
 }

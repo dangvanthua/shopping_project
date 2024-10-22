@@ -13,7 +13,6 @@
   </section>
   <!-- Main content -->
   <section class="content">
-    <!-- Small boxes (Stat box) -->
     <div class="row">
         <form role="form" action="" method="POST" enctype="multipart/form-data">
             @csrf
@@ -76,9 +75,6 @@
                                         <td>Ngày Mua Đơn Hàng</td>
                                         <td><span >Yes sir</span></td>
                                     </tr>
-                                    {{-- <tr>
-                                        <td>Chức Vụ</td>
-                                    </tr> --}}
                                 </tbody>
                             </table>
                         </div>
@@ -120,7 +116,6 @@
                         </div>  --}}
                     </div>
                 </div>
-                
                 <div class="col-md-12">
                     <div class="box-footer" style="text-align: center;">
                         <a href="" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
@@ -130,14 +125,6 @@
         </form>
     </div>
     </div>
-    <!-- /.row -->
-    <!-- Main row -->
-    <!-- /.row (main row) -->
   </section>
-  <!-- /.content -->
-  {{--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/css/fileinput.css"  />
-  <script src="https://code.jquery.com/jquery-3.2.1.js" ></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/js/fileinput.js" ></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/themes/fa/theme.js" ></script>  --}}
 @endsection
 
