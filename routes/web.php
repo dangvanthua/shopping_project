@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryViewController;
 use App\Http\Controllers\Demo_OderController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,12 @@ Route::get('demo', [Demo_OderController::class, 'showData']);
 Route::get('view', [Demo_OderController::class, 'showView'])->name("view");
 
 Route::get('category', [CategoryViewController::class, 'index']);
+
+// Route home
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/filter/products', [HomeController::class, 'filter'])->name('filter.products');
+Route::post('/load-more/products', [HomeController::class, 'loadMore']);
+
 
 // Route Event
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
