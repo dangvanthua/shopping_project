@@ -13,8 +13,7 @@
 </section>
 
 <!-- Main content -->
-<section class="content">
-    <!-- Small boxes (Stat box) -->
+<section class="content" id="main-content">
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -39,7 +38,7 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>STT</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Tổng tiền</th>
                                 <th>Status</th>
@@ -48,7 +47,7 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody id="dashboard_list" style="height: 100px">
+                        <tbody id="list_item" style="height: 100px">
                             <!-- Nội dung sẽ được thêm vào đây bằng JavaScript -->
                         </tbody>
                     </table>
@@ -60,7 +59,7 @@
 </section>
 
 <!-- Modal -->
-<div class="modal fade" id="modal-preview-transaction">
+{{-- <div class="modal fade" id="modal-preview-transaction">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -77,6 +76,6 @@
             </div>
         </div>
     </div>
-</div>
-
+</div> --}}
+<script src="{{ asset("shopping/data_rest/dashboard.js") }}"></script>
 @endsection

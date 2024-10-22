@@ -57,7 +57,7 @@
         <div class="col-md-12">
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Danh sách đơn hàng trong 10 gần nhất</h3>
+                    <h3 class="box-title">Đơn hàng mới của bạn</h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
                                 class="fa fa-minus"></i>
@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="box-footer clearfix" style="">
-                    <a href="" class="btn btn-sm btn-info btn-flat pull-right">Danh Sách Đơn Hàng</a>
+                    <a href="{{ Route('get-orders') }}" id="btn-all-item" class="btn btn-sm btn-info  pull-right">Danh Sách Đơn Hàng</a>
                 </div>
             </div>
         </div>

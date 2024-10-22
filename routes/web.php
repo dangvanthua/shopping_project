@@ -27,8 +27,8 @@ Route::get('/transaction', [App\Http\Controllers\TestController::class, 'testcai
 // Route::get('view',[Demo_OderController::class,'showView'])->name("view");
 
 Route::get('category', [CategoryViewController::class, 'index']);
-
 Route::get('/attribute',[AttributeViewController::class, 'showThemmeAttributeIndex']);
 
 // thực thi với theme dashboard
 Route::get('/dashboard',[AdminDashboardViewController::class, 'showThemeDashBoard']);
+Route::get('/get-orders',[AdminDashboardViewController::class, 'showIndexDashBoard'])->name('get-orders');

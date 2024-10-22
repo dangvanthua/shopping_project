@@ -31,8 +31,8 @@ class Order extends Model
     // thiết lập quan hệ giữa order và payment (1-n)
     public function payment()
     {
-        return $this->belongsTo(Payment::class,'id_payment');
-    }
+        return $this->belongsTo(Payment::class, 'id_payment');
+    }    
 
     // thiết lập quan hệ giữa customer và order (1-n)
     public function customer()

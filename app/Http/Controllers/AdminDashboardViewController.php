@@ -11,4 +11,11 @@ class AdminDashboardViewController extends Controller
     {
         return view('Front-end-Admin.transaction.dashboard');
     }
+
+    // hiện thị toàn bộ đơn hàng
+    public function showIndexDashBoard()
+    {
+        return view('Front-end-Admin.transaction.index');
+
+    }
 }

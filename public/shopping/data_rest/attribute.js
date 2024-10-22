@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-
     // @thực hiện xoá phần tử
     document.addEventListener('click', function (event) {
         if (event.target.classList.contains('js-delete-confirm')) {

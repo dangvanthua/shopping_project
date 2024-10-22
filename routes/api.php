@@ -37,4 +37,4 @@ Route::get('attribute/search',[AttributeController::class, 'searchAttribute']);
 
 // thực thi với dashboard
 Route::get('/dashboard',[DashboardController::class,'getItemDashBoard']);
-// Route::get('dashboard/{id}',[DashboardController::class, 'getItemDashBoard']);
+Route::get('/get-orders',[DashboardController::class, 'getAllItemDashboard']);

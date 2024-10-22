@@ -19,11 +19,24 @@ class DashboardController extends Controller
         ]);
     }
 
+    // lấy giá trị đơn hàng
     public function getItemDashBoard(){
-        $orderItems = OrderItem::with('product','order.customer','order.')->get();
+        $items = OrderItem::with('product','order.customer','order.payment')->get();
         return response()->json([
             'message' => 'Thành công',
-            'data' => $orderItems
+            'data' => $items
+        ]);
+    }
+
+    //
+
+
+    public function getAllItemDashboard()
+    {
+        $item = OrderItem::with('product','order.customer','order.payment')->get();
+        return response()->json([
+            'message' => 'Thành công',
+            'data' => $item
         ]);
     }
 
