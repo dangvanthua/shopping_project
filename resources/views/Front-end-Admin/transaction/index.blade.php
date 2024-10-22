@@ -78,5 +78,5 @@
         </div>
     </div>
 </div>
-<script src="{{ asset("shopping/data_rest/dashboard.js") }}"></script>
+
 @endsection

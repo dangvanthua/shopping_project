@@ -22,7 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/transaction', [App\Http\Controllers\TestController::class, 'testcai']);
+Route::get('/transaction', [App\Http\Controllers\TestController::class, 'testcai']);
 // Route::get('demo',[Demo_OderController::class,'showData']);
 // Route::get('view',[Demo_OderController::class,'showView'])->name("view");
 

@@ -9,6 +9,6 @@ class AdminDashboardViewController extends Controller
     //Hiện thị theme trang dashboard
     public function showThemeDashBoard()
     {
-        return view('Front-end-Admin.transaction.index');
+        return view('Front-end-Admin.transaction.dashboard');
     }
 }

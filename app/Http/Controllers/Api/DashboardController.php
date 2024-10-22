@@ -20,18 +20,11 @@ class DashboardController extends Controller
     }
 
     public function getItemDashBoard(){
-        $orderItems = OrderItem::with('product','order')->get();
+        $orderItems = OrderItem::with('product','order.customer','order.')->get();
         return response()->json([
             'message' => 'Thành công',
             'data' => $orderItems
         ]);
     }
 
-    // public function getItemDashBoard(){
-    //     $orderItems = Order::with('product')->get();
-    //     return response()->json([
-    //         'message' => 'Thành công',
-    //         'data' => $orderItems
-    //     ]);
-    // }
 }
