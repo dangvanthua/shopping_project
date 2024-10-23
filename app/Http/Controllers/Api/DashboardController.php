@@ -29,13 +29,43 @@ class DashboardController extends Controller
     }
 
     //@ lấy chi tiết đơn hàng
-    public function getViewItemDashboard()
+    // public function getViewItemDashboard()
+    // {
+    //     $item = OrderItem::with('product','order.customer','order.payment')->get();
+    //     return response()->json([
+    //         'message' => 'Thành công',
+    //         'data' => $item
+    //     ]);
+    // }
+
+    public function getViewItemDashboard($id)
     {
-        $item = OrderItem::with('product','order.customer','order.payment')->get();
-        return response()->json([
-            'message' => 'Thành công',
-            'data' => $item
-        ]);
+        $item = Order::with('customer')->find($id);
+        return response()->json($item);
+    }
+
+    // @thực thi cập nhật trạng thái đơn hàng
+    public function updateStatusOrderDashBoard(Request $request, $id)
+    {
+        $item = $request->items;
+        forEach($item as $itemOrder)
+        {
+            $data = OrderItem::find($itemOrder['id_order_item']);
+            if($data)
+            {
+                $data->status = $itemOrder['status'];
+                $data->save();
+                return response()->json([
+                    'message' => 'Cập nhật thành công',
+                ],200);
+            }
+            else{
+                return response()->json([
+                    'message' => 'Cập nhật thất bại',
+                ],404);
+            }
+        }
+
     }
 
 }

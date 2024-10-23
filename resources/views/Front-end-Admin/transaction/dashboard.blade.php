@@ -1,16 +1,7 @@
 @extends('LayOut.admin-dashboard.master_admin')
 @section('content')
-<section class="content-header">
-    <h1>
-        Dashboard
-        <small>Control panel</small>
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-    </ol>
-</section>
-<section class="content">
+
+<section class="content" id="content-area">
     <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
@@ -92,5 +83,5 @@
         </div>
     </div>
 </section>
-<script src="{{ asset("shopping/data_rest/dashboard.js") }}"></script>
+<script src="{{asset("shopping/data_rest/dashboard.js")}}"></script>
 @endsection
