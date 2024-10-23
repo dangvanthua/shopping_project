@@ -13,24 +13,25 @@ use DB;
 class CategoryProductController extends Controller
 {
  public function add_category_product(){
-    return view("Front-end-Admin.add_category_product");
+    return view("Front-end-Admin.category.add_category_product");
+ }
+ 
+
+
+ public function api_all_category_product()
+ {
+     // Lấy tất cả danh mục sản phẩm với phân trang
+     $all_category_product = DB::table('tbl_category_product')->paginate(2);
+
+     // Trả về dữ liệu dưới dạng JSON
+     return response()->json($all_category_product);
  }
  public function all_category_product(){
     $all_category_product = DB::table('tbl_category_product')->paginate(2);
-    $manager_category_product  = view('Front-end-Admin.all_category_product')->with('all_category_product',$all_category_product);
-    return view('Front-end-Admin.index')->with('Front-end-Admin.all_category_product', $manager_category_product);
+    $manager_category_product  = view('Front-end-Admin.category.all_category_product')->with('all_category_product',$all_category_product);
+    return view('Front-end-Admin.index')->with('Front-end-Admin.category.all_category_product', $manager_category_product);
    //  return view("Front-end-Admin.all_category_product");
  }
-
-
- public function all_category_product_api()
-{
-    $all_category_product = DB::table('tbl_category_product')->paginate(2);
-
-    // Trả về dữ liệu dạng JSON cho API
-    return response()->json( $all_category_product);
-}
-
 
  public function save_category_product(Request $request)
 {
@@ -65,6 +66,7 @@ class CategoryProductController extends Controller
     $request->validate($rules, $messages);
 
     // Insert the valid data into the database
+
     $data = [
         'category_name' => $request->category_product_name,
         'category_desc' => $request->category_product_desc,
@@ -95,9 +97,9 @@ public function edit_category_product($category_product_id){
   
    $edit_category_product = DB::table('tbl_category_product')->where('category_id',$category_product_id)->get();
 
-   $manager_category_product  = view('Front-end-Admin.edit_category_product')->with('edit_category_product',$edit_category_product);
+   $manager_category_product  = view('Front-end-Admin.category.edit_category_product')->with('edit_category_product',$edit_category_product);
 
-   return view('Front-end-Admin.index')->with('Front-end-Admin.edit_category_product', $manager_category_product);
+   return view('Front-end-Admin.index')->with('Front-end-Admin.category.edit_category_product', $manager_category_product);
 }
 public function update_category_product(Request $request, $category_product_id)
 {
@@ -169,3 +171,5 @@ public function delete_category_product($category_product_id){
 // }
 
 }
+
+

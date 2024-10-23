@@ -245,15 +245,12 @@
             </li>
     
             <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-book"></i>
-                        <span>Danh mục sản phẩm</span>
-                    </a>
-                    <ul class="sub">
-						<li><a href="{{URL::to('add-category-product')}}">Thêm danh mục</a></li>
-						<li><a href="{{URL::to('all-category-product')}}">Liệt danh mục</a></li>
-                    </ul>
-                </li>
+    <a href="{{ URL::to('all-category-product') }}">
+        <i class="fa fa-book"></i>
+        <span>Danh mục sản phẩm</span>
+    </a>
+</li>
+
             <li class="{{ Request::is('admin-datn/transaction*') ? 'active' : '' }}">
                 <a href="">
                     <i class="fa fa-cart-arrow-down"></i> <span>Đơn hàng</span>
