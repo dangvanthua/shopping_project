@@ -1,6 +1,7 @@
 @extends('LayOut.admin-dashboard.master_admin')
 @section('content')
 <section class="content-header">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <h1>
         Quản lý đơn hàng
         <small>index</small>
@@ -13,7 +14,7 @@
 </section>
 
 <!-- Main content -->
-<section class="content">
+<section class="content" id="list_demo">
     <div class="row">
         <div class="col-xs-12">
             <div class="box">

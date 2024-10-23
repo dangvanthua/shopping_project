@@ -20,9 +20,8 @@ class AdminDashboardViewController extends Controller
     }
 
     //@hiện thị view chi tiết
-
-    public function showViewDashBoart()
-    {
-        return view('Front-end-Admin.transaction.view');
-    }
+    // public function showViewDashBoart()
+    // {
+    //     return view('Front-end-Admin.transaction.view',compact(''));
+    // }
 }

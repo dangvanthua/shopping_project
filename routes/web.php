@@ -32,3 +32,4 @@ Route::get('/attribute',[AttributeViewController::class, 'showThemmeAttributeInd
 // thực thi với theme dashboard
 Route::get('/dashboard',[AdminDashboardViewController::class, 'showThemeDashBoard']);
 Route::get('/get-orders',[AdminDashboardViewController::class, 'showIndexDashBoard'])->name('get-orders');
+Route::get('/view-dashboard',[AdminDashboardViewController::class, 'showViewDashBoart']);
