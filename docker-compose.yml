@@ -18,10 +18,10 @@ services:
     image: mysql:8.0
     container_name: laravel_db
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: 21102004
       MYSQL_DATABASE: laravel
       MYSQL_USER: root
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_PASSWORD: 21102004
     volumes:
       - dbdata:/var/lib/mysql
     networks:
