@@ -45,6 +45,9 @@ class HomeController extends Controller
             $products = Product::where('id_category', $categoryId)->paginate(8, ['*'], 'page', $page);
         }
 
-        return response()->json($products);
+        return response()->json([
+            'products' => $products->items(),
+            'total' => $products->total(),
+        ]);
     }
 }

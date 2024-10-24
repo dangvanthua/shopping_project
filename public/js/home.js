@@ -35,8 +35,20 @@ document.addEventListener('DOMContentLoaded', function () {
             body: JSON.stringify({ category_id: categoryId, page: page })
         })
             .then(response => response.json())
-            .then(result => {
-                renderProducts(result.data);
+            .then(data => {
+                const products = data.products;
+                const total = data.total;
+
+                renderProducts(products);
+
+                const loadMoreBtn = document.querySelector('#load-more-button');
+                if (!loadMoreBtn) return;
+
+                if (total <= page * 8) {
+                    loadMoreBtn.style.display = 'none';
+                } else {
+                    loadMoreBtn.style.display = 'flex-w';
+                }
             })
             .catch(error => console.log('Error', error));
     }
@@ -53,8 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
-                        <img src="${product.images}" alt="IMG-PRODUCT">
-
+                        <img src="../images/events/1729298479.png" alt="IMG-PRODUCT">
                         <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
