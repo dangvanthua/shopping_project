@@ -15,9 +15,7 @@ return new class extends Migration {
             $table->bigIncrements('id_customer');
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('status');
             $table->string('password');
-            $table->string('token')->nullable();
             $table->string('phone');
             $table->string('address')->nullable();
             $table->timestamps();

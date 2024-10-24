@@ -20,8 +20,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 21102004
       MYSQL_DATABASE: laravel
-      MYSQL_USER: root
-      MYSQL_PASSWORD: 21102004
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
     volumes:
       - dbdata:/var/lib/mysql
     networks:
