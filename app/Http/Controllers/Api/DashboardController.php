@@ -31,50 +31,42 @@ class DashboardController extends Controller
     }
 
     //@ lấy chi tiết đơn hàng
-    // public function getViewItemDashboard()
-    // {
-    //     $item = OrderItem::with('product','order.customer','order.payment')->get();
-    //     return response()->json([
-    //         'message' => 'Thành công',
-    //         'data' => $item
-    //     ]);
-    // }
-
     public function getViewItemDashboard($id)
     {
-        $item = Order::with('customer')->find($id);
-        return response()->json($item);
+        // Tìm đơn hàng theo ID
+        $order = Order::with('customer')->find($id);
+    
+        // Kiểm tra xem đơn hàng có tồn tại không
+        if (!$order) {
+            return response()->json(['message' => 'Order not found'], 404);
+        }
+    
+        // Chuẩn bị dữ liệu để trả về
+        $data = [
+            'customer' => [
+                'name' => $order->customer->name,
+                'email' => $order->customer->email,
+                'phone' => $order->customer->phone,
+                'address' => $order->customer->address,
+            ],
+            'status' => $order->status,
+            'total' => $order->total,
+            // 'created_at' => $order->created_at->format('Y-m-d H:i:s'),
+        ];
+        // Trả về dữ liệu dưới dạng JSON
+        return response()->json($data);
     }
 
-    // @thực thi cập nhật trạng thái đơn hàng
-    // public function updateStatusOrderDashBoard(Request $request, $id)
+
+    // public function getViewItemDashboard($id)
     // {
-    //     // Nếu không có items trong request, trả về lỗi
-    //     if (!$request->has('items') || empty($request->items)) {
-    //         return response()->json([
-    //             'message' => 'Không có dữ liệu đơn hàng'
-    //         ], 400);
-    //     }
-
-
-    // public function updateStatusOrderDashBoard(Request $request, $id)
-    // {
-    //     // Kiểm tra xem dữ liệu 'status' có tồn tại không
-    //     if (!$request->has('status')) {
-    //         return response()->json(['message' => 'Status is required'], 400);
-    //     }
-
-    //     // Lấy đơn hàng theo ID
-    //     $order = OrderItem::find($id);
-    //     if (!$order) {
-    //         return response()->json(['message' => 'Order not found'], 404);
-    //     }
-
-    //     // Cập nhật trạng thái đơn hàng
-    //     $order->status = $request->input('status');
-    //     $order->save();
-    //     return response()->json(['message' => 'Cập nhật thành công'], 200);
+    //     $item = Order::with('customer')->find($id);
+    //     return response()->json($item);
     // }
+
+    // @thực thi cập nhật trạng thái đơn hàng
+
+
 
     // public function updateStatusOrderDashBoard(Request $request, $id)
     // {
@@ -137,7 +129,6 @@ class DashboardController extends Controller
         if (!$key) {
             return response()->json(['message' => 'Order not found'], 404);
         }
-
         // Lấy tất cả các OrderItem của đơn hàng này
         $orders = OrderItem::where('id_order', $items->id_order)->get();
 
@@ -151,7 +142,6 @@ class DashboardController extends Controller
             $key->status = $request->input('status');
             $key->save();
         }
-
         return response()->json(['message' => 'Cập nhật thành công'], 200);
     }
 }

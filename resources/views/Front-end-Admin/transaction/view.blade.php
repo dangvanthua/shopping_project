@@ -74,9 +74,9 @@
 <script src="{{ asset("shopping/data_rest/dashboard.js") }}"></script>
 @endsection --}}
 
-
 @extends('LayOut.admin-dashboard.master_admin')
 @section('content')
+
 <section class="content-header">
     <h1>View Detail Transaction</h1>
     <ol class="breadcrumb">
@@ -86,7 +86,7 @@
     </ol>
 </section>
 
-<section class="content">
+<section class="content" id="main-content">
     <div class="row">
         <!-- Phần thông tin khách hàng -->
         <div class="col-md-6">
@@ -118,7 +118,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Phần thông tin đơn hàng -->
         <div class="col-md-6">
             <div class="box box-danger">
