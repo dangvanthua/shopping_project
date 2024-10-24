@@ -157,33 +157,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // @submit để cập nhật dữ liệu sửa lại
-    // function submitToUpdate(form_id,data_id)
-    // {
-    //     const form = document.getElementById(form_id);
-    //     form.addEventListener('submit',function(event){
-    //         event.preventDefault();
-    //         const formData = new FormData(this);
-    //         // api
-    //         fetch(`api/attribute/update/${data_id}`, {
-    //             method: 'PUT',
-    //             body: formData,
-    //             headers: {
-    //             'Accept': 'application/json',
-    //             },
-    //         }).then(respone => respone.json()).then(data => {
-    //             if(data.message)
-    //             {
-    //                 alert("Cập nhật thành công");
-    //                 window.location.href = '/attribute';
-    //             }
-    //             else{
-    //                 alert("Cập nhật chưa thành công");
-    //             }
-    //         }).catch(error => console.error("Đã xảy ra lỗi",error));
-    //     });
-    // }
-
     function submitToUpdate(form_id, data_id) {
         const form = document.getElementById(form_id);
         form.addEventListener('submit', function (event) {
@@ -214,42 +187,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-
-    // function submitUpdateAttribute(form_id, data_id) {
-    //     const form = document.getElementById(form_id);
-
-    //     form.addEventListener('submit', function (event) {
-    //         event.preventDefault(); // Ngăn hành động submit mặc định
-
-    //         const formData = new FormData(this); // Lấy dữ liệu từ form
-
-    //         // Gửi dữ liệu cập nhật qua fetch
-    //         fetch(`/api/attribute/update/${data_id}`, {
-    //             method: 'POST', // Chúng ta vẫn để phương thức POST vì có _method là PUT trong form
-    //             body: formData,
-    //             headers: {
-    //                 'Accept': 'application/json',
-    //                 // Nếu bạn sử dụng CSRF token với AJAX:
-    //                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    //             },
-    //         })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             if (data.message) {
-    //                 alert('Cập nhật thành công!');
-    //                 // Quay lại trang index hoặc refresh dữ liệu
-    //                 window.location.href = '/attribute';
-    //             } else {
-    //                 alert('Cập nhật thất bại, vui lòng thử lại.');
-    //             }
-    //         })
-    //         .catch(error => console.error('Lỗi khi cập nhật:', error));
-    //     });
-    // }
-
-
-
-
     // @thực thi edit
     function loadButtonEdit() {
         fetch('api/attribute/update').then(respone => respone.text()).then(data => {
@@ -263,7 +200,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function showDataSearch(attribute) {
         const attributeList = document.getElementById('attribute-list');
         attributeList.innerHTML = '';
-
         // lặp kết quả
         attribute.forEach(attribute => {
             const tr = document.createElement('tr');
@@ -317,7 +253,6 @@ document.addEventListener('DOMContentLoaded', function () {
     //     });
 
     // })
-
 
 
     // Gọi hàm để load dữ liệu lần đầu

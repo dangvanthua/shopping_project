@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class AdminDashboardViewController extends Controller
@@ -16,12 +17,7 @@ class AdminDashboardViewController extends Controller
     public function showIndexDashBoard()
     {
         return view('Front-end-Admin.transaction.index');
-
     }
 
-    //@hiện thị view chi tiết
-    public function showViewDashBoart()
-    {
-        return view('Front-end-Admin.transaction.view');
-    }
+
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminDashboardViewController;
+use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\AttributeViewController;
 use App\Http\Controllers\CategoryViewController;
 use App\Http\Controllers\Demo_OderController;
@@ -32,4 +33,7 @@ Route::get('/attribute',[AttributeViewController::class, 'showThemmeAttributeInd
 // thực thi với theme dashboard
 Route::get('/dashboard',[AdminDashboardViewController::class, 'showThemeDashBoard']);
 Route::get('/get-orders',[AdminDashboardViewController::class, 'showIndexDashBoard'])->name('get-orders');
-Route::get('/view-dashboard/{id}',[AdminDashboardViewController::class, 'showViewDashBoart']);
+Route::get('/view-dashboard/{id}',[AdminDashboardViewController::class, 'showViewDashBoard'])->name('get_view_dashboard');
+
+
+Route::get('view-detail/{id}',[DashboardController::class,'showViewDashBoard']); // hiển thị giao diện chi tiết view

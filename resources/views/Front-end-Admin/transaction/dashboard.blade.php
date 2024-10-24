@@ -1,6 +1,5 @@
 @extends('LayOut.admin-dashboard.master_admin')
 @section('content')
-
 <section class="content" id="content-area">
     <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
