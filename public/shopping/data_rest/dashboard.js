@@ -91,7 +91,7 @@ function getAllItems(page = 1) {
                             </td>
                             <td>${moment(item.created_at).format("DD/MM/YYYY")}</td>
                             <td>
-                                <a href="" class="btn btn-xs btn-info js-preview-view" data-id="${item.id_order_item}">
+                                <a href="/view-detail/${item.id_order_item}" class="btn btn-xs btn-info js-preview-view" data-id="${item.id_order_item}">
                                     <i class="fa fa-eye"></i> View
                                 </a>
                                 <div class="btn-group">
@@ -114,17 +114,17 @@ function getAllItems(page = 1) {
                 });
 
 
-                // Gắn sự kiện click cho nút View sau khi các phần tử được thêm vào DOM
-                document.querySelectorAll('.js-preview-view').forEach(button => {
-                    button.addEventListener('click', function (event) {
-                        event.preventDefault();
-                        // Lấy ID đơn hàng từ thuộc tính data-id
-                        const orderId = this.getAttribute('data-id');
-                        console.log("Nhấn được mà đúng ko!!");
-                        // Gọi hàm fetchOrderDetails để lấy chi tiết đơn hàng
-                        getDetailViewData(orderId);
-                    });
-                });
+                // // Gắn sự kiện click cho nút View sau khi các phần tử được thêm vào DOM
+                // document.querySelectorAll('.js-preview-view').forEach(button => {
+                //     button.addEventListener('click', function (event) {
+                //         event.preventDefault();
+                //         // Lấy ID đơn hàng từ thuộc tính data-id
+                //         const orderId = this.getAttribute('data-id');
+                //         console.log("Nhấn được mà đúng ko!!");
+                //         // Gọi hàm fetchOrderDetails để lấy chi tiết đơn hàng
+                //         getDetailViewData(orderId);
+                //     });
+                // });
                 // Gắn sự kiện cập nhật trạng thái cho các nút sau khi các phần tử được thêm vào DOM
                 document.querySelectorAll('.update-status').forEach(button => {
                     button.addEventListener('click', function (event) {
@@ -178,7 +178,8 @@ function updateStatusDashBoard(idOrder, newStatus) {
 
 // viết hàm xử lý chi tiết view
 // function getDetailViewData(order_id) {
-//     fetch(`api/view-detail_items/${order_id}`).then(response => {
+//     fetch(`api/view-detail_items/${order_id}`)
+//         .then(response => {
 //             if (!response.ok) {
 //                 throw new Error('Not ok');
 //             }
@@ -189,71 +190,36 @@ function updateStatusDashBoard(idOrder, newStatus) {
 //                 alert("Không có dữ liệu");
 //                 return;
 //             }
-
 //             // Kiểm tra và cập nhật nội dung vào phần tử DOM nếu nó tồn tại
 //             const customerNameElem = document.getElementById('customer_name');
-//             console.log(customerNameElem.innerText = data.customer.name);
 //             if (customerNameElem) {
 //                 customerNameElem.innerText = data.customer.name;
+//             } else {
+//                 console.error('Phần tử customer_name không tồn tại');
 //             }
+
 //             const customerEmailElem = document.getElementById('customer_email');
 //             if (customerEmailElem) {
 //                 customerEmailElem.innerText = data.customer.email;
+//             } else {
+//                 console.error('Phần tử customer_email không tồn tại');
 //             }
 //             const customerPhoneElem = document.getElementById('customer_phone');
 //             if (customerPhoneElem) {
 //                 customerPhoneElem.innerText = data.customer.phone;
+//             } else {
+//                 console.error('Phần tử customer_phone không tồn tại');
 //             }
+
 //             const customerAddressElem = document.getElementById('customer_address');
 //             if (customerAddressElem) {
 //                 customerAddressElem.innerText = data.customer.address;
+//             } else {
+//                 console.error('Phần tử customer_address không tồn tại');
 //             }
-//         }).catch(error => console.error("Đã có lỗi xảy ra", error));
+//         })
+//         .catch(error => console.error("Đã có lỗi xảy ra", error));
 // }
-
-function getDetailViewData(order_id) {
-    fetch(`api/view-detail_items/${order_id}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.message === 'Not Found') {
-                alert("Không có dữ liệu");
-                return;
-            }
-            // Kiểm tra và cập nhật nội dung vào phần tử DOM nếu nó tồn tại
-            const customerNameElem = document.getElementById('customer_name');
-            if (customerNameElem) {
-                customerNameElem.innerText = data.customer.name;
-            } else {
-                console.error('Phần tử customer_name không tồn tại');
-            }
-
-            const customerEmailElem = document.getElementById('customer_email');
-            if (customerEmailElem) {
-                customerEmailElem.innerText = data.customer.email;
-            } else {
-                console.error('Phần tử customer_email không tồn tại');
-            }
-            const customerPhoneElem = document.getElementById('customer_phone');
-            if (customerPhoneElem) {
-                customerPhoneElem.innerText = data.customer.phone;
-            } else {
-                console.error('Phần tử customer_phone không tồn tại');
-            }
-
-            const customerAddressElem = document.getElementById('customer_address');
-            if (customerAddressElem) {
-                customerAddressElem.innerText = data.customer.address;
-            } else {
-                console.error('Phần tử customer_address không tồn tại');
-            }
-        })
-        .catch(error => console.error("Đã có lỗi xảy ra", error));
-}
 
 //@ hàm hiện thị view cho tìm kiếm dashboard
 function showViewSearchDashboard(data_dashboard) {
@@ -346,8 +312,6 @@ document.getElementById('btn-search').addEventListener('click', function (event)
         })
         .catch(error => console.error("Đã có lỗi xảy ra", error));
 });
-
-
 // @hàm xử lý phân trang
 function createPaginationLinks(data) {
     let links = '';

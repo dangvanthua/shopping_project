@@ -118,37 +118,30 @@ class DashboardController extends Controller
     }
 
     //@xử lý tìm kiếm
-    public function findValueDashBoard(Request $request)
-    {
-        $email = $request->input('query');
-        // thực hiện truy vấn với hàm callback
-        $findValue = Order::findByCustomerDashboard($email)->get();
-        return response()->json([
-            'message' => 'Thành công',
-            'data' => $findValue
-        ], 200);
-    }
-
-    // theo chat gpt
     // public function findValueDashBoard(Request $request)
     // {
-    //     // Xác thực dữ liệu đầu vào
-    //     $request->validate([
-    //         'query' => 'required|string|max:255',
-    //     ]);
-
-    //     $query = $request->input('query');
-
-    //     // Sử dụng nhiều tiêu chí tìm kiếm, ví dụ theo email hoặc tên khách hàng
-    //     $findValue = Order::where('email', 'LIKE', "%$query%")
-    //         ->orWhereHas('customer', function ($q) use ($query) {
-    //             $q->where('name', 'LIKE', "%$query%");
-    //         })
-    //         ->paginate(10); // Thêm phân trang
-
+    //     $email = $request->input('query');
+    //     // thực hiện truy vấn với hàm callback
+    //     $findValue = Order::findByCustomerDashboard($email)->get();
     //     return response()->json([
     //         'message' => 'Thành công',
     //         'data' => $findValue
     //     ], 200);
     // }
+    public function findValueDashBoard(Request $request)
+{
+    // Lấy giá trị email và id từ request
+    $email = $request->input('query');  // email trong input 'query'
+    $id = $request->input('id');        // id từ input 'id'
+
+    // Thực hiện truy vấn dựa trên email hoặc id
+    $findValue = Order::findByCustomerDashboard($email, $id)->get();
+
+    return response()->json([
+        'message' => 'Thành công',
+        'data' => $findValue
+    ], 200);
+}
+
+
 }

@@ -23,19 +23,19 @@
                         <tbody>
                             <tr>
                                 <td>Tên KH</td>
-                                <td id="customer_name"></td>
+                                <td>{{ $items->customer->name }}</td>
                             </tr>
                             <tr>
                                 <td>Email KH</td>
-                                <td id="customer_email"></td>
+                                <td>{{ $items->customer->email }}</td>
                             </tr>
                             <tr>
                                 <td>Phone KH</td>
-                                <td id="customer_phone"></td>
+                                <td>{{ $items->customer->phone }}</td>
                             </tr>
                             <tr>
                                 <td>Địa Chỉ KH</td>
-                                <td id="customer_address"></td>
+                                <td>{{ $items->customer->address }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -53,22 +53,26 @@
                         <tbody>
                             <tr>
                                 <td>Trạng Thái</td>
-                                <td id="order_status"></td> <!-- Cập nhật trạng thái -->
+                                <td>{{ $items->status }}</td>
                             </tr>
                             <tr>
                                 <td>Tổng Tiền Đơn Hàng</td>
-                                <td id="order_total"></td> <!-- Cập nhật tổng tiền -->
+                                <td>{{ $items->total_item }}</td>
+                            </tr>
+                            <tr>
+                                <td>Phương thức thanh toán</td>
+                                <td>{{ $items->payment->payment_method }}</td>
                             </tr>
                             <tr>
                                 <td>Ngày Mua Đơn Hàng</td>
-                                <td id="order_date"></td> <!-- Cập nhật ngày mua -->
+                                <td>{{ $items->created_at }}</td>
                             </tr>
+
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
         <!-- Phần chi tiết lịch sử mua hàng -->
         <div class="col-md-12">
             <div class="box box-danger">
@@ -87,7 +91,7 @@
                                 <th>Total</th>
                             </tr>
                             <!-- Các chi tiết sản phẩm sẽ được chèn ở đây -->
-                            <tr id="order_items"></tr>
+                            <tr></tr>
                         </tbody>
                     </table>
                 </div>
