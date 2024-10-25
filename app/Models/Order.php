@@ -69,4 +69,21 @@ class Order extends Model
             $item->where('email', 'LIKE', "%$email%");
         })->with('customer');
     }
+
+
+    // public function scopeFindByCustomerDashboard($query, $email,$id=null)
+    // {
+    //     return $query->whereHas('customer', function ($data) use ($email,$id) {
+    //         if(!empty($email))
+    //         {
+    //             $data->whereHas('customer',function($item) use($email){
+    //                 $item->where('email', 'LIKE', "%$email%");
+    //             });
+    //         }
+    //         if(!empty($id))
+    //         {
+    //             $data->orWhere('id_oder',$id);
+    //         }
+    //     })->with('customer');
+    // }
 }

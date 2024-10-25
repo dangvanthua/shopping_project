@@ -46,12 +46,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 dashboard.innerHTML = '<tr><td colspan="7">Không có đơn hàng</td></tr>';
             }
         }).catch(error => console.error('Có lỗi xảy ra:', error));
-
 });
 
-
 // viết phương thức hiện thị toàn bộ đơn hàng qua button
-function getAllItems() {
+function getAllItems(page = 1) {
     const item_dashboard = document.getElementById('list_item');
     if (!item_dashboard) {
         console.error('Không tìm thấy phần tử list_item');
@@ -61,6 +59,7 @@ function getAllItems() {
         .then(response => response.json())
         .then(data => {
             item_dashboard.innerHTML = ''; // Xóa nội dung cũ
+            console.log(data.data);
             if (data && data.data.length > 0) {
                 data.data.forEach(item => {
                     const formatMoney = new Intl.NumberFormat('vi-VN', {
@@ -113,6 +112,8 @@ function getAllItems() {
                         </tr>`;
                     item_dashboard.innerHTML += row; // Thêm nội dung vào bảng
                 });
+
+
                 // Gắn sự kiện click cho nút View sau khi các phần tử được thêm vào DOM
                 document.querySelectorAll('.js-preview-view').forEach(button => {
                     button.addEventListener('click', function (event) {
@@ -124,7 +125,6 @@ function getAllItems() {
                         getDetailViewData(orderId);
                     });
                 });
-
                 // Gắn sự kiện cập nhật trạng thái cho các nút sau khi các phần tử được thêm vào DOM
                 document.querySelectorAll('.update-status').forEach(button => {
                     button.addEventListener('click', function (event) {
@@ -135,13 +135,15 @@ function getAllItems() {
                         updateStatusDashBoard(orderId, newStatus);
                     });
                 });
+                // Hiển thị các link phân trang
+                const paginationLinks = document.getElementById('pagination-links');
+                paginationLinks.innerHTML = createPaginationLinks(data);
             } else {
                 item_dashboard.innerHTML = '<tr><td colspan="7">Không có đơn hàng</td></tr>';
             }
         })
         .catch(error => console.error('Đã có lỗi xảy ra:', error));
 }
-
 
 //@viết hàm cập nhật trạng thái đơn hàng
 function updateStatusDashBoard(idOrder, newStatus) {
@@ -194,17 +196,14 @@ function updateStatusDashBoard(idOrder, newStatus) {
 //             if (customerNameElem) {
 //                 customerNameElem.innerText = data.customer.name;
 //             }
-
 //             const customerEmailElem = document.getElementById('customer_email');
 //             if (customerEmailElem) {
 //                 customerEmailElem.innerText = data.customer.email;
 //             }
-
 //             const customerPhoneElem = document.getElementById('customer_phone');
 //             if (customerPhoneElem) {
 //                 customerPhoneElem.innerText = data.customer.phone;
 //             }
-
 //             const customerAddressElem = document.getElementById('customer_address');
 //             if (customerAddressElem) {
 //                 customerAddressElem.innerText = data.customer.address;
@@ -272,10 +271,10 @@ function showViewSearchDashboard(data_dashboard) {
             <td>100</td>
             <td>
                 <ul>
-                    <li>Name: ${item.order && item.order.customer ? item.customer.name : 'N/A'}</li>
-                    <li>Email: ${item.order && item.order.customer ? item.order.customer.email : 'N/A'}</li>
-                    <li>Phone: ${item.order && item.order.customer ? item.order.customer.phone : 'N/A'}</li>
-                    <li>Address: ${item.order && item.order.customer ? item.order.customer.address : 'N/A'}</li>
+                    <li>Name: ${item.customer && item.customer ? item.customer.name : 'N/A'}</li>
+                    <li>Email: ${item.customer && item.customer ? item.customer.email : 'N/A'}</li>
+                    <li>Phone: ${item.customer && item.customer ? item.customer.phone : 'N/A'}</li>
+                    <li>Address: ${item.customer && item.customer ? item.customer.address : 'N/A'}</li>
                 </ul>
             </td>
             <td>${formatMoney}</td>
@@ -311,14 +310,29 @@ function showViewSearchDashboard(data_dashboard) {
         `;
         // Thêm hàng `row` vào `data_view`
         data_view.appendChild(row);
+        // Gắn sự kiện cập nhật trạng thái cho các nút sau khi các phần tử được thêm vào DOM
+        document.querySelectorAll('.update-status').forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                const orderId = this.getAttribute('data-id');
+                const newStatus = this.getAttribute('data-status');
+                // Gọi API cập nhật trạng thái
+                updateStatusDashBoard(orderId, newStatus);
+            });
+        });
     });
 }
 
-// Hàm xử lý sự kiện tìm kiếm
+// Hàm xử lý sự kiện tìm kiếm dashboard
 document.getElementById('btn-search').addEventListener('click', function (event) {
     event.preventDefault();
-    const data_query = document.getElementById('search_name').value;
-    console.log(data_query);
+    const data_query = document.getElementById('search_email').value.trim();
+    // thực hiện kiểm tra giá trị có điền vào ko
+    if(!data_query)
+    {
+       alert("Chưa có dữ liệu trong các ô cần tìm");
+        return;
+    }
     // Gọi API để lấy dữ liệu
     fetch(`api/dashboard/search?query=${data_query}`)
         .then(response => response.json())
@@ -332,3 +346,23 @@ document.getElementById('btn-search').addEventListener('click', function (event)
         })
         .catch(error => console.error("Đã có lỗi xảy ra", error));
 });
+
+
+// @hàm xử lý phân trang
+function createPaginationLinks(data) {
+    let links = '';
+    if (data.prev_page_url) {
+        links += `<li><a href="#" class="pagination-link" data-page="${data.current_page - 1}">Previous</a></li>`;
+    }
+
+    for (let i = 1; i <= data.last_page; i++) {
+        links += `<li class="${i === data.current_page ? 'active' : ''}">
+                    <a href="#" class="pagination-link" data-page="${i}">${i}</a>
+                  </li>`;
+    }
+
+    if (data.next_page_url) {
+        links += `<li><a href="#" class="pagination-link" data-page="${data.current_page + 1}">Next</a></li>`;
+    }
+    return links;
+}

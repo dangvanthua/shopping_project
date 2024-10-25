@@ -21,19 +21,23 @@
                 <div class="box-header">
                     <div class="box-title">
                         <form action="" method="GET" class="form-inline">
-                            <input type="text" class="form-control" name="id" placeholder="ID">
-                            <input type="text" class="form-control" name="email" id="search_name" placeholder="Email ...">
+                            <input type="text" class="form-control" name="id" id="search_id" placeholder="ID ...">
+                            <input type="text" class="form-control" name="email" id="search_email"
+                                placeholder="Email ...">
                             <select name="status" class="form-control">
-                                <option value="0">__Trạng Thái__</option>
+                                <option>__Trạng Thái__</option>
                                 <option value="1">Tiếp Nhận</option>
-                                <option value="2">Đang Vận Chuyển</option>
-                                <option value="3">Đã Bàn Giao</option>
+                                <option value="2">Đang chuẩn bị</option>
+                                <option value="3">Đang Vận Chuyển</option>
+                                <option value="4">Đã bàn giao</option>
                                 <option value="-1">Hủy Bỏ</option>
                             </select>
-                            <button type="submit" class="btn btn-success" id="btn-search"><i class="fa fa-search"> </i> Search</button>
+                            <button type="submit" class="btn btn-success" id="btn-search"><i class="fa fa-search"> </i>
+                                Search</button>
                         </form>
                     </div>
                 </div>
+                <div id="loading-indicator" style="display:none;">Loading...</div>
                 <!-- .box-header -->
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
@@ -52,6 +56,11 @@
                             <!-- Nội dung sẽ được thêm vào đây bằng JavaScript -->
                         </tbody>
                     </table>
+                    <div id="pageNavPosition" class="text-right">
+                        <ul class="pagination" id="pagination-links">
+                            <!-- Các nút phân trang sẽ được hiển thị tại đây thông qua JavaScript -->
+                        </ul>
+                    </div>
                 </div>
 
             </div>
@@ -78,5 +87,5 @@
         </div>
     </div>
 </div> --}}
-<script src="{{ asset("shopping/data_rest/dashboard.js") }}"></script>
+<script src="{{ asset(" shopping/data_rest/dashboard.js") }}"></script>
 @endsection

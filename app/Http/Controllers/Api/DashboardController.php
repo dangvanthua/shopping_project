@@ -120,14 +120,15 @@ class DashboardController extends Controller
     //@xử lý tìm kiếm
     public function findValueDashBoard(Request $request)
     {
-        $query = $request->input('query');
+        $email = $request->input('query');
         // thực hiện truy vấn với hàm callback
-        $findValue = Order::findByCustomerDashboard($query)->get();
+        $findValue = Order::findByCustomerDashboard($email)->get();
         return response()->json([
             'message' => 'Thành công',
             'data' => $findValue
-        ],200);
+        ], 200);
     }
+
     // theo chat gpt
     // public function findValueDashBoard(Request $request)
     // {
