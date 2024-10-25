@@ -22,7 +22,7 @@
                     <div class="box-title">
                         <form action="" method="GET" class="form-inline">
                             <input type="text" class="form-control" name="id" placeholder="ID">
-                            <input type="text" class="form-control" name="email" placeholder="Email ...">
+                            <input type="text" class="form-control" name="email" id="search_name" placeholder="Email ...">
                             <select name="status" class="form-control">
                                 <option value="0">__Trạng Thái__</option>
                                 <option value="1">Tiếp Nhận</option>
@@ -30,7 +30,7 @@
                                 <option value="3">Đã Bàn Giao</option>
                                 <option value="-1">Hủy Bỏ</option>
                             </select>
-                            <button type="submit" class="btn btn-success"><i class="fa fa-search"> </i> Search</button>
+                            <button type="submit" class="btn btn-success" id="btn-search"><i class="fa fa-search"> </i> Search</button>
                         </form>
                     </div>
                 </div>

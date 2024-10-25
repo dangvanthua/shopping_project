@@ -257,6 +257,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Gọi hàm để load dữ liệu lần đầu
     fetchAttributes();
-    // backToIndex();
 
 });

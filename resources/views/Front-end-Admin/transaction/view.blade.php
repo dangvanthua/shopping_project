@@ -32,15 +32,16 @@
                             <tr>
                                 <td>Phone KH</td>
                                 <td id="customer_phone"></td>
+                            </tr>
                             <tr>
                                 <td>Địa Chỉ KH</td>
                                 <td id="customer_address"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
         <!-- Phần thông tin đơn hàng -->
         <div class="col-md-6">
             <div class="box box-danger">
@@ -86,7 +87,7 @@
                                 <th>Total</th>
                             </tr>
                             <!-- Các chi tiết sản phẩm sẽ được chèn ở đây -->
-                            <tr id="order_items"></tr> 
+                            <tr id="order_items"></tr>
                         </tbody>
                     </table>
                 </div>
@@ -101,5 +102,5 @@
         </div>
     </div>
 </section>
-<script src="{{ asset('shopping/data_rest/dashboard.js') }}"></script>
+<script src="{{asset("shopping/data_rest/dashboard.js")}}"></script>
 @endsection

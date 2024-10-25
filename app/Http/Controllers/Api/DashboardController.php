@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
@@ -34,21 +35,19 @@ class DashboardController extends Controller
     public function showViewDashBoard($id)
     {
         $items = Order::findOrFail($id);
-        if(!$items)
-        {
+        if (!$items) {
             return abort(404, 'Order not found');
         }
         // Trả về view hiển thị, truyền dữ liệu sang view
-        return view('Front-end-Admin.transaction.view',compact('items'));
+        return view('Front-end-Admin.transaction.view', compact('items'));
     }
 
     // lấy dữ liệu json thực thi bên js
     public function getViewItemDashboard($id)
     {
         $items = Order::with('customer')->find($id);
-        if(!$items)
-        {
-            return response()->json(['message'  => 'Not Found'],404);
+        if (!$items) {
+            return response()->json(['message'  => 'Not Found'], 404);
         }
         return response()->json($items);
     }
@@ -118,8 +117,37 @@ class DashboardController extends Controller
         return response()->json(['message' => 'Cập nhật thành công'], 200);
     }
 
+    //@xử lý tìm kiếm
+    public function findValueDashBoard(Request $request)
+    {
+        $query = $request->input('query');
+        // thực hiện truy vấn với hàm callback
+        $findValue = Order::findByCustomerDashboard($query)->get();
+        return response()->json([
+            'message' => 'Thành công',
+            'data' => $findValue
+        ],200);
+    }
+    // theo chat gpt
+    // public function findValueDashBoard(Request $request)
+    // {
+    //     // Xác thực dữ liệu đầu vào
+    //     $request->validate([
+    //         'query' => 'required|string|max:255',
+    //     ]);
 
+    //     $query = $request->input('query');
 
-    //@show giao diện chi tiết view
+    //     // Sử dụng nhiều tiêu chí tìm kiếm, ví dụ theo email hoặc tên khách hàng
+    //     $findValue = Order::where('email', 'LIKE', "%$query%")
+    //         ->orWhereHas('customer', function ($q) use ($query) {
+    //             $q->where('name', 'LIKE', "%$query%");
+    //         })
+    //         ->paginate(10); // Thêm phân trang
 
+    //     return response()->json([
+    //         'message' => 'Thành công',
+    //         'data' => $findValue
+    //     ], 200);
+    // }
 }

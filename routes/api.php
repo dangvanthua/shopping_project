@@ -42,3 +42,4 @@ Route::put('/update/dashboard-status/{id}',[DashboardController::class, 'updateS
 // Route::get('/view-dashboard/{id}',[DashboardController::class, 'getViewItemDashboard']);  // lấy chi tiết đơn hàng
 
 Route::get('view-detail_items/{id}',[DashboardController::class, 'getViewItemDashboard']);
+Route::get('dashboard/search',[DashboardController::class, 'findValueDashBoard']); // tìm kiếm dữ liệu dashboard
