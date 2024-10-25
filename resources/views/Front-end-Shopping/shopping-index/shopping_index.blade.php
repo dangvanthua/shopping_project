@@ -260,31 +260,31 @@
 
                             <li class="p-b-6">
                                 <a href="#" class="filter-link stext-106 trans-04">
-                                    $0.00 - $50.00
+                                    10.000đ - 50.000đ
                                 </a>
                             </li>
 
                             <li class="p-b-6">
                                 <a href="#" class="filter-link stext-106 trans-04">
-                                    $50.00 - $100.00
+                                    50.000đ - 100.000đ
                                 </a>
                             </li>
 
                             <li class="p-b-6">
                                 <a href="#" class="filter-link stext-106 trans-04">
-                                    $100.00 - $150.00
+                                    100.000đ - 250.000đ
                                 </a>
                             </li>
 
                             <li class="p-b-6">
                                 <a href="#" class="filter-link stext-106 trans-04">
-                                    $150.00 - $200.00
+                                    250.000đ - 500.000đ
                                 </a>
                             </li>
 
                             <li class="p-b-6">
                                 <a href="#" class="filter-link stext-106 trans-04">
-                                    $200.00+
+                                    500.000đ+
                                 </a>
                             </li>
                         </ul>
