@@ -48,6 +48,21 @@ class HomeController extends Controller
         ]);
     }
 
+    public function searchProducts(Request $request)
+    {
+        $query = $request->input('query');
+        $page = $request->input('page', 1);
+
+        $products = Product::where('name', 'LIKE', "%$query%")
+            ->orWhere('describe', 'LIKE', "%$query%")
+            ->paginate(8, ['*'], 'page', $page);
+
+        return response()->json([
+            'products' => $products->items(),
+            'total' => $products->total(),
+        ]);
+    }
+
     public function loadMore(Request $request)
     {
         $categoryId = $request->input('category_id');

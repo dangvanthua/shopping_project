@@ -2,13 +2,15 @@ let currentPage = 1;
 let currentCategoryId = 0;
 let currentMinPrice = 0;
 let currentMaxPrice = Infinity;
-let currentFilterType = 'category';
+let currentLoadMoreType = 'category';
+let currentSearchQuery = '';
 
 document.addEventListener('DOMContentLoaded', function () {
     console.log('Home js');
 
     const filterCategories = document.querySelectorAll('.filter-tope-group button');
     const priceLinks = document.querySelectorAll('#filter-price .filter-link');
+    const searchInput = document.querySelector('#search-product');
     const loadMoreBtn = document.querySelector('#load-more-button');
 
     // loc su kien theo danh muc
@@ -17,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
             button.addEventListener('click', function () {
                 currentCategoryId = button.dataset.filter;
                 currentPage = 1;
-                currentFilterType = 'category';
+                currentLoadMoreType = 'category';
 
                 loadProducts(currentCategoryId, currentPage);
             });
@@ -33,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const priceRange = link.innerText;
                 [currentMinPrice, currentMaxPrice] = parsePriceRange(priceRange);
                 currentPage = 1;
-                currentFilterType = 'price';
+                currentLoadMoreType = 'price';
 
                 loadProductsByPrice(currentMinPrice, currentMaxPrice, currentPage);
             });
@@ -48,13 +50,31 @@ document.addEventListener('DOMContentLoaded', function () {
         return range.length === 2 ? range : [range[0], Infinity];
     }
 
+    function debounce(func, delay) {
+        let timeout;
+        return function (...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), delay);
+        };
+    }
+
+    searchInput.addEventListener('input', debounce(function () {
+        currentSearchQuery = searchInput.value.trim();
+        currentPage = 1;
+        currentLoadMoreType = 'search';
+        searchProducts(currentSearchQuery, currentPage);
+    }, 300));
+
+
     // Load thêm sản phẩm khi nhấn nút "Load More"
     loadMoreBtn.addEventListener('click', function () {
         currentPage++;
-        if (currentFilterType === 'category') {
+        if (currentLoadMoreType === 'category') {
             loadProducts(currentCategoryId, currentPage);
-        } else if (currentFilterType === 'price') {
+        } else if (currentLoadMoreType === 'price') {
             loadProductsByPrice(currentMinPrice, currentMaxPrice, currentPage);
+        } else if (currentLoadMoreType === 'search') {
+            searchProducts(currentSearchQuery, currentPage);
         }
     });
 
@@ -101,6 +121,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 renderProducts(products, total, page);
             })
             .catch(error => console.log('Error', error));
+    }
+
+    // tim kiem san pham
+    function searchProducts(query, page) {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch('/search/products', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify({ query: query, page: page })
+        })
+            .then(response => response.json())
+            .then(data => renderProducts(data.products, data.total, page))
+            .catch(error => console.log('Error:', error));
     }
 
 
