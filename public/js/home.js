@@ -1,5 +1,5 @@
-// let currentPage = 1; // Khởi tạo trang hiện tại
-// let currentCategoryId = 0; // Khởi tạo categoryId
+let currentPage = 1;
+let currentCategoryId = 0;
 
 document.addEventListener('DOMContentLoaded', function () {
     console.log('Home js');
@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (filterButtons.length > 0) {
         filterButtons.forEach(button => {
             button.addEventListener('click', function () {
-                currentCategoryId = button.dataset.filter; // Lưu categoryId
-                currentPage = 1; // Reset trang về 1
+                currentCategoryId = button.dataset.filter;
+                currentPage = 1;
 
-                loadProducts(currentCategoryId, currentPage); // Tải sản phẩm theo categoryId
+                loadProducts(currentCategoryId, currentPage);
             });
         });
     }
@@ -25,6 +25,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function loadProducts(categoryId, page) {
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        const loadMoreBtn = document.querySelector('#load-more-button');
+
+        if (!loadMoreBtn) return;
 
         fetch('/load-more/products', {
             method: 'POST',
@@ -39,19 +42,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 const products = data.products;
                 const total = data.total;
 
+                // Xóa các sản phẩm cũ nếu là trang đầu tiên (chuyển danh mục)
+                if (page === 1) {
+                    document.querySelector('.product-grid').innerHTML = '';
+                }
+
                 renderProducts(products);
 
-                const loadMoreBtn = document.querySelector('#load-more-button');
-                if (!loadMoreBtn) return;
-
+                console.log(total, page);
                 if (total <= page * 8) {
-                    loadMoreBtn.style.display = 'none';
+                    loadMoreBtn.classList.add('d-none');
+                    loadMoreBtn.classList.remove('d-flex');
                 } else {
-                    loadMoreBtn.style.display = 'flex-w';
+                    loadMoreBtn.classList.add('d-flex');
+                    loadMoreBtn.classList.remove('d-none');
                 }
             })
             .catch(error => console.log('Error', error));
     }
+
 
     function renderProducts(products) {
         const productContainer = document.querySelector('.product-grid');
