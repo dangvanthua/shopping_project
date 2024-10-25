@@ -33,6 +33,21 @@ class HomeController extends Controller
         return response()->json($products);
     }
 
+    public function filterByPrice(Request $request)
+    {
+        $minPrice = $request->input('min_price', 0);
+        $maxPrice = $request->input('max_price', INF);
+        $page = $request->input('page', 1);
+
+        $products = Product::whereBetween('price', [$minPrice, $maxPrice])
+            ->paginate(8, ['*'], 'page', $page);
+
+        return response()->json([
+            'products' => $products->items(),
+            'total' => $products->total(),
+        ]);
+    }
+
     public function loadMore(Request $request)
     {
         $categoryId = $request->input('category_id');

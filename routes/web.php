@@ -31,6 +31,7 @@ Route::get('category', [CategoryViewController::class, 'index']);
 // Route home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/filter/products', [HomeController::class, 'filter'])->name('filter.products');
+Route::post('/filter/price', [HomeController::class, 'filterByPrice'])->name('filter.price');
 Route::post('/load-more/products', [HomeController::class, 'loadMore']);
 
 

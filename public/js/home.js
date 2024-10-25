@@ -1,33 +1,84 @@
 let currentPage = 1;
 let currentCategoryId = 0;
+let currentMinPrice = 0;
+let currentMaxPrice = Infinity;
+let currentFilterType = 'category';
 
 document.addEventListener('DOMContentLoaded', function () {
     console.log('Home js');
 
-    const filterButtons = document.querySelectorAll('.filter-tope-group button');
+    const filterCategories = document.querySelectorAll('.filter-tope-group button');
+    const priceLinks = document.querySelectorAll('#filter-price .filter-link');
+    const loadMoreBtn = document.querySelector('#load-more-button');
 
-    if (filterButtons.length > 0) {
-        filterButtons.forEach(button => {
+    // loc su kien theo danh muc
+    if (filterCategories.length > 0) {
+        filterCategories.forEach(button => {
             button.addEventListener('click', function () {
                 currentCategoryId = button.dataset.filter;
                 currentPage = 1;
+                currentFilterType = 'category';
 
                 loadProducts(currentCategoryId, currentPage);
             });
         });
     }
 
+    // loc su kien theo gia tien
+    if (priceLinks.length > 0) {
+        priceLinks.forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                const priceRange = link.innerText;
+                [currentMinPrice, currentMaxPrice] = parsePriceRange(priceRange);
+                currentPage = 1;
+                currentFilterType = 'price';
+
+                loadProductsByPrice(currentMinPrice, currentMaxPrice, currentPage);
+            });
+        });
+    }
+
+    // Lay gia tri tien lon nhat va nho nhat
+    function parsePriceRange(priceRange) {
+        if (priceRange === 'All') return [0, Infinity];
+
+        const range = priceRange.split('-').map(price => parseInt(price.replace(/\D/g, '')));
+        return range.length === 2 ? range : [range[0], Infinity];
+    }
+
     // Load thêm sản phẩm khi nhấn nút "Load More"
-    document.querySelector('#load-more-button').addEventListener('click', function () {
+    loadMoreBtn.addEventListener('click', function () {
         currentPage++;
-        loadProducts(currentCategoryId, currentPage);
+        if (currentFilterType === 'category') {
+            loadProducts(currentCategoryId, currentPage);
+        } else if (currentFilterType === 'price') {
+            loadProductsByPrice(currentMinPrice, currentMaxPrice, currentPage);
+        }
     });
 
+
+    // Loc san pham theo gia
+    function loadProductsByPrice(minPrice, maxPrice, page) {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch('/filter/price', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify({ min_price: minPrice, max_price: maxPrice, page: page })
+        })
+            .then(response => response.json())
+            .then(data => renderProducts(data.products, data.total, page))
+            .catch(err => console.log('Error: ', err));
+    }
+
+    // loc san pham theo danh muc 
     function loadProducts(categoryId, page) {
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const loadMoreBtn = document.querySelector('#load-more-button');
-
-        if (!loadMoreBtn) return;
 
         fetch('/load-more/products', {
             method: 'POST',
@@ -47,26 +98,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.querySelector('.product-grid').innerHTML = '';
                 }
 
-                renderProducts(products);
-
-                console.log(total, page);
-                if (total <= page * 8) {
-                    loadMoreBtn.classList.add('d-none');
-                    loadMoreBtn.classList.remove('d-flex');
-                } else {
-                    loadMoreBtn.classList.add('d-flex');
-                    loadMoreBtn.classList.remove('d-none');
-                }
+                renderProducts(products, total, page);
             })
             .catch(error => console.log('Error', error));
     }
 
 
-    function renderProducts(products) {
+    function renderProducts(products, total, page) {
         const productContainer = document.querySelector('.product-grid');
-        if (!productContainer) return;
+        const loadMoreBtn = document.querySelector('#load-more-button');
 
-        productContainer.innerHTML = '';
+        if (!productContainer && !loadMoreBtn) return;
+
+        if (page === 1) {
+            productContainer.innerHTML = '';
+        }
 
         products.forEach(product => {
             const productCard = `
@@ -102,5 +148,14 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
             productContainer.innerHTML += productCard;
         });
+
+        console.log(total, page);
+        if (total <= page * 8) {
+            loadMoreBtn.classList.add('d-none');
+            loadMoreBtn.classList.remove('d-flex');
+        } else {
+            loadMoreBtn.classList.add('d-flex');
+            loadMoreBtn.classList.remove('d-none');
+        }
     }
 });
