@@ -31,6 +31,6 @@ Route::get('category', [CategoryViewController::class, 'index']);
 Route::get('/attribute',[AttributeViewController::class, 'showThemmeAttributeIndex']);
 
 // thực thi với theme dashboard
-Route::get('/dashboard',[AdminDashboardViewController::class, 'showThemeDashBoard']);
+Route::get('/dashboard',[AdminDashboardViewController::class, 'showThemeDashBoard'])->name('index_dashboard');
 Route::get('/get-orders',[AdminDashboardViewController::class, 'showIndexDashBoard'])->name('get-orders');
 Route::get('view-detail/{id}',[AdminDashboardViewController::class,'showViewDashBoard'])->name('get_view'); // hiển thị giao diện chi tiết view

@@ -101,7 +101,7 @@
         <!-- Nút trở lại -->
         <div class="col-md-12">
             <div class="box-footer" style="text-align: center;">
-                <a href="" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
+                <a href="{{ Route('index_dashboard') }}" class="btn btn-danger"><i class="fa fa-undo"></i> Trở Lại</a>
             </div>
         </div>
     </div>

@@ -12,7 +12,6 @@
         <li class="active">list</li>
     </ol>
 </section>
-
 <!-- Main content -->
 <section class="content" id="list_demo">
     <div class="row">
@@ -21,17 +20,16 @@
                 <div class="box-header">
                     <div class="box-title">
                         <form action="" method="GET" class="form-inline">
-                            <input type="text" class="form-control" name="id" id="search_id" placeholder="ID ...">
                             <input type="text" class="form-control" name="email" id="search_email"
                                 placeholder="Email ...">
-                            <select name="status" class="form-control">
-                                <option>__Trạng Thái__</option>
-                                <option value="1">Tiếp Nhận</option>
-                                <option value="2">Đang chuẩn bị</option>
-                                <option value="3">Đang Vận Chuyển</option>
-                                <option value="4">Đã bàn giao</option>
-                                <option value="-1">Hủy Bỏ</option>
-                            </select>
+                                <select name="status" class="form-control" id="status_active">
+                                    <option value="">__Trạng Thái__</option>
+                                    <option value="Đã tiếp nhận">Đã tiếp nhận</option>
+                                    <option value="Đang chuẩn bị">Đang chuẩn bị</option>
+                                    <option value="Đang Vận Chuyển">Đang Vận Chuyển</option>
+                                    <option value="Đã bàn giao">Đã bàn giao</option>
+                                    <option value="Hủy">Hủy Bỏ</option>
+                                </select>
                             <button type="submit" class="btn btn-success" id="btn-search"><i class="fa fa-search"> </i>
                                 Search</button>
                         </form>
@@ -62,12 +60,10 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </section>
-
 <!-- Modal -->
 {{-- <div class="modal fade" id="modal-preview-transaction">
     <div class="modal-dialog modal-lg">

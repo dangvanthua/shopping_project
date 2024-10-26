@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch(`api/dashboard`).then(response => response.json())
         .then(data => {
             dashboard.innerHTML = ''; // Reset nội dung
-
             if (data.data.length > 0) {
                 data.data.forEach(item => {
                     const formatMoney = new Intl.NumberFormat('vi-VN', {
@@ -17,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }).format(item.price);
                     const row = `
                         <tr>
-                            <td></td>
+                            <td>100</td>
                             <td>
                                 <ul>
                                     <li>Name: ${item.order.customer ? item.order.customer.name : 'N/A'}</li>
@@ -160,10 +159,11 @@ function updateStatusDashBoard(idOrder, newStatus) {
         })
         .catch(error => console.error('Đã có lỗi xảy ra:', error));
 }
-//@ hàm hiện thị view cho tìm kiếm dashboard
+// Hàm hiện thị view cho tìm kiếm dashboard
 function showViewSearchDashboard(data_dashboard) {
     const data_view = document.getElementById('list_item');
     data_view.innerHTML = ''; // Xóa nội dung cũ
+
     data_dashboard.forEach(item => {
         const row = document.createElement('tr');
         // Định dạng tiền tệ
@@ -176,26 +176,22 @@ function showViewSearchDashboard(data_dashboard) {
             <td>100</td>
             <td>
                 <ul>
-                    <li>Name: ${item.customer && item.customer ? item.customer.name : 'N/A'}</li>
-                    <li>Email: ${item.customer && item.customer ? item.customer.email : 'N/A'}</li>
-                    <li>Phone: ${item.customer && item.customer ? item.customer.phone : 'N/A'}</li>
-                    <li>Address: ${item.customer && item.customer ? item.customer.address : 'N/A'}</li>
+                    <li>Name: ${item.customer ? item.customer.name : 'N/A'}</li>
+                    <li>Email: ${item.customer ? item.customer.email : 'N/A'}</li>
+                    <li>Phone: ${item.customer ? item.customer.phone : 'N/A'}</li>
+                    <li>Address: ${item.customer ? item.customer.address : 'N/A'}</li>
                 </ul>
             </td>
             <td>${formatMoney}</td>
             <td class="status-cell">
-                <span class="label label-warning" style="cursor: default; pointer-events: none;">
-                    ${item.status || 'N/A'}
-                </span>
+                <span class="label label-warning">${item.status || 'N/A'}</span>
             </td>
             <td>
-                <span class="label label-info" style="cursor: default; pointer-events: none;">
-                    ${item.payment ? item.payment.payment_method : 'N/A'}
-                </span>
+                <span class="label label-info">${item.payment ? item.payment.payment_method : 'N/A'}</span>
             </td>
-           <td>${moment(item.created_at).format("DD/MM/YYYY")}</td>
+            <td>${item.created_at ? moment(item.created_at).format("DD/MM/YYYY") : 'N/A'}</td>
             <td>
-                <a href="/view-detail/${item.encrypted_id}" class="btn btn-xs btn-info js-preview-view" data-id="${item.id_order_item}">
+                <a href="/view-detail/${item.encrypted_id}" class="btn btn-xs btn-info js-preview-view" data-id="${item.id_order}">
                     <i class="fa fa-eye"></i> View
                 </a>
                 <div class="btn-group">
@@ -205,43 +201,48 @@ function showViewSearchDashboard(data_dashboard) {
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="" class="update-status" data-id="${item.id_order_item}" data-status="Đang Chuẩn Bị">Đang Chuẩn Bị</a></li>
-                        <li><a href="" class="update-status" data-id="${item.id_order_item}" data-status="Đã Bàn Giao">Đã Bàn Giao</a></li>
-                        <li><a href="" class="update-status" data-id="${item.id_order_item}" data-status="Đang Vận Chuyển">Đang Vận Chuyển</a></li>
-                        <li><a href="" class="update-status" data-id="${item.id_order_item}" data-status="Hủy">Hủy</a></li>
+                        <li><a href="" class="update-status" data-id="${item.id_order}" data-status="Đang Chuẩn Bị">Đang Chuẩn Bị</a></li>
+                        <li><a href="" class="update-status" data-id="${item.id_order}" data-status="Đã Bàn Giao">Đã Bàn Giao</a></li>
+                        <li><a href="" class="update-status" data-id="${item.id_order}" data-status="Đang Vận Chuyển">Đang Vận Chuyển</a></li>
+                        <li><a href="" class="update-status" data-id="${item.id_order}" data-status="Hủy">Hủy</a></li>
                     </ul>
                 </div>
             </td>`;
+
         // Thêm hàng `row` vào `data_view`
         data_view.appendChild(row);
     });
-    // Gắn sự kiện cập nhật trạng thái cho các nút sau khi các phần tử được thêm vào DOM
-    document.querySelectorAll('.update-status').forEach(button => {
-        button.addEventListener('click', function (event) {
-            event.preventDefault();
-            const orderId = this.getAttribute('data-id');
-            const newStatus = this.getAttribute('data-status');
-            // Gọi API cập nhật trạng thái
-            updateStatusDashBoard(orderId, newStatus);
-        });
-    });
 }
 
+// Gắn sự kiện một lần cho toàn bộ `data_view` để xử lý cập nhật trạng thái
+document.getElementById('list_item').addEventListener('click', function (event) {
+    if (event.target.classList.contains('update-status')) {
+        event.preventDefault();
+        const orderId = event.target.getAttribute('data-id');
+        const newStatus = event.target.getAttribute('data-status');
+        updateStatusDashBoard(orderId, newStatus);
+    }
+});
 // Hàm xử lý sự kiện tìm kiếm dashboard
 document.getElementById('btn-search').addEventListener('click', function (event) {
     event.preventDefault();
-    const data_query = document.getElementById('search_email').value.trim();
-    // thực hiện kiểm tra giá trị có điền vào ko
-    if (!data_query) {
-        alert("Chưa có dữ liệu trong các ô cần tìm");
+
+    const status_query = document.getElementById('status_active').value;
+    const email_query = document.getElementById('search_email').value.trim();
+
+    if (!email_query && !status_query) {
+        alert("Vui lòng nhập email hoặc chọn trạng thái để tìm kiếm");
         return;
     }
-    // Gọi API để lấy dữ liệu
-    fetch(`api/dashboard/search?query=${data_query}`)
+    const value_item = new URLSearchParams({
+        status: status_query,
+        email: email_query
+    }).toString();
+
+    fetch(`/api/dashboard/search?${value_item}`)
         .then(response => response.json())
         .then(data => {
-            if (data.data.length > 0) {
-                // Hiển thị kết quả tìm kiếm
+            if (data.data && data.data.length > 0) {
                 showViewSearchDashboard(data.data);
             } else {
                 document.getElementById('list_item').innerHTML = '<tr><td colspan="5">Không tìm thấy kết quả</td></tr>';
@@ -249,6 +250,18 @@ document.getElementById('btn-search').addEventListener('click', function (event)
         })
         .catch(error => console.error("Đã có lỗi xảy ra", error));
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 // @hàm xử lý phân trang
 function createPaginationLinks(data) {

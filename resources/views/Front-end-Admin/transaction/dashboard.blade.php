@@ -5,10 +5,9 @@
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
                 <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
-
                 <div class="info-box-content">
-                    <span class="info-box-text">Tổng Số Đơn Hàng</span>
-                    <span class="info-box-number"><small><a href="">(Chi Tiết)</a></small></span>
+                    <span class="info-box-text">Đơn hàng thành công</span>
+                    <span class="info-box-number"><small>Số lượng: {{ $countItems }}</small></span>
                 </div>
             </div>
         </div>
@@ -17,7 +16,7 @@
                 <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Thành Viên</span>
+                    <span class="info-box-text">Số người dùng</span>
                     <span class="info-box-number"> <small><a href="">(Chi Tiết)</a></small></span>
                 </div>
             </div>
@@ -27,8 +26,8 @@
             <div class="info-box">
                 <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Sản Phẩm</span>
-                    <span class="info-box-number"><small><a href="">(Chi Tiết)</a></small></span>
+                    <span class="info-box-text">Tổng sản phẩm có</span>
+                    <span class="info-box-number"><small>Số lượng: {{ $countProducts }}</small></span>
                 </div>
             </div>
         </div>
@@ -37,8 +36,8 @@
                 <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Fix Bug</span>
-                    <span class="info-box-number">++</span>
+                    <span class="info-box-text">Thu nhập</span>
+                    <span class="info-box-number">{{ number_format($getTotal_items, 0, ',', '.') }}</span>
                 </div>
             </div>
         </div>

@@ -34,7 +34,7 @@ class OrderItem extends Model
     }
 
 
-    // Thêm encrypted_id vào danh sách các thuộc tính có thể được truy cập
+    // Thêm thực thi mã hoá id
     protected $appends = ['encrypted_id'];
 
     // Accessor cho encrypted_id
@@ -42,5 +42,12 @@ class OrderItem extends Model
     {
         return Crypt::encrypt($this->attributes['id_order_item']);
     }
+
+    // thực hiện truy vấn lấy 5 sản phẩm hiển thị ra mới nhất
+    public function scopeLatestGetItems($query,$limit=5)
+    {
+        return $query->with('product', 'order.customer', 'order.payment')->latest()->take($limit);
+    }
+
 
 }
