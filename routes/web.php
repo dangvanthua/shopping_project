@@ -36,3 +36,5 @@ Route::get('/attibute',[AttributeViewController::class, 'showThemmeAttributeInde
 
 Route::get('/demo',[RegistController::class, 'showRegistrationForm'])->name('register');
 Route::post('/demo',[RegistController::class, 'register'])->name('index.register');
+
+Route::get('/verify/{token}', [RegistController::class, 'verify'])->name('verify');
