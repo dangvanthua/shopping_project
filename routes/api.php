@@ -39,7 +39,5 @@ Route::get('attribute/search',[AttributeController::class, 'searchAttribute']);
 Route::get('/dashboard',[DashboardController::class,'getItemDashBoard']);  //hiện thị dữ liệu dashboard
 Route::get('/get-orders',[DashboardController::class, 'getAllItemDashboard']); // lấy toàn bộ danh sách dashboard
 Route::put('/update/dashboard-status/{id}',[DashboardController::class, 'updateStatusOrderDashBoard']);   //@todo     // cập nhật trang thái status
-// Route::get('/view-dashboard/{id}',[DashboardController::class, 'getViewItemDashboard']);  // lấy chi tiết đơn hàng
-
-Route::get('view-detail_items/{id}',[DashboardController::class, 'getViewItemDashboard']);
-Route::get('dashboard/search',[DashboardController::class, 'findValueDashBoard']); // tìm kiếm dữ liệu dashboard
+// Route::get('view-detail_items/{id}',[DashboardController::class, 'getViewItemDashboard']); @todo
+Route::get('/dashboard/search',[DashboardController::class, 'findValueDashBoard']); // tìm kiếm dữ liệu dashboard

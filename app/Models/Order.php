@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Crypt;
 
 class Order extends Model
 {
@@ -64,6 +65,14 @@ class Order extends Model
     {
         return $query->whereHas('customer', function ($item) use ($email) {
             $item->where('email', 'LIKE', "%$email%");
-        })->with('customer');
+        })->with(['customer', 'payment']);
     }
+
+    // protected $appends = ['encrypted_id'];
+
+    // // Accessor cho encrypted_id
+    // public function getEncryptedIdAttribute()
+    // {
+    //     return Crypt::encrypt($this->attributes['id_order_item']);
+    // }
 }

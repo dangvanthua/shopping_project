@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use Illuminate\Support\Facades\Crypt;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,6 +31,16 @@ class OrderItem extends Model
     public function product()
     {
         return $this->belongsTo(Product::class,'id_product');
+    }
+
+
+    // Thêm encrypted_id vào danh sách các thuộc tính có thể được truy cập
+    protected $appends = ['encrypted_id'];
+
+    // Accessor cho encrypted_id
+    public function getEncryptedIdAttribute()
+    {
+        return Crypt::encrypt($this->attributes['id_order_item']);
     }
 
 }
