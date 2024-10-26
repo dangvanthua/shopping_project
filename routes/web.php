@@ -32,6 +32,7 @@ Route::get('category', [CategoryViewController::class, 'index']);
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/filter/products', [HomeController::class, 'filter'])->name('filter.products');
 Route::post('/filter/price', [HomeController::class, 'filterByPrice'])->name('filter.price');
+Route::post('/filter/sort', [HomeController::class, 'filterSort'])->name('filter.sort');
 Route::post('/search/products', [HomeController::class, 'searchProducts']);
 Route::post('/load-more/products', [HomeController::class, 'loadMore']);
 

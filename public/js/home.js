@@ -10,8 +10,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const filterCategories = document.querySelectorAll('.filter-tope-group button');
     const priceLinks = document.querySelectorAll('#filter-price .filter-link');
+    const sortFilters = document.querySelectorAll('#filter-sort .filter-link');
     const searchInput = document.querySelector('#search-product');
     const loadMoreBtn = document.querySelector('#load-more-button');
+
+    if (sortFilters.length > 0) {
+        sortFilters.forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                currentSortType = link.dataset.sort;
+                currentPage = 1;
+                currentLoadMoreType = 'sort';
+
+                loadProductsBySort(currentSortType, currentPage);
+            });
+        });
+    }
 
     // loc su kien theo danh muc
     if (filterCategories.length > 0) {
@@ -75,9 +89,27 @@ document.addEventListener('DOMContentLoaded', function () {
             loadProductsByPrice(currentMinPrice, currentMaxPrice, currentPage);
         } else if (currentLoadMoreType === 'search') {
             searchProducts(currentSearchQuery, currentPage);
+        } else if (currentLoadMoreType === 'sort') {
+            loadProductsBySort(currentSortType, currentPage);
         }
     });
 
+    // Loc san pham theo dang sap xep gia
+    function loadProductsBySort(sortType, page) {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch('/filter/sort', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify({ sort: sortType, page: page })
+        })
+            .then(response => response.json())
+            .then(data => renderProducts(data.products, data.total, page))
+            .catch(err => console.log('Error: ', err));
+    }
 
     // Loc san pham theo gia
     function loadProductsByPrice(minPrice, maxPrice, page) {

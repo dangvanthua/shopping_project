@@ -207,40 +207,22 @@
                             Sort By
                         </div>
 
-                        <ul>
+                        <ul id="filter-sort">
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Default
+                                <a href="#" class="filter-link stext-106 trans-04" data-sort="default">
+                                    Mặc định
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Popularity
+                                <a href="#" class="filter-link stext-106 trans-04" data-sort="asc">
+                                    Giá: Thấp đến cao
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Average rating
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                                    Newness
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Price: Low to High
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Price: High to Low
+                                <a href="#" class="filter-link stext-106 trans-04" data-sort="desc">
+                                    Giá: Cao đến thấp
                                 </a>
                             </li>
                         </ul>

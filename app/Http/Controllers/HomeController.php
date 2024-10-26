@@ -33,6 +33,26 @@ class HomeController extends Controller
         return response()->json($products);
     }
 
+    public function filterSort(Request $request)
+    {
+        $sort = $request->input('sort');
+        $page = $request->input('page', 1);
+
+        $query = Product::query();
+        if ($sort === 'asc') {
+            $query->orderBy('price', 'asc');
+        } elseif ($sort === 'desc') {
+            $query->orderBy('price', 'desc');
+        }
+
+        $products = $query->paginate(8, ['*'], 'page', $page);
+
+        return response()->json([
+            'products' => $products->items(),
+            'total' => $products->total(),
+        ]);
+    }
+
     public function filterByPrice(Request $request)
     {
         $minPrice = $request->input('min_price', 0);
