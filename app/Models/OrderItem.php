@@ -27,9 +27,9 @@ class OrderItem extends Model
     }
 
     // // thực thi cấu hình quan hệ cho orderitem và product (n-n)
-    // public function product()
-    // {
-    //     return $this->belongsTo(Product::class,'id_product');
-    // }
+    public function product()
+    {
+        return $this->belongsTo(Product::class,'id_product');
+    }
 
 }

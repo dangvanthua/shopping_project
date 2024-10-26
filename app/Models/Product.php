@@ -82,11 +82,4 @@ class Product extends Model
     //
 
 
-    // thiết lập quan hệ giữa order và product (n-n)
-    public function order()
-    {
-        return $this->belongsToMany(Order::class,'order_item','id_order','id_product')
-                                    ->withPivot('quantity','price','status');
-    }
-
 }
