@@ -10,22 +10,12 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use DB;
 
-class CategoryProductController extends Controller
+class CategoryProductView extends Controller
 {
  public function add_category_product(){
     return view("Front-end-Admin.category.add_category_product");
  }
  
-
-
- public function api_all_category_product()
- {
-     // Lấy tất cả danh mục sản phẩm với phân trang
-     $all_category_product = DB::table('tbl_category_product')->paginate(2);
-
-     // Trả về dữ liệu dưới dạng JSON
-     return response()->json($all_category_product);
- }
  public function all_category_product(){
     $all_category_product = DB::table('tbl_category_product')->paginate(2);
     $manager_category_product  = view('Front-end-Admin.category.all_category_product')->with('all_category_product',$all_category_product);
