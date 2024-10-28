@@ -425,23 +425,23 @@
 			<div class="p-t-40">
 				<div class="flex-c-m flex-w p-b-18">
 					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-01.png" alt="ICON-PAY">
+						<img src="{{ asset('shopping/images/icons/icon-pay-01.png') }}" alt="ICON-PAY">
 					</a>
 
 					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-02.png" alt="ICON-PAY">
+						<img src="{{ asset('shopping/images/icons/icon-pay-02.png') }}" alt="ICON-PAY">
 					</a>
 
 					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-03.png" alt="ICON-PAY">
+						<img src="{{ asset('shopping/images/icons/icon-pay-03.png') }}" alt="ICON-PAY">
 					</a>
 
 					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-04.png" alt="ICON-PAY">
+						<img src="{{ asset('shopping/images/icons/icon-pay-04.png') }}" alt="ICON-PAY">
 					</a>
 
 					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-05.png" alt="ICON-PAY">
+						<img src="{{ asset('shopping/images/icons/icon-pay-05.png') }}" alt="ICON-PAY">
 					</a>
 				</div>
 
@@ -726,7 +726,6 @@
 	</script>
 	<!--===============================================================================================-->
 	<script src="{{ asset('shopping/js/main.js') }}"></script>
-
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </html>

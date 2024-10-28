@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AtributeController;
 use App\Http\Controllers\Api\AttributeController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\ShoppingCartController;
 use App\Models\Attribute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,3 +42,7 @@ Route::get('/get-orders',[DashboardController::class, 'getAllItemDashboard']); /
 Route::put('/update/dashboard-status/{id}',[DashboardController::class, 'updateStatusOrderDashBoard']);   //@todo     // cập nhật trang thái status
 // Route::get('view-detail_items/{id}',[DashboardController::class, 'getViewItemDashboard']); @todo
 Route::get('/dashboard/search',[DashboardController::class, 'findValueDashBoard']); // tìm kiếm dữ liệu dashboard
+
+
+// giỏ hàng
+Route::post('cart/add/{Idproduct}', [ShoppingCartController::class, 'addToCartShopping']);

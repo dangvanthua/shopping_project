@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\AttributeViewController;
 use App\Http\Controllers\CategoryViewController;
 use App\Http\Controllers\Demo_OderController;
+use App\Http\Controllers\ShoppingCartViewController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/transaction', [App\Http\Controllers\TestController::class, 'testcai']);
+Route::get('/testcai', [App\Http\Controllers\TestController::class, 'testcai']);
 // Route::get('demo',[Demo_OderController::class,'showData']);
 // Route::get('view',[Demo_OderController::class,'showView'])->name("view");
 
@@ -34,3 +35,9 @@ Route::get('/attribute',[AttributeViewController::class, 'showThemmeAttributeInd
 Route::get('/dashboard',[AdminDashboardViewController::class, 'showThemeDashBoard'])->name('index_dashboard');
 Route::get('/get-orders',[AdminDashboardViewController::class, 'showIndexDashBoard'])->name('get-orders');
 Route::get('view-detail/{id}',[AdminDashboardViewController::class,'showViewDashBoard'])->name('get_view'); // hiển thị giao diện chi tiết view
+
+// hiển thị và thực thi với giỏ hàng
+Route::get('shopping-cart',[ShoppingCartViewController::class, 'showViewShopping_Cart']);
+
+// test cái nha
+Route::get('demo',[ShoppingCartViewController::class, 'showDemoNha']);
