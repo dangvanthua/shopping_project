@@ -221,11 +221,12 @@
             </li>
 
              {{-- @comment --}}
-            <li class="{{ Request::is('admin-datn/menu*') ? 'active' : '' }}">
-              <a href="">
-                  <i class="fa fa-list"></i> <span>Danh mục</span>
-              </a>
-            </li>
+                     <li class="sub-menu">
+    <a href="{{ URL::to('all-category-product') }}">
+        <i class="fa fa-book"></i>
+        <span>Danh mục sản phẩm</span>
+    </a>
+</li> 
 
             <li class="{{ Request::is('admin-datn/type-product*') ? 'active' : '' }}">
                 <a href="">
@@ -244,12 +245,12 @@
                 </a>
             </li>
     
-            <li class="sub-menu">
+            <!-- <li class="sub-menu">
     <a href="{{ URL::to('all-category-product') }}">
         <i class="fa fa-book"></i>
         <span>Danh mục sản phẩm</span>
     </a>
-</li>
+</li> -->
 
             <li class="{{ Request::is('admin-datn/transaction*') ? 'active' : '' }}">
                 <a href="">
