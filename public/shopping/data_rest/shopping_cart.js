@@ -1,24 +1,34 @@
 // thêm vào giỏ hàng
-function addItemsToCard(Idproduct)
-{
-    fetch(`api/cart/add/${Idproduct}`,{
-        method: "POST",
-        headers:{
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            quantity: 1
+function addItemsToCard(Idproduct) {
+    if (!Idproduct) {
+        console.error("ID sản phẩm không hợp lệ");
+        return;
+    }
+    fetch(`api/cart/add/${Idproduct}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                quantity: 1
+            })
+        }).then(response => response.json())
+        .then(data => {
+            if (data.message === "Đã thêm dữ liệu thành công") {
+                alert("Đã thêm giỏ hàng thành công");
+                if (data.data) {
+                    showItemsShoppingCart(data.data);
+                } else {
+                    console.error("Dữ liệu giỏ hàng trống");
+                }
+            } else {
+                console.error("Đã có lỗi xảy ra:", data.message);
+            }
         })
-    }).then(response => response.json()).then(data => {
-        if(data.message === "Đã thêm dữ liệu thành công")
-        {
-            alert("Đã thêm giỏ hàng thành công");
-            showItemsShoppingCart(data.data);
-        }
-        else{
-            console.error("Đã có lỗi xảy ra",data.message);
-        }
-    }).catch(error => console.error('Có lỗi rồi',error));
+        .catch(error => {
+            console.error('Có lỗi rồi', error);
+            alert("Có lỗi xảy ra khi thêm vào giỏ hàng.");
+        });
 }
 
 

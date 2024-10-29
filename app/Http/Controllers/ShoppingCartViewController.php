@@ -15,9 +15,16 @@ class ShoppingCartViewController extends Controller
     }
 
     // test giao diện lại để demo
+    public function showViewModelCart($id)
+    {
+        $items = Product::findOrFail($id);
+        return view('Front-end-Shopping.model_shopping_cart',compact('items'));
+    }
+
+    // test giao diện demo
     public function showDemoNha()
     {
-        $items = Product::paginate(2);
-        return view('Front-end-Shopping.demo01',compact('items'));
+        $product = Product::paginate(3);
+        return view('Front-end-Shopping.demo',compact('product'));
     }
 }

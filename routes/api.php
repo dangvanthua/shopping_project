@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AtributeController;
 use App\Http\Controllers\Api\AttributeController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ShoppingCartController;
 use App\Models\Attribute;
 use Illuminate\Http\Request;
@@ -46,3 +47,6 @@ Route::get('/dashboard/search',[DashboardController::class, 'findValueDashBoard'
 
 // giỏ hàng
 Route::post('cart/add/{Idproduct}', [ShoppingCartController::class, 'addToCartShopping']);
+
+//
+Route::get('/get-product/{id_product}',[ProductController::class, 'getItemsProduct']);
