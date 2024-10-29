@@ -250,38 +250,42 @@
                 </div>
             </div>
         </div>
-        {{-- @todo --}}
+
         <div class="row isotope-grid">
             @foreach ($product as $items)
-                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                    <div class="block2">
-                        <div class="block2-pic hov-img0">
-                            <img src="{{ asset('shopping/images/product-01.jpg') }}" alt="IMG-PRODUCT">
-                            <a href=""
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1" data-id="{{ $items->id_product }}">
-                                Quick View
+            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+                <div class="block2">
+                    <div class="block2-pic hov-img0">
+                        <img src="{{ asset('shopping/images/product-01.jpg') }}" alt="IMG-PRODUCT">
+
+                        <a href="#"
+                            class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
+                            data-id="{{ $items->id_product }}">
+                            Quick View
+                        </a>
+                    </div>
+                    <div class="block2-txt flex-w flex-t p-t-14">
+                        <div class="block2-txt-child1 flex-col-l ">
+                            <a href="{{ Route('showdetail',['id_product' => $items->id_product]) }}"
+                                class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6 product-link"
+                                data-id="{{ $items->id_product }}">
+                                {{ $items->name }}
                             </a>
+                            <span class="stext-105 cl3">
+                                {{ $items->price }}
+                            </span>
                         </div>
-                        <div class="block2-txt flex-w flex-t p-t-14">
-                            <div class="block2-txt-child1 flex-col-l ">
-                                <a href="" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                    {{ $items->name }}
-                                </a>
-                                <span class="stext-105 cl3">
-                                    {{ $items->price }}
-                                </span>
-                            </div>
-                            <div class="block2-txt-child2 flex-r p-t-3">
-                                <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                    <img class="icon-heart1 dis-block trans-04"
-                                        src="{{ asset('shopping/images/icons/icon-heart-01.png') }}" alt="ICON">
-                                    <img class="icon-heart2 dis-block trans-04 ab-t-l"
-                                        src="{{ asset('shopping/images/icons/icon-heart-02.png') }}" alt="ICON">
-                                </a>
-                            </div>
+                        <div class="block2-txt-child2 flex-r p-t-3">
+                            <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                <img class="icon-heart1 dis-block trans-04"
+                                    src="{{ asset('shopping/images/icons/icon-heart-01.png') }}" alt="ICON">
+                                <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                    src="{{ asset('shopping/images/icons/icon-heart-02.png') }}" alt="ICON">
+                            </a>
                         </div>
                     </div>
                 </div>
+            </div>
             @endforeach
         </div>
         <!-- Load more -->
@@ -300,5 +304,5 @@
 </div>
 <!-- Modal1 -->
 @include("Front-end-Shopping.model_shopping_cart")
-{{-- <script src="{{ asset("shopping/data_rest/product.js") }}"></script> --}}
+<script src="{{ asset(" shopping/data_rest/product.js") }}"></script>
 @endsection

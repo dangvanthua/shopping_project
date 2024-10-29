@@ -37,12 +37,14 @@ Route::get('/get-orders',[AdminDashboardViewController::class, 'showIndexDashBoa
 Route::get('view-detail/{id}',[AdminDashboardViewController::class,'showViewDashBoard'])->name('get_view'); // hiển thị giao diện chi tiết view
 
 
-Route::get('product_detail',[ShoppingCartViewController::class, 'showViewProductDetail']);
+Route::get('product_detail/{id_product}',[ShoppingCartViewController::class, 'showViewProductDetail'])->name("showdetail"); // hiển thị sản phẩm chi tiết
 
 // hiển thị và thực thi với giỏ hàng
 Route::get('shopping-cart',[ShoppingCartViewController::class, 'showViewShopping_Cart']); //hiển thị trang giỏ hàng
 Route::get('add_shopping_cart/{id_product}',[ShoppingCartViewController::class, 'showViewModelCart']);
-// test cái nha
-Route::get('/product',[ShoppingCartViewController::class, 'showDemoNha'])->name('showItems');
+
+
+// test cái nha @phần này test chưa có sửa lại
+Route::get('/product',[ShoppingCartViewController::class, 'showDemoNha'])->name('showItems'); // chỉ là demo thôi nè
 
 //

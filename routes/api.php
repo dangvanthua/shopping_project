@@ -49,4 +49,4 @@ Route::get('/dashboard/search',[DashboardController::class, 'findValueDashBoard'
 Route::post('cart/add/{Idproduct}', [ShoppingCartController::class, 'addToCartShopping']);
 
 //
-Route::get('/get-product/{id_product}',[ProductController::class, 'getItemsProduct']);
+Route::get('/get-product/{id_product}',[ProductController::class, 'getItemsProduct']); // sản phẩm chi tiết

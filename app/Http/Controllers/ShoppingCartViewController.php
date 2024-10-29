@@ -28,8 +28,12 @@ class ShoppingCartViewController extends Controller
     }
 
     // hiển thị giao diện chi tiết sản phẩm
-    public function showViewProductDetail()
+    public function showViewProductDetail($id_product)
     {
-        return view('Front-end-Shopping.product_detail');
+        $product = Product::find($id_product);
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+        return view('Front-end-Shopping.product_detail',compact('product'));
     }
 }
