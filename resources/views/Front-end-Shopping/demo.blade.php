@@ -305,4 +305,18 @@
 @include("Front-end-Shopping.model_shopping_cart")
 <script src="{{ asset(" shopping/data_rest/product.js") }}"></script>
 <script src="{{ asset(" shopping/data_rest/shopping_cart.js") }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Kiểm tra nếu id_session đã tồn tại trong Local Storage
+        if (!localStorage.getItem('id_session')) {
+            // Nếu chưa có, lưu id_session vào Local Storage từ Laravel session
+            localStorage.setItem('id_session', "{{ session()->getId() }}");
+        } else {
+            // Nếu đã có, lấy id_session từ Local Storage và thiết lập vào cookie
+            const storedSessionId = localStorage.getItem('id_session');
+            document.cookie = "laravel_session=" + storedSessionId + "; path=/";
+        }
+    });
+</script>
+
 @endsection

@@ -377,6 +377,22 @@
     </div>
 </section>
 <script src="{{ asset("shopping/data_rest/product.js") }}"></script>
-{{-- <script src="{{ asset(" shopping/data_rest/shopping_cart.js") }}"></script> --}}
 <script src="{{ asset("shopping/data_rest/shopping_cart.js") }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Lấy id_session từ server-side Laravel
+        let sessionIdFromServer = "{{ session()->getId() }}";
+
+        // Kiểm tra nếu id_session chưa có trong Local Storage
+        if (!localStorage.getItem('id_session')) {
+            // Nếu chưa có, lưu id_session vào Local Storage
+            localStorage.setItem('id_session', sessionIdFromServer);
+        } else {
+            // Nếu đã có, lấy id_session từ Local Storage và thiết lập vào cookie
+            const storedSessionId = localStorage.getItem('id_session');
+            document.cookie = "laravel_session=" + storedSessionId + "; path=/";
+        }
+    });
+</script>
+
 @endsection

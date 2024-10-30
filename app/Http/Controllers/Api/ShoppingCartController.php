@@ -15,53 +15,49 @@ class ShoppingCartController extends Controller
     {
         // thực thi trả về id_session và id_customer
         $id_session = session()->getId();
-        $id_customer = auth()->check() ? auth()->id() :null;
+        $id_customer = auth()->check() ? auth()->id() : null;
 
         // thực thi kiểm tra sản phẩm
         $product = Product::find($Idproduct);
-        if(!$product)
-        {
+        if (!$product) {
             return response()->json([
                 'message' => 'Dữ liệu không tồn tại',
-            ],404);
+            ], 404);
         }
 
         // tìm kiếm sản phẩm dựa trên trạng thái đăng nhập
         $itemsValues = null;
-        if($id_customer)
-        {
+        $quantity = $request->input('quantity', 1);
+        if ($id_customer) {
             // lấy trên id của khách hàng
-            $itemsValues = ShoppingCart::where('id_product',$Idproduct)
-                                        ->where('id_customer',$id_customer)
-                                        ->first();
-        }
-        else{
+            $itemsValues = ShoppingCart::where('id_product', $Idproduct)
+                ->where('id_customer', $id_customer)
+                ->first();
+        } else {
             // lấy id session
-            $itemsValues = ShoppingCart::where('id_product',$Idproduct)
-                                        ->where('id_session',$id_session)
-                                        ->first();
+            $itemsValues = ShoppingCart::where('id_product', $Idproduct)
+                ->where('id_session', $id_session)
+                ->first();
         }
         // thực thi kiểm tra và cập nhật giỏ hàng
-        if($itemsValues)
-        {
-            $itemsValues->quantity +=1;
+        if ($itemsValues) {
+            $itemsValues->quantity += 1;
             $itemsValues->total_price = $itemsValues->quantity * $itemsValues->price;
             $itemsValues->save();
-        }
-        else{
+        } else {
             // Nếu sản phẩm chưa có, thêm sản phẩm mới vào giỏ hàng
-        ShoppingCart::create([
-            'id_customer' => $id_customer,
-            'id_product' => $Idproduct,
-            'id_session' => $id_session,
-            'quantity' => 1,
-            'price' => $product->price,
-            'total_price' => $product->price * 1,
-        ]);
+            ShoppingCart::create([
+                'id_customer' => $id_customer,
+                'id_product' => $Idproduct,
+                'id_session' => $id_session,
+                'quantity' => $quantity,
+                'price' => $product->price,
+                'total_price' => $product->price * $quantity,
+            ]);
         }
         return response()->json([
             'message' => "Đã thêm dữ liệu thành công",
-        ],200);
+        ], 200);
     }
 
     // Cập nhật lại số lượng đơn hàng
@@ -71,7 +67,35 @@ class ShoppingCartController extends Controller
         $id_session = session()->getId();
         $id_customer = auth()->check() ? auth()->id() : null;
 
-        // Thực thi tìm sản phẩm trong giỏ hàng dựa trên id_customer hoặc id_session
+        // // Thực thi tìm sản phẩm trong giỏ hàng dựa trên id_customer hoặc id_session
+        // $dataCartQuery = ShoppingCart::where('id_product', $id_product);
+        // if ($id_customer) {
+        //     $dataCartQuery->where('id_customer', $id_customer);
+        // } else {
+        //     $dataCartQuery->where('id_session', $id_session);
+        // }
+        // $dataCart = $dataCartQuery->first();
+        // // Kiểm tra nếu sản phẩm không tồn tại trong giỏ hàng
+        // if (!$dataCart) {
+        //     return response()->json(['success' => false, 'message' => 'Dữ liệu không hợp lệ'], 404);
+        // }
+        // // Thực thi cập nhật số lượng và tính lại tổng giá
+        // $dataCart->quantity = $request->input('quantity');
+        // $dataCart->total_price = $dataCart->quantity * $dataCart->price;
+        // $dataCart->save();
+
+        // if (!$dataCart) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'Dữ liệu không hợp lệ',
+        //         'debug' => [
+        //             'id_product' => $id_product,
+        //             'id_customer' => $id_customer,
+        //             'id_session' => $id_session,
+        //         ]
+        //     ], 404);
+        // }
+        // Truy vấn sản phẩm trong giỏ hàng
         $dataCartQuery = ShoppingCart::where('id_product', $id_product);
 
         if ($id_customer) {
@@ -79,28 +103,17 @@ class ShoppingCartController extends Controller
         } else {
             $dataCartQuery->where('id_session', $id_session);
         }
-        $dataCart = $dataCartQuery->first();
 
-        // Kiểm tra nếu sản phẩm không tồn tại trong giỏ hàng
+        $dataCart = $dataCartQuery->first();
+        dd($dataCart); // Kiểm tra kết quả truy vấn
+
         if (!$dataCart) {
             return response()->json(['success' => false, 'message' => 'Dữ liệu không hợp lệ'], 404);
         }
-        dd($id_product, $id_customer, $id_session);
-
-
-        // Thực thi cập nhật số lượng và tính lại tổng giá
-        $dataCart->quantity = $request->input('quantity');
-        $dataCart->total_price = $dataCart->quantity * $dataCart->price;
-        $dataCart->save();
-
-        return response()->json([
-            'success' => true,
-            'total_price' => $dataCart->total_price,
-            'message' => 'Cập nhật giỏ hàng thành công'
-        ]);
     }
 
-    // public function updateItemsShoppingCart(Request $request, $id_product)
+
+    //   public function updateItemsShoppingCart(Request $request, $id_product)
     // {
     //     // Thực thi trả về id_session và id_customer
     //     $id_session = session()->getId();

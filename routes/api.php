@@ -44,9 +44,10 @@ Route::put('/update/dashboard-status/{id}',[DashboardController::class, 'updateS
 // Route::get('view-detail_items/{id}',[DashboardController::class, 'getViewItemDashboard']); @todo
 Route::get('/dashboard/search',[DashboardController::class, 'findValueDashBoard']); // tìm kiếm dữ liệu dashboard
 
-
 // giỏ hàng
-Route::post('/cart/add/{Idproduct}', [ShoppingCartController::class, 'addToCartShopping']);
-Route::post('/cart/update/{Id   product}', [ShoppingCartController::class, 'updateItemsShoppingCart']);  // cập nhập số lượng giỏ hàng
+Route::post('/cart/add/{Idproduct}', [ShoppingCartController::class, 'addToCartShopping']); // thêm vào giỏ hàng
+// Route::post('/cart/update/{Idproduct}', [ShoppingCartController::class, 'updateItemsShoppingCart']);  // cập nhập số lượng giỏ hàng
+Route::get('/cart/update/{Idproduct}', [ShoppingCartController::class, 'updateItemsShoppingCart']);
+
 //
 Route::get('/get-product/{id_product}',[ProductController::class, 'getItemsProduct']); // sản phẩm chi tiết
