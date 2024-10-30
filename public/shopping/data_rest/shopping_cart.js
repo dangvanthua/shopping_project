@@ -4,6 +4,7 @@ function addItemsToCart(Idproduct,quantity=1) {
         console.error("ID sản phẩm không hợp lệ");
         return;
     }
+const sessionId = localStorage.getItem('id_session');
     fetch(`/api/cart/add/${Idproduct}`, {
             method: "POST",
             headers: {
@@ -11,7 +12,8 @@ function addItemsToCart(Idproduct,quantity=1) {
                 'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             },
             body: JSON.stringify({
-                quantity: quantity
+                quantity: quantity,
+                    session_id: sessionId
             })
         })
         .then(response => response.json())
@@ -34,6 +36,46 @@ function addItemsToCart(Idproduct,quantity=1) {
             alert("Có lỗi xảy ra khi thêm vào giỏ hàng.");
         });
 }
+// function addItemsToCart(Idproduct, quantity = 1) {
+//     if (!Idproduct) {
+//         console.error("ID sản phẩm không hợp lệ");
+//         return;
+//     }
+
+//     // Lấy session ID từ localStorage
+//     const sessionId = localStorage.getItem('id_session');
+
+//     fetch(`/api/cart/add/${Idproduct}`, {
+//         method: "POST",
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+//         },
+//         body: JSON.stringify({
+//             quantity: quantity,
+//             session_id: sessionId  // Truyền session_id vào yêu cầu
+//         })
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         if (data.message === "Đã thêm dữ liệu thành công") {
+//             alert("Đã thêm giỏ hàng thành công");
+//             if (data.data && data.data.length > 0) {
+//                 showItemsShoppingCart(data.data);
+//             } else {
+//                 console.error("Dữ liệu giỏ hàng trống");
+//             }
+//         } else {
+//             console.error("Đã có lỗi xảy ra:", data.message);
+//             alert(data.message);
+//         }
+//     })
+//     .catch(error => {
+//         console.error('Có lỗi rồi', error);
+//         alert("Có lỗi xảy ra khi thêm vào giỏ hàng.");
+//     });
+// }
+
 // viết hàm hiển thị danh sách giỏ hàng
 function showItemsShoppingCart(valueItems) {
     const listShowCart = document.getElementById('list_showcart');
@@ -88,33 +130,6 @@ function showItemsShoppingCart(valueItems) {
 
 
 //@ thực thi viết hàm cập nhật số lượng và giá cờ men lại
-
-// function updateQuantityValue(Idproduct, newQuantity) {
-//     if(!Idproduct)
-//     {
-//         console.error("ID không hợp lệ: " + Idproduct);
-//         return;
-//     }
-//     fetch(`/api/cart/update/${Idproduct}`, {
-//         method: "POST",
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-//         },
-//         body: JSON.stringify({ quantity: newQuantity })
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         if (data.success) {
-//             // Đảm bảo `total_price` được chuyển đổi đúng sang chuỗi số có định dạng
-//             document.getElementById('total-price').innerHTML = data.total_price.toLocaleString("en-US") + " VND";
-//         } else {
-//             console.error("Cập nhật thất bại:", data.message);
-//         }
-//     })
-//     .catch(error => console.error('Đã có lỗi xảy ra', error));
-// }
-
 
 
 // sự kiện của chat GPT

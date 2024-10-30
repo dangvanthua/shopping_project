@@ -10,11 +10,12 @@
                         <div class="wrap-slick3-dots"></div>
                         <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
                         <div class="slick3 gallery-lb">
-                            <div class="item-slick3" data-thumb="{{ asset("shopping/images/product-detail-01.jpg") }}">
+                            <div class="item-slick3" data-thumb="{{ asset(" shopping/images/product-detail-01.jpg") }}">
                                 <div class="wrap-pic-w pos-relative">
                                     <img src="" alt="IMG-PRODUCT">
 
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                        href="images/product-detail-01.jpg">
                                         <i class="fa fa-expand"></i>
                                     </a>
                                 </div>
@@ -24,7 +25,8 @@
                                 <div class="wrap-pic-w pos-relative">
                                     <img src="" alt="IMG-PRODUCT">
 
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                        href="images/product-detail-02.jpg">
                                         <i class="fa fa-expand"></i>
                                     </a>
                                 </div>
@@ -34,7 +36,8 @@
                                 <div class="wrap-pic-w pos-relative">
                                     <img src="" alt="IMG-PRODUCT">
 
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                        href="images/product-detail-03.jpg">
                                         <i class="fa fa-expand"></i>
                                     </a>
                                 </div>
@@ -98,13 +101,15 @@
                                         <i class="fs-16 zmdi zmdi-minus"></i>
                                     </div>
                                     <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product"
-                                    id="product-quantity" value="1" min="1">
-                                    <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" data-id="{{ $product->id_product }}">
+                                        id="product-quantity" value="1" min="1">
+                                    <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"
+                                        data-id="{{ $product->id_product }}">
                                         <i class="fs-16 zmdi zmdi-plus"></i>
                                     </div>
                                 </div>
                                 <button
-                                    class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" data-id="{{ $product->id_product }}">
+                                    class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+                                    data-id="{{ $product->id_product }}">
                                     Add to cart
                                 </button>
                             </div>
@@ -380,19 +385,24 @@
 <script src="{{ asset("shopping/data_rest/shopping_cart.js") }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Lấy id_session từ server-side Laravel
-        let sessionIdFromServer = "{{ session()->getId() }}";
+        // Truyền `session ID` từ server vào biến JavaScript
+        const sessionIdFromServer = "{{ session()->getId() }}";
 
-        // Kiểm tra nếu id_session chưa có trong Local Storage
+        // Kiểm tra nếu không có session trong Local Storage thì lưu vào
         if (!localStorage.getItem('id_session')) {
-            // Nếu chưa có, lưu id_session vào Local Storage
             localStorage.setItem('id_session', sessionIdFromServer);
+            console.log("Local Storage: Đã lưu mới session ID từ server:", sessionIdFromServer);
         } else {
-            // Nếu đã có, lấy id_session từ Local Storage và thiết lập vào cookie
             const storedSessionId = localStorage.getItem('id_session');
-            document.cookie = "laravel_session=" + storedSessionId + "; path=/";
+            console.log("Local Storage: Đã tồn tại session ID:", storedSessionId);
+
+            // Cập nhật cookie dựa trên Local Storage để đảm bảo tính nhất quán
+            document.cookie = "laravel_session=" + storedSessionId + "; path=/; SameSite=Lax";
         }
+
+        // Kiểm tra giá trị trong Console
+        console.log("Session ID từ Local Storage:", localStorage.getItem('id_session'));
+        console.log("Session ID từ Cookie:", document.cookie);
     });
 </script>
-
 @endsection
