@@ -1,6 +1,5 @@
 @extends('LayOut.shopping.master_shopping')
 @section('content')
-
 <div class="bg0 m-t-23 p-b-140">
     <div class="container">
         <div class="flex-w flex-sb-m p-b-52">
@@ -305,4 +304,5 @@
 <!-- Modal1 -->
 @include("Front-end-Shopping.model_shopping_cart")
 <script src="{{ asset(" shopping/data_rest/product.js") }}"></script>
+<script src="{{ asset(" shopping/data_rest/shopping_cart.js") }}"></script>
 @endsection

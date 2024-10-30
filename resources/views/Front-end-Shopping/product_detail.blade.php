@@ -1,21 +1,61 @@
 @extends('LayOut.shopping.master_shopping')
 @section('content')
 <section class="sec-product-detail bg0 p-t-65 p-b-60">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="container">
         <div class="row">
+            <div class="col-md-6 col-lg-7 p-b-30">
+                <div class="p-l-25 p-r-30 p-lr-0-lg">
+                    <div class="wrap-slick3 flex-sb flex-w">
+                        <div class="wrap-slick3-dots"></div>
+                        <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+                        <div class="slick3 gallery-lb">
+                            <div class="item-slick3" data-thumb="{{ asset("shopping/images/product-detail-01.jpg") }}">
+                                <div class="wrap-pic-w pos-relative">
+                                    <img src="" alt="IMG-PRODUCT">
+
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
+                                        <i class="fa fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="item-slick3" data-thumb="">
+                                <div class="wrap-pic-w pos-relative">
+                                    <img src="" alt="IMG-PRODUCT">
+
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
+                                        <i class="fa fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="item-slick3" data-thumb="">
+                                <div class="wrap-pic-w pos-relative">
+                                    <img src="" alt="IMG-PRODUCT">
+
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
+                                        <i class="fa fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             {{-- @hiển thị sản phẩm chi tiết --}}
             <div class="col-md-6 col-lg-5 p-b-30">
                 <div class="p-r-50 p-t-5 p-lr-0-lg">
                     <h4 class="mtext-105 cl2 js-name-detail p-b-14">
                         {{ $product->name }}
                     </h4>
-                    <span class="mtext-106 cl2">
+                    <span class="mtext-106 cl2" id="total-price">
                         {{ $product->price }}
                     </span>
                     <p class="stext-102 cl3 p-t-23">
                         {{ $product->describe }}
                     </p>
-                    <!--  -->
+
                     <div class="p-t-33">
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-203 flex-c-m respon6">
@@ -58,16 +98,17 @@
                                         <i class="fs-16 zmdi zmdi-minus"></i>
                                     </div>
                                     <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product"
-                                        value="1">
-                                    <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                    id="product-quantity" value="1" min="1">
+                                    <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" data-id="{{ $product->id_product }}">
                                         <i class="fs-16 zmdi zmdi-plus"></i>
                                     </div>
                                 </div>
                                 <button
-                                    class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                    class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" data-id="{{ $product->id_product }}">
                                     Add to cart
                                 </button>
                             </div>
+                            <p>Tổng giá: <span id="total-price">{{ $product->price }}</span> VND</p>
                         </div>
                     </div>
                     <!--  -->
@@ -93,6 +134,7 @@
                         </a>
                     </div>
                 </div>
+
             </div>
         </div>
         <div class="bor10 m-t-50 p-t-43 p-b-40">
@@ -334,5 +376,7 @@
         </div>
     </div>
 </section>
-<script src="{{ asset(" shopping/data_rest/product.js") }}"></script>
+<script src="{{ asset("shopping/data_rest/product.js") }}"></script>
+{{-- <script src="{{ asset(" shopping/data_rest/shopping_cart.js") }}"></script> --}}
+<script src="{{ asset("shopping/data_rest/shopping_cart.js") }}"></script>
 @endsection

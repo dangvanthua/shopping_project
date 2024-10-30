@@ -427,7 +427,7 @@
 	<!--===============================================================================================-->
 	<script src="{{ asset('shopping/vendor/isotope/isotope.pkgd.min.js') }}"></script>
 	<!--===============================================================================================-->
-	<script src="{{ asset('shopping/vendor/sweetalert/sweetalert.min.js') }}"></script>
+	{{-- <script src="{{ asset('shopping/vendor/sweetalert/sweetalert.min.js') }}"></script> --}}
 
 	<script>
 		$('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
@@ -455,12 +455,7 @@
         });
     });
 
-    $('.js-addcart-detail').each(function(){
-        var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-        $(this).on('click', function(){
-            swal(nameProduct, "is added to cart !", "success");
-        });
-    });
+
 	</script>
 	<!--===============================================================================================-->
 	<script src="{{ asset('shopping/vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>

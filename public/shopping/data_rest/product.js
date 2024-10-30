@@ -217,31 +217,31 @@ document.querySelectorAll('.js-show-modal1').forEach(button => {
     });
 });
 
-// Hàm hiển thị dữ liệu chi tiết sản phẩm (product_detail)
-function loadDataProductDetail(Idproduct) {
-    fetch(`product_detail/${Idproduct}`)
-        .then(response => response.text())
-        .then(html => {
-            document.getAttribute('#row').innerHTML = html;  // Đảm bảo chỉ chọn phần tử đầu tiên có ID "row"
-            // Cập nhật URL mà không cần reload lại trang
-            history.pushState(null, '', `product_detail/${Idproduct}`);
-        })
-        .catch(error => console.error('Đã có lỗi xảy ra', error));
-}
+// // Hàm hiển thị dữ liệu chi tiết sản phẩm (product_detail)
+// function loadDataProductDetail(Idproduct) {
+//     fetch(`product_detail/${Idproduct}`)
+//         .then(response => response.text())
+//         .then(html => {
+//             document.getAttribute('#row').innerHTML = html;  // Đảm bảo chỉ chọn phần tử đầu tiên có ID "row"
+//             // Cập nhật URL mà không cần reload lại trang
+//             history.pushState(null, '', `product_detail/${Idproduct}`);
+//         })
+//         .catch(error => console.error('Đã có lỗi xảy ra', error));
+// }
 
-// Xử lý sự kiện khi người dùng nhấn nút "quay lại" trên trình duyệt
-window.addEventListener('popstate', function() {
-    location.reload();
-});
+// // Xử lý sự kiện khi người dùng nhấn nút "quay lại" trên trình duyệt
+// window.addEventListener('popstate', function() {
+//     location.reload();
+// });
 
-// Thực thi sự kiện cho bấm vào chi tiết
-document.querySelectorAll('product-link').forEach(link => {
-    link.addEventListener('click', function(event) {
-        event.preventDefault();
-        // Lấy product ID và gọi hàm tải chi tiết sản phẩm
-        const productId = this.getAttribute('data-id');
-        loadDataProductDetail(productId);
-    });
-});
+// // Thực thi sự kiện cho bấm vào chi tiết
+// document.querySelectorAll('product-link').forEach(link => {
+//     link.addEventListener('click', function(event) {
+//         event.preventDefault();
+//         // Lấy product ID và gọi hàm tải chi tiết sản phẩm
+//         const productId = this.getAttribute('data-id');
+//         loadDataProductDetail(productId);
+//     });
+// });
 
 
