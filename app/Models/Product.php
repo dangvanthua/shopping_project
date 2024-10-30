@@ -64,8 +64,6 @@ class Product extends Model
         return $this->belongsToMany(Customer::class,'favorite','id_product','id_customer');
     }
 
-
-
     // thực thi thiết lập quan hệ giữa 3 bảng ==> bảng phụ:  Product_attributes
     //quan hệ với attribute
     public function attribute()
@@ -80,6 +78,11 @@ class Product extends Model
     }
 
     //
+    // viết đếm số lượng sản phẩm trong table product
+    public static function countDataProducts()
+    {
+        return self::count();
+    }
 
 
 }
