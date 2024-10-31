@@ -108,7 +108,7 @@
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->
 			<div class="logo-mobile">
-				<a href="index.html"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+				<a href=""><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->
@@ -117,10 +117,6 @@
 					<i class="zmdi zmdi-search"></i>
 				</div>
 
-				{{-- <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-					data-notify="23">
-					<i class="zmdi zmdi-shopping-cart"></i>
-				</div> --}}
 				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
 					data-notify="0">
 					<i class="zmdi zmdi-shopping-cart"></i>
@@ -472,7 +468,7 @@
     });
 	</script>
 	<!--===============================================================================================-->
-	{{-- <script src="{{ asset(" shopping/data_rest/shopping_cart.js") }}"></script> --}}
+	<script src="{{ asset(" shopping/data_rest/shopping_cart.js") }}"></script>
 	<script src="{{ asset('shopping/js/main.js') }}"></script>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
