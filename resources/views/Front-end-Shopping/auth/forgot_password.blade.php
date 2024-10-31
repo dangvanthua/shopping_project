@@ -9,23 +9,42 @@
 </head>
 <body>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <h2 class="text-center">Forgot Password</h2>
-                <form method="POST" action="{{route('auth.sumitReset')}}">
-                    @csrf
-                    <div class="form-group">
-                        <label for="email">Enter your email address</label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="Email" required>
-                        @error('email') 
-                            <small class="help-block">{{$message}}</small>
-                        @enderror
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Send Reset Link</button>
-                </form>
-                <p class="text-center mt-3">
-                    <a href="login.html">Back to Login</a>
-                </p>
+    <div class="left">
+        <img alt="Logo" height="40" src="https://storage.googleapis.com/a1aa/image/QfZ4pv5paAVdECfpQBk8h8WP7MgvzGKHjQ1tCjsF80HGCOsTA.jpg" width="40"/>
+        <h1>
+        Forgot password?
+        </h1>
+        <p>
+        No worries, we'll send you reset instructions.
+        </p>
+        <form method="POST" action="{{route('auth.sumitReset')}}">
+            @csrf
+            <div class="form-group">
+                <label for="email">Enter your email address</label>
+                <input type="email" name="email" id="email" placeholder="Email" required>
+                @error('email') 
+                    <small class="help-block">{{$message}}</small>
+                @enderror
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Reset password</button>
+        </form>
+        <a href="#">
+            <i class="fas fa-arrow-left"></i>
+                Back to log in
+        </a>
+        </div>
+        <div class="right">
+            <div class="overlay">
+            <div class="logo">
+            </div>
+                <div class="navigation">
+                    <i class="fas fa-circle">
+                    </i>
+                    <i class="fas fa-circle">
+                    </i>
+                    <i class="fas fa-circle">
+                    </i>
+                </div>
             </div>
         </div>
     </div>
