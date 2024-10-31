@@ -2,7 +2,7 @@
 FROM php:8.2-fpm-alpine
 
 # Cài đặt các tiện ích cần thiết
-RUN apk add --no-cache \
+RUN apk update && apk add --no-cache \
     freetype-dev \
     libjpeg-turbo-dev \
     libpng-dev \
@@ -23,7 +23,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www
 
 # Sao chép composer.json và composer.lock trước để cache phụ thuộc Composer
-COPY composer.json composer.lock ./ 
+COPY composer.json composer.lock ./
 
 # Chạy lệnh cài đặt Composer với tối ưu hóa
 RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction --no-scripts \
