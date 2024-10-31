@@ -38,3 +38,7 @@ Route::get('/attribute',[AttributeViewController::class, 'showThemmeAttributeInd
 Route::get('/dashboard',[AdminDashboardViewController::class, 'showThemeDashBoard'])->name('index_dashboard');
 Route::get('/get-orders',[AdminDashboardViewController::class, 'showIndexDashBoard'])->name('get-orders');
 Route::get('view-detail/{id}',[AdminDashboardViewController::class,'showViewDashBoard'])->name('get_view'); // hiển thị giao diện chi tiết view
+
+// đăng ký
+Route::get('/demo',[RegistController::class, 'showRegistrationForm'])->name('register');
+Route::post('/demo',[RegistController::class, 'register'])->name('index.register');
