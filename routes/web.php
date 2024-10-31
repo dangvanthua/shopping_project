@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminDashboardViewController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\GetCartShoppingController;
 use App\Http\Controllers\AttributeViewController;
 use App\Http\Controllers\CategoryViewController;
 use App\Http\Controllers\Demo_OderController;
@@ -41,6 +42,7 @@ Route::get('view-detail/{id}',[AdminDashboardViewController::class,'showViewDash
 Route::get('product_detail/{id_product}',[ShoppingCartViewController::class, 'showViewProductDetail'])->name("showdetail"); // hiển thị sản phẩm chi tiết
 
 // hiển thị và thực thi với giỏ hàng
+Route::get('/get/cart',[GetCartShoppingController::class, 'getItemsCartShopping']); //thực thi trang giỏ hàng matter layout
 Route::get('shopping-cart',[ShoppingCartViewController::class, 'showViewShopping_Cart']); //hiển thị trang giỏ hàng
 Route::get('add_shopping_cart/{id_product}',[ShoppingCartViewController::class, 'showViewModelCart']); // thêm giá trị vào giỏ hàng
 
