@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AtributeController;
 use App\Http\Controllers\Api\AttributeController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\GetCartShoppingController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ShoppingCartController;
 use App\Models\Attribute;
@@ -44,7 +45,8 @@ Route::put('/update/dashboard-status/{id}',[DashboardController::class, 'updateS
 // Route::get('view-detail_items/{id}',[DashboardController::class, 'getViewItemDashboard']); @todo
 Route::get('/dashboard/search',[DashboardController::class, 'findValueDashBoard']); // tìm kiếm dữ liệu dashboard
 
-// giỏ hàng
+// thực thi với giỏ hàng và trang giỏ hàng
+Route::get('/get/cart',[GetCartShoppingController::class, 'getItemsCartShopping']); //thực thi trang giỏ hàng matter layout
 Route::post('/cart/add/{Idproduct}', [ShoppingCartController::class, 'addToCartShopping']); // thêm vào giỏ hàng
 // Route::post('/cart/update/{Idproduct}', [ShoppingCartController::class, 'updateItemsShoppingCart']);  // cập nhập số lượng giỏ hàng
 Route::get('/cart/update/{Idproduct}', [ShoppingCartController::class, 'updateItemsShoppingCart']);

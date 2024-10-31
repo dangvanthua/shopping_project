@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\AttributeViewController;
 use App\Http\Controllers\CategoryViewController;
 use App\Http\Controllers\Demo_OderController;
+use App\Http\Controllers\GetCartShoppingViewController;
 use App\Http\Controllers\ShoppingCartViewController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
@@ -41,7 +42,7 @@ Route::get('product_detail/{id_product}',[ShoppingCartViewController::class, 'sh
 
 // hiển thị và thực thi với giỏ hàng
 Route::get('shopping-cart',[ShoppingCartViewController::class, 'showViewShopping_Cart']); //hiển thị trang giỏ hàng
-Route::get('add_shopping_cart/{id_product}',[ShoppingCartViewController::class, 'showViewModelCart']);
+Route::get('add_shopping_cart/{id_product}',[ShoppingCartViewController::class, 'showViewModelCart']); // thêm giá trị vào giỏ hàng
 
 
 // test cái nha @phần này test chưa có sửa lại

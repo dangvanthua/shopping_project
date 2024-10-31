@@ -229,6 +229,8 @@
 		</div>
 	</header>
 
+	@include("Front-end-Shopping.get_cart");
+
 	{{-- thực thi @matter layout --}}
 	<div class="container">
 		@yield('content')
