@@ -157,6 +157,57 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+document.addEventListener('DOMContentLoaded',function(){
+
+    function showFetchItems()
+    {
+        fetch(`/get/cart`,{
+            method: "GET",
+            headers:{
+            'Content-Type': 'application/json'
+            }
+        }).then(response => response.json())
+        .then(data=>{
+            if(data.message)
+            {
+                document.getElementById('items-cart').innerHTML = `<li>${data.message}</li>`;
+            }
+            else{
+                displayCartItems(data);
+            }
+        }).catch(error => console.error('Đã có lỗi xảy ra',error));
+    }
+
+
+    function displayCartItems(items) {
+        let cartContent = document.getElementById('items-cart');
+        cartContent.innerHTML = '';
+        let totalPrice = 0;
+
+        items.forEach(data =>{
+            totalPrice += parseFloat(data.total_price);
+            const row = `<li class="header-cart-item flex-w flex-t m-b-12">
+            <div class="header-cart-item-img">
+            <img src="images/item-cart-01.jpg" alt="IMG">
+             </div>
+            <div class="header-cart-item-txt p-t-8">
+            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                     ${data.id_product}
+                 </a>
+                    <span class="header-cart-item-info">
+                      ${data.quantity} x ${parseFloat(data.price).toLocaleString()} VND
+                     </span>
+                 </div>
+            </li>`;
+            // chèn sản phẩm vào danh sách
+            cartContent.insertAdjacentHTML('beforeend',row);
+        });
+        // Cập nhật tổng tiền giỏ hàng
+        document.getElementById('cart-total').textContent = totalPrice.toLocaleString() + ' VND';
+    }
+    // thực thi gọi hàm ra
+    showFetchItems();
+});
 
 
 
