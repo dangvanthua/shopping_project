@@ -99,5 +99,5 @@
         </div>
     </div>
 </form>
-<script src="{{ asset("shopping/data_rest/shopping_cart.js") }}"></script>
+{{-- <script src="{{ asset("shopping/data_rest/shopping_cart.js") }}"></script> --}}
 @endsection

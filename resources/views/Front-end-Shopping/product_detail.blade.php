@@ -382,7 +382,7 @@
     </div>
 </section>
 <script src="{{ asset("shopping/data_rest/product.js") }}"></script>
-<script src="{{ asset("shopping/data_rest/shopping_cart.js") }}"></script>
+{{-- <script src="{{ asset("shopping/data_rest/shopping_cart.js") }}"></script> chính cái này làm thêm giỏ hàng liên tục --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Truyền `session ID` từ server vào biến JavaScript
