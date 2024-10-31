@@ -29,17 +29,32 @@ class GetCartShoppingController extends Controller
 
     public function getItemsCartShopping(Request $request)
     {
-        // Lấy session ID cố định từ session Laravel (vì route đã chuyển sang web.php)
-        $id_session = session()->getId();
+        $cartItems = null;
 
-        // Truy vấn giỏ hàng dựa trên session ID
-        $cartItems = ShoppingCart::where('id_session', $id_session)->get();
-
-        if ($cartItems->isEmpty()) {
-            return response()->json([
-                'message' => 'Không có sản phẩm trong giỏ hàng'
-            ], 404);
+        if (auth()->check()) {
+            // Nếu người dùng đã đăng nhập, lấy giỏ hàng theo `id_product`
+            $userId = auth()->id();
+            $cartItems = ShoppingCart::where('id_customer', $userId)
+                ->with('product') // Lấy thêm thông tin sản phẩm từ bảng `products`
+                ->get();
+        } else {
+            // Nếu chưa đăng nhập, lấy giỏ hàng theo `id_session`
+            $id_session = session()->getId();
+            $cartItems = ShoppingCart::where('id_session', $id_session)
+                ->with('product') // Lấy thêm thông tin sản phẩm từ bảng `products`
+                ->get();
         }
+
+        // Chuyển đổi dữ liệu để dễ dàng hiển thị ở phía client
+        $cartItems = $cartItems->map(function ($item) {
+            return [
+                'id_product' => $item->id_product,
+                'product_name' => $item->product->name, // Tên sản phẩm từ bảng `products`
+                'quantity' => $item->quantity,
+                'price' => $item->price,
+                'total_price' => $item->total_price,
+            ];
+        });
 
         return response()->json($cartItems);
     }
