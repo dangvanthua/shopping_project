@@ -6,7 +6,6 @@ let currentLoadMoreType = 'category';
 let currentSearchQuery = '';
 
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('Home js');
 
     const filterCategories = document.querySelectorAll('.filter-tope-group button');
     const priceLinks = document.querySelectorAll('#filter-price .filter-link');
