@@ -44,7 +44,7 @@ Route::get('view-detail/{id}',[AdminDashboardViewController::class,'showViewDash
 Route::get('product_detail/{id_product}',[ShoppingCartViewController::class, 'showViewProductDetail'])->name("showdetail"); // hiển thị sản phẩm chi tiết
 
 // hiển thị và thực thi với giỏ hàng
-Route::get('/shopping-cart',[GetViewAllItemsShoppingCart::class, 'showAllItemsShoppingCart']); //hiển thị trang giỏ hàng
+Route::get('/shopping-cart',[GetViewAllItemsShoppingCart::class, 'showAllItemsShoppingCart'])->name('showShoppingCart'); //hiển thị trang giỏ hàng
 // Route::get('/shopping-cart',[GetAllItemsShoppingCart::class, 'getAllItemsShoppingCart']); // lấy dữ liệu toàn bộ giỏ hàng @todo
 Route::get('/get/cart',[GetCartShoppingController::class, 'getItemsCartShopping']); //thực thi trang giỏ hàng matter layout lấy dạng json
 Route::get('add_shopping_cart/{id_product}',[ShoppingCartViewController::class, 'showViewModelCart']); // thêm giá trị vào giỏ hàng
