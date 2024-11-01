@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error("ID sản phẩm không hợp lệ");
             return;
         }
-
         const sessionId = localStorage.getItem('id_session');
         fetch(`/api/cart/add/${Idproduct}`, {
                 method: "POST",
@@ -89,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
     }
-
     // Sự kiện tăng và giảm số lượng
     const quantityUp = document.querySelector('.btn-num-product-up');
     const quantityDown = document.querySelector('.btn-num-product-down');
@@ -112,7 +110,6 @@ document.addEventListener('DOMContentLoaded', function () {
             addItemsToCart(Idproduct, quantity);
         });
     }
-
     // Gọi `showFetchItems` khi trang tải xong
     showFetchItems();
 });
