@@ -238,12 +238,12 @@
                     <i class="glyphicon glyphicon-asterisk"></i> <span>Phân loại(tt)</span>
                 </a>
             </li>
-
-            <li class="{{ Request::is('admin-datn/product*') ? 'active' : '' }}">
-              <a href="">
-                    <i class="fa fa-fw fa-anchor"></i> <span>Sản phẩm</span>
-                </a>
-            </li>
+            <a href="{{ URL::to('all-product') }}">
+            <i class="fa fa-fw fa-anchor"></i> 
+            <span>Sản phẩm</span>
+        
+    </a>
+</li> 
     
             <!-- <li class="sub-menu">
     <a href="{{ URL::to('all-category-product') }}">
@@ -441,30 +441,7 @@
           {{-- @todo lai --}}
 
     <script>
-        $(document).ready(function(){
-            $('.js-delete-confirm').click(function(event){
-                event.preventDefault();
-                let URL=$(this).attr('href');
-                $.confirm({
-                    title: ' Bạn Muốn Xóa Chứ ?',
-                    content: 'Đã Xóa Thì Không Lấy Lại Được Đâu !',
-                    type: 'red',
-                    buttons: {
-                        ok: {
-                            text: "ok!",
-                            btnClass: 'btn-primary',
-                            keys: ['enter'],
-                            action: function(){
-                                 window.location.href=URL;
-                            }
-                        },
-                        cancel: function(){
-                            console.log('the user clicked cancel');
-                        }
-                    }
-                });
-            })
-        });
+      
 
         $(document).ready(function(){
             $(document).on('click','#js-notification',function(e){
