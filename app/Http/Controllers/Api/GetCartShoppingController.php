@@ -12,7 +12,6 @@ class GetCartShoppingController extends Controller
     public function getItemsCartShopping(Request $request)
     {
         $cartItems = null;
-
         if (auth()->check()) {
             // Nếu người dùng đã đăng nhập, lấy giỏ hàng theo `id_product`
             $userId = auth()->id();
@@ -26,7 +25,6 @@ class GetCartShoppingController extends Controller
                 ->with('product') // Lấy thêm thông tin sản phẩm từ bảng `products`
                 ->get();
         }
-
         // Chuyển đổi dữ liệu để dễ dàng hiển thị ở phía client
         $cartItems = $cartItems->map(function ($item) {
             return [

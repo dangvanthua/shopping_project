@@ -6,7 +6,6 @@
             Home
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
-
         <span class="stext-109 cl4">
             Shoping Cart
         </span>
@@ -27,8 +26,29 @@
                                 <th class="column-4">Quantity</th>
                                 <th class="column-5">Total</th>
                             </tr>
-                            <tr class="table_row" id="list_showcart">
-                                {{-- các dữ liệu sẽ hiển thị nơi này --}}
+
+                            <tr class="table_row">
+                                <td class="column-1">
+                                    <div class="how-itemcart1">
+                                        <img src="images/item-cart-04.jpg" alt="IMG">
+                                    </div>
+                                </td>
+                                <td class="column-2">Fresh Strawberries</td>
+                                <td class="column-3">$ 36.00</td>
+                                <td class="column-4">
+                                    <div class="wrap-num-product flex-w m-l-auto m-r-0">
+                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                            <i class="fs-16 zmdi zmdi-minus"></i>
+                                        </div>
+
+                                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="1">
+
+                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                            <i class="fs-16 zmdi zmdi-plus"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="column-5">$ 36.00</td>
                             </tr>
                         </table>
                     </div>
@@ -61,7 +81,6 @@
                                 Subtotal:
                             </span>
                         </div>
-
                         <div class="size-209">
                             <span class="mtext-110 cl2">
                                 $79.65
@@ -99,5 +118,4 @@
         </div>
     </div>
 </form>
-{{-- <script src="{{ asset("shopping/data_rest/shopping_cart.js") }}"></script> --}}
 @endsection

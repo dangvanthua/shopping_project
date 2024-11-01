@@ -92,18 +92,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const quantityUp = document.querySelector('.btn-num-product-up');
     const quantityDown = document.querySelector('.btn-num-product-down');
     const addCartButton = document.querySelector('.js-addcart-detail');
-
     if (quantityUp && quantityDown && addCartButton) {
         quantityUp.addEventListener('click', function () {
             const quantityInput = document.getElementById('product-quantity');
             quantityInput.value = parseInt(quantityInput.value) + 1;
         });
-
         quantityDown.addEventListener('click', function () {
             const quantityInput = document.getElementById('product-quantity');
             quantityInput.value = Math.max(parseInt(quantityInput.value) - 1, 1);
         });
-
         addCartButton.addEventListener('click', function () {
             const Idproduct = this.getAttribute('data-id');
             const quantity = parseInt(document.getElementById('product-quantity').value);

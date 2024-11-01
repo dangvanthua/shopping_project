@@ -7,12 +7,6 @@ use Illuminate\Http\Request;
 
 class ShoppingCartViewController extends Controller
 {
-    // hiển thị view trang giỏ hàng
-    public function showViewShopping_Cart()
-    {
-        return view('Front-end-Shopping.shopping_cart');
-    }
-
     // test giao diện lại để demo
     public function showViewModelCart($id)
     {

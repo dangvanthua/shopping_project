@@ -9,6 +9,6 @@ class TestController extends Controller
     //
     public function testcai()
     {
-        return view('Front-end-Shopping.aboutus');
+        return view('Front-end-Shopping.shopping_cart');
     }
 }

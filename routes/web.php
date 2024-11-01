@@ -6,7 +6,9 @@ use App\Http\Controllers\Api\GetCartShoppingController;
 use App\Http\Controllers\AttributeViewController;
 use App\Http\Controllers\CategoryViewController;
 use App\Http\Controllers\Demo_OderController;
+use App\Http\Controllers\GetAllItemsShoppingCart;
 use App\Http\Controllers\GetCartShoppingViewController;
+use App\Http\Controllers\GetViewAllItemsShoppingCart;
 use App\Http\Controllers\ShoppingCartViewController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
@@ -42,8 +44,8 @@ Route::get('view-detail/{id}',[AdminDashboardViewController::class,'showViewDash
 Route::get('product_detail/{id_product}',[ShoppingCartViewController::class, 'showViewProductDetail'])->name("showdetail"); // hiển thị sản phẩm chi tiết
 
 // hiển thị và thực thi với giỏ hàng
-Route::get('/get/cart',[GetCartShoppingController::class, 'getItemsCartShopping']); //thực thi trang giỏ hàng matter layout
-Route::get('shopping-cart',[ShoppingCartViewController::class, 'showViewShopping_Cart']); //hiển thị trang giỏ hàng
+Route::get('/shopping-cart',[GetViewAllItemsShoppingCart::class, 'showAllItemsShoppingCart']); //hiển thị trang giỏ hàng
+Route::get('/get/cart',[GetCartShoppingController::class, 'getItemsCartShopping']); //thực thi trang giỏ hàng matter layout lấy dạng json
 Route::get('add_shopping_cart/{id_product}',[ShoppingCartViewController::class, 'showViewModelCart']); // thêm giá trị vào giỏ hàng
 
 
