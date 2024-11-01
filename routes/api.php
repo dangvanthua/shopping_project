@@ -47,7 +47,6 @@ Route::put('/update/dashboard-status/{id}',[DashboardController::class, 'updateS
 Route::get('/dashboard/search',[DashboardController::class, 'findValueDashBoard']); // tìm kiếm dữ liệu dashboard
 
 // thực thi với giỏ hàng và trang giỏ hàng
-Route::get('/shopping-cart',[GetAllItemsShoppingCart::class, 'getAllItemsShoppingCart']); // lấy dữ liệu toàn bộ giỏ hàng
 Route::post('/cart/add/{Idproduct}', [ShoppingCartController::class, 'addToCartShopping']); // thêm vào giỏ hàng
 // Route::post('/cart/update/{Idproduct}', [ShoppingCartController::class, 'updateItemsShoppingCart']);  // cập nhập số lượng giỏ hàng
 // Route::get('/cart/update/{Idproduct}', [ShoppingCartController::class, 'updateItemsShoppingCart']); @todo đang gặp lõi
