@@ -56,14 +56,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const dataPrice = parseInt(button.getAttribute('data-price'));
         const input = document.querySelector(`input[data-id="${dataProduct}"]`);
         const totalPrice = document.querySelector(`.total-price[data-id="${dataProduct}"]`);
-
         let quantity = parseInt(input.value) + change;
         if (quantity < 1) quantity = 1;
-
         input.value = quantity;
         const newTotalPrice = quantity * dataPrice;
         totalPrice.innerHTML = `${newTotalPrice.toLocaleString()} đ`;
-
         // cập nhật lại tổng tiền trong giỏ hàng
         updateTotalAllItems();
         // cập nhật lên server
@@ -110,9 +107,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }).catch(error => console.error('Đã có lỗi xảy ra', error));
     }
-
     // cập nhật tổng tiền trong giỏ hàng
     function updateTotalAllItems() {
+        // khởi tạo giá trị
         let totalPrice = 0;
         document.querySelectorAll('.total-price').forEach(items => {
             const lastPrice = items.innerHTML.replace(/[^0-9]/g, '');
@@ -126,7 +123,9 @@ document.addEventListener('DOMContentLoaded', function () {
             subTotalElement.innerHTML = `${totalPrice.toLocaleString()} đ`;
             totalElement.innerHTML = `${totalPrice.toLocaleString()} đ`;
         } else {
-            console.error("Giá trị ko có tồn tại");
+            console.error("Giá trị không có tồn tại");
         }
     }
+
+
 });
