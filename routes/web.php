@@ -7,6 +7,7 @@ use App\Http\Controllers\AttributeViewController;
 use App\Http\Controllers\CategoryViewController;
 use App\Http\Controllers\Demo_OderController;
 use App\Http\Controllers\Api\GetAllItemsShoppingCart;
+use App\Http\Controllers\Api\ShoppingCartController;
 use App\Http\Controllers\GetCartShoppingViewController;
 use App\Http\Controllers\GetViewAllItemsShoppingCart;
 use App\Http\Controllers\ShoppingCartViewController;
@@ -48,7 +49,7 @@ Route::get('/shopping-cart',[GetViewAllItemsShoppingCart::class, 'showAllItemsSh
 // Route::get('/shopping-cart',[GetAllItemsShoppingCart::class, 'getAllItemsShoppingCart']); // lấy dữ liệu toàn bộ giỏ hàng @todo
 Route::get('/get/cart',[GetCartShoppingController::class, 'getItemsCartShopping']); //thực thi trang giỏ hàng matter layout lấy dạng json
 Route::get('add_shopping_cart/{id_product}',[ShoppingCartViewController::class, 'showViewModelCart']); // thêm giá trị vào giỏ hàng
-
+Route::put('/update-shopping-cart', [ShoppingCartController::class, 'updateQuantityAllItems'])->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 
 // test cái nha @phần này test chưa có sửa lại
 Route::get('/product',[ShoppingCartViewController::class, 'showDemoNha'])->name('showItems'); // chỉ là demo thôi nè

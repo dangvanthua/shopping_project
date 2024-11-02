@@ -62,6 +62,8 @@ document.addEventListener('DOMContentLoaded', function () {
         input.value = quantity;
         const newTotalPrice = quantity * dataPrice;
         totalPrice.innerHTML = `${newTotalPrice.toLocaleString()} đ`;
+
+        updateQuantityOnServer(dataProduct,quantity);
     }
 
     function attachQuantityEvents() {
@@ -72,13 +74,40 @@ document.addEventListener('DOMContentLoaded', function () {
                 updateQuantityItemsShopping(button, -1);
             })
         });
-
-
         document.querySelectorAll('.btn-num-product-up').forEach(button => {
             button.addEventListener('click', function () {
                 console.log("Bê quá anh ơi");
                 updateQuantityItemsShopping(button, 1);
             })
         })
+    }
+
+    // viết hàm cập nhật số lượng của giỏ hàng
+    function updateQuantityOnServer(productId,quantity)
+    {
+        fetch(`/update-shopping-cart`,{
+            method: "PUT",
+            headers:{
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+                id_product: productId,
+                quantity: quantity
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.success)
+            {
+                console.log("Cập nhật thành công");
+                showFetchAllItems();
+                alert("Cập nhật thành công");
+
+            }
+            else{
+                console.log("Đã có lỗi xảy ra");
+            }
+        }).catch(error => console.error('Đã có lỗi xảy ra',error));
     }
 });
