@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showFetchAllItems() {
-        fetch('/get/cart', {
+        fetch('/get/cart',{
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json'
@@ -85,9 +85,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // viết hàm cập nhật số lượng của giỏ hàng
     function updateQuantityOnServer(productId,quantity)
     {
-        fetch(`/update-shopping-cart`,{
+       fetch(`update-shopping-cart`,{
             method: "PUT",
-            headers:{
+            headers: {
             'Content-Type': 'application/json',
             'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             },
@@ -95,19 +95,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 id_product: productId,
                 quantity: quantity
             })
-        })
-        .then(response => response.json())
-        .then(data => {
+       }).then(response => response.json())
+       .then(data => {
             if(data.success)
             {
-                console.log("Cập nhật thành công");
                 showFetchAllItems();
-                alert("Cập nhật thành công");
-
+                alert("Cập nhật giỏ hàng thành công");
             }
             else{
-                console.log("Đã có lỗi xảy ra");
+                alert("Đã có lỗi khi cập nhật");
             }
-        }).catch(error => console.error('Đã có lỗi xảy ra',error));
+       }).catch(error => console.error('Đã có lỗi xảy ra',error));
     }
 });
