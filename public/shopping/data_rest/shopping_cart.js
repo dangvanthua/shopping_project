@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         ${data.product_name}
                     </a>
                     <span class="header-cart-item-info">
-                        ${data.quantity} x ${parseFloat(data.price).toLocaleString()} đ
+                        ${data.quantity} x ${parseFloat(data.price).toLocaleString()} VND
                     </span>
                 </div>
             </li>`;
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         const cartTotalElement = document.getElementById('cart-total');
         if (cartTotalElement) {
-            cartTotalElement.textContent = `Tổng tiền: ${totalPrice.total_price.toLocaleString()} đ`;
+            cartTotalElement.textContent = `Tổng tiền: ${totalPrice.toLocaleString()} VND`;
         } else {
             console.error('Không tìm thấy phần tử có ID "cart-total"');
         }

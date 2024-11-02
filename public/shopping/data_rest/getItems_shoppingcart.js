@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
             </td>
             <td class="column-2">${data.product_name}</td>
-            <td class="column-3">${data.price.toLocaleString()} đ</td>
+            <td class="column-3">${parseFloat(data.price).toLocaleString()} đ</td>
             <td class="column-4">
                 <div class="wrap-num-product flex-w m-l-auto m-r-0">
                     <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" data-id="${data.id_product}" data-price="${data.price}">
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                 </div>
             </td>
-            <td class="column-5 total-price" data-id="${data.id_product}">${data.total_price.toLocaleString()} đ</td>
+            <td class="column-5 total-price" data-id="${data.id_product}">${parseFloat(data.total_price).toLocaleString()} đ</td>
         </tr>
             `;
             itemsShoppingCart.insertAdjacentHTML('beforeend', row);
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showFetchAllItems() {
-        fetch('/get/cart',{
+        fetch('/get/cart', {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json'
@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 if (data.length > 0) {
                     displayCartItems(data);
+                    updateTotalAllItems();
                 } else {
                     alert("Bạn chưa có sản phẩm nào trong giỏ hàng");
                     console.log("Không có giá trị trong giỏ hàng");
@@ -63,7 +64,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const newTotalPrice = quantity * dataPrice;
         totalPrice.innerHTML = `${newTotalPrice.toLocaleString()} đ`;
 
-        updateQuantityOnServer(dataProduct,quantity);
+        // cập nhật lại tổng tiền trong giỏ hàng
+        updateTotalAllItems();
+        // cập nhật lên server
+        updateQuantityOnServer(dataProduct, quantity);
+
+
     }
 
     function attachQuantityEvents() {
@@ -83,28 +89,44 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // viết hàm cập nhật số lượng của giỏ hàng
-    function updateQuantityOnServer(productId,quantity)
-    {
-       fetch(`update-shopping-cart`,{
-            method: "PUT",
-            headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-            body: JSON.stringify({
-                id_product: productId,
-                quantity: quantity
-            })
-       }).then(response => response.json())
-       .then(data => {
-            if(data.success)
-            {
-                showFetchAllItems();
-                alert("Cập nhật giỏ hàng thành công");
-            }
-            else{
-                alert("Đã có lỗi khi cập nhật");
-            }
-       }).catch(error => console.error('Đã có lỗi xảy ra',error));
+    function updateQuantityOnServer(productId, quantity) {
+        fetch(`update-shopping-cart`, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    id_product: productId,
+                    quantity: quantity
+                })
+            }).then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showFetchAllItems();
+                    alert("Cập nhật giỏ hàng thành công");
+                } else {
+                    alert("Đã có lỗi khi cập nhật");
+                }
+            }).catch(error => console.error('Đã có lỗi xảy ra', error));
+    }
+
+    // cập nhật tổng tiền trong giỏ hàng
+    function updateTotalAllItems() {
+        let totalPrice = 0;
+        document.querySelectorAll('.total-price').forEach(items => {
+            const lastPrice = items.innerHTML.replace(/[^0-9]/g, '');
+            const afterPrice = parseFloat(lastPrice);
+            totalPrice += afterPrice;
+        });
+        // thực hiện cập nhật giá trị cho subtal và total
+        const subTotalElement = document.getElementById('subtotal');
+        const totalElement = document.getElementById('total');
+        if (subTotalElement && totalElement) {
+            subTotalElement.innerHTML = `${totalPrice.toLocaleString()} đ`;
+            totalElement.innerHTML = `${totalPrice.toLocaleString()} đ`;
+        } else {
+            console.error("Giá trị ko có tồn tại");
+        }
     }
 });

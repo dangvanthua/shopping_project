@@ -53,36 +53,36 @@
                     <div class="flex-w flex-t bor12 p-b-13">
                         <div class="size-208">
                             <span class="stext-110 cl2">
-                                Subtotal:
+                                Tạm tính:
                             </span>
                         </div>
                         <div class="size-209">
-                            <span class="mtext-110 cl2">
-                                $79.65
+                            <span class="mtext-110 cl2" id="subtotal">
+                                $0
                             </span>
                         </div>
                     </div>
                     <div class="flex-w flex-t bor12 p-t-15 p-b-30">
                         <div class="size-208 w-full-ssm">
                             <span class="stext-110 cl2">
-                                Shipping:
+                                Vận chuyển:
                             </span>
                         </div>
                     </div>
                     <div class="flex-w flex-t p-t-27 p-b-33">
                         <div class="size-208">
                             <span class="mtext-101 cl2">
-                                Total:
+                                Tổng tiền
                             </span>
                         </div>
                         <div class="size-209 p-t-1">
-                            <span class="mtext-110 cl2">
-                                $79.65
+                            <span class="mtext-110 cl2" id="total">
+                                $0
                             </span>
                         </div>
                     </div>
                     <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-                        Proceed to Checkout
+                        Thanh toán
                     </button>
                 </div>
             </div>
