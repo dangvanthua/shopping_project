@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Log;
 
 class ShoppingCartController extends Controller
 {
-    //
     // thêm vào giỏ hàng
     public function addToCartShopping(Request $request, $Idproduct)
     {
@@ -97,6 +96,31 @@ class ShoppingCartController extends Controller
             'success' => false,
             'message' => "Không có sản phẩm nào",
         ],404);
+    }
+
+    // thực hiện xoá sản phẩm trong giỏ hàng
+    public function deleteItemsShoppingCart(Request $request, $id_product)
+    {
+        $cartItems = null;
+        if(auth()->check())
+        {
+            $id_customer = auth()->id();
+            $cartItems = ShoppingCart::where('id_customer',$id_customer)
+                        ->where('id_product',$id_product)
+                        ->first();
+        }
+        else{
+            $id_session = session()->getId();
+            $cartItems = ShoppingCart::where('id_session',$id_session)
+                        ->where('id_product',$id_product)
+                        ->first();
+        }
+        if($cartItems)
+        {
+            $cartItems->delete();
+            return response()->json(['success' => true, 'message' => 'Sản phẩm đã được xoá khỏi giỏ hàng']);
+        }
+        return response()->json(['success' => false, 'message' => 'Sản phẩm không tồn tại trong giỏ hàng']);
     }
 }
 

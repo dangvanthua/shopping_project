@@ -52,6 +52,7 @@ Route::get('/shopping-cart',[GetViewAllItemsShoppingCart::class, 'showAllItemsSh
 Route::get('/get/cart',[GetCartShoppingController::class, 'getItemsCartShopping']); //thực thi trang giỏ hàng matter layout lấy dạng json
 Route::get('add_shopping_cart/{id_product}',[ShoppingCartViewController::class, 'showViewModelCart']); // thêm giá trị vào giỏ hàng
 Route::put('/update-shopping-cart', [ShoppingCartController::class, 'updateQuantityAllItems'])->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+Route::delete('delete/shopping-cart/{id_product}',[ShoppingCartController::class, 'deleteItemsShoppingCart']);
 
 // test cái nha @phần này test chưa có sửa lại
 Route::get('/product',[ShoppingCartViewController::class, 'showDemoNha'])->name('showItems'); // chỉ là demo thôi nè

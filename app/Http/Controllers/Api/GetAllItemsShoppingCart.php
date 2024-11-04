@@ -42,35 +42,4 @@ class GetAllItemsShoppingCart extends Controller
         return response()->json($cartItems);
     }
 
-    // // @viết phương thức cập nhật số lượng trong giỏ hàng
-    // public function (Request $request)
-    // {
-    //     $cartItems = null;
-    //     if(auth()->checkupdateQuantityAllItems())
-    //     {
-    //         $userId = auth()->id();
-    //         $cartItems = ShoppingCart::where('id_customer',$userId)->with('product')->first();
-    //     }
-    //     else{
-    //         $id_session = session()->getId();
-    //         $cartItems = ShoppingCart::where('id_session',$id_session)->with('product')->first();
-    //     }
-    //     dd($id_session); die();
-    //     if($cartItems)
-    //     {
-    //         $cartItems->quantity = $request->quantity;
-    //         $cartItems->total_price = $request->quantity * $request->price;
-    //         $cartItems->save();
-
-    //         return response()->json([
-    //             'message' => true,
-    //             'data' => $cartItems
-    //         ],200);
-    //     }
-    //     return response()->json([
-    //         'message' => false
-    //     ],404);
-    // }
-
-    
 }
