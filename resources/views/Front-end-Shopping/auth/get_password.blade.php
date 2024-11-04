@@ -15,11 +15,11 @@
         <p>
             Enter your new password to complete the reset.
         </p>
-        <form>
-        @csrf
-        <input type="password" name="password" id="password" placeholder="Password" required>
-        <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm password" required>
-        <button type="submit">Reset password</button>
+        <form method="POST" action="{{ route('auth.submitPassword', ['customer' => $customer->id_customer, 'token' => $token]) }}">
+            @csrf
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm password" required>
+            <button type="submit">Reset password</button>
         </form>
     </div> 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

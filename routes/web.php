@@ -31,7 +31,7 @@ Route::post('/events/store', [EventController::class, 'store'])->name('events.st
 Route::delete('/events/{id}/delete', [EventController::class, 'destroy'])->name('deleteEvent');
 
 // Route User
-Route::get('/auth/forgot-password', [UserController::class, 'showForgotPassword'])->name('auth.password');
-Route::post('/auth/forgot-password', [UserController::class, 'submitFormForgetPassword'])->name('auth.sumitReset');
-Route::get('/auth/get-password/{customer}/{token}', [UserController::class, 'showGetPassword'])->name('auth.getPassword');
-Route::post('/auth/get-password/{customer}/{token}', [UserController::class, 'submitGetPassword'])->name('auth.submitPassword');
+Route::get('/auth/forgot_password', [UserController::class, 'showForgotPassword'])->name('auth.password');
+Route::post('/auth/forgot_password', [UserController::class, 'submitFormForgetPassword'])->name('auth.sumitReset');
+Route::get('/auth/get_password/{customer}/{token}', [UserController::class, 'showGetPassword'])->name('auth.getPassword');
+Route::post('/auth/get_password/{customer}/{token}', [UserController::class, 'submitGetPassword'])->name('auth.submitPassword');

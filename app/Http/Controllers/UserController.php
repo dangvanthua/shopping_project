@@ -35,12 +35,15 @@ class UserController extends Controller
 
         $resetLink = route('auth.getPassword', ['customer' => $customer->id_customer, 'token' => $token]);
 
-        Mail::send('emails.check_email_forget', compact('customer', 'resetLink'), function ($email) use ($customer) {
-            $email->subject('Shopping', 'Lấy lại mật khẩu');
-            $email->to($customer->email, $customer->name);
-        });
-
-        return redirect()->back()->with('Success', 'Vui lòng kiểm tra email để thực hiện đặt lại mật khẩu');
+        try {
+            Mail::send('emails.check_email_forget', compact('customer', 'resetLink'), function ($email) use ($customer) {
+                $email->subject('Shopping', 'Lấy lại mật khẩu');
+                $email->to($customer->email, $customer->name);
+            });
+            return redirect()->back()->with('success', 'Vui lòng kiểm tra email để thực hiện đặt lại mật khẩu');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Đã xảy ra lỗi khi gửi email. Vui lòng thử lại sau.');
+        }
     }
 
     public function showGetPassword(Customer $customer, $token)
