@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', function () {
             `;
             itemsShoppingCart.insertAdjacentHTML('beforeend', row);
         });
+        // gọi hàm xoá
+        buttonDeleteItems();
+        attachQuantityEvents();
     }
 
     function showFetchAllItems() {
@@ -45,18 +48,18 @@ document.addEventListener('DOMContentLoaded', function () {
             }).then(response => response.json())
             .then(data => {
                 if (data.length > 0) {
-                    displayCartItems(data);
-                    // gọi hàm cập nhật
-                    updateTotalAllItems();
-                    // gọi hàm xoá
-                    buttonDeleteItems();
-                    attachQuantityEvents();
+                    displayCartItems(data); // Hiển thị giỏ hàng khi có sản phẩm
+                    updateTotalAllItems(); // Cập nhật tổng tiền
                 } else {
-                    alert("Bạn chưa có sản phẩm nào trong giỏ hàng");
-                    console.log("Không có giá trị trong giỏ hàng");
+                    // Hiển thị thông báo khi giỏ hàng trống
+                    document.getElementById('items-shoppingcart').innerHTML = "<tr><td colspan='5'>Giỏ hàng của bạn đang trống</td></tr>";
+                    // Cập nhật tổng tiền về 0 khi không có sản phẩm
+                    document.getElementById('subtotal').innerText = "0 đ";
+                    document.getElementById('total').innerText = "0 đ";
                 }
             }).catch(error => console.error('Đã có lỗi xảy ra', error));
     }
+
     showFetchAllItems()
 
     // viết hàm cập nhật số lượng trong giỏ hàng
