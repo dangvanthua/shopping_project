@@ -31,8 +31,6 @@ Route::get('/', function () {
 });
 
 Route::get('/testcai', [App\Http\Controllers\TestController::class, 'testcai']);
-// Route::get('demo',[Demo_OderController::class,'showData']);
-// Route::get('view',[Demo_OderController::class,'showView'])->name("view");
 
 Route::get('category', [CategoryViewController::class, 'index']);
 Route::get('/attribute',[AttributeViewController::class, 'showThemmeAttributeIndex']);
@@ -50,7 +48,6 @@ Route::get('product/{id_slug}', [DetailProductViewController::class, 'showViewPr
 Route::get('/shopping-cart',[GetViewAllItemsShoppingCart::class, 'showAllItemsShoppingCart'])->name('showShoppingCart'); //hiển thị trang giỏ hàng
 // Route::get('/shopping-cart',[GetAllItemsShoppingCart::class, 'getAllItemsShoppingCart']); // lấy dữ liệu toàn bộ giỏ hàng @todo
 Route::get('/get/cart',[GetCartShoppingController::class, 'getItemsCartShopping']); //thực thi trang giỏ hàng matter layout lấy dạng json
-Route::get('add_shopping_cart/{id_product}',[ShoppingCartViewController::class, 'showViewModelCart']); // thêm giá trị vào giỏ hàng
 Route::put('/update-shopping-cart', [ShoppingCartController::class, 'updateQuantityAllItems'])->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 Route::delete('delete/shopping-cart/{id_product}',[ShoppingCartController::class, 'deleteItemsShoppingCart']);
 

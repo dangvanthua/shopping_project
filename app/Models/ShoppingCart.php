@@ -34,4 +34,11 @@ class ShoppingCart extends Model
     // thực thi cấu hình quan hệ customer và shopping_cart (1-n)
         return $this->belongsTo(Customer::class,'id_customer');
     }
+
+    //
+    //Thiết lập mối quan hệ với ShoppingCartAttribute
+    public function attributes()
+    {
+        return $this->hasMany(ShoppingCartAttributes::class, 'id_shopping_cart');
+    }
 }

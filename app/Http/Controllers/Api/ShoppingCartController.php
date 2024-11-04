@@ -5,18 +5,18 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ShoppingCart;
+use App\Models\ShoppingCartAttributes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class ShoppingCartController extends Controller
 {
-    // thêm vào giỏ hàng
+    //@thêm sản phẩm vào giỏ hàng
     public function addToCartShopping(Request $request, $Idproduct)
     {
         // Kiểm tra và lấy session_id từ yêu cầu frontend
         $id_session = $request->input('session_id') ?? session()->getId();
         $id_customer = auth()->check() ? auth()->id() : null;
-
         // Kiểm tra sản phẩm
         $product = Product::find($Idproduct);
         if (!$product) {
@@ -26,6 +26,9 @@ class ShoppingCartController extends Controller
         }
 
         $quantity = $request->input('quantity', 1);
+        $size = $request->input('size');
+        $color = $request->input('color');
+
         // Kiểm tra xem sản phẩm đã có trong giỏ hàng của session này chưa
         $itemsValues = ShoppingCart::where('id_product', $Idproduct)
             ->where(function ($query) use ($id_session, $id_customer) {
@@ -48,6 +51,24 @@ class ShoppingCartController extends Controller
                 'quantity' => $quantity,
                 'price' => $product->price,
                 'total_price' => $product->price * $quantity,
+            ]);
+        }
+
+        // thực hiển kiểm tra thuộc tính(attribute) sản phẩm và thực hiện thêm vào
+        if($size)
+        {
+            ShoppingCartAttributes::create([
+                'id_shopping_cart' => $itemsValues->id,
+                'id_attribute' => 1,
+                'id_attribute_value' => $size,
+            ]);
+        }
+        if($color)
+        {
+            ShoppingCartAttributes::create([
+                'id_shopping_cart' => $itemsValues->id,
+                'id_attribute' => 2,
+                'id_attribute_value' => $color,
             ]);
         }
 
@@ -85,7 +106,6 @@ class ShoppingCartController extends Controller
             $cartItem->quantity = $quantity;
             $cartItem->total_price = $quantity * $cartItem->price;
             $cartItem->save();
-
             return response()->json([
                 'success' => true,
                 'data' => $cartItem,
