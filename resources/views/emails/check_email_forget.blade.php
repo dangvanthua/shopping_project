@@ -12,8 +12,6 @@
         <div class="text-center">
            <h2>Xin chào {{$customer->name}}</h2>
             <p>Vui lòng click vào link dưới đây để đặt lại mật khẩu</p>
-            <p>Nhấn vào đây để nhận Iphone 16 promin</p>
-            <a href="https://thiep-chuc-mung.vercel.app/?id=n4JaL5KWlBcXHi3DObDX">HPBD</a>
             <p><a href="{{ $resetLink }}">Đặt lại mật khẩu</a></p>
         </div>
     </div>
