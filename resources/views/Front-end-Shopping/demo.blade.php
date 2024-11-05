@@ -296,7 +296,6 @@
         <i class="zmdi zmdi-chevron-up"></i>
     </span>
 </div>
-{{-- <script src="{{ asset(" shopping/data_rest/shopping_cart.js") }}"></script> --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Kiểm tra nếu id_session đã tồn tại trong Local Storage

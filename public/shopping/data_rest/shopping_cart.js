@@ -66,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }).catch(error => console.error('Đã có lỗi xảy ra', error));
     }
-
     // Hàm để hiển thị sản phẩm trong danh sách giỏ hàng
     function displayCartItems(items) {
         let cartContent = document.getElementById('items-cart');

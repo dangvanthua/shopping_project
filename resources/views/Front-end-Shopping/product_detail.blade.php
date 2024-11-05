@@ -128,7 +128,6 @@
                         </a>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="bor10 m-t-50 p-t-43 p-b-40">
@@ -309,7 +308,6 @@
         </div>
     </div>
 </section>
-{{-- <script src="{{ asset("shopping/data_rest/product.js") }}"></script> --}}
 <script src="{{ asset("shopping/data_rest/shopping_cart.js")}}"></script>
 {{-- <script src="{{ asset("shopping/data_rest/shopping_cart.js" --}}{{-- àm thêm giỏ hàng liên tục --}}
 <script>
