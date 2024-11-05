@@ -38,5 +38,5 @@ class ShoppingCart extends Model
     }
 
     //
-    
+
 }

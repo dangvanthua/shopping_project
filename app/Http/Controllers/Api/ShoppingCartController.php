@@ -26,7 +26,8 @@ class ShoppingCartController extends Controller
         }
 
         $quantity = $request->input('quantity', 1);
-        $color = $request->input('color'); // Lấy giá trị màu sắc từ request
+        // thực hiện lấy giá trị từ request
+        $color = $request->input('color');
         $size = $request->input('size');
         // Kiểm tra xem sản phẩm đã có trong giỏ hàng của session này chưa
         $itemsValues = ShoppingCart::where('id_product', $Idproduct)
@@ -35,10 +36,7 @@ class ShoppingCartController extends Controller
                 if ($id_customer) {
                     $query->orWhere('id_customer', $id_customer);
                 }
-            })
-            ->where('color', $color)
-            ->where('size', $size)
-            ->first();
+            })->first();
         // Cập nhật hoặc thêm mới sản phẩm vào giỏ hàng
         if ($itemsValues) {
             $itemsValues->quantity += $quantity;

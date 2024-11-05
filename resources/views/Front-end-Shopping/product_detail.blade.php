@@ -60,7 +60,6 @@
                             <div class="size-204 respon6-next">
                                 <div class="rs1-select2 bor8 bg0">
                                     <select class="js-select2" name="size">
-                                        <option>Choose an option</option>
                                         @foreach ($size as $items)
                                         <option value="{{ $items->id_attribute_value }}">{{ $items->value }}</option>
                                         @endforeach
@@ -76,7 +75,6 @@
                             <div class="size-204 respon6-next">
                                 <div class="rs1-select2 bor8 bg0">
                                     <select class="js-select2" name="color">
-                                        <option>Choose an option</option>
                                         @foreach ($color as $items)
                                         <option value="{{ $items->id_attribute_value }}">{{ $items->value }}</option>
                                         @endforeach
@@ -159,60 +157,6 @@
                             </p>
                         </div>
                     </div>
-                    <!-- - -->
-                    <div class="tab-pane fade" id="information" role="tabpanel">
-                        <div class="row">
-                            <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
-                                <ul class="p-lr-28 p-lr-15-sm">
-                                    <li class="flex-w flex-t p-b-7">
-                                        <span class="stext-102 cl3 size-205">
-                                            Weight
-                                        </span>
-                                        <span class="stext-102 cl6 size-206">
-                                            0.79 kg
-                                        </span>
-                                    </li>
-                                    <li class="flex-w flex-t p-b-7">
-                                        <span class="stext-102 cl3 size-205">
-                                            Dimensions
-                                        </span>
-                                        <span class="stext-102 cl6 size-206">
-                                            110 x 33 x 100 cm
-                                        </span>
-                                    </li>
-                                    <li class="flex-w flex-t p-b-7">
-                                        <span class="stext-102 cl3 size-205">
-                                            Materials
-                                        </span>
-                                        <span class="stext-102 cl6 size-206">
-                                            60% cotton
-                                        </span>
-                                    </li>
-
-                                    <li class="flex-w flex-t p-b-7">
-                                        <span class="stext-102 cl3 size-205">
-                                            Color
-                                        </span>
-
-                                        <span class="stext-102 cl6 size-206">
-                                            Black, Blue, Grey, Green, Red, White
-                                        </span>
-                                    </li>
-
-                                    <li class="flex-w flex-t p-b-7">
-                                        <span class="stext-102 cl3 size-205">
-                                            Size
-                                        </span>
-
-                                        <span class="stext-102 cl6 size-206">
-                                            XL, L, M, S
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- - -->
                     <div class="tab-pane fade" id="reviews" role="tabpanel">
                         <div class="row">
@@ -366,7 +310,8 @@
     </div>
 </section>
 {{-- <script src="{{ asset("shopping/data_rest/product.js") }}"></script> --}}
-{{-- <script src="{{ asset("shopping/data_rest/shopping_cart.js") }}"></script> --}}{{-- chính cái này làm thêm giỏ hàng liên tục --}}
+<script src="{{ asset("shopping/data_rest/shopping_cart.js")}}"></script>
+{{-- <script src="{{ asset("shopping/data_rest/shopping_cart.js" --}}{{-- àm thêm giỏ hàng liên tục --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Truyền `session ID` từ server vào biến JavaScript
