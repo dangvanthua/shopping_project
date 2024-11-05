@@ -7,6 +7,7 @@ use App\Http\Controllers\AttributeViewController;
 use App\Http\Controllers\CategoryViewController;
 use App\Http\Controllers\Demo_OderController;
 use App\Http\Controllers\Api\GetAllItemsShoppingCart;
+use App\Http\Controllers\Api\PayMonneyController;
 use App\Http\Controllers\Api\ShoppingCartController;
 use App\Http\Controllers\DetailProductViewController;
 use App\Http\Controllers\GetCartShoppingViewController;
@@ -58,3 +59,5 @@ Route::get('/product',[ShoppingCartViewController::class, 'showDemoNha'])->name(
 //
 // hiển thị thanh toán
 Route::get('/pay-money',[PayMonneyViewController::class, 'showViewPayMoney']);
+// thực thị thanh toán
+Route::get('/make-payment',[PayMonneyController::class, 'makePaymentAllItems']);

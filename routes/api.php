@@ -55,4 +55,4 @@ Route::post('/cart/add/{Idproduct}', [ShoppingCartController::class, 'addToCartS
 Route::get('/get-product/{id_product}',[ProductController::class, 'getItemsProduct']); // sản phẩm chi tiết @todo làm lại sau
 
 // thực thị thanh toán
-Route::get('/pay-money',[PayMonneyController::class, 'makePaymentAllItems'])->name('makepaymoney');
+// Route::get('/make-payment',[PayMonneyController::class, 'makePaymentAllItems'])->name('makepaymoney');

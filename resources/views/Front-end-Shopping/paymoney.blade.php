@@ -7,16 +7,9 @@
     <div class="row">
         <!-- Left Column - Product Details and Form -->
         <div class="col-md-7">
-            <h5 class="mb-4">Sản phẩm trong đơn (1)</h5>
-            <div class="product-info">
-                <img src="" alt="Product Image">
-                <div class="ml-3">
-                    <h6>Chuột có dây Rapoo N200</h6>
-                    <small>Màu: Đen</small>
-                </div>
-                <div class="text-right">
-                    <span>119.000 đ</span>
-                </div>
+            <div id="cart-items-container">
+                <h5 class="mb-4">Tiến hành thanh toán</h5>
+                {{-- Hiển thị sản phẩm sẽ ở nơi này --}}
             </div>
 
             <h6 class="mt-4">Người đặt hàng</h6>
@@ -111,4 +104,5 @@
         </div>
     </div>
 </div>
+<script src="{{ asset("shopping/data_rest/pay_money.js") }}"></script>
 @endsection
