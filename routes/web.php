@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\ShoppingCartController;
 use App\Http\Controllers\DetailProductViewController;
 use App\Http\Controllers\GetCartShoppingViewController;
 use App\Http\Controllers\GetViewAllItemsShoppingCart;
+use App\Http\Controllers\PayMonneyViewController;
 use App\Http\Controllers\ShoppingCartViewController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
@@ -55,3 +56,5 @@ Route::delete('delete/shopping-cart/{id_product}',[ShoppingCartController::class
 Route::get('/product',[ShoppingCartViewController::class, 'showDemoNha'])->name('showItems'); // chỉ là demo thôi nè
 
 //
+// hiển thị thanh toán
+Route::get('/pay-money',[PayMonneyViewController::class, 'showViewPayMoney']);

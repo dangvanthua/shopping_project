@@ -61,7 +61,7 @@ class ShoppingCartController extends Controller
         ], 200);
     }
 
-    //theo chat GPT
+    //@todo
     // public function addToCartShopping(Request $request, $Idproduct)
     // {
     //     // Kiểm tra và lấy session_id từ yêu cầu frontend

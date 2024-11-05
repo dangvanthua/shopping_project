@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\GetAllItemsShoppingCart;
 use App\Http\Controllers\Api\GetCartShoppingController;
+use App\Http\Controllers\Api\PayMonneyController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ShoppingCartController;
 use App\Models\Attribute;
@@ -52,3 +53,6 @@ Route::post('/cart/add/{Idproduct}', [ShoppingCartController::class, 'addToCartS
 // Route::get('/cart/update/{Idproduct}', [ShoppingCartController::class, 'updateItemsShoppingCart']); @todo đang gặp lõi
 //
 Route::get('/get-product/{id_product}',[ProductController::class, 'getItemsProduct']); // sản phẩm chi tiết @todo làm lại sau
+
+// thực thị thanh toán
+Route::get('/pay-money',[PayMonneyController::class, 'makePaymentAllItems'])->name('makepaymoney');
