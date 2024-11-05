@@ -1,15 +1,6 @@
-
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
+@extends('LayOut.shopping.master_shopping')
+@section('content')
+   
     <div class="container">
         <div class="form-email">
             <img alt="Logo" height="40" src="{{asset('images/users/logo.jpg')}}" width="40"/>
@@ -36,4 +27,4 @@
             </a>
         </div>
     </div>
-  
+@endsection

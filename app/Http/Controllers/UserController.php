@@ -37,12 +37,20 @@ class UserController extends Controller
 
         try {
             Mail::send('emails.check_email_forget', compact('customer', 'resetLink'), function ($email) use ($customer) {
-                $email->subject('Shopping', 'Lấy lại mật khẩu');
+                $email->subject('Shopping - Lấy lại mật khẩu');
                 $email->to($customer->email, $customer->name);
             });
-            return redirect()->back()->with('success', 'Vui lòng kiểm tra email để thực hiện đặt lại mật khẩu');
+
+            return redirect()->back()->with('toastr', [
+                'type' => 'success',
+                'message' => 'Vui lòng kiểm tra email để thực hiện đặt lại mật khẩu'
+            ]);
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Đã xảy ra lỗi khi gửi email. Vui lòng thử lại sau.');
+
+            return redirect()->back()->with('toastr', [
+                'type' => 'error',
+                'message' => 'Đã xảy ra lỗi khi gửi email. Vui lòng thử lại sau.'
+            ]);
         }
     }
 
