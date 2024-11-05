@@ -19,13 +19,14 @@ document.addEventListener('DOMContentLoaded',function()
                     <small>${items.size}</small>
                 </div>
                 <div class="text-right">
-                    <span>119.000 đ</span>
+                    <span>${items.total_price.toLocaleString()} đ</span>
                 </div>
             </div>`;
             container.insertAdjacentHTML('beforeend',row);
                 });
             }
             else{
+                alert("Vui lòng thêm sản phẩm để tiến hành thanh toán");
                 console.log('Không có giá trị nào cả');
             }
         }).catch(error => console.error('Đã có lỗi xảy ra',error));
