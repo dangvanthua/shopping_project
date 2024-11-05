@@ -19,6 +19,8 @@ class ShoppingCart extends Model
         'quantity',
         'price',
         'total_price',
+        'color',
+        'size'
     ];
 
     // thực thi cấu hình quan hệ giữa product và shopping_cart (1-n)
@@ -36,9 +38,5 @@ class ShoppingCart extends Model
     }
 
     //
-    //Thiết lập mối quan hệ với ShoppingCartAttribute
-    public function attributes()
-    {
-        return $this->hasMany(ShoppingCartAttributes::class, 'id_shopping_cart');
-    }
+    
 }

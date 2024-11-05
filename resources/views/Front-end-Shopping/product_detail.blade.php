@@ -13,25 +13,21 @@
                             <div class="item-slick3" data-thumb="{{ asset(" shopping/images/product-detail-01.jpg") }}">
                                 <div class="wrap-pic-w pos-relative">
                                     <img src="" alt="IMG-PRODUCT">
-
                                     <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
                                         href="images/product-detail-01.jpg">
                                         <i class="fa fa-expand"></i>
                                     </a>
                                 </div>
                             </div>
-
                             <div class="item-slick3" data-thumb="">
                                 <div class="wrap-pic-w pos-relative">
                                     <img src="" alt="IMG-PRODUCT">
-
                                     <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
                                         href="images/product-detail-02.jpg">
                                         <i class="fa fa-expand"></i>
                                     </a>
                                 </div>
                             </div>
-
                             <div class="item-slick3" data-thumb="">
                                 <div class="wrap-pic-w pos-relative">
                                     <img src="" alt="IMG-PRODUCT">
@@ -55,9 +51,6 @@
                     <span class="mtext-106 cl2" id="total-price">
                         {{ $product->price }}
                     </span>
-                    <p class="stext-102 cl3 p-t-23">
-                        {{ $product->describe }}
-                    </p>
 
                     <div class="p-t-33">
                         <div class="flex-w flex-r-m p-b-10">
@@ -162,14 +155,7 @@
                     <div class="tab-pane fade show active" id="description" role="tabpanel">
                         <div class="how-pos2 p-lr-15-md">
                             <p class="stext-102 cl6">
-                                Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit
-                                amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus
-                                interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus et
-                                elementum sed, sodales vitae eros. Ut ex quam, porta consequat interdum in, faucibus eu
-                                velit. Quisque rhoncus ex ac libero varius molestie. Aenean tempor sit amet orci nec
-                                iaculis. Cras sit amet nulla libero. Curabitur dignissim, nunc nec laoreet consequat,
-                                purus nunc porta lacus, vel efficitur tellus augue in ipsum. Cras in arcu sed metus
-                                rutrum iaculis. Nulla non tempor erat. Duis in egestas nunc.
+                                {{ $product->describe }}
                             </p>
                         </div>
                     </div>
@@ -379,8 +365,8 @@
         </div>
     </div>
 </section>
-<script src="{{ asset("shopping/data_rest/product.js") }}"></script>
-{{-- <script src="{{ asset("shopping/data_rest/shopping_cart.js") }}"></script> chính cái này làm thêm giỏ hàng liên tục --}}
+{{-- <script src="{{ asset("shopping/data_rest/product.js") }}"></script> --}}
+{{-- <script src="{{ asset("shopping/data_rest/shopping_cart.js") }}"></script> --}}{{-- chính cái này làm thêm giỏ hàng liên tục --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Truyền `session ID` từ server vào biến JavaScript

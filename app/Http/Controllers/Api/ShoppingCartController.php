@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 
 class ShoppingCartController extends Controller
 {
-    //@thêm sản phẩm vào giỏ hàng
+    // //@thêm sản phẩm vào giỏ hàng
     public function addToCartShopping(Request $request, $Idproduct)
     {
         // Kiểm tra và lấy session_id từ yêu cầu frontend
@@ -26,9 +26,8 @@ class ShoppingCartController extends Controller
         }
 
         $quantity = $request->input('quantity', 1);
+        $color = $request->input('color'); // Lấy giá trị màu sắc từ request
         $size = $request->input('size');
-        $color = $request->input('color');
-
         // Kiểm tra xem sản phẩm đã có trong giỏ hàng của session này chưa
         $itemsValues = ShoppingCart::where('id_product', $Idproduct)
             ->where(function ($query) use ($id_session, $id_customer) {
@@ -37,6 +36,8 @@ class ShoppingCartController extends Controller
                     $query->orWhere('id_customer', $id_customer);
                 }
             })
+            ->where('color', $color)
+            ->where('size', $size)
             ->first();
         // Cập nhật hoặc thêm mới sản phẩm vào giỏ hàng
         if ($itemsValues) {
@@ -51,31 +52,15 @@ class ShoppingCartController extends Controller
                 'quantity' => $quantity,
                 'price' => $product->price,
                 'total_price' => $product->price * $quantity,
+                'color' => $product->color,
+                'size' => $product->size,
             ]);
         }
-
-        // thực hiển kiểm tra thuộc tính(attribute) sản phẩm và thực hiện thêm vào
-        if($size)
-        {
-            ShoppingCartAttributes::create([
-                'id_shopping_cart' => $itemsValues->id,
-                'id_attribute' => 1,
-                'id_attribute_value' => $size,
-            ]);
-        }
-        if($color)
-        {
-            ShoppingCartAttributes::create([
-                'id_shopping_cart' => $itemsValues->id,
-                'id_attribute' => 2,
-                'id_attribute_value' => $color,
-            ]);
-        }
-
         return response()->json([
             'message' => "Đã thêm dữ liệu thành công",
         ], 200);
     }
+
 
     //@Thực hiện cập nhật giỏ hàng ở trang giỏ hàng
     public function updateQuantityAllItems(Request $request)
@@ -86,62 +71,54 @@ class ShoppingCartController extends Controller
                 'message' => 'Thiếu thông tin sản phẩm hoặc số lượng.'
             ], 400);
         }
-        $quantity = max(1,(int) $request->quantity);
-        if(auth()->check())
-        {
+        $quantity = max(1, (int) $request->quantity);
+        if (auth()->check()) {
             $id_customer = auth()->id();
-            $cartItem = ShoppingCart::where('id_customer',$id_customer)
-                        ->where('id_product',$request->id_product)
-                        ->first();
-        }
-        else{
+            $cartItem = ShoppingCart::where('id_customer', $id_customer)
+                ->where('id_product', $request->id_product)
+                ->first();
+        } else {
             $id_session = session()->getId();
-            $cartItem = ShoppingCart::where('id_session',$id_session)
-                        ->where('id_product',$request->id_product)
-                        ->first();
+            $cartItem = ShoppingCart::where('id_session', $id_session)
+                ->where('id_product', $request->id_product)
+                ->first();
         }
 
-        if($cartItem)
-        {
+        if ($cartItem) {
             $cartItem->quantity = $quantity;
             $cartItem->total_price = $quantity * $cartItem->price;
             $cartItem->save();
             return response()->json([
                 'success' => true,
                 'data' => $cartItem,
-            ],200);
+            ], 200);
         }
 
         return response()->json([
             'success' => false,
             'message' => "Không có sản phẩm nào",
-        ],404);
+        ], 404);
     }
 
     // thực hiện xoá sản phẩm trong giỏ hàng
     public function deleteItemsShoppingCart(Request $request, $id_product)
     {
         $cartItems = null;
-        if(auth()->check())
-        {
+        if (auth()->check()) {
             $id_customer = auth()->id();
-            $cartItems = ShoppingCart::where('id_customer',$id_customer)
-                        ->where('id_product',$id_product)
-                        ->first();
-        }
-        else{
+            $cartItems = ShoppingCart::where('id_customer', $id_customer)
+                ->where('id_product', $id_product)
+                ->first();
+        } else {
             $id_session = session()->getId();
-            $cartItems = ShoppingCart::where('id_session',$id_session)
-                        ->where('id_product',$id_product)
-                        ->first();
+            $cartItems = ShoppingCart::where('id_session', $id_session)
+                ->where('id_product', $id_product)
+                ->first();
         }
-        if($cartItems)
-        {
+        if ($cartItems) {
             $cartItems->delete();
             return response()->json(['success' => true, 'message' => 'Sản phẩm đã được xoá khỏi giỏ hàng']);
         }
         return response()->json(['success' => false, 'message' => 'Sản phẩm không tồn tại trong giỏ hàng']);
     }
 }
-
-
