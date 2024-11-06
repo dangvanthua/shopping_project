@@ -6,7 +6,6 @@ let currentLoadMoreType = 'category';
 let currentSearchQuery = '';
 
 document.addEventListener('DOMContentLoaded', function () {
-
     const filterCategories = document.querySelectorAll('.filter-tope-group button');
     const priceLinks = document.querySelectorAll('#filter-price .filter-link');
     const sortFilters = document.querySelectorAll('#filter-sort .filter-link');
@@ -188,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
-                        <img src="${product.images}">
+                        <img src="../shopping/images/${product.images}">
                         <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
