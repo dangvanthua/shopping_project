@@ -53,4 +53,52 @@ class ReviewController extends Controller
             ]
         ]);
     }
+
+    public function updateReview(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => [
+                'required',
+                'string',
+                'regex:/^(?!.*\s{2,}).*$/'
+            ],
+        ], [
+            'rating.required' => 'Please select a rating.',
+            'comment.required' => 'Please enter your review.',
+            'comment.regex' => 'Please avoid multiple consecutive spaces in your comment.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $review = Review::find($id);
+
+        if ($review) {
+            $review->update($validator->validated());
+
+            return response()->json([
+                'success' => true,
+                'review' => $review,
+            ]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Review not found'], 404);
+    }
+
+    public function removeReview($id)
+    {
+        $review = Review::find($id);
+
+        if ($review) {
+            $review->delete();
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Review not found'], 404);
+    }
 }

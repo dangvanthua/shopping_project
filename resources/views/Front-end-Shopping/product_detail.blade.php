@@ -238,7 +238,7 @@
                                 <div class="p-b-30 m-lr-15-sm" id="review-info">
                                     @foreach($reviews as $review) 
                                         <!-- Review -->
-                                        <div class="flex-w flex-t p-b-68">
+                                        <div class="flex-w flex-t p-b-68" data-review-id="{{$review->id_review}}">
                                             <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
                                                 <img src="images/avatar-01.jpg" alt="AVATAR">
                                             </div>
@@ -259,6 +259,11 @@
                                                 <p class="stext-102 cl6">
                                                       {{ $review->comment }}
                                                 </p>
+
+                                                <div class="review-actions">
+                                                    <i class="zmdi zmdi-edit edit-icon" data-id="{{ $review->id_review }}" style="cursor: pointer;"></i>
+                                                    <i class="zmdi zmdi-delete delete-icon" data-id="{{ $review->id_review }}" style="cursor: pointer; margin-left: 10px;"></i>
+                                                </div>
                                             </div>
                                         </div>
                                     @endforeach
