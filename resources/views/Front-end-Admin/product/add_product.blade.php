@@ -16,12 +16,14 @@
             </div>
             <div class="panel-body">
                 <div class="position-center">
-                    <form role="form" action="{{ URL::to('save-product') }}" method="post" enctype="multipart/form-data">
+                    <form role="form" action="{{ URL::to('save-product') }}" method="post"
+                        enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên sản phẩm</label>
-                            <input type="text" name="product_name" class="form-control" placeholder="Tên sản phẩm" value="{{ old('product_name') }}">
+                            <input type="text" name="product_name" class="form-control" placeholder="Tên sản phẩm"
+                                value="{{ old('product_name') }}">
                             @if ($errors->has('product_name'))
                                 <span class="text-danger">{{ $errors->first('product_name') }}</span>
                             @endif
@@ -29,10 +31,19 @@
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá sản phẩm</label>
-                            <input type="text" name="product_price" class="form-control" placeholder="Giá" value="{{ old('product_price') }}">
+                            <input type="text" name="product_price" class="form-control" placeholder="Giá"
+                                value="{{ old('product_price') }}">
                             @if ($errors->has('product_price'))
                                 <span class="text-danger">{{ $errors->first('product_price') }}</span>
                             @endif
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">SL sản phẩm</label>
+                            <input type="text" name="product_quantity" class="form-control" id="convert_slug"
+                                value="{{ old('product_quantity') }}">
+                            @error('product_quantity')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
@@ -45,19 +56,21 @@
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả sản phẩm</label>
-                            <textarea style="resize: none" rows="8" class="form-control" name="product_desc" placeholder="Mô tả sản phẩm">{{ old('product_desc') }}</textarea>
+                            <textarea style="resize: none" rows="8" class="form-control" name="product_desc"
+                                placeholder="Mô tả sản phẩm">{{ old('product_desc') }}</textarea>
                             @if ($errors->has('product_desc'))
                                 <span class="text-danger">{{ $errors->first('product_desc') }}</span>
                             @endif
                         </div>
 
                         <div class="form-group">
-    <label for="exampleInputPassword1">Nội dung sản phẩm</label>
-    <textarea style="resize: none" rows="8" class="form-control" name="product_content" placeholder="Nội dung sản phẩm">{{ old('product_content') }}</textarea>
-    @if ($errors->has('product_content')) <!-- Thêm kiểm tra lỗi cho product_content -->
-        <span class="text-danger">{{ $errors->first('product_content') }}</span>
-    @endif
-</div>
+                            <label for="exampleInputPassword1">Nội dung sản phẩm</label>
+                            <textarea style="resize: none" rows="8" class="form-control" name="product_content"
+                                placeholder="Nội dung sản phẩm">{{ old('product_content') }}</textarea>
+                            @if ($errors->has('product_content')) <!-- Thêm kiểm tra lỗi cho product_content -->
+                                <span class="text-danger">{{ $errors->first('product_content') }}</span>
+                            @endif
+                        </div>
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Danh mục sản phẩm</label>

@@ -27,6 +27,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">SL sản phẩm</label>
                             <input type="text" name="product_quantity" class="form-control" id="convert_slug" value="{{ old('product_quantity') }}">
+                                                  
                             @error('product_quantity')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -36,6 +37,14 @@
                             <label for="exampleInputEmail1">Giá sản phẩm</label>
                             <input type="text" name="product_price" class="form-control" id="exampleInputEmail1" value="{{ old('product_price', $pro->product_price) }}">
                             @error('product_price')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Giảm giá (%)</label>
+                            <input type="text" name="sale" class="form-control" value="{{ old('sale', $pro->sale) }}" placeholder="Nhập phần trăm giảm giá">
+                            @error('sale')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -84,6 +93,14 @@
                             <select name="product_status" class="form-control input-sm m-bot15">
                                 <option value="0" {{ old('product_status', $pro->product_status) == '0' ? 'selected' : '' }}>Ẩn</option>
                                 <option value="1" {{ old('product_status', $pro->product_status) == '1' ? 'selected' : '' }}>Hiển thị</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Sản phẩm hot</label>
+                            <select name="hot" class="form-control input-sm m-bot15">
+                                <option value="0" {{ old('hot', $pro->hot) == '0' ? 'selected' : '' }}>Không</option>
+                                <option value="1" {{ old('hot', $pro->hot) == '1' ? 'selected' : '' }}>Có</option>
                             </select>
                         </div>
 
