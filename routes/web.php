@@ -58,6 +58,6 @@ Route::get('/product',[ShoppingCartViewController::class, 'showDemoNha'])->name(
 
 //
 // hiển thị thanh toán
-Route::get('/pay-money',[PayMonneyViewController::class, 'showViewPayMoney']);
+Route::get('/pay-money',[PayMonneyViewController::class, 'showViewPayMoney'])->name('payMoney');
 // thực thị thanh toán
 Route::get('/make-payment',[PayMonneyController::class, 'makePaymentAllItems']);

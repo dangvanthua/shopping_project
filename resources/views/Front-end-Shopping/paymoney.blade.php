@@ -45,14 +45,6 @@
                     <label for="cod"><img src="" alt="COD">Thanh toán khi nhận hàng</label>
                 </div>
                 <div class="payment-option">
-                    <input type="radio" id="vnpay" name="paymentMethod">
-                    <label for="vnpay"><img src="" alt="VNPay">Thanh toán bằng thẻ ATM nội địa (Qua VNPay)</label>
-                </div>
-                <div class="payment-option">
-                    <input type="radio" id="visa" name="paymentMethod">
-                    <label for="visa"><img src="" alt="Visa">Thanh toán bằng thẻ quốc tế Visa, Master, JCB, AMEX, Apple Pay, Google Pay</label>
-                </div>
-                <div class="payment-option">
                     <input type="radio" id="momo" name="paymentMethod">
                     <label for="momo"><img src="" alt="Momo">Thanh toán bằng ví MoMo</label>
                 </div>
@@ -66,29 +58,11 @@
 
         <!-- Right Column - Order Summary -->
         <div class="col-md-5">
-            <div class="right-summary">
-                <h5>Thông tin đơn hàng</h5>
-                <div class="order-summary">
-                    <div class="item">
-                        <span>Tổng tiền:</span>
-                        <span>119.000 đ</span>
-                    </div>
-                    <div class="item">
-                        <span>Tổng khuyến mãi:</span>
-                        <span>0 đ</span>
-                    </div>
-                    <div class="item">
-                        <span>Phí vận chuyển:</span>
-                        <span>Miễn phí</span>
-                    </div>
-                    <hr>
-                    <div class="total">
-                        <span>Cần thanh toán:</span>
-                        <span>119.000 đ</span>
-                    </div>
-                </div>
 
-                <button class="btn btn-order btn-block mt-4">Đặt hàng</button>
+            <div class="right-summary" id="order-summary-container">
+                <h5>Thông tin đơn hàng</h5>
+                {{-- hiện tổng tiền nơi này bằng js --}}
+                {{-- <button class="btn btn-order btn-block mt-4">Đặt hàng</button> --}}
             </div>
         </div>
     </div>
