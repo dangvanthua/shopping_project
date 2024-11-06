@@ -19,6 +19,7 @@ class DetailProductViewController extends Controller
         $product = Product::findOrFail($id_product);
         // thực hiện tạo slug
         $expectedSlug = Str::slug($product->name);
+        // dd($slug); die();
         // dd($expectedSlug);
         if($slug !== $expectedSlug)
         {
