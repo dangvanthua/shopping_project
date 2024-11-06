@@ -7,8 +7,8 @@
     <div class="row">
         <!-- Left Column - Product Details and Form -->
         <div class="col-md-7">
+            <h5 class="mb-4">Tiến hành thanh toán</h5>
             <div id="cart-items-container">
-                <h5 class="mb-4">Tiến hành thanh toán</h5>
                 {{-- Hiển thị sản phẩm sẽ ở nơi này --}}
             </div>
 
@@ -24,17 +24,6 @@
             </div>
 
             <h6 class="mt-4">Hình thức nhận hàng</h6>
-            <div class="form-group">
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="homeDelivery" name="deliveryMethod" class="custom-control-input" checked>
-                    <label class="custom-control-label" for="homeDelivery">Giao hàng tận nơi</label>
-                </div>
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="storePickup" name="deliveryMethod" class="custom-control-input">
-                    <label class="custom-control-label" for="storePickup">Nhận tại cửa hàng</label>
-                </div>
-            </div>
-
             <div class="form-group">
                 <select class="form-control">
                     <option selected>Chọn Tỉnh/Thành Phố, Quận/Huyện, Phường/Xã</option>
