@@ -32,13 +32,14 @@ Route::get('/transaction', [App\Http\Controllers\TestController::class, 'testcai
 // Route::get('view',[Demo_OderController::class,'showView'])->name("view");
 
 Route::get('category', [CategoryViewController::class, 'index']);
-Route::get('/attribute',[AttributeViewController::class, 'showThemmeAttributeIndex']);
+Route::get('/attribute', [AttributeViewController::class, 'showThemmeAttributeIndex']);
 
 // thực thi với theme dashboard
-Route::get('/dashboard',[AdminDashboardViewController::class, 'showThemeDashBoard'])->name('index_dashboard');
-Route::get('/get-orders',[AdminDashboardViewController::class, 'showIndexDashBoard'])->name('get-orders');
-Route::get('view-detail/{id}',[AdminDashboardViewController::class,'showViewDashBoard'])->name('get_view'); // hiển thị giao diện chi tiết view
+Route::get('/dashboard', [AdminDashboardViewController::class, 'showThemeDashBoard'])->name('index_dashboard');
+Route::get('/get-orders', [AdminDashboardViewController::class, 'showIndexDashBoard'])->name('get-orders');
+Route::get('view-detail/{id}', [AdminDashboardViewController::class, 'showViewDashBoard'])->name('get_view'); // hiển thị giao diện chi tiết view
 
 // đăng ký
-Route::get('/demo',[RegistController::class, 'showRegistrationForm'])->name('register');
-Route::post('/demo',[RegistController::class, 'register'])->name('index.register');
+Route::get('/register', [RegistController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegistController::class, 'register'])->name('index.register');
+Route::get('/verify/{token}', [RegistController::class, 'verify'])->name('verify');
