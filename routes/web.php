@@ -1,17 +1,16 @@
 <?php
 
 use App\Http\Controllers\CategoryProductController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\CategoryProductView;
 use App\Http\Controllers\ProductView;
-=======
 use App\Http\Controllers\CategoryViewController;
 use App\Http\Controllers\Demo_OderController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\HomeController;
 
->>>>>>> trang_about_dotiendai
+
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -64,10 +63,10 @@ Route::get('active-category-product/{category_product_id}', [CategoryProductView
 Route::get('edit-category-product/{category_product_id}', [CategoryProductView::class, 'edit_category_product'])->name('edit_category_product');
 Route::post('update-category-product/{category_product_id}', [CategoryProductView::class, 'update_category_product'])->name('update_category_product');
 // //Xoa
-<<<<<<< HEAD
+
 Route::get('delete-category-product/{category_product_id}', [CategoryProductView::class, 'delete_category_product'])->name('delete_category_product');
-=======
-Route::get('delete-category-product/{category_product_id}', [CategoryProductController::class, 'delete_category_product'])->name('delete_category_product');
+
+Route::get('delete-category-product/{category_product_id}', [CategoryProductView::class, 'delete_category_product'])->name('delete_category_product');
 
 Route::get('demo', [Demo_OderController::class, 'showData']);
 Route::get('view', [Demo_OderController::class, 'showView'])->name("view");
@@ -90,4 +89,4 @@ Route::get('/events/create', [EventController::class, 'create'])->name('create')
 Route::post('/events/store', [EventController::class, 'store'])->name('events.store');
 Route::delete('/events/{id}/delete', [EventController::class, 'destroy'])->name('deleteEvent');
 
->>>>>>> trang_about_dotiendai
+
