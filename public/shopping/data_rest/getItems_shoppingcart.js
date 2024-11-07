@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     updateTotalAllItems(); // Cập nhật tổng tiền
                 } else {
                     // Hiển thị thông báo khi giỏ hàng trống
+                    console.log('Không có oke nha');
                     document.getElementById('items-shoppingcart').innerHTML = "<tr><td colspan='5'>Giỏ hàng của bạn đang trống</td></tr>";
                     // Cập nhật tổng tiền về 0 khi không có sản phẩm
                     document.getElementById('subtotal').innerText = "0 đ";
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }).catch(error => console.error('Đã có lỗi xảy ra', error));
     }
 
-    showFetchAllItems()
+    showFetchAllItems();
 
     // viết hàm cập nhật số lượng trong giỏ hàng
     function updateQuantityItemsShopping(button, change) {

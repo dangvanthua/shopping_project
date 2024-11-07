@@ -15,7 +15,8 @@ class AttributeSeeder extends Seeder
     {
         //
         DB::table('attribute')->insert([
-            ['name' => 'Kích cỡ', 'describe' => 'Size của sản phẩm'],
+            ['name' => 'Kích thước', 'describe' => 'Kích thước của sản phẩm'],
+            ['name' => 'Màu sắc' , 'describe' => 'Màu sắc của sản phẩm']
         ]);
     }
 }

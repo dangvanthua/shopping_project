@@ -18,6 +18,9 @@ class AttributeValueSeeder extends Seeder
             ['id_attribute' => 1, 'value' => 'S'],
             ['id_attribute' => 1, 'value' => 'M'],
             ['id_attribute' => 1, 'value' => 'L'],
+            ['id_attribute' => 2, 'value' => 'Xanh'],
+            ['id_attribute' => 2, 'value' => 'Đỏ'],
+            ['id_attribute' => 2, 'value' => 'Tím'],
         ]);
     }
 }
