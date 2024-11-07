@@ -18,7 +18,15 @@ class ShoppingCartController extends Controller
         $id_session = $request->input('session_id') ?? session()->getId();
         $id_customer = auth()->check() ? auth()->id() : null;
         // Kiểm tra sản phẩm
+        $quantity = $request->input('quantity',1);
+
         $product = Product::find($Idproduct);
+        if($quantity <=0 || $quantity > $product->quantity_available)
+        {
+            return response()->json([
+                'message' => "Xin lỗi, số lượng trong kho hàng không đủ",
+            ],400);
+        }
         if (!$product) {
             return response()->json([
                 'message' => 'Dữ liệu không tồn tại',
