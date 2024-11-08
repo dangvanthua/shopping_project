@@ -13,14 +13,14 @@ class ProductController extends Controller
         
     return response()->json($products);
 }
-public function toggleStatus(Request $request, $id)
-{
-    $product = DB::table('tbl_product')::find($id);
-    $product->product_status = $request->status;
-    $product->save();
+// public function toggleStatus(Request $request, $id)
+// {
+//     $product = DB::table('tbl_product')::find($id);
+//     $product->product_status = $request->status;
+//     $product->save();
 
-    return response()->json(['message' => 'Trạng thái sản phẩm đã được cập nhật!']);
-}
+//     return response()->json(['message' => 'Trạng thái sản phẩm đã được cập nhật!']);
+// }
 
 public function delete($id)
 {
