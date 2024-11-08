@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\GetCartShoppingController;
 use App\Http\Controllers\AttributeViewController;
 use App\Http\Controllers\CategoryViewController;
+use App\Http\Controllers\Auth\RegistController;
 use App\Http\Controllers\Demo_OderController;
 use App\Http\Controllers\Api\GetAllItemsShoppingCart;
 use App\Http\Controllers\Api\PayMonneyController;
@@ -19,8 +20,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VerificationController;
+use App\Mail\VerifyEmail;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,3 +101,15 @@ Route::get('/auth/forgot_password', [UserController::class, 'showForgotPassword'
 Route::post('/auth/forgot_password', [UserController::class, 'submitFormForgetPassword'])->name('auth.sumitReset');
 Route::get('/auth/get_password/{customer}/{token}', [UserController::class, 'showGetPassword'])->name('auth.getPassword');
 Route::post('/auth/get_password/{customer}/{token}', [UserController::class, 'submitGetPassword'])->name('auth.submitPassword');
+
+// Route::get('/oke',TestController::class,'testcai');
+// Route::get('demo',[Demo_OderController::class,'showData']);
+// Route::get('view',[Demo_OderController::class,'showView'])->name("view");
+
+Route::get('category', [CategoryViewController::class, 'index']);
+
+
+Route::get('/attibute', [AttributeViewController::class, 'showThemmeAttributeIndex']);
+
+Route::get('/demo', [RegistController::class, 'showRegistrationForm'])->name('register');
+Route::post('/demo', [RegistController::class, 'register'])->name('index.register');
