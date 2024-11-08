@@ -18,6 +18,8 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -84,9 +86,16 @@ Route::get('/events/create', [EventController::class, 'create'])->name('create')
 Route::post('/events/store', [EventController::class, 'store'])->name('events.store');
 Route::delete('/events/{id}/delete', [EventController::class, 'destroy'])->name('deleteEvent');
 
+
 // Route Review
 // Hàm này mục đích chỉ để hiển thị trang chi tiết sản phẩm sẽ bị thay thế
 Route::get('/product-detail', [ReviewController::class, 'index'])->name('product_detail');
 Route::post('/submit-review', [ReviewController::class, 'saveReview']);
 Route::delete('/reviews/{id}', [ReviewController::class, 'removeReview']);
 Route::put('/reviews/{id}', [ReviewController::class, 'updateReview']);
+
+// Route User
+Route::get('/auth/forgot_password', [UserController::class, 'showForgotPassword'])->name('auth.password');
+Route::post('/auth/forgot_password', [UserController::class, 'submitFormForgetPassword'])->name('auth.sumitReset');
+Route::get('/auth/get_password/{customer}/{token}', [UserController::class, 'showGetPassword'])->name('auth.getPassword');
+Route::post('/auth/get_password/{customer}/{token}', [UserController::class, 'submitGetPassword'])->name('auth.submitPassword');
