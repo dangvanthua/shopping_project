@@ -162,5 +162,5 @@ Route::get('category', [CategoryViewController::class, 'index']);
 
 Route::get('/attibute', [AttributeViewController::class, 'showThemmeAttributeIndex']);
 
-Route::get('/demo', [RegistController::class, 'showRegistrationForm'])->name('register');
-Route::post('/demo', [RegistController::class, 'register'])->name('index.register');
+Route::get('/register', [RegistController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegistController::class, 'register'])->name('index.register');
