@@ -10,7 +10,7 @@ class TestController extends Controller
     public function testcai()
     {
 
-        return view('Front-end-Shopping.paymoney');
+        // return view('Front-end-Shopping.paymoney');
 
         return view('Front-end-Admin.index');
 
