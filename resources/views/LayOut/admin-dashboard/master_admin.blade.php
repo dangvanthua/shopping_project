@@ -196,9 +196,14 @@
           <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <li class="{{ Request::is('admin-datn') ? 'active' : '' }}">
-                <a href="">
-                    <i class="fa fa-dashboard"></i> <span>Bảng điều khiển</span>
+                <a href="{{ Route('index_dashboard') }}">
+                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
+            </li>
+            <li class="{{ Request::is('admin-datn/menu*') ? 'active' : '' }}">
+              <a href="{{ Route('attribute') }}">
+                  <i class="fa fa-list"></i> <span>Thuộc tính</span>
+              </a>
             </li>
 
              {{-- @comment --}}
@@ -256,7 +261,7 @@
             </li>
 
             <li class="{{ Request::is('admin-datn/rating*') ? 'active' : '' }}">
-                <a href="">
+                <a href="{{ Route('events.index') }}">
                     <i class="fa fa-commenting"></i> <span>Envents</span>
                 </a>
             </li>
