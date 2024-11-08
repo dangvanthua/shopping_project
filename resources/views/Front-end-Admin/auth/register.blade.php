@@ -11,15 +11,28 @@
 </head>
 
 <body>
-
+    <div class="logo">
+    <img class="hinh hinh1" src="{{ asset("images/black_logo.png") }}" alt="">
+    <img class="hinh hinh2" src="{{ asset("images/white_logo.png") }}" alt="">
+    </div>
     <div class="circle"></div>
     <div class="container">
         <div class="tieude">
-            <strong>Login</strong>
+            <strong>Register</strong>
         </div>
 
         <form method="post" autocomplete="on">
- 
+            <!--First name-->
+            <div class="box">
+                <label for="userName" class="fl fontLabel"> UserName: </label>
+                <div class="new iconBox">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </div>
+                <div class="fr">
+                    <input type="text" name="username" placeholder="UserName" class="textBox" autofocus="on" required>
+                </div>
+            </div>
+            <!--First name-->
             <!---Email ID---->
             <div class="box">
                 <label for="email" class="fl fontLabel"> Email ID: </label>
@@ -30,12 +43,34 @@
             </div>
             <!--Email ID----->
 
+            <!---Phone No.------>
+            <div class="box">
+                <label for="phone" class="fl fontLabel"> Phone No.: </label>
+                <div class="fl iconBox"><i class="fa fa-phone-square" aria-hidden="true"></i></div>
+                <div class="fr">
+                    <input type="text" required name="phoneNo" maxlength="10" placeholder="Phone No." class="textBox">
+                </div>
+            </div>
+            <!---Phone No.---->
+
+
             <!---Password------>
             <div class="box">
                 <label for="password" class="fl fontLabel"> Password: </label>
                 <div class="fl iconBox"><i class="fa fa-key" aria-hidden="true"></i></div>
                 <div class="fr">
                     <input type="Password" required name="password" placeholder="Password" class="textBox">
+                </div>
+            </div>
+            <!---Password---->
+
+            <!---Confirm Password------>
+            <div class="box">
+                <label for="Confirmpassword" class="fl fontLabel"> Confirm Password: </label>
+                <div class="fl iconBox"><i class="fa fa-key" aria-hidden="true"></i></div>
+                <div class="fr">
+                    <input type="Password" required name="confirmpassword" placeholder="Confirm Password"
+                        class="textBox">
                 </div>
             </div>
             <!---Password---->
@@ -176,25 +211,55 @@
     .circle {
         z-index: -1;
         position: fixed;
-        background-color: white;
+        background-color: #ededed;
         width: 2600px;
         height: 2600px;
         border-radius: 50%;
         left: -125px;
-        top: 60px;
+        top: -1860px;
         animation: circle 9s infinite ease-in-out;
     }
-@keyframes circle {
+@keyframes circl1e {
     0%{
-        top: 60px;
+        left: -125px;
+        top: -1860px;
     }
     50%{
-        top: 270px;
+        left: -125px;
+        top: -2070px;
     }
     100%
     {
-        top: 60px;
+        left: -125px;
+        top: -1860px;
     }
 }
-
+.logo{
+    position: absolute;
+    top: 45%;
+    left: 30%;
+    transform: translate(-50%,-50%);
+}
+.hinh{
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%,-50%);
+    width: 700px;
+}
+.hinh2{
+    opacity: 1;
+    animation: hinh2 4s infinite ease-in-out;
+}
+@keyframes hinh2 {
+    0%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
 </style>
