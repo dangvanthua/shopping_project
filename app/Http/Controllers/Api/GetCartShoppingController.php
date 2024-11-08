@@ -12,6 +12,7 @@ class GetCartShoppingController extends Controller
     //lấy sản phẩm trong giỏ hàng
     public function getItemsCartShopping(Request $request)
     {
+        Log::info("Lấy giá trị id_session lần đầu nè: " . session()->getId());
         $cartItems = null;
         if (auth()->check()) {
             // Nếu người dùng đã đăng nhập, lấy giỏ hàng theo `id_product`
@@ -22,11 +23,15 @@ class GetCartShoppingController extends Controller
         } else {
             // Nếu chưa đăng nhập, lấy giỏ hàng theo `id_session`
             $id_session = session()->getId();
+
             dd([
                 'session_id' => $id_session,
                 'cartItems' => $cartItems
             ]);
             die();
+
+            Log::info("Lấy giá trị id_session nè: " . $id_session);
+
             $cartItems = ShoppingCart::where('id_session', $id_session)
                 ->with('product') // Lấy thêm thông tin sản phẩm từ bảng `products`
                 ->get();

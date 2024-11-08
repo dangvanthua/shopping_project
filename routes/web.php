@@ -18,6 +18,7 @@ use App\Http\Controllers\DetailProductViewController;
 use App\Http\Controllers\GetCartShoppingViewController;
 use App\Http\Controllers\GetViewAllItemsShoppingCart;
 use App\Http\Controllers\PayMonneyViewController;
+use App\Http\Controllers\RatingViewController;
 use App\Http\Controllers\ShoppingCartViewController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AboutController;
@@ -44,7 +45,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/testcai', [App\Http\Controllers\TestController::class, 'testcai']);
+Route::get('/testcai', [TestController::class, 'testcai']);
 
 Route::get('category', [CategoryViewController::class, 'index']);
 Route::get('/attribute', [AttributeViewController::class, 'showThemmeAttributeIndex']);
@@ -71,6 +72,7 @@ Route::get('/product', [ShoppingCartViewController::class, 'showDemoNha'])->name
 // hiển thị thanh toán
 Route::get('/pay-money', [PayMonneyViewController::class, 'showViewPayMoney'])->name('payMoney');
 // thực thị thanh toán
+
 Route::get('/make-payment', [PayMonneyController::class, 'makePaymentAllItems']);
 // Route::get('/demo',TestController::class,'testcai');
 
@@ -164,3 +166,9 @@ Route::get('/attibute', [AttributeViewController::class, 'showThemmeAttributeInd
 
 Route::get('/register', [RegistController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegistController::class, 'register'])->name('index.register');
+
+Route::get('/make-payment',[PayMonneyController::class, 'makePaymentAllItems']);
+
+
+Route::get('/admin-rating',[RatingViewController::class, 'showViewRating']); // hiển thị view rating 
+
