@@ -8,7 +8,9 @@ use App\Http\Controllers\Api\GetAllItemsShoppingCart;
 use App\Http\Controllers\Api\GetCartShoppingController;
 use App\Http\Controllers\Api\PayMonneyController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\ShoppingCartController;
+use App\Http\Controllers\RatingViewController;
 use App\Models\Attribute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -56,3 +58,6 @@ Route::get('/get-product/{id_product}',[ProductController::class, 'getItemsProdu
 
 // thực thị thanh toán
 // Route::get('/make-payment',[PayMonneyController::class, 'makePaymentAllItems'])->name('makepaymoney');
+
+Route::get('/admin-rating',[RatingController::class,'getAllRatings']); //hiên thị dữ liệu rating
+Route::delete('/delete-admin-rating/{id}',[RatingController::class, 'deleteItemsReview']); // thực thi xoá dữ liệu

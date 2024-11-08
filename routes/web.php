@@ -13,6 +13,7 @@ use App\Http\Controllers\DetailProductViewController;
 use App\Http\Controllers\GetCartShoppingViewController;
 use App\Http\Controllers\GetViewAllItemsShoppingCart;
 use App\Http\Controllers\PayMonneyViewController;
+use App\Http\Controllers\RatingViewController;
 use App\Http\Controllers\ShoppingCartViewController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +33,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/testcai', [App\Http\Controllers\TestController::class, 'testcai']);
+Route::get('/testcai', [TestController::class, 'testcai']);
 
 Route::get('category', [CategoryViewController::class, 'index']);
 Route::get('/attribute',[AttributeViewController::class, 'showThemmeAttributeIndex']);
@@ -62,5 +63,5 @@ Route::get('/pay-money',[PayMonneyViewController::class, 'showViewPayMoney'])->n
 // thực thị thanh toán
 Route::get('/make-payment',[PayMonneyController::class, 'makePaymentAllItems']);
 
-// cho test cái
-Route::get('/donghom',[TestController::class,'testLayId_session']);
+
+Route::get('/admin-rating',[RatingViewController::class, 'showViewRating']); // hiển thị view rating 

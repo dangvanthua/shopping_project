@@ -20,7 +20,6 @@ class AttributeController extends Controller
     public function deteleDataAttribute($id)
     {
         $attribute = Attribute::find($id);
-
         if ($attribute) {
             $attribute->delete();
             return response()->json(['message' => 'Xoá thành công!'], 200);
