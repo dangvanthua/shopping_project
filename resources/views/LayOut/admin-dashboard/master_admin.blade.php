@@ -27,9 +27,9 @@
       folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{ asset('admin/dist/css/skins/_all-skins.min.css') }}">
     <!-- Morris chart -->
-    <link rel="stylesheet" href="{{ asset('admin/bower_components/morris.js/morris.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('admin/bower_components/morris.js/morris.css') }}"> -->
     <!-- jvectormap -->
-    <link rel="stylesheet" href="{{ asset('admin/bower_components/jvectormap/jquery-jvectormap.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('admin/bower_components/jvectormap/jquery-jvectormap.css') }}"> -->
     <!-- Date Picker -->
     <link rel="stylesheet" href="{{ asset('admin/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
     <!-- Daterange picker -->
@@ -46,9 +46,9 @@
 <!-- font CSS -->
 <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 <!-- font-awesome icons -->
-<link rel="stylesheet" href="{{asset('backend/css/font.css')}}" type="text/css"/>
-<link href="{{asset('backend/css/font-awesome.css')}}" rel="stylesheet"> 
-<link rel="stylesheet" href="{{asset('backend/css/morris.css')}}" type="text/css"/>
+<!-- <link rel="stylesheet" href="{{asset('backend/css/font.css')}}" type="text/css"/> -->
+<!-- <link href="{{asset('backend/css/font-awesome.css')}}" rel="stylesheet">  -->
+<!-- <link rel="stylesheet" href="{{asset('backend/css/morris.css')}}" type="text/css"/> -->
 <!-- calendar -->
 <link rel="stylesheet" href="{{asset('backend/css/monthly.css')}}">
 <!-- //calendar -->
@@ -57,7 +57,7 @@
 <script src="{{asset('backend/js/jquery2.0.3.min.js')}}"></script>
 <script src="{{asset('backend/js/raphael-min.js')}}"></script>
 <script src="{{asset('backend/js/morris.js')}}"></script>
-<link rel="stylesheet" href="{{asset('backend/css/darkmode.css')}}" media="(prefers-color: scheme-dark)" >
+<!-- <link rel="stylesheet" href="{{asset('backend/css/darkmode.css')}}" media="(prefers-color: scheme-dark)" > -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -399,7 +399,7 @@
            $('#popup-messages').modal();
         });
     </script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       //{{-- @todo lai --}}
       Pusher.logToConsole = true;
       var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
@@ -436,11 +436,11 @@
           $('.total-message').html(totals);
           $('.total-message').css("display", "block");
       });
-  </script>
+  </script> -->
 
           {{-- @todo lai --}}
 
-    <script>
+    <!-- <script>
       
 
         $(document).ready(function(){
@@ -479,7 +479,7 @@
 
 
 
-    </script>
+    </script> -->
           {{-- @todo lai --}}
 
     <script>

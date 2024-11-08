@@ -46,6 +46,7 @@ class ProductView extends Controller
             'product_name' => 'required|regex:/^[A-Za-z0-9\s]+$/|unique:product,product_name',
             'product_price' => 'required|numeric|min:0.01',
             'product_cate' => 'required',
+            'product_quantity' => 'required|integer|min:0',
             'product_desc' => 'required|regex:/^[A-Za-z0-9\s]+$/',
             'product_content' => 'required|regex:/^[A-Za-z0-9\s]+$/', // Sử dụng cùng một quy tắc cho nội dung sản phẩm
             'product_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
@@ -59,6 +60,10 @@ class ProductView extends Controller
             'product_price.required' => 'Giá sản phẩm không được để trống.',
             'product_price.numeric' => 'Giá sản phẩm phải là một số.',
             'product_price.min' => 'Giá sản phẩm phải lớn hơn 0.',
+            'product_quantity.required' => 'Số lượng sản phẩm không được để trống.',
+            'product_quantity.integer' => 'Số lượng sản phẩm phải là số nguyên.',
+            'product_quantity.min' => 'Số lượng sản phẩm phải lớn hơn hoặc bằng 0.',
+            'sale.numeric' => 'Giảm giá phải là một số.',
             'product_cate.required' => 'Vui lòng chọn một danh mục cho sản phẩm.',
             'product_desc.required' => 'Mô tả sản phẩm không được để trống.',
             'product_desc.regex' => 'Mô tả sản phẩm không được chứa ký tự đặc biệt.',
@@ -79,7 +84,7 @@ class ProductView extends Controller
         }
     
         // Lưu dữ liệu nếu xác thực thành công
-        $data = $request->only(['product_name', 'product_price', 'product_desc', 'product_content', 'product_status']);
+        $data = $request->only(['product_name', 'product_price','product_quantity', 'product_desc', 'product_content', 'product_status']);
         $data['category_id'] = $request->product_cate;
     
         // Xử lý ảnh sản phẩm

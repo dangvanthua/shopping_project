@@ -25,7 +25,7 @@ class CategoryProductView extends Controller
 //  }
  
 public function all_category_product() {
-    $all_category_product = DB::table('tbl_category_product')->paginate(2);
+    $all_category_product = DB::table('tbl_category_product')->paginate(5);
 
     // Mã hóa category_id và tạo khóa ngẫu nhiên
     foreach ($all_category_product as $category) {
