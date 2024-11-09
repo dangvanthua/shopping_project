@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showFetchAllItems() {
-        fetch('/get/cart', {
+        fetch('/api/get-cart', {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json'
