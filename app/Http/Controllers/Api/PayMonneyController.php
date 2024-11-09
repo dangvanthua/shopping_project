@@ -7,6 +7,7 @@ use App\Models\AttributeValue;
 use App\Models\ShoppingCart;
 use Attribute;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PayMonneyController extends Controller
 {
@@ -21,7 +22,7 @@ class PayMonneyController extends Controller
                     ->with('product')
                     ->get();
             } else {
-                $id_session = session()->getId();
+                $id_session = Session::getId();
                 $cartItems = ShoppingCart::where('id_session', $id_session)
                     ->with('product')
                     ->get();

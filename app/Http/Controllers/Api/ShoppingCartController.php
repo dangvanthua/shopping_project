@@ -87,7 +87,7 @@ class ShoppingCartController extends Controller
                 ->where('id_product', $request->id_product)
                 ->first();
         } else {
-            $id_session = session()->getId();
+            $id_session = Session::getId();
             $cartItem = ShoppingCart::where('id_session', $id_session)
                 ->where('id_product', $request->id_product)
                 ->first();

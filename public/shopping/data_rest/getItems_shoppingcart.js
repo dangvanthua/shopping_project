@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // viết hàm cập nhật số lượng của giỏ hàng
     function updateQuantityOnServer(productId, quantity) {
-        fetch(`update-shopping-cart`, {
+        fetch(`api/update-cart`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //@viết sự kiện xoá sản phẩm trong giỏ hàng
     function deteleItemsShoppingCart(productId) {
         const Id_session = localStorage.getItem('id_session');
-        fetch(`/delete/shopping-cart/${productId}`, {
+        fetch(`api/delete-cart/${productId}`, {
                 method: "DELETE",
                 headers: {
                     'Content-Type': 'application/json',

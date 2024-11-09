@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded',function()
     // //@Viết hàm hiển thị toàn bộ sản phẩm ra
     function showAllItemsPayMoney()
     {
-        fetch(`/make-payment`).then(response => response.json())
+        fetch(`api/make-payment`).then(response => response.json())
         .then(data =>{
             const container = document.getElementById('cart-items-container');
             container.innerHTML = '';

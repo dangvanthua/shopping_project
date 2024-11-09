@@ -62,8 +62,6 @@ Route::get('product/{id_slug}', [DetailProductViewController::class, 'showViewPr
 // hiển thị và thực thi với giỏ hàng
 Route::get('/shopping-cart', [GetViewAllItemsShoppingCart::class, 'showAllItemsShoppingCart'])->name('showShoppingCart'); //hiển thị trang giỏ hàng
 
-Route::put('/update-shopping-cart', [ShoppingCartController::class, 'updateQuantityAllItems'])->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
-Route::delete('delete/shopping-cart/{id_product}', [ShoppingCartController::class, 'deleteItemsShoppingCart']);
 
 // test cái nha @phần này test chưa có sửa lại
 Route::get('/product', [ShoppingCartViewController::class, 'showDemoNha'])->name('showItems'); // chỉ là demo thôi nè
@@ -71,8 +69,6 @@ Route::get('/product', [ShoppingCartViewController::class, 'showDemoNha'])->name
 //
 // hiển thị thanh toán
 Route::get('/pay-money', [PayMonneyViewController::class, 'showViewPayMoney'])->name('payMoney');
-// thực thị thanh toán
-Route::get('/make-payment', [PayMonneyController::class, 'makePaymentAllItems']);
 // Route::get('/demo',TestController::class,'testcai');
 
 // Route::get('demo', [Demo_OderController::class, 'showData']);
@@ -164,6 +160,6 @@ Route::get('category', [CategoryViewController::class, 'index']);
 Route::get('/register', [RegistController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegistController::class, 'register'])->name('index.register');
 
-Route::get('/make-payment',[PayMonneyController::class, 'makePaymentAllItems']); // hiển thị thanh toán
+
 Route::get('/admin-rating',[RatingViewController::class, 'showViewRating']); // hiển thị view rating
 

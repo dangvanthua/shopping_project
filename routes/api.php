@@ -71,12 +71,15 @@ Route::get('/dashboard/search', [DashboardController::class, 'findValueDashBoard
 // thực thi với giỏ hàng và trang giỏ hàng
 Route::get('/get-cart', [GetCartShoppingController::class, 'getItemsCartShopping']); //thực thi trang giỏ hàng matter layout lấy dạng json
 Route::post('/cart-add/{Idproduct}', [ShoppingCartController::class, 'addToCartShopping']); // thêm sản phẩm vào giỏ hàng
-
+// Route::put('/update-shopping-cart', [ShoppingCartController::class, 'updateQuantityAllItems'])->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+Route::put('/update-cart', [ShoppingCartController::class, 'updateQuantityAllItems']);
+Route::delete('delete-cart/{id_product}', [ShoppingCartController::class, 'deleteItemsShoppingCart']);
 //
 Route::get('/get-product/{id_product}', [ProductController::class, 'getItemsProduct']); // sản phẩm chi tiết @todo làm lại sau
 
 // thực thị thanh toán
 // Route::get('/make-payment',[PayMonneyController::class, 'makePaymentAllItems'])->name('makepaymoney');
+Route::get('/make-payment', [PayMonneyController::class, 'makePaymentAllItems']);
 
 Route::get('/admin-rating',[RatingController::class,'getAllRatings']); //hiên thị dữ liệu rating
 Route::delete('/delete-admin-rating/{id}',[RatingController::class, 'deleteItemsReview']); // thực thi xoá dữ liệu
