@@ -48,7 +48,7 @@ Route::get('/', function () {
 Route::get('/testcai', [TestController::class, 'testcai']);
 
 Route::get('category', [CategoryViewController::class, 'index']);
-Route::get('/attribute', [AttributeViewController::class, 'showThemmeAttributeIndex']);
+Route::get('/attribute', [AttributeViewController::class, 'showThemmeAttributeIndex'])->name('attribute');
 
 // thực thi với theme dashboard
 Route::get('/dashboard', [AdminDashboardViewController::class, 'showThemeDashBoard'])->name('index_dashboard');
@@ -72,7 +72,6 @@ Route::get('/product', [ShoppingCartViewController::class, 'showDemoNha'])->name
 // hiển thị thanh toán
 Route::get('/pay-money', [PayMonneyViewController::class, 'showViewPayMoney'])->name('payMoney');
 // thực thị thanh toán
-
 Route::get('/make-payment', [PayMonneyController::class, 'makePaymentAllItems']);
 // Route::get('/demo',TestController::class,'testcai');
 
@@ -162,13 +161,9 @@ Route::post('/auth/get_password/{customer}/{token}', [UserController::class, 'su
 Route::get('category', [CategoryViewController::class, 'index']);
 
 
-Route::get('/attibute', [AttributeViewController::class, 'showThemmeAttributeIndex']);
-
 Route::get('/register', [RegistController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegistController::class, 'register'])->name('index.register');
 
-Route::get('/make-payment',[PayMonneyController::class, 'makePaymentAllItems']);
-
-
-Route::get('/admin-rating',[RatingViewController::class, 'showViewRating']); // hiển thị view rating 
+Route::get('/make-payment',[PayMonneyController::class, 'makePaymentAllItems']); // hiển thị thanh toán
+Route::get('/admin-rating',[RatingViewController::class, 'showViewRating']); // hiển thị view rating
 

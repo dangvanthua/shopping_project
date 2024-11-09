@@ -9,20 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('category', function (Blueprint $table) {
-            $table->bigIncrements('id_category');
-            $table->string('name')->unique();
-            $table->text('description')->nullable();
+        Schema::create('product_discount', function (Blueprint $table) {
+            $table->bigIncrements('id_product_discount'); // Khóa chính cho bảng product_discounts
+            $table->unsignedBigInteger('id_product');
+            $table->unsignedBigInteger('id_discount');
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('category');
+        Schema::dropIfExists('product_discount');
     }
 };

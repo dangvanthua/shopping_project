@@ -13,31 +13,31 @@ class CategoryTableSeeder extends Seeder
         DB::table('category')->insert([
             [
                 'name' => 'Men',
-                'describe' => 'Clothing for men including shirts, pants, and jackets',
+                'description' => 'Clothing for men including shirts, pants, and jackets',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'name' => 'Women',
-                'describe' => 'Clothing for women including dresses, skirts, and blouses',
+                'description' => 'Clothing for women including dresses, skirts, and blouses',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'name' => 'Bags',
-                'describe' => 'Different types of bags including handbags, backpacks, and wallets',
+                'description' => 'Different types of bags including handbags, backpacks, and wallets',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'name' => 'Shoes',
-                'describe' => 'Various types of shoes including sneakers, boots, and sandals',
+                'description' => 'Various types of shoes including sneakers, boots, and sandals',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'name' => 'Watches',
-                'describe' => 'Various types of watches including digital and analog models',
+                'description' => 'Various types of watches including digital and analog models',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

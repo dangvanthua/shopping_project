@@ -160,9 +160,8 @@
                         <div class="row">
                             <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
                                 <div class="p-b-30 m-lr-15-sm" id="review-info">
-                                    @foreach($reviews as $review) 
                                         <!-- Review -->
-                                        <div class="flex-w flex-t p-b-68" data-review-id="{{$review->id_review}}">
+                                        <div class="flex-w flex-t p-b-68" data-review-id="">
                                             <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
                                                 <img src="images/avatar-01.jpg" alt="AVATAR">
                                             </div>
@@ -170,18 +169,14 @@
                                             <div class="size-207">
                                                 <div class="flex-w flex-sb-m p-b-17">
                                                     <span class="mtext-107 cl2 p-r-20">
-                                                       {{ $review->customer->name }}
+
                                                     </span>
     
                                                     <span class="fs-18 cl11">
-                                                        @for ($i = 1; $i <= 5; $i++)
-                                                            <i class="zmdi {{ $i <= $review->rating ? 'zmdi-star' : 'zmdi-star-outline' }}"></i>
-                                                        @endfor
                                                     </span>
                                                 </div>
     
                                                 <p class="stext-102 cl6">
-                                                      {{ $review->comment }}
                                                 </p>
 
                                             <p class="stext-102 cl6">
@@ -243,12 +238,12 @@
                                     </form>
                                 </div>
                                                 <div class="review-actions">
-                                                    <i class="zmdi zmdi-edit edit-icon" data-id="{{ $review->id_review }}" style="cursor: pointer;"></i>
-                                                    <i class="zmdi zmdi-delete delete-icon" data-id="{{ $review->id_review }}" style="cursor: pointer; margin-left: 10px;"></i>
+                                                    <i class="zmdi zmdi-edit edit-icon" data-id="" style="cursor: pointer;"></i>
+                                                    <i class="zmdi zmdi-delete delete-icon" data-id="" style="cursor: pointer; margin-left: 10px;"></i>
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach
+
                                 </div>
                                 <!-- Add review -->
                                 <form class="w-full" id="form-review">
