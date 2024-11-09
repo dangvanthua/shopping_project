@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,5 +30,13 @@ class Review extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'id_customer');
+    }
+
+
+    // viết model thực thi chức năng tìm kiếm Full Text Search
+
+    public function scopeSearch($query, $keyword)
+    {
+        return $query->whereRaw("MATCH(comment) AGAINST(? IN BOOLEAN MODE)", [$keyword]);
     }
 }

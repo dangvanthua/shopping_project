@@ -11,13 +11,12 @@ class RatingController extends Controller
     //
     public function getAllRatings()
     {
-        $review = Review::with('product','customer')->paginate(5);
-        if($review)
-        {
+        $review = Review::with('product', 'customer')->paginate(3);
+        if ($review) {
             return response()->json([
                 'message' => "Lấy dữ liệu thành công",
                 'data' => $review
-            ],200);
+            ], 200);
         }
     }
 
@@ -25,19 +24,39 @@ class RatingController extends Controller
     public function deleteItemsReview($id)
     {
         $itemsrating = Review::find($id);
-        if($itemsrating)
-        {
+        if ($itemsrating) {
             $itemsrating->delete();
             return response()->json([
                 'message' => "Xoá dữ liệu thành công",
                 'data' => $itemsrating
 
-            ],200);
-        }
-        else{
+            ], 200);
+        } else {
             return response()->json([
                 'message' => "Có lỗi xoá dữ liệu"
-            ],404);
+            ], 404);
         }
+    }
+    //@thực thi tìm kiếm
+    public function fullTextSearchRatings(Request $request)
+    {
+        // Lấy từ khóa tìm kiếm từ query parameter 'key'
+        $value = $request->input('key');
+        // Thực hiện truy vấn full-text search
+        $fullTextSearch = Review::with(['customer', 'product'])
+            ->search($value)
+            ->get();
+
+        // Kiểm tra nếu không có kết quả nào được tìm thấy
+        if ($fullTextSearch->isEmpty()) {
+            return response()->json([
+                'message' => "Không tìm thấy dữ liệu"
+            ], 404);
+        }
+        // Trả về kết quả tìm kiếm thành công
+        return response()->json([
+            'message' => 'Lấy dữ liệu thành công',
+            'data' => $fullTextSearch
+        ], 200);
     }
 }

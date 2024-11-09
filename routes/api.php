@@ -80,3 +80,4 @@ Route::get('/get-product/{id_product}', [ProductController::class, 'getItemsProd
 
 Route::get('/admin-rating',[RatingController::class,'getAllRatings']); //hiên thị dữ liệu rating
 Route::delete('/delete-admin-rating/{id}',[RatingController::class, 'deleteItemsReview']); // thực thi xoá dữ liệu
+Route::get('/search-rating',[RatingController::class, 'fullTextSearchRatings'])->name('fulltextsearchRating');
