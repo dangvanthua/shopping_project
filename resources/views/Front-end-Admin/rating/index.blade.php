@@ -33,9 +33,9 @@
                     <h3 class="box-title"><a href="" class="btn btn-primary">Thêm mới </a></h3>
                     <div class="box-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                            <input type="text" name="table_search" id="search-key" class="form-control pull-right" placeholder="Search">
                             <div class="input-group-btn">
-                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                <button type="submit" class="btn btn-default" id="btn-search"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
                     </div>
