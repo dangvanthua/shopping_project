@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
             alert("Vui lòng chọn kích thước và màu sắc");
             console.error("Đã có lỗi khi thêm");
         }
-        fetch(`/api/cart/add/${Idproduct}`, {
+        fetch(`/api/cart-add/${Idproduct}`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
