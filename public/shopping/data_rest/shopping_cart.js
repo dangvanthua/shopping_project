@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Hàm hiển thị sản phẩm trong giỏ hàng và cập nhật số lượng
     function showFetchItems() {
-        fetch('/get/cart', {
+        fetch('/api/get-cart', {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json'
