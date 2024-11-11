@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AttributeValue;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\OrderStatusHistory;
 use App\Models\ShoppingCart;
 use Attribute;
 use Illuminate\Http\Request;
@@ -62,7 +63,6 @@ class PayMonneyController extends Controller
     public function paymentAllItems(Request $request)
     {
         try {
-            Log::info("Bắt đầu hàm paymentAllItems");
             // Log::info("Giá trị items là: " )
 
             // Lấy dữ liệu từ request
@@ -72,17 +72,7 @@ class PayMonneyController extends Controller
             $shipping_address = $request->input('shipping_address');
             $id_shipping_method = $request->input('shipping_method');
             $id_payment = $request->input('payment_method');
-
-            Log::info("Thông tin khách hàng", [
-                'customer_name' => $name_customer,
-                'customer_phone' => $phone_customer,
-                'customer_email' => $email_customer,
-                'shipping_address' => $shipping_address,
-                'id_shipping_method' => $id_shipping_method,
-                'id_payment' => $id_payment,
-
-            ]);
-
+            
             // Lấy id_session và id_customer
             $id_session = Session::getId();
             $id_customer = auth()->check() ? auth()->id() : null;
@@ -91,7 +81,6 @@ class PayMonneyController extends Controller
                 'id_session' => $id_session,
                 'id_customer' => $id_customer
             ]);
-
             // Lấy sản phẩm từ giỏ hàng
             $cartItems = ShoppingCart::with('product')
                 ->where(function ($query) use ($id_customer, $id_session) {
@@ -110,8 +99,6 @@ class PayMonneyController extends Controller
             }
 
             $totalAmount = $cartItems->sum('total_price');
-            Log::info("Tổng tiền: " . $totalAmount);
-
             // Tạo đơn hàng
             $orders = Order::create([
                 'id_customer' => $id_customer,
@@ -127,8 +114,6 @@ class PayMonneyController extends Controller
                 'order_date' => now(),
             ]);
 
-            Log::info("Tạo đơn hàng thành công", ['order_id' => $orders->id_order]);
-
             // Tạo các mục trong orderItems
             foreach ($cartItems as $items) {
                 OrderItem::create([
@@ -139,17 +124,18 @@ class PayMonneyController extends Controller
                     'status' => "Đã tiếp nhận",
                 ]);
             }
-
-            Log::info("Thêm các sản phẩm vào orderItems thành công");
+            //lưu giá trị ở trong lịch sử đặt hàng
+            OrderStatusHistory::create([
+                'id_order' => $orders->id_order,
+                'status' => "Đặt hàng thành công",
+                'created_at' => now()
+            ]);
             // Xóa sản phẩm trong giỏ hàng sau khi đặt hàng thành công
             if ($id_customer) {
                 ShoppingCart::where('id_customer', $id_customer)->delete();
             } else {
                 ShoppingCart::where('id_session', $id_session)->delete();
             }
-
-            Log::info("Xóa giỏ hàng thành công");
-
             return response()->json([
                 'message' => "Đặt hàng thành công",
                 'order_id' => $orders->id_order,

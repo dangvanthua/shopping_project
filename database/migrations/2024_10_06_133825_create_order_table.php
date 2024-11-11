@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_customer')->nullable();
             $table->unsignedBigInteger('id_shipping_method');
             $table->unsignedBigInteger('id_payment');
-            $table->decimal('total_item')->comment('tổng tiền');
+            $table->decimal('total_item',20,2)->comment('tổng tiền');
             $table->string('status')->default('Đã tiếp nhận')->comment('trạng thái đơn hàng');
             $table->string('shipping_address')->comment('Địa chỉ giao hàng');
             $table->dateTime('order_date');

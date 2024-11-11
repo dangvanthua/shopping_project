@@ -16,9 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('id_customer')->nullable();
             $table->unsignedBigInteger('id_product');
             $table->string('id_session')->nullable()->comment('id khi không đăng nhập');
-            $table->integer('quantity');
-            $table->decimal('price', 10, 2);
-            $table->decimal('total_price', 10, 2)->comment('tổng tiền');
+            $table->decimal('price', 20, 2);
+            $table->decimal('total_price', 20, 2)->comment('Tổng tiền');
             $table->timestamps();
         });
     }

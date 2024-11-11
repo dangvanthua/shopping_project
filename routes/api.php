@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\GetAllItemsShoppingCart;
 use App\Http\Controllers\Api\GetCartShoppingController;
+use App\Http\Controllers\Api\HistoryBuyItems;
 use App\Http\Controllers\Api\PayMonneyController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\RatingController;
@@ -85,3 +86,6 @@ Route::post('/order-items',[PayMonneyController::class, 'paymentAllItems']); //t
 Route::get('/admin-rating',[RatingController::class,'getAllRatings']); //hiên thị dữ liệu rating
 Route::delete('/delete-admin-rating/{id}',[RatingController::class, 'deleteItemsReview']); // thực thi xoá dữ liệu
 Route::get('/search-rating',[RatingController::class, 'fullTextSearchRatings'])->name('fulltextsearchRating');
+
+//Lịch sử mua hàng
+Route::get('/history-buy-items',[HistoryBuyItems::class,'getAllBuyItemsHistory']);
