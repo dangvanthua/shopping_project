@@ -83,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
             customer_phone: phone,
             customer_email: email,
             shipping_address: address,
+
             shipping_method: shipping_method,
             payment_method: payment_method,
         };

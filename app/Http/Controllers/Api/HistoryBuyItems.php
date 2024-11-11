@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class HistoryBuyItems extends Controller
 {
     //
+    //Hiển thị danh sách đơn hàng
     public function getAllBuyItemsHistory()
     {
         $buyItems = null;
@@ -31,6 +32,36 @@ class HistoryBuyItems extends Controller
         }
         return response()->json([
             'message' => "Không có dữ liệu mua hàng"
+        ], 404);
+    }
+
+    //Chi tiết lịch sử đặt hàng
+    public function getDetailHistoryItems($id_order)
+    {
+        $detail_items = null;
+        if (auth()->check()) {
+            $id_customer = auth()->id();
+            $detail_items = Order::with('orderItems.product')
+                ->where('id_order', $id_order)
+                ->where('id_customer', $id_customer)
+                ->first();
+        } else {
+            $id_session = Session()->getid();
+            $detail_items = Order::with('orderItems.product')
+                ->where('id_order', $id_order)
+                ->where('id_session', $id_session)
+                ->first();
+        }
+
+        if ($detail_items) {
+            return response()->json([
+                'message' => "Lấy dữ liệu thành công",
+                'data' => $detail_items
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => "Chưa lấy được dữ liệu"
         ], 404);
     }
 }

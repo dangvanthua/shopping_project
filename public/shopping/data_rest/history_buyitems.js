@@ -18,7 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                         <div class="order-info">
                             <p><strong>${items.customer_name}</strong></p>
-                            <p>Ngày đặt hàng: ${items.quantity}</p>
+                            <p>Địa chỉ: ${items.shipping_address}</p>
+                            <p>Trạng thái: ${items.status}</p>
+                            <p>Số điện thoại: ${items.customer_phone}</p>
                             <p>Ngày đặt hàng: ${formattedDate}</p>
                         </div>
                         <div class="order-price">
@@ -28,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <p>Thành tiền: <span class="new-price">${parseFloat(items.total_item).toLocaleString()}₫</span></p>
                             </div>
                             <div class="order-action">
-                                <button class="btn-rebuy">Mua lại</button>
+                                <button class="btn-readmore" id="btn-readmore">Xem chi tiết</button>
                             </div>
                         </div>
                     </div> `;

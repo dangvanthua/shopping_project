@@ -88,4 +88,5 @@ Route::delete('/delete-admin-rating/{id}',[RatingController::class, 'deleteItems
 Route::get('/search-rating',[RatingController::class, 'fullTextSearchRatings'])->name('fulltextsearchRating');
 
 //Lịch sử mua hàng
-Route::get('/history-buy-items',[HistoryBuyItems::class,'getAllBuyItemsHistory']);
+Route::get('/history-buy-items',[HistoryBuyItems::class,'getAllBuyItemsHistory']); //danh sách lịch sử mua hàng
+ROute::get('/detail-history-items/{id_order}',[HistoryBuyItems::class,'getDetailHistoryItems']); // chi tiết sản phẩm đã mua

@@ -63,8 +63,6 @@ class PayMonneyController extends Controller
     public function paymentAllItems(Request $request)
     {
         try {
-            // Log::info("Giá trị items là: " )
-
             // Lấy dữ liệu từ request
             $name_customer = $request->input('customer_name');
             $email_customer = $request->input('customer_email');
@@ -72,7 +70,6 @@ class PayMonneyController extends Controller
             $shipping_address = $request->input('shipping_address');
             $id_shipping_method = $request->input('shipping_method');
             $id_payment = $request->input('payment_method');
-            
             // Lấy id_session và id_customer
             $id_session = Session::getId();
             $id_customer = auth()->check() ? auth()->id() : null;

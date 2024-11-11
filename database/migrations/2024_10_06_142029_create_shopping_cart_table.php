@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id_shopping_cart');
             $table->unsignedBigInteger('id_customer')->nullable();
             $table->unsignedBigInteger('id_product');
+            $table->bigInteger('quantity')->comment("Số lượng");
             $table->string('id_session')->nullable()->comment('id khi không đăng nhập');
             $table->decimal('price', 20, 2);
             $table->decimal('total_price', 20, 2)->comment('Tổng tiền');
