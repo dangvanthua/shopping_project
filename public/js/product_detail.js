@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const formElement = document.querySelector('#form-review');
     const reviewContainer = document.querySelector('#review-info');
-    let editMode = false;  // Biến xác định chế độ chỉnh sửa
-    let currentReviewId = null;  // ID đánh giá đang chỉnh sửa
+    let editMode = false;
+    let currentReviewId = null;
 
     if (!formElement) return;
 

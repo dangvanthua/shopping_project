@@ -14,9 +14,9 @@ class CustomersTableSeeder extends Seeder
         // Thêm khách hàng vào bảng customers
         DB::table('customers')->insert([
             [
-                'name' => 'John Doe',
-                'email' => 'john.doe@example.com',
-                'password' => Hash::make('password123'),
+                'name' => 'Van Thuan',
+                'email' => 'thuandang021102@gmail.com',
+                'password' => Hash::make('0123456789@Tt1'),
                 'phone' => '1234567890',
                 'address' => '123 Street, City',
                 'created_at' => now(),
