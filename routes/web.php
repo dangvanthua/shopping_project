@@ -50,6 +50,6 @@ Route::get('/get-orders', [AdminDashboardViewController::class, 'showIndexDashBo
 Route::get('view-detail/{id}', [AdminDashboardViewController::class, 'showViewDashBoard'])->name('get_view'); // hiển thị giao diện chi tiết view
 
 // đăng ký
-Route::get('/register', [RegistController::class, 'showRegistrationForm'])->name('register');
+Route::get('register', [RegistController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegistController::class, 'register'])->name('index.register');
 Route::get('/verify/{token}', [RegistController::class, 'verify'])->name('verify');
