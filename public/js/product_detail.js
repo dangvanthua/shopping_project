@@ -89,6 +89,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (data.errors.comment) {
                         commentError.innerText = data.errors.comment[0];
                     }
+                } else if (data.error) {
+                    if (data.error) {
+                        commentError.innerText = data.error;
+                    }
                 }
             })
             .catch(error => console.log('Error: ', error));
