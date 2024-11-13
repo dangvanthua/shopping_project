@@ -65,4 +65,30 @@ class HistoryBuyItems extends Controller
             'message' => 'Không có dữ liệu lịch sử cho đơn hàng này',
         ], 404);
     }
+
+    //@thực hiện huỷ đơn hàng
+    public function cancelOrderItems($id_order)
+    {
+        $order = Order::find($id_order);
+        if(!$id_order)
+        {
+            return response()->json([
+                'message' => "Không tìm thấy giá trị"
+            ],404);
+        }
+
+            if($order->status === "Đã tiếp nhận")
+            {
+                $order->status = "Huỷ";
+                $order->save();
+                return response()->json([
+                    'message' => "Huỷ đơn hàng thành công",
+                    'data' => $order,
+                ],200);
+            }
+
+            return response()->json([
+                'message' => "Không thể huỷ đơn hàng",
+            ],400);
+    }
 }

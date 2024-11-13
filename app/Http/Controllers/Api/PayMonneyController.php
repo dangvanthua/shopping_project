@@ -106,7 +106,7 @@ class PayMonneyController extends Controller
                 'id_shipping_method' => $id_shipping_method,
                 'id_payment' => $id_payment,
                 'total_item' => $totalAmount,
-                'status' => "Đã tiếp nhận đơn hàng",
+                'status' => "Đã tiếp nhận",
                 'shipping_address' => $shipping_address,
                 'order_date' => now(),
             ]);

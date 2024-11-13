@@ -153,4 +153,4 @@ Route::get('/admin-rating',[RatingViewController::class, 'showViewRating']); // 
 
 Route::get('/about-me',[ProfileCustomerViewController::class, 'showViewProfileCustomer']); // hiển thị view chi tiết của khách hàng
 Route::get('/history-buy',[HistotyViewBuyItems::class,'showViewHistoryBuyItems']); // hiển thị lịch sử mua hàng
-Route::get('/detail-history/{id_order}',[DetailViewBuyItems::class, 'viewDetailBuyItems']); //hiển thị chi tiết sản phẩm đã mua
+Route::get('/detail-history/{id_order}',[DetailViewBuyItems::class, 'viewDetailBuyItems'])->name('order.details'); //hiển thị chi tiết sản phẩm đã mua

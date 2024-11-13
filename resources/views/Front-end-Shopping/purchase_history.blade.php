@@ -12,5 +12,5 @@
     </div>
 
 </div>
-<script src="{{ asset("shopping/data_rest/history_buyitems.js") }}"></script>
+<script src="{{ asset("shopping/data_rest/history_list_buy_items.js") }}"></script>
 @endsection
