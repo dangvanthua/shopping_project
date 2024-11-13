@@ -57,14 +57,14 @@
                                 <td>{{ $cate_pro->category_name }}</td>
                                 <td>
                                     @if($cate_pro->category_status == 0)
-                                        <a href="{{ URL::to('unactive-category-product/'.$cate_pro->category_id) }}" class="label label-info">Hiển thị</a>
+                                        <a href="{{ URL::to('unactive-category-product/'.$cate_pro->id_category) }}" class="label label-info">Hiển thị</a>
                                     @else
-                                        <a href="{{ URL::to('active-category-product/'.$cate_pro->category_id) }}" class="label label-default">Ẩn</a>
+                                        <a href="{{ URL::to('active-category-product/'.$cate_pro->id_category) }}" class="label label-default">Ẩn</a>
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ URL::to('edit-category-product/'.$cate_pro->category_id) }}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Sửa</a>
-                                    <a href="{{ URL::to('delete-category-product/'.$cate_pro->category_id) }}" class="btn btn-xs btn-danger js-delete-confirm" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                    <a href="{{ URL::to('edit-category-product/'.$cate_pro->id_category) }}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Sửa</a>
+                                    <a href="{{ URL::to('delete-category-product/'.$cate_pro->id_category) }}" class="btn btn-xs btn-danger js-delete-confirm" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
                                         <i class="fa fa-trash"></i> Xóa
                                     </a>
                                 </td>
@@ -81,8 +81,8 @@
         </div>
     </div>
 </section>
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-    <!-- <script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
         $(document).ready(function() {
             $.ajax({
                 url: '/api/category',
@@ -104,4 +104,4 @@
             });
         });
     </script>
-@endsection -->
+@endsection

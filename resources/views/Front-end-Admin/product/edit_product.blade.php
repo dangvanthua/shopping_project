@@ -13,7 +13,7 @@
             <div class="panel-body">
                 <div class="position-center">
                     @foreach($edit_product as $key => $pro)
-                    <form role="form" action="{{URL::to('update-product/'.$pro->product_id)}}" method="post" enctype="multipart/form-data">
+                    <form role="form" action="{{URL::to('update-product/'.$pro->id_product)}}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         
                         <div class="form-group">
@@ -78,7 +78,7 @@
                             <label for="exampleInputPassword1">Danh mục sản phẩm</label>
                             <select name="product_cate" class="form-control input-sm m-bot15">
                                 @foreach($cate_product as $key => $cate)
-                                    <option value="{{ $cate->category_id }}" {{ $cate->category_id == old('product_cate', $pro->category_id) ? 'selected' : '' }}>
+                                    <option value="{{ $cate->id_category}}" {{ $cate->id_category == old('product_cate', $pro->id_category) ? 'selected' : '' }}>
                                         {{ $cate->category_name }}
                                     </option>
                                 @endforeach

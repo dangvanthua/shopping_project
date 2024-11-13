@@ -1,6 +1,7 @@
 @extends('LayOut.admin-dashboard.master_admin')
 @section('content')
 <section class="content-header">
+<!-- <script src="{{asset('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script> -->
   <h1>
     Sản phẩm
     <small>Danh sách</small>
@@ -51,7 +52,7 @@
                   <th>Số lượng</th>
                   <th>Hot</th>
                   <th>Giảm giá (%)</th>
-                  <th>Giá sau khi giảm</th>
+
                   <th>Hình sản phẩm</th>               
                   <th>Danh mục</th>
                   <th>Hiển thị</th>
@@ -67,28 +68,28 @@
               <td>{{ $pro->product_quantity }}</td>
               <td>{{ $pro->hot ? 'Có' : 'Không' }}</td>
               <td>{{ $pro->sale }}%</td>
-              <td>{{ number_format($pro->discounted_price, 0, ',', '.') }}đ</td>
+              <!-- <td>{{ number_format($pro->discounted_price, 0, ',', '.') }}đ</td> -->
               <td><img src="uploads/product/{{ $pro->product_image }}" height="100" width="100"></td>
               <td>{{ $pro->category_name }}</td>
               <td>
               <span class="text-ellipsis">
             @if($pro->product_status == 0)
-            <a href="{{ URL::to('unactive-product/'.$pro->product_id) }}">
+            <a href="{{ URL::to('unactive-product/'.$pro->id_product) }}">
             <span class="fa-thumb-styling fa fa-thumbs-up"></span>
             </a>
             @else
-            <a href="{{ URL::to('active-product/'.$pro->product_id) }}">
+            <a href="{{ URL::to('active-product/'.$pro->id_product) }}">
             <span class="fa-thumb-styling fa fa-thumbs-down"></span>
             </a>
             @endif
             </span>
           </td>
               <td>
-              <a href="{{ URL::to('edit-product/' . $pro->product_id) }}" class="active styling-edit">
-                <i class="fa fa-pencil-square-o text-success text-active"></i>
+              <a href="{{ URL::to('edit-product/' . $pro->id_product) }}" class="active styling-edit">
+                <i class="fa fa-pencil-square-o text-success text-id_producttive"></i>
               </a>
               <a onclick="return confirm('Bạn có chắc là muốn xóa sản phẩm này không?')"
-                href="{{ URL::to('delete-product/' . $pro->product_id) }}" class="active styling-edit">
+                href="{{ URL::to('delete-product/' . $pro->id_product) }}" class="active styling-edit">
                 <i class="fa fa-times text-danger text"></i>
               </a>
               </td>
@@ -107,7 +108,7 @@
     </div>
   </div>
 </section>
-
+<!-- <script src="{{asset('backend/js/bootstrap.js')}}"></script> -->
 <script>
   // Tự động ẩn thông báo sau 3 giây
   setTimeout(function () {

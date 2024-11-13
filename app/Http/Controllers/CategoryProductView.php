@@ -25,11 +25,11 @@ class CategoryProductView extends Controller
 //  }
  
 public function all_category_product() {
-    $all_category_product = DB::table('tbl_category_product')->paginate(5);
+    $all_category_product = DB::table('category')->paginate(5);
 
     // Mã hóa category_id và tạo khóa ngẫu nhiên
     foreach ($all_category_product as $category) {
-        $category->category_id = base64_encode($category->category_id); // Mã hóa category_id
+        $category->id_category = base64_encode($category->id_category); // Mã hóa category_id
         $category->random_key = Str::random(16); // Tạo khóa ngẫu nhiên dài 16 ký tự
     }
 
@@ -76,7 +76,7 @@ public function all_category_product() {
          'category_status' => $request->category_product_status,
      ];
  
-     DB::table('tbl_category_product')->insert($data);
+     DB::table('category')->insert($data);
  
      // Set success message and redirect
      Session::put('message', 'Thêm danh mục sản phẩm thành công');
@@ -88,7 +88,7 @@ public function unactive_category_product($category_product_id) {
     // Giải mã category_product_id
     $decoded_category_product_id = base64_decode($category_product_id);
 
-    DB::table('tbl_category_product')->where('category_id', $decoded_category_product_id)->update(['category_status' => 1]);
+    DB::table('category')->where('id_category', $decoded_category_product_id)->update(['category_status' => 1]);
     Session::put('message', 'Không kích hoạt danh mục sản phẩm thành công');
     return Redirect::to('all-category-product');
 }
@@ -97,7 +97,7 @@ public function active_category_product($category_product_id) {
     // Giải mã category_product_id
     $decoded_category_product_id = base64_decode($category_product_id);
 
-    DB::table('tbl_category_product')->where('category_id', $decoded_category_product_id)->update(['category_status' => 0]);
+    DB::table('category')->where('id_category', $decoded_category_product_id)->update(['category_status' => 0]);
     Session::put('message', 'Kích hoạt danh mục sản phẩm thành công');
     return Redirect::to('all-category-product');
 }
@@ -106,7 +106,7 @@ public function edit_category_product($category_product_id) {
     // Giải mã category_product_id
     $decoded_category_product_id = base64_decode($category_product_id);
 
-    $edit_category_product = DB::table('tbl_category_product')->where('category_id', $decoded_category_product_id)->get();
+    $edit_category_product = DB::table('category')->where('id_category', $decoded_category_product_id)->get();
     $manager_category_product = view('Front-end-Admin.menu.edit_category_product')->with('edit_category_product', $edit_category_product);
 
     return view('Front-end-Admin.index')->with('Front-end-Admin.menu.edit_category_product', $manager_category_product);
@@ -153,7 +153,7 @@ public function update_category_product(Request $request, $category_product_id) 
         'category_status' => $request->category_product_status,
     ];
 
-    DB::table('tbl_category_product')->where('category_id', $category_product_id)->update($data);
+    DB::table('category')->where('id_category', $category_product_id)->update($data);
 
     // Set success message and redirect
     return Redirect::to('all-category-product')->with('message', 'Cập nhật danh mục sản phẩm thành công');
@@ -162,7 +162,7 @@ public function update_category_product(Request $request, $category_product_id) 
  public function api_all_category_product()
  {
 
-     $all_category_product = DB::table('tbl_category_product')->paginate(2);
+     $all_category_product = DB::table('category')->paginate(2);
 
 
      return response()->json($all_category_product);
@@ -172,7 +172,7 @@ public function update_category_product(Request $request, $category_product_id) 
     $decoded_category_product_id = base64_decode($category_product_id);
 
     // Thực hiện xóa danh mục với ID đã được giải mã
-    DB::table('tbl_category_product')->where('category_id', $decoded_category_product_id)->delete();
+    DB::table('category')->where('id_category', $decoded_category_product_id)->delete();
     
     Session::put('message', 'Xóa danh mục sản phẩm thành công');
     return Redirect::to('all-category-product');

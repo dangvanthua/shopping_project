@@ -15,8 +15,8 @@ return new class extends Migration
             $table->bigIncrements('id_review');
             $table->unsignedBigInteger('id_product');
             $table->unsignedBigInteger('id_customer');
+            $table->unsignedTinyInteger('rating');
             $table->text('comment');
-            $table->string('image');
             $table->timestamps();
         });
     }

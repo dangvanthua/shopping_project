@@ -15,7 +15,7 @@ class ProductView extends Controller
 {
     public function add_product(){
      
-        $cate_product = DB::table('tbl_category_product')->orderby('category_id','desc')->get(); 
+        $cate_product = DB::table('category')->orderby('id_category','desc')->get(); 
        
 
         return view('Front-end-Admin.product.add_product')->with('cate_product', $cate_product)->with('brand_product');
@@ -26,13 +26,13 @@ class ProductView extends Controller
 
     public function all_product() {
         $all_product = DB::table('product')
-            ->join('tbl_category_product', 'tbl_category_product.category_id', '=', 'product.category_id')
-            ->orderby('product.product_id', 'desc')
+            ->join('category', 'category.id_category', '=', 'product.id_category')
+            ->orderby('product.id_product', 'desc')
             ->paginate(5);
     
         // Mã hóa product_id và tạo khóa ngẫu nhiên
         foreach ($all_product as $product) {
-            $product->product_id = base64_encode($product->product_id);
+            $product->id_product = base64_encode($product->id_product);
             $product->random_key = Str::random(16); // Tạo khóa ngẫu nhiên dài 16 ký tự
         }
     
@@ -46,7 +46,6 @@ class ProductView extends Controller
             'product_name' => 'required|regex:/^[A-Za-z0-9\s]+$/|unique:product,product_name',
             'product_price' => 'required|numeric|min:0.01',
             'product_cate' => 'required',
-            'product_quantity' => 'required|integer|min:0',
             'product_desc' => 'required|regex:/^[A-Za-z0-9\s]+$/',
             'product_content' => 'required|regex:/^[A-Za-z0-9\s]+$/', // Sử dụng cùng một quy tắc cho nội dung sản phẩm
             'product_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
@@ -60,10 +59,6 @@ class ProductView extends Controller
             'product_price.required' => 'Giá sản phẩm không được để trống.',
             'product_price.numeric' => 'Giá sản phẩm phải là một số.',
             'product_price.min' => 'Giá sản phẩm phải lớn hơn 0.',
-            'product_quantity.required' => 'Số lượng sản phẩm không được để trống.',
-            'product_quantity.integer' => 'Số lượng sản phẩm phải là số nguyên.',
-            'product_quantity.min' => 'Số lượng sản phẩm phải lớn hơn hoặc bằng 0.',
-            'sale.numeric' => 'Giảm giá phải là một số.',
             'product_cate.required' => 'Vui lòng chọn một danh mục cho sản phẩm.',
             'product_desc.required' => 'Mô tả sản phẩm không được để trống.',
             'product_desc.regex' => 'Mô tả sản phẩm không được chứa ký tự đặc biệt.',
@@ -84,8 +79,8 @@ class ProductView extends Controller
         }
     
         // Lưu dữ liệu nếu xác thực thành công
-        $data = $request->only(['product_name', 'product_price','product_quantity', 'product_desc', 'product_content', 'product_status']);
-        $data['category_id'] = $request->product_cate;
+        $data = $request->only(['product_name', 'product_price', 'product_desc', 'product_content', 'product_status']);
+        $data['id_category'] = $request->product_cate;
     
         // Xử lý ảnh sản phẩm
         $get_image = $request->file('product_image');
@@ -102,20 +97,20 @@ class ProductView extends Controller
         return Redirect::to('all-product');
     }
   
-    public function unactive_product($product_id) {
+    public function unactive_product($id_product) {
         // Giải mã product_id
-        $decoded_product_id = base64_decode($product_id);
+        $decoded_product_id = base64_decode($id_product);
     
-        DB::table('product')->where('product_id', $decoded_product_id)->update(['product_status' => 1]);
+        DB::table('product')->where('id_product', $decoded_product_id)->update(['product_status' => 1]);
         Session::put('message', 'Không kích hoạt sản phẩm thành công');
         return Redirect::to('all-product');
     }
     
-    public function active_product($product_id) {
+    public function active_product($id_product) {
         // Giải mã product_id
-        $decoded_product_id = base64_decode($product_id);
+        $decoded_product_id = base64_decode($id_product);
     
-        DB::table('product')->where('product_id', $decoded_product_id)->update(['product_status' => 0]);
+        DB::table('product')->where('id_product', $decoded_product_id)->update(['product_status' => 0]);
         Session::put('message', 'Kích hoạt sản phẩm thành công');
         return Redirect::to('all-product');
     }
@@ -127,8 +122,8 @@ public function edit_product($product_id) {
     // Giải mã product_id
     $decoded_product_id = base64_decode($product_id);
 
-    $cate_product = DB::table('tbl_category_product')->orderby('category_id', 'desc')->get(); 
-    $edit_product = DB::table('product')->where('product_id', $decoded_product_id)->get();
+    $cate_product = DB::table('category')->orderby('id_category', 'desc')->get(); 
+    $edit_product = DB::table('product')->where('id_product', $decoded_product_id)->get();
 
     $manager_product = view('Front-end-Admin.product.edit_product')
         ->with('edit_product', $edit_product)
@@ -189,7 +184,7 @@ public function update_product(Request $request, $product_id) {
 
     // Nếu xác thực thành công, tiến hành cập nhật dữ liệu
     $data = $request->only(['product_name', 'product_price', 'product_desc', 'product_content', 'product_status', 'hot']);
-    $data['category_id'] = $request->product_cate;
+    $data['id_category'] = $request->product_cate;
     $data['product_quantity'] = $request->product_quantity;
     $data['sale'] = $request->sale;
 
@@ -211,7 +206,7 @@ public function update_product(Request $request, $product_id) {
     }
 
     // Cập nhật dữ liệu sản phẩm
-    DB::table('product')->where('product_id', $product_id)->update($data);
+    DB::table('product')->where('id_product', $product_id)->update($data);
     Session::put('message', 'Cập nhật sản phẩm thành công');
 
     return Redirect::to('all-product');
@@ -278,12 +273,12 @@ public function update_product(Request $request, $product_id) {
 //     return Redirect::to('all-product');
 // }
 
-public function delete_product($product_id) {
+public function delete_product($id_product) {
     // Giải mã product_id
-    $decoded_product_id = base64_decode($product_id);
+    $decoded_product_id = base64_decode($id_product);
 
     // Thực hiện xóa sản phẩm với ID đã được giải mã
-    DB::table('product')->where('product_id', $decoded_product_id)->delete();
+    DB::table('product')->where('id_product', $decoded_product_id)->delete();
     
     Session::put('message', 'Xóa sản phẩm thành công');
     return Redirect::to('all-product');
