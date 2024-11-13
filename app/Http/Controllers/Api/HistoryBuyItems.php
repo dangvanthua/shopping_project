@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderStatusHistory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HistoryBuyItems extends Controller
 {
@@ -35,33 +37,32 @@ class HistoryBuyItems extends Controller
         ], 404);
     }
 
-    //Chi tiết lịch sử đặt hàng
-    public function getDetailHistoryItems($id_order)
-    {
-        $detail_items = null;
-        if (auth()->check()) {
-            $id_customer = auth()->id();
-            $detail_items = Order::with('orderItems.product')
-                ->where('id_order', $id_order)
-                ->where('id_customer', $id_customer)
-                ->first();
-        } else {
-            $id_session = Session()->getid();
-            $detail_items = Order::with('orderItems.product')
-                ->where('id_order', $id_order)
-                ->where('id_session', $id_session)
-                ->first();
-        }
 
-        if ($detail_items) {
+    //@Danh sách lịch sử đặt hàng
+    public function getOrderHistoryDetails($id_order)
+    {
+        $orderHistory = OrderStatusHistory::where('id_order', $id_order)
+            ->whereHas('order', function ($query) {
+                if (auth()->check()) {
+                    $query->where('id_customer', auth()->id());
+                } else {
+                    $query->where('id_session', Session::getId());
+                }
+            })
+            ->with(['order' => function ($query) {
+                $query->with('orderItems.product');
+            }])
+            ->get();
+
+        if ($orderHistory->isNotEmpty()) {
             return response()->json([
-                'message' => "Lấy dữ liệu thành công",
-                'data' => $detail_items
+                'message' => 'Lấy dữ liệu thành công',
+                'data' => $orderHistory,
             ], 200);
         }
 
         return response()->json([
-            'message' => "Chưa lấy được dữ liệu"
+            'message' => 'Không có dữ liệu lịch sử cho đơn hàng này',
         ], 404);
     }
 }

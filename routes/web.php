@@ -23,6 +23,7 @@ use App\Http\Controllers\ShoppingCartViewController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Api\ProfileCustomerViewController;
+use App\Http\Controllers\DetailViewBuyItems;
 use App\Http\Controllers\HistotyViewBuyItems;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReviewController;
@@ -151,4 +152,5 @@ Route::post('/register', [RegistController::class, 'register'])->name('index.reg
 Route::get('/admin-rating',[RatingViewController::class, 'showViewRating']); // hiển thị view rating
 
 Route::get('/about-me',[ProfileCustomerViewController::class, 'showViewProfileCustomer']); // hiển thị view chi tiết của khách hàng
-Route::get('/history-buy',[HistotyViewBuyItems::class,'showViewHistoryBuyItems']);
+Route::get('/history-buy',[HistotyViewBuyItems::class,'showViewHistoryBuyItems']); // hiển thị lịch sử mua hàng
+Route::get('/detail-history/{id_order}',[DetailViewBuyItems::class, 'viewDetailBuyItems']); //hiển thị chi tiết sản phẩm đã mua

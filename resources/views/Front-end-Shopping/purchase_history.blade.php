@@ -7,11 +7,10 @@
         <h2>Lịch sử mua hàng</h2>
         <input type="text" placeholder="Tìm kiếm...">
     </div>
-
-    <!-- Item 1 -->
     <div id="order-items">
         {{-- hiển thị giá trị sẽ ở nơi đây bằng js--}}
     </div>
+
 </div>
 <script src="{{ asset("shopping/data_rest/history_buyitems.js") }}"></script>
 @endsection
