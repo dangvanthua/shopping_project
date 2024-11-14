@@ -19,15 +19,17 @@
                         <h3 class="box-title">Add New Event</h3>
                     </div>
                     <div class="box-body">
-                         @php
-                            $id_event = $event->id_event;
+                    @if(isset($event))
+                    @php
+                        $id_event = $event->id_event;
 
-                            $secretKey = env('SECRET_KEY', 'secret_key');
+                        $secretKey = env('SECRET_KEY', 'secret_key');
 
-                            $combined = $id_event . ':' . $secretKey;
+                        $combined = $id_event . ':' . $secretKey;
 
-                            $encodedId = base64_encode($combined);
-                        @endphp
+                        $encodedId = base64_encode($combined);
+                    @endphp
+                    @endif
                        <form action="{{ isset($event) ? route('events.update', ['id' => $encodedId]) : route('events.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @if(isset($event))

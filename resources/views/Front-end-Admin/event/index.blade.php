@@ -24,6 +24,12 @@
             </div>
         @endif
 
+        @if(session('error'))
+            <div class="alert alert-error">
+                {{ session('error') }}
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
