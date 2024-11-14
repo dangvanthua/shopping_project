@@ -19,14 +19,14 @@ class HistoryBuyItems extends Controller
             $id_customer = auth()->id();
             $buyItems = Order::where('id_customer', $id_customer)
                 ->with('orderStatusHistory')
-                ->get();
+                ->paginate(3);
         } else {
             $id_session = Session()->getid();
             $buyItems = Order::where('id_session', $id_session)
                 ->with('orderStatusHistory')
-                ->get();
+                ->paginate(3);
         }
-        if ($buyItems->isNotEmpty()) {
+        if ($buyItems->total() > 0) {
             return response()->json([
                 'message' => "Đã có dữ liệu mua hàng",
                 'data' => $buyItems
@@ -38,7 +38,7 @@ class HistoryBuyItems extends Controller
     }
 
 
-    //@Danh sách lịch sử đặt hàng
+    //@Danh sách chi tiết lịch sử đặt hàng
     public function getOrderHistoryDetails($id_order)
     {
         $orderHistory = OrderStatusHistory::where('id_order', $id_order)

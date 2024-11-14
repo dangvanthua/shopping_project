@@ -10,6 +10,9 @@
     <div id="order-items">
         {{-- hiển thị giá trị sẽ ở nơi đây bằng js--}}
     </div>
+    <div id="pagination" class="pagination">
+        {{-- Phân trang sẽ hiển thị ở nơi này --}}
+    </div>
 
 </div>
 <script src="{{ asset("shopping/data_rest/history_list_buy_items.js") }}"></script>
