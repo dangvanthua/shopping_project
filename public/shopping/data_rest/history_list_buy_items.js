@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 showAllHistoryofItems();
             }
             else{
-                alert("Xin lỗi, đơn hàng không thể huỷ");
+                alert("Xin lỗi, Bạn không thẻ huỷ đơn hàng");
                 console.error(error => console.error("Lỗi huỷ đơn hàng",error));
             }
         })
