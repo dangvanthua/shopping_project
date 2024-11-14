@@ -91,4 +91,27 @@ class HistoryBuyItems extends Controller
                 'message' => "Không thể huỷ đơn hàng",
             ],400);
     }
+
+    //@tìm kiếm full text search cho lịch sử đơn hàng
+    public function fullTextSearchHistoryItems(Request $request)
+    {
+        //Lấy dữ liệu từ từ khoá
+        $values = $request->input('key');
+        $fullTextSearch = OrderStatusHistory::with('order')
+                        ->search($values)
+                        ->get();
+
+        //Thực hiện kiểm tra
+        if($fullTextSearch->isEmpty())
+        {
+            return response()->json([
+                'message' => "Không có dữ liệu về lịch sử mua hàng",
+            ],404);
+        }
+
+        return response()->json([
+            'message' => "Đã tìm thấy dữ liệu",
+            'data' => $fullTextSearch
+        ],200);
+    }
 }
