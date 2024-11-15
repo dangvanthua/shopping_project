@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -56,11 +57,15 @@ class HomeController extends Controller
     public function filterByPrice(Request $request)
     {
         $minPrice = $request->input('min_price', 0);
-        $maxPrice = $request->input('max_price', INF);
-        $page = $request->input('page', 1);
+        $maxPrice = $request->input('max_price', 9999999999);
 
-        $products = Product::whereBetween('price', [$minPrice, $maxPrice])
-            ->paginate(8, ['*'], 'page', $page);
+        if ($maxPrice == 9999999999) {
+            $products = Product::where('price', '>=', $minPrice)
+                ->paginate(8, ['*'], 'page', $request->input('page', 1));
+        } else {
+            $products = Product::whereBetween('price', [$minPrice, $maxPrice])
+                ->paginate(8, ['*'], 'page', $request->input('page', 1));
+        }
 
         return response()->json([
             'products' => $products->items(),
@@ -70,12 +75,22 @@ class HomeController extends Controller
 
     public function searchProducts(Request $request)
     {
-        $query = $request->input('query');
+        $query = trim($request->input('query', ''));
         $page = $request->input('page', 1);
+        $perPage = 8;
 
-        $products = Product::where('name', 'LIKE', "%$query%")
-            ->orWhere('describe', 'LIKE', "%$query%")
-            ->paginate(8, ['*'], 'page', $page);
+        if (empty($query)) {
+            $products = Product::paginate($perPage, ['*'], 'page', $page);
+
+            return response()->json([
+                'products' => $products->items(),
+                'total' => $products->total(),
+            ]);
+        }
+
+        $products = Product::where('name', 'like', "%$query%")
+            ->orWhere('describe', 'like', "%$query%")
+            ->paginate($perPage, ['*'], 'page', $page);
 
         return response()->json([
             'products' => $products->items(),

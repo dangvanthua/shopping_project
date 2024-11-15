@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_category');
             $table->string('name');
             $table->text('describe')->comment('mô tả sản phẩm');
-            $table->decimal('price',10,2);
+            $table->decimal('price', 10, 2);
             $table->string('images');
             $table->boolean('hot')->default(false)->comment('sản phẩm hot');
             $table->boolean('is_active')->default(true)->comment('còn hàng không');
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->bigInteger('number_of_purchases')->comment('số lượt mua');
             $table->bigInteger('quantity_available')->comment('số lượng còn lại');
             $table->timestamps();
+            $table->fullText(['name', 'describe']);
         });
     }
 

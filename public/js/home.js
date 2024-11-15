@@ -56,10 +56,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Lay gia tri tien lon nhat va nho nhat
     function parsePriceRange(priceRange) {
-        if (priceRange === 'All') return [0, Infinity];
+        if (priceRange === 'All') return [0, 9999999999];
 
         const range = priceRange.split('-').map(price => parseInt(price.replace(/\D/g, '')));
-        return range.length === 2 ? range : [range[0], Infinity];
+        return range.length === 2 ? range : [range[0], 9999999999];
     }
 
     function debounce(func, delay) {
@@ -170,8 +170,8 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.log('Error:', error));
     }
 
-
     function renderProducts(products, total, page) {
+        console.log(products);
         const productContainer = document.querySelector('.product-grid');
         const loadMoreBtn = document.querySelector('#load-more-button');
 

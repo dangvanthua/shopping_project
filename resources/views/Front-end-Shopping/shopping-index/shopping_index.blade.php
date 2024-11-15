@@ -259,7 +259,7 @@
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a class="filter-link stext-106 trans-04">
                                     250.000đ - 500.000đ
                                 </a>
                             </li>
