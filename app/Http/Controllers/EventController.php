@@ -157,18 +157,31 @@ class EventController extends Controller
 
     public function destroy($id)
     {
-        // Tìm sự kiện theo id
         $event = Event::find($id);
 
-        // Kiểm tra nếu sự kiện không tồn tại (đã bị xóa ở tab khác)
         if (!$event) {
             return redirect()->route('events.index')->with('error', 'Event no longer exists.');
         }
 
-        // Xóa sự kiện
         $event->delete();
 
-        // Điều hướng lại trang danh sách sự kiện với thông báo thành công
         return redirect()->route('events.index')->with('success', 'Event deleted successfully!');
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('key', '');
+        $events = Event::query();
+
+
+        if (!empty($query)) {
+            $events = $events->where('name', 'like', '%' . $query . '%')
+                ->orWhere('content', 'like', '%' . $query . '%')
+                ->orWhereRaw("SOUNDEX(name) = SOUNDEX(?)", [$query]);
+        }
+
+        $events = $events->paginate(10);
+
+        return view('Front-end-Admin.event.index', compact('events'));
     }
 }

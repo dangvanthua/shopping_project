@@ -38,7 +38,8 @@
                             <a href="{{route('create')}}" class="btn btn-primary">Thêm mới </a>
                         </h3>
                         <div class="box-tools">
-                            <form action="#">
+                            <form action="{{ route('events.search') }}" method="GET">
+                                @csrf
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                     <input type="text" name="key" value="{{ request()->input('key') }}" class="form-control pull-right" placeholder="Search">
                                     <div class="input-group-btn">

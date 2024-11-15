@@ -31,6 +31,7 @@ Route::post('/events/store', [EventController::class, 'store'])->name('events.st
 Route::get('/events/{id}/edit', [EventController::class, 'edit'])->name('events.edit');
 Route::put('/events/{id}', [EventController::class, 'update'])->name('events.update');
 Route::delete('/events/{id}/delete', [EventController::class, 'destroy'])->name('deleteEvent');
+Route::get('/events/search', [EventController::class, 'search'])->name('events.search');
 
 // Route User
 Route::get('/auth/forgot_password', [UserController::class, 'showForgotPassword'])->name('auth.password');
