@@ -119,23 +119,22 @@ document.addEventListener('DOMContentLoaded', function () {
     // });
 
 
-    //@thực thi viết hàm đặt hàng
+    // //@thực thi viết hàm đặt hàng
     function orderAllItemsShoppingCart() {
         // Lấy dữ liệu từ form
         const name = document.querySelector('input[name="customer_name"]').value;
         const phone = document.querySelector('input[name="customer_phone"]').value;
         const email = document.querySelector('input[name="customer_email"]').value;
-
         // Lấy giá trị từ dropdown Tỉnh, Quận/Huyện, Phường/Xã
         const province = document.querySelector('select[name="method_province"]').selectedOptions[0].text;
         const district = document.querySelector('select[name="method_district"]').selectedOptions[0].text;
         const commune = document.querySelector('select[name="method_ward"]').selectedOptions[0].text;
 
         // Lấy địa chỉ chi tiết
-        const address_details = document.querySelector('textarea[name="address_details"]').value;
+        const address_details = document.querySelector('textarea[name="shipping_address"]').value;
 
         // Kết hợp thành địa chỉ đầy đủ
-        const address = `${address_details}, ${commune}, ${district}, ${province}`;
+        const shipping_address = `${address_details}, ${commune}, ${district}, ${province}`;
         if (province === "0" || district === "0" || commune === "0" || !address_details) {
             alert("Vui lòng điền đầy đủ thông tin địa chỉ.");
             return;
@@ -149,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
             customer_name: name,
             customer_phone: phone,
             customer_email: email,
-            shipping_address: address,
+            shipping_address: shipping_address,
             shipping_method: shipping_method,
             payment_method: payment_method,
         };

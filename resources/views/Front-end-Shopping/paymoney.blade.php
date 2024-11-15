@@ -22,7 +22,7 @@
             <div class="form-group">
                 <input type="email" class="form-control" name="customer_email" placeholder="Email">
             </div>
-
+            <form action="/api/order-items" method="POST" id="orderForm">
             <h6 class="mt-4">Địa chỉ nhận hàng</h6>
             <div class="form-group">
                 <div class="css_select_div">
@@ -37,14 +37,14 @@
                     </select>
                 </div>
             </div>
+        </form>
             <div class="form-group">
-                <textarea class="form-control" name="address_details" placeholder="Nhập địa chỉ chi tiết"></textarea>
+                <textarea class="form-control" name="shipping_address" placeholder="Nhập địa chỉ chi tiết"></textarea>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="vatInvoice">
                 <label class="custom-control-label" for="vatInvoice">Xuất hóa đơn điện tử</label>
             </div>
-
             <!-- Payment Method Section -->
             <div class="payment-method mt-4">
                 <h6>Phương thức thanh toán</h6>
