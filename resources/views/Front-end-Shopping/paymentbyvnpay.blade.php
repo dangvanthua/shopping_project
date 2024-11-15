@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="container mt-5">
         <div class="card">
             <div class="card-header text-center">
@@ -15,10 +16,9 @@
             <div class="card-body text-center">
                 <p>Phương thức thanh toán: Ví điện tử VN PAY</p>
                 <p>Tổng số tiền: 200,000 VND</p>
-                <!-- Bạn có thể thêm thông tin khác về đơn hàng tại đây -->
 
                 <!-- Nút xác nhận thanh toán -->
-                <form action="{{ route('thanhtoan') }}" method="POST">
+                <form action="{{ route('checkout') }}" method="POST">
                     @csrf
                     <button type="submit" class="btn btn-primary">Xác nhận thanh toán bằng VNPAY</button>
                 </form>

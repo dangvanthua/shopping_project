@@ -27,6 +27,7 @@ use App\Http\Controllers\Api\ProfileCustomerViewController;
 use App\Http\Controllers\DetailViewBuyItems;
 use App\Http\Controllers\HistotyViewBuyItems;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentByVnPay;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
@@ -158,4 +159,6 @@ Route::get('/detail-history/{id_order}',[DetailViewBuyItems::class, 'viewDetailB
 
 // Demo thanh toán
 Route::get('/testcai', [TestController::class, 'testcai']);
-Route::get('/thanh_toan',[PaymentByVNPayController::class, 'paymentItemsByVNPay'])->name('thanhtoan');
+Route::get('/payment-buy-vnpay',[PaymentByVnPay::class, 'showViewPayByVNPay']);
+Route::post('/demo-checkout',[PaymentByVNPayController::class, 'paymentItemsByVNPay'])->name('checkout');
+
