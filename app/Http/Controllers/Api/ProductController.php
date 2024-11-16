@@ -26,14 +26,14 @@ class ProductController extends Controller
 
     public function getAllProducts()
     {
-        $products = DB::table('tbl_product')->paginate(5);
+        $products = DB::table('product')->paginate(5);
 
         return response()->json($products);
     }
 
     public function toggleStatus(Request $request, $id)
     {
-        $product = DB::table('tbl_product')->find($id);
+        $product = DB::table('product')->find($id);
         $product->product_status = $request->status;
         $product->save();
 
@@ -42,7 +42,7 @@ class ProductController extends Controller
 
     public function delete($id)
     {
-        DB::table('tbl_product')::destroy($id);
+        DB::table('product')::destroy($id);
         return response()->json(['message' => 'Sản phẩm đã được xóa!']);
     }
 }

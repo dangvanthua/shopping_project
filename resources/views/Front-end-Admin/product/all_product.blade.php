@@ -20,13 +20,12 @@
         <div class="box-header with-border">
           <h3 class="box-title"><a href="{{ URL::to('add-product') }}" class="btn btn-primary">Thêm mới</a></h3>
           <div class="box-tools">
-            <form action="{{ URL::to('search-product') }}" method="GET" class="input-group input-group-sm"
-              style="width: 200px;">
-              <input type="text" name="search" class="form-control pull-right" placeholder="Tìm kiếm">
-              <div class="input-group-btn">
-                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-              </div>
-            </form>
+          <form action="{{ route('search.product') }}" method="GET" class="input-group input-group-sm" style="width: 200px;">
+    <input type="text" name="search" class="form-control pull-right" placeholder="Tìm kiếm">
+    <div class="input-group-btn">
+        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+    </div>
+</form>
           </div>
         </div>
         <div class="box-body">
@@ -52,7 +51,7 @@
                   <th>Số lượng</th>
                   <th>Hot</th>
                   <th>Giảm giá (%)</th>
-
+                  <th>Giá sau khi giảm giá</th>
                   <th>Hình sản phẩm</th>               
                   <th>Danh mục</th>
                   <th>Hiển thị</th>
@@ -68,7 +67,7 @@
               <td>{{ $pro->product_quantity }}</td>
               <td>{{ $pro->hot ? 'Có' : 'Không' }}</td>
               <td>{{ $pro->sale }}%</td>
-              <!-- <td>{{ number_format($pro->discounted_price, 0, ',', '.') }}đ</td> -->
+              <td>{{ number_format($pro->discounted_price, 0, ',', '.') }}đ</td>
               <td><img src="uploads/product/{{ $pro->product_image }}" height="100" width="100"></td>
               <td>{{ $pro->category_name }}</td>
               <td>

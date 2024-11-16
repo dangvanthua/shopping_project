@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('product_quantity')->default(0); // số lượng sản phẩm
             $table->integer('product_status');
             // $table->integer('discounted_price')->default(0); // Giá sau khi giảm
+             $table->fullText(['product_name', 'product_desc']);
             $table->timestamps();
         });
     }

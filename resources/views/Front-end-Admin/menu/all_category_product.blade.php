@@ -22,13 +22,16 @@
                         <a href="{{ route('add_category_product') }}" class="btn btn-primary">Thêm mới</a>
                     </h3>
                     <div class="box-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Tìm kiếm">
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                            </div>
-                        </div>
-                    </div>
+    <form action="{{ route('search_category') }}" method="GET">
+        <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control pull-right" placeholder="Tìm kiếm" value="{{ request()->table_search }}">
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+    </form>
+</div>
+
                 </div>
                 
                 <!-- Hiển thị thông báo nếu có -->

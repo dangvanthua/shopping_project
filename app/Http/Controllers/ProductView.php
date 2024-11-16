@@ -212,8 +212,27 @@ public function update_product(Request $request, $product_id) {
     return Redirect::to('all-product');
 }
 
+public function delete_product($id_product) {
+    // Giải mã product_id
+    $decoded_product_id = base64_decode($id_product);
 
-// public function update_product(Request $request, $product_id) {
+    // Kiểm tra sản phẩm có tồn tại hay không
+    $product = DB::table('product')->where('id_product', $decoded_product_id)->first();
+
+    if ($product) {
+        // Nếu sản phẩm tồn tại, thực hiện xóa
+        DB::table('product')->where('id_product', $decoded_product_id)->delete();
+        Session::put('message', 'Xóa sản phẩm thành công');
+    } else {
+        // Nếu không tìm thấy sản phẩm, thông báo lỗi
+        Session::put('message', 'Sản phẩm không tồn tại hoặc đã bị xóa trước đó');
+    }
+
+    // Chuyển hướng về trang danh sách sản phẩm
+    return Redirect::to('all-product');
+}
+
+
 //     // Giải mã product_id
 //    // $decoded_product_id = base64_decode($product_id);
 
@@ -273,40 +292,31 @@ public function update_product(Request $request, $product_id) {
 //     return Redirect::to('all-product');
 // }
 
-public function delete_product($id_product) {
-    // Giải mã product_id
-    $decoded_product_id = base64_decode($id_product);
+// public function delete_product($id_product) {
+//     // Giải mã product_id
+//     $decoded_product_id = base64_decode($id_product);
 
-    // Thực hiện xóa sản phẩm với ID đã được giải mã
-    DB::table('product')->where('id_product', $decoded_product_id)->delete();
+//     // Thực hiện xóa sản phẩm với ID đã được giải mã
+//     DB::table('product')->where('id_product', $decoded_product_id)->delete();
     
-    Session::put('message', 'Xóa sản phẩm thành công');
-    return Redirect::to('all-product');
+//     Session::put('message', 'Xóa sản phẩm thành công');
+//     return Redirect::to('all-product');
+// }
+
+
+
+public function searchProduct(Request $request)
+{
+    $search = $request->input('search');
+
+    // Truy vấn full-text
+    $all_product = DB::table('product')
+        ->join('category', 'product.id_category', '=', 'category.id_category')
+        ->select('product.*', 'category.category_name')
+        ->whereRaw("MATCH(product_name, product_desc) AGAINST(? IN BOOLEAN MODE)", [$search])
+        ->paginate(10);
+
+    return view('Front-end-Admin.product.all_product', compact('all_product'));
 }
 
-    // public function delete_product($product_id){
-     
-    //     DB::table('tbl_product')->where('product_id',$product_id)->delete();
-    //     Session::put('message','Xóa sản phẩm thành công');
-    //     return Redirect::to('all-product');
-    // }
-//     public function details_product(Request $request){
-//         //slide
-//       // $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
-
-//        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get(); 
-//        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get(); 
-
-//        $details_product = DB::table('tbl_product')
-//        ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
-//        ->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id');
-     
-
-      
-      
-      
-
-//        return view('pages.sanpham.show_details')->with('category',$cate_product)->with('brand',$brand_product)->with('product_details',$details_product);
-
-//    }
 }

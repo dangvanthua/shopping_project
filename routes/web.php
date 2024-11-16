@@ -90,7 +90,7 @@ Route::get('demo', [TestController::class, 'testcai']);
 Route::get('all-product', [ProductView::class, 'all_product'])->name('all_product');
 Route::get('add-product', [ProductView::class, 'add_product'])->name('add_product');
 Route::post('save-product', [ProductView::class, 'save_product'])->name('save_product');
-
+Route::get('search-product', [ProductView::class, 'searchProduct'])->name('search.product');
 Route::get('unactive-product/{product_id}', [ProductView::class, 'unactive_product'])->name('unactive_product');
 Route::get('active-product/{product_id', [ProductView::class, 'active_product'])->name('active_product');
 Route::get('edit-product/{product_id}', [ProductView::class, 'edit_product'])->name('edit_product');
@@ -103,6 +103,7 @@ Route::get('/add-category-product', [CategoryProductView::class, 'add_category_p
 Route::get('/all-category-product', [CategoryProductView::class, 'all_category_product'])->name('all_category_product');
 Route::post('save-category-product', [CategoryProductView::class, 'save_category_product'])->name('save_category_product');
 //Route::get('/api/all-category-product', [CategoryProductController::class, 'api_all_category_product'])->name('api.all_category_product');
+Route::get('search-category', [CategoryProductView::class, 'search'])->name('search_category');
 
 Route::get('unactive-category-product/{category_product_id}', [CategoryProductView::class, 'unactive_category_product'])->name('unactive_category_product');
 Route::get('active-category-product/{category_product_id}', [CategoryProductView::class, 'active_category_product'])->name('active_category_product');
