@@ -29,6 +29,7 @@ use App\Http\Controllers\HistotyViewBuyItems;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentByVnPay;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SuccessBuyItemsViewController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/testcai',[TestController::class, 'testcai']);
 
 Route::get('category', [CategoryViewController::class, 'index']);
 Route::get('/attribute', [AttributeViewController::class, 'showThemmeAttributeIndex'])->name('attribute');
@@ -89,7 +91,6 @@ Route::get('edit-product/{product_id}', [ProductView::class, 'edit_product'])->n
 Route::post('update-product/{product_id}', [ProductView::class, 'update_product'])->name('updatate_product');
 Route::get('delete-product/{product_id}', [ProductView::class, 'delete_product'])->name('delete_product');
 
-
 //Category_product
 Route::get('/add-category-product', [CategoryProductView::class, 'add_category_product'])->name('add_category_product');
 Route::get('/all-category-product', [CategoryProductView::class, 'all_category_product'])->name('all_category_product');
@@ -102,9 +103,7 @@ Route::get('active-category-product/{category_product_id}', [CategoryProductView
 Route::get('edit-category-product/{category_product_id}', [CategoryProductView::class, 'edit_category_product'])->name('edit_category_product');
 Route::post('update-category-product/{category_product_id}', [CategoryProductView::class, 'update_category_product'])->name('update_category_product');
 // //Xoa
-
 Route::get('delete-category-product/{category_product_id}', [CategoryProductView::class, 'delete_category_product'])->name('delete_category_product');
-
 Route::get('delete-category-product/{category_product_id}', [CategoryProductView::class, 'delete_category_product'])->name('delete_category_product');
 
 
@@ -121,7 +120,6 @@ Route::post('/load-more/products', [HomeController::class, 'loadMore']);
 
 
 //Route About
-
 Route::get('/about', [AboutController::class, 'about'])->name('about');
 
 // Route Event
@@ -153,7 +151,7 @@ Route::post('/register', [RegistController::class, 'register'])->name('index.reg
 Route::get('/admin-rating',[RatingViewController::class, 'showViewRating']); // hiển thị view rating
 
 Route::get('/about-me',[ProfileCustomerViewController::class, 'showViewProfileCustomer']); // hiển thị view chi tiết của khách hàng
-Route::get('/history-buy',[HistotyViewBuyItems::class,'showViewHistoryBuyItems']); // hiển thị lịch sử mua hàng
+Route::get('/history-buy',[HistotyViewBuyItems::class,'showViewHistoryBuyItems'])->name('history-buy'); // hiển thị lịch sử mua hàng
 Route::get('/detail-history/{id_order}',[DetailViewBuyItems::class, 'viewDetailBuyItems'])->name('order.details'); //hiển thị chi tiết sản phẩm đã mua
 
 
@@ -161,4 +159,7 @@ Route::get('/detail-history/{id_order}',[DetailViewBuyItems::class, 'viewDetailB
 Route::get('/testcai', [TestController::class, 'testcai']);
 Route::get('/payment-buy-vnpay',[PaymentByVnPay::class, 'showViewPayByVNPay']);
 Route::post('/demo-checkout',[PaymentByVNPayController::class, 'paymentItemsByVNPay'])->name('checkout');
+
+// thanh toán thành công
+Route::get('/success-buy-items',[SuccessBuyItemsViewController::class, 'showViewSuccessBuyItems'])->name('success.buy');
 

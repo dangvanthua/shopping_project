@@ -10,7 +10,6 @@ class PaymentByVNPayController extends Controller
     //@cấu hình thanh toán bằng VN PAY
     public function paymentItemsByVNPay()
     {
-
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = "https://localhost/vnpay_php/vnpay_return.php";
         $vnp_TmnCode = "1F38668S"; //Mã website tại VNPAY
@@ -44,7 +43,6 @@ class PaymentByVNPayController extends Controller
         if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
             $inputData['vnp_Bill_State'] = $vnp_Bill_State;
         }
-
         //var_dump($inputData);
         ksort($inputData);
         $query = "";
@@ -76,8 +74,6 @@ class PaymentByVNPayController extends Controller
         } else {
             echo json_encode($returnData);
         }
-        // vui lòng tham khảo thêm tại code demo
-
     }
 
 
