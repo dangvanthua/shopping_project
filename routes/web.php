@@ -159,10 +159,6 @@ Route::get('/detail-history/{id_order}',[DetailViewBuyItems::class, 'viewDetailB
 
 
 // Demo thanh toán
-Route::get('/testcai', [TestController::class, 'testcai']);
+// Route::get('/testcai', [TestController::class, 'testcai']);
 Route::get('/payment-buy-vnpay',[PaymentByVnPay::class, 'showViewPayByVNPay']);
-
-// demo deput
-Route::get('/payment', [VnPayController::class, 'createPayment'])->name('payment.create');
-Route::get('/vnpay-return', [VnPayController::class, 'vnpayReturn'])->name('vnpay.return');
 

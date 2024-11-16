@@ -1,15 +1,28 @@
 <div class="card-body text-center">
-    <p>Phương thức thanh toán: Ví điện tử VN PAY</p>
+    <p>Phương thức thanh toán: Ví điện tử VNPAY</p>
     <p>Tổng số tiền: 200,000 VND</p>
-
-    <!-- Nút xác nhận thanh toán -->
-    <button onclick="redirectVNPay()" class="btn btn-primary">Xác nhận thanh toán bằng VNPAY</button>
+    <button id="vnpay-button" class="btn btn-primary">Thanh toán qua VNPAY</button>
 </div>
 
 <script>
-function redirectVNPay() {
-    // URL từ response của API VNPay mà bạn đã tạo
-    const vnpayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html?...";
-    window.location.href = vnpayUrl;
-}
+    document.getElementById('vnpay-button').addEventListener('click', function () {
+        fetch('/api/payment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({})
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Chuyển hướng đến URL thanh toán
+                window.location.href = data.payment_url;
+            } else {
+                alert('Không thể tạo giao dịch thanh toán!');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
 </script>
