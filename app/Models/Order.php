@@ -87,7 +87,6 @@ class Order extends Model
 
     // mã hoá id
     protected $appends = ['encrypted_id'];
-
     // Accessor cho encrypted_id
     public function getEncryptedIdAttribute()
     {

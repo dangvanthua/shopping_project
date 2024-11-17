@@ -12,6 +12,8 @@ use App\Http\Controllers\Api\PayMonneyController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\ShoppingCartController;
+use App\Http\Controllers\Api\StatisticalOrderController;
+use App\Http\Controllers\Api\StatisticalProductController;
 use App\Http\Controllers\RatingViewController;
 use App\Models\Attribute;
 
@@ -92,3 +94,12 @@ Route::get('/history-buy-items',[HistoryBuyItems::class,'getAllBuyItemsHistory']
 Route::get('/detail-history-items/{id_order}',[HistoryBuyItems::class,'getOrderHistoryDetails']); // chi tiết sản phẩm đã mua
 Route::post('/cancel-status-items/{id_order}',[HistoryBuyItems::class, 'cancelOrderItems']); // Huỷ đơn hàng khi không mua nữa
 Route::get('/search-history-items',[HistoryBuyItems::class,'fullTextSearchHistoryItems']); // tìm kiếm cho lịch sử mua hàng
+
+
+//Thống kê cho bên admin
+Route::get('/product-staticital',[StatisticalProductController::class, 'productStatistical']); //thống kê sản phẩm
+Route::get('/out-stock-product',[StatisticalProductController::class, 'outOfStockProduct']); //thống kê sản phẩm nào gần hết
+Route::get('/top-sell-product',[StatisticalProductController::class,'bestSellProduct']); // thống kê top 10 sản phẩm bán chạy nhất
+Route::get('/order-by-status',[StatisticalOrderController::class, 'orderByStatus']); // thống kê theo trạng thái sản phẩm
+
+
