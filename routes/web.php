@@ -29,6 +29,7 @@ use App\Http\Controllers\HistotyViewBuyItems;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentByVnPay;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\StatisticalViewController;
 use App\Http\Controllers\SuccessBuyItemsViewController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
@@ -147,7 +148,7 @@ Route::post('/auth/get_password/{customer}/{token}', [UserController::class, 'su
 Route::get('/register', [RegistController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegistController::class, 'register'])->name('index.register');
 
-
+// Đánh giá bên Admin
 Route::get('/admin-rating',[RatingViewController::class, 'showViewRating']); // hiển thị view rating
 
 Route::get('/about-me',[ProfileCustomerViewController::class, 'showViewProfileCustomer']); // hiển thị view chi tiết của khách hàng
@@ -162,4 +163,5 @@ Route::post('/demo-checkout',[PaymentByVNPayController::class, 'paymentItemsByVN
 
 // thanh toán thành công
 Route::get('/success-buy-items',[SuccessBuyItemsViewController::class, 'showViewSuccessBuyItems'])->name('success.buy');
+
 
