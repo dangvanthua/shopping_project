@@ -28,7 +28,7 @@ class ProductView extends Controller
         $all_product = DB::table('product')
             ->join('category', 'category.id_category', '=', 'product.id_category')
             ->orderby('product.id_product', 'desc')
-            ->paginate(5);
+            ->paginate(10);
     
         // Mã hóa product_id và tạo khóa ngẫu nhiên
         foreach ($all_product as $product) {
