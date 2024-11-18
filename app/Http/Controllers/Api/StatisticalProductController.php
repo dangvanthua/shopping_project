@@ -29,8 +29,7 @@ class StatisticalProductController extends Controller
     public function outOfStockProduct()
     {
         $stockOfProduct = Product::where('quantity_available', '<', 10)
-            ->get('name', 'quantity_available');
-
+            ->get(['name', 'quantity_available']);
         return response()->json([
             'message' => "Lấy dữ liệu thành công",
             'data' => $stockOfProduct
@@ -49,7 +48,8 @@ class StatisticalProductController extends Controller
             ->groupBy('product.id_product', 'product.name','order_item.id_order_item')
             ->orderByDesc('total_sold')
             ->take(10)
-            ->get();
+            ->get()
+            ->makeHidden(['id_order_item']);
 
         return response()->json([
             'message' => "Lấy dữ liệu thành công",

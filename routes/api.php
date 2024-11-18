@@ -102,4 +102,7 @@ Route::get('/out-stock-product',[StatisticalProductController::class, 'outOfStoc
 Route::get('/top-sell-product',[StatisticalProductController::class,'bestSellProduct']); // thống kê top 10 sản phẩm bán chạy nhất
 Route::get('/order-by-status',[StatisticalOrderController::class, 'orderByStatus']); // thống kê theo trạng thái sản phẩm
 
+// Biểu đồ theo tháng
+Route::get('/revenue-by-month',[StatisticalOrderController::class, 'revenueByMonth']);
+
 

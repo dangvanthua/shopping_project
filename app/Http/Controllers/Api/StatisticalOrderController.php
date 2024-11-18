@@ -21,4 +21,21 @@ class StatisticalOrderController extends Controller
             'data' => $orders,
         ],200);
     }
+
+    //biểu đồ doanh thu theo tháng
+    public function revenueByMonth()
+    {
+        $revenue = Order::where('status', '!=','Huỷ')
+        ->select(
+            DB::raw('MONTH(created_at) as month'),
+            DB::raw('SUM(total_item) as total_revenue') // tổng doanh thu
+        )
+        ->groupBy('month')
+        ->orderBy('month')
+        ->get();
+        return response()->json([
+            'message' => 'Lấy dữ liệu thành công',
+            'data' => $revenue,
+        ], 200);
+    }
 }

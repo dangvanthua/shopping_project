@@ -9,6 +9,7 @@
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Thống kê</li>
     </ol>
+    <link rel="stylesheet" href="{{ asset('shopping/css/statistical.css') }}">
 </section>
 <section class="content">
     <div class="row" style="margin-bottom: 20px">
@@ -36,25 +37,22 @@
             </div>
             <br>
         </div>
-
         <!-- Biểu đồ Doanh thu -->
-        <div class="col-sm-8">
+        <div class="col-sm-11">
             <figure class="highcharts-figure">
-                <div id="revenue-chart" data-chart-data="{{ $chartData }}"></div>
+                <div id="revenue-chart" style="height: 400px;"></div>
             </figure>
         </div>
-
         <!-- Biểu đồ trạng thái đơn hàng -->
-        <div class="col-sm-4">
+        <div class="col-sm-5">
             <figure class="highcharts-figure">
-                <div id="order-status-chart" data-status-data="{{ $statusData }}"></div>
             </figure>
         </div>
     </div>
 
     <!-- Doanh số hàng ngày -->
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-12">
             <div class="box box-success">
                 <div class="box-header with-border">
                     <h3 class="box-title">Doanh Số Hàng Ngày</h3>
@@ -70,16 +68,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($dailyRevenue as $index => $data)
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $data['day'] }}</td>
-                                    <td>{{ number_format($data['revenue']) }} VNĐ</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
-                                @endforeach
                                 <tr>
                                     <td colspan="2"><strong>Tổng</strong></td>
-                                    <td><strong>{{ number_format($totalRevenue) }} VNĐ</strong></td>
+                                    <td><strong></strong></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -87,12 +83,11 @@
                 </div>
             </div>
         </div>
-
         <!-- Top khách hàng -->
-        <div class="col-md-5">
+        <div class="col-md-12">
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Top 10 Khách Hàng Mua Nhiều Nhất</h3>
+                    <h3 class="box-title"><strong>THỐNG KÊ SẢN PHẨM</strong></h3>
                 </div>
                 <div class="box-body">
                     <div class="table-responsive">
@@ -100,24 +95,37 @@
                             <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Khách hàng</th>
-                                    <th>Chi tiêu</th>
+                                    <th>Tổng sản phẩm</th>
+                                    <th>Sản phẩm hot</th>
+                                    <th>Tổng doanh thu dự kiến</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($topCustomers as $index => $customer)
+                            <tbody id="statistical_product">
+                               {{-- Sẽ hiển thị chỗ này trong js --}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><strong>SỐ LƯỢNG TRONG KHO THẤP</strong></h3>
+                </div>
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>
-                                        <ul>
-                                            <li><strong>Tên:</strong> {{ $customer['name'] }}</li>
-                                            <li><strong>Email:</strong> {{ $customer['email'] }}</li>
-                                            <li><strong>SĐT:</strong> {{ $customer['phone'] }}</li>
-                                        </ul>
-                                    </td>
-                                    <td>{{ number_format($customer['spent']) }} VNĐ</td>
+                                    <th>STT</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Số lượng còn lại</th>
                                 </tr>
-                                @endforeach
+                            </thead>
+                            <tbody id="top-out-stock">
+                                {{-- Dữ liệu sẽ hiển thị nơi này --}}
                             </tbody>
                         </table>
                     </div>
@@ -126,10 +134,10 @@
         </div>
 
         <!-- Top sản phẩm bán chạy -->
-        <div class="col-md-5">
+        <div class="col-md-12">
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Top Sản Phẩm Bán Chạy Trong Tháng</h3>
+                    <h3 class="box-title"><strong>DANH SÁCH SẢN PHẨM BÁN CHẠY NHẤT</strong></h3>
                 </div>
                 <div class="box-body">
                     <div class="table-responsive">
@@ -141,14 +149,8 @@
                                     <th>Số lượng bán</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($topProducts as $index => $product)
-                                <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $product['name'] }}</td>
-                                    <td>{{ $product['sold'] }}</td>
-                                </tr>
-                                @endforeach
+                            <tbody id="top-best-seller">
+                                {{-- Hiển thị dữ liệu ở nơi này --}}
                             </tbody>
                         </table>
                     </div>
@@ -159,6 +161,8 @@
 </section>
 @endsection
 <script src="{{ asset("shopping/data_rest/statiscical.js") }}"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
 {{-- @section('script')
 <link rel="stylesheet" href="https://code.highcharts.com/css/highcharts.css">
 <script src="https://code.highcharts.com/highcharts.js"></script>
