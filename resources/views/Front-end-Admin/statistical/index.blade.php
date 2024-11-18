@@ -44,8 +44,9 @@
             </figure>
         </div>
         <!-- Biểu đồ trạng thái đơn hàng -->
-        <div class="col-sm-5">
+        <div class="col-sm-11">
             <figure class="highcharts-figure">
+                <div id="order-status-chart" style="height: 400px;"></div>
             </figure>
         </div>
     </div>

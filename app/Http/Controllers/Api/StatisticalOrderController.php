@@ -12,9 +12,12 @@ class StatisticalOrderController extends Controller
     //
     public function orderByStatus()
     {
-        $orders = Order::select('id_order','status',DB::raw('COUNT(*) as count'))
-        ->groupBy('id_order','status')
-        ->paginate(5);
+        $orders = Order::select(
+            'status', // Trường trạng thái
+            DB::raw('COUNT(*) as count') // Tính tổng số lượng đơn hàng
+        )
+        ->groupBy('status') // Nhóm theo trạng thái
+        ->get();
 
         return response()->json([
             'message' => "Lấy dữ liệu thành công",

@@ -79,14 +79,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     //biểu đồ nek
     function renderRevenueChart(data) {
-        console.log('Dữ liệu truyền vào biểu đồ:', data); // Debug dữ liệu
-
         Highcharts.chart('revenue-chart', {
             chart: {
                 type: 'column'
             },
             title: {
-                text: 'Doanh thu theo tháng'
+                text: 'DOANH THU THEO THÁNG'
             },
             xAxis: {
                 categories: data.map(item => `Tháng ${item.month}`),
@@ -110,12 +108,77 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             series: [{
                 name: 'Doanh thu',
-                data: data.map(item => parseFloat(item.total_revenue)) // Chuyển đổi sang số
+                data: data.map(item => parseFloat(item.total_revenue)),
+                 // Màu cột
+                showInLegend: true,
             }]
         });
     }
 
+    //@hiên thị giao diện thống kê theo trạng thái
+    function showViewItemsByStattus(data)
+    {
+        console.log(data);
+        Highcharts.chart('order-status-chart', {
+            chart: {
+                type: 'pie',
+                backgroundColor: '#ffffff'
+            },
+            title: {
+                text: 'TRẠNG THÁI ĐƠN HÀNG'
+            },
+            tooltip: {
+                pointFormat: '<b>{point.y} Đơn hàng ({point.percentage:.1f}%)</b>'
+            },
+            legend: {
+                align: 'center',
+                verticalAlign: 'bottom',
+                layout: 'horizontal'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.y} đơn ({point.percentage:.1f}%)',
+                        style: {
+                            fontSize: '12px'
+                        }
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Đơn hàng',
+                colorByPoint: true,
+                data: data.map(item => ({
+                    name: convertStatusToText(item.status), // Chuyển trạng thái thành text
+                    y: item.count
+                }))
+            }]
+        });
+    }
 
+    //@các trường hợp của trạng thái
+    function convertStatusToText(status) {
+        switch (status) {
+            case 'Đang Chuẩn Bị':
+                return 'Đang Chuẩn Bị';
+            case 'Đã Bàn Giao':
+                return 'Đã Bàn Giao';
+            case 'Đang Vận Chuyển':
+                return 'Đang Vận Chuyển';
+                case 'Đã tiếp nhận':
+                return 'Đã tiếp nhận';
+            case 'Hủy':
+                return 'Hủy';
+            default:
+                return 'Không xác định';
+        }
+    }
+
+    //@thực thi hàm thống kê theo tháng
     function fetchRevenueData() {
         fetch('/api/revenue-by-month')
             .then(response => response.json())
@@ -127,7 +190,22 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Lỗi khi lấy dữ liệu doanh thu:', error));
     }
 
-    fetchRevenueData();
+    //@thực thi thống kê theo trang thái
+    function fetchDataItemsByStatus()
+    {
+        fetch(`/api/order-by-status`).then(response => response.json())
+        .then(data => {
+            if(data.message == "Lấy dữ liệu thành công")
+            {
+                showViewItemsByStattus(data.data);
+            }
+        })
+        .catch(error => console.error('Đã có lỗi xảy ra',error));
+    }
+
+
+    fetchRevenueData(); //thống kê tháng
+    fetchDataItemsByStatus(); //thống kê theo trạng thái
     statiscialProduct();
     staticitalOutOfProduct();
     topBestSellerProduct();
