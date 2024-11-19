@@ -75,7 +75,6 @@
                 </div>
             </div>
         </div>
-    
         <!-- Thống kê sản phẩm -->
         <div class="col-lg-6 col-md-6">
             <div class="box box-info">
@@ -102,7 +101,6 @@
             </div>
         </div>
     </div>
-    
     <div class="row mt-3">
         <!-- Số lượng trong kho thấp -->
         <div class="col-lg-6 col-md-6">
