@@ -89,7 +89,8 @@ document.addEventListener('DOMContentLoaded', function () {
             xAxis: {
                 categories: data.map(item => `Tháng ${item.month}`),
                 title: {
-                    text: 'Tháng'
+                    text: 'Tháng',
+                    align: 'high'
                 }
             },
             yAxis: {
@@ -178,6 +179,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    //@hiển thị giao view doanh thu theo ngày
+    function showViewRevenueDataByDays(statisticalData)
+    {
+        const getElement = document.getElementById('revenue_by_days');
+        getElement.innerHTML = '';
+
+        statisticalData.forEach((items,index) => {
+            const row = `
+            <tr>
+            <td>${index + 1}</td>
+            <td>${items.days}</td>
+            <td>${parseFloat(items.revenue).toLocaleString()}</td>
+            </tr>`;
+
+            getElement.insertAdjacentHTML('beforeend',row);
+        });
+    }
+
     //@thực thi hàm thống kê theo tháng
     function fetchRevenueData() {
         fetch('/api/revenue-by-month')
@@ -203,9 +222,23 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => console.error('Đã có lỗi xảy ra',error));
     }
 
+    //Thực thi hiển thị thống kê theo ngày
+    function fetchDataRevenueDataByDays()
+    {
+        fetch(`/api/revenue-by-days`).then(response => response.json())
+        .then(data => {
+            if(data.message = "Lấy dữ liệu thành công")
+            {
+                showViewRevenueDataByDays(data.data);
+            }
+        })
+        .catch(error => console.error('Đã có lỗi xảy ra',error));
+    }
+
 
     fetchRevenueData(); //thống kê tháng
     fetchDataItemsByStatus(); //thống kê theo trạng thái
+    fetchDataRevenueDataByDays(); //thống kê theo ngày
     statiscialProduct();
     staticitalOutOfProduct();
     topBestSellerProduct();

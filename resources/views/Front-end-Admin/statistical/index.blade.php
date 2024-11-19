@@ -53,7 +53,7 @@
 
     <!-- Doanh số hàng ngày -->
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="box box-success">
                 <div class="box-header with-border">
                     <h3 class="box-title">Doanh Số Hàng Ngày</h3>
@@ -68,23 +68,15 @@
                                     <th>Doanh thu</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><strong>Tổng</strong></td>
-                                    <td><strong></strong></td>
-                                </tr>
+                            <tbody id="revenue_by_days">
+                               {{-- Dữ liệu sẽ được hiển thị ở đây --}}
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Top khách hàng -->
+        <!-- Thống kê sản phẩm -->
         <div class="col-md-12">
             <div class="box box-info">
                 <div class="box-header with-border">

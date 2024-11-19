@@ -41,4 +41,25 @@ class StatisticalOrderController extends Controller
             'data' => $revenue,
         ], 200);
     }
+
+    //@viết hàm thống kê doanh thu hằng ngày
+    public function revenueByDays()
+    {
+        $revenue = Order::where('status','!=','Huỷ')
+        ->select(
+            DB::raw('DATE(created_at) as days'),
+            DB::raw('SUM(total_item) as revenue')
+        )
+        ->groupBy('days')
+        ->orderBy('days','asc')
+        ->get();
+
+        $sum_revenue = $revenue->sum('totalrevenue'); //tổng doanh thu
+
+        return response()->json([
+            'message' => 'Lấy dữ liệu thành công',
+            'data' => $revenue,
+            'total_revenue' => $sum_revenue
+        ]);
+    }
 }
