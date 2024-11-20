@@ -147,9 +147,8 @@ Route::post('/auth/get_password/{customer}/{token}', [UserController::class, 'su
 
 
 
-Route::get('/register', [RegistController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [RegistController::class, 'register'])->name('index.register');
-
+// Route::get('/register', [RegistController::class, 'showRegistrationForm'])->name('register');
+// Route::post('/register', [RegistController::class, 'register'])->name('index.register');
 
 Route::get('/admin-rating',[RatingViewController::class, 'showViewRating']); // hiển thị view rating
 
