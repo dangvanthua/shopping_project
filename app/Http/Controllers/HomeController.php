@@ -21,7 +21,7 @@ class HomeController extends Controller
 
             ->orderby('product.id_product', 'desc')->get();
 
-        $all_product = DB::table('product')->where('product_status', '0')->orderby(DB::raw('RAND()'))->paginate(6);
+        $all_product = DB::table('product')->where('product_status', '0')->orderby(DB::raw('RAND()'))->paginate(8);
         return view('Front-end-Shopping.shopping-index.shopping_index')->with('category', $cate_product)->with('all_product', $all_product);
     }
 
@@ -30,10 +30,11 @@ class HomeController extends Controller
         $categoryId = $request->input('id_category');
 
         if ($categoryId == 0) {
-            $products = Product::paginate(8);
+            $products = DB::table('product')->paginate(8);
         } else {
-
-            $products = Product::where('id_category', $categoryId)->paginate(8);
+            $products = DB::table('product')
+                ->where('id_category', $categoryId)
+                ->paginate(8);
         }
 
         return response()->json($products);
@@ -44,11 +45,12 @@ class HomeController extends Controller
         $sort = $request->input('sort');
         $page = $request->input('page', 1);
 
-        $query = Product::query();
+        $query = DB::table('product');
+
         if ($sort === 'asc') {
-            $query->orderBy('price', 'asc');
+            $query->orderBy('product_price', 'asc');
         } elseif ($sort === 'desc') {
-            $query->orderBy('price', 'desc');
+            $query->orderBy('product_price', 'desc');
         }
 
         $products = $query->paginate(8, ['*'], 'page', $page);
@@ -59,23 +61,15 @@ class HomeController extends Controller
         ]);
     }
 
+
     public function filterByPrice(Request $request)
     {
         $minPrice = $request->input('min_price', 0);
         $maxPrice = $request->input('max_price', 9999999999);
 
-        if ($maxPrice == 9999999999) {
-            $products = Product::where('price', '>=', $minPrice)
-                ->paginate(8, ['*'], 'page', $request->input('page', 1));
-        } else {
-            $products = Product::whereBetween('price', [$minPrice, $maxPrice])
-                ->paginate(8, ['*'], 'page', $request->input('page', 1));
-        }
-        $maxPrice = $request->input('max_price', INF);
-        $page = $request->input('page', 1);
-
-        $products = Product::whereBetween('price', [$minPrice, $maxPrice])
-            ->paginate(8, ['*'], 'page', $page);
+        $products = DB::table('product')
+            ->whereBetween('product_price', [$minPrice, $maxPrice])
+            ->paginate(8, ['*'], 'page', $request->input('page', 1));
 
         return response()->json([
             'products' => $products->items(),
@@ -90,7 +84,7 @@ class HomeController extends Controller
         $perPage = 8;
 
         if (empty($query)) {
-            $products = Product::paginate($perPage, ['*'], 'page', $page);
+            $products = DB::table('product')->paginate($perPage, ['*'], 'page', $page);
 
             return response()->json([
                 'products' => $products->items(),
@@ -98,15 +92,10 @@ class HomeController extends Controller
             ]);
         }
 
-        $products = Product::where('name', 'like', "%$query%")
-            ->orWhere('describe', 'like', "%$query%")
+        $products = DB::table('product')
+            ->where('product_name', 'like', "%$query%")
+            ->orWhere('product_desc', 'like', "%$query%")
             ->paginate($perPage, ['*'], 'page', $page);
-        $query = $request->input('query');
-        $page = $request->input('page', 1);
-
-        $products = Product::where('name', 'LIKE', "%$query%")
-            ->orWhere('describe', 'LIKE', "%$query%")
-            ->paginate(8, ['*'], 'page', $page);
 
         return response()->json([
             'products' => $products->items(),
@@ -114,15 +103,18 @@ class HomeController extends Controller
         ]);
     }
 
+
     public function loadMore(Request $request)
     {
         $categoryId = $request->input('category_id');
         $page = $request->input('page', 1);
 
         if ($categoryId == 0) {
-            $products = Product::paginate(8, ['*'], 'page', $page);
+            $products = DB::table('product')->paginate(8, ['*'], 'page', $page);
         } else {
-            $products = Product::where('id_category', $categoryId)->paginate(8, ['*'], 'page', $page);
+            $products = DB::table('product')
+                ->where('id_category', $categoryId)
+                ->paginate(8, ['*'], 'page', $page);
         }
 
         return response()->json([

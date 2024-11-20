@@ -20,89 +20,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 currentPage = 1;
                 currentLoadMoreType = 'sort';
 
-                const filterCategories = document.querySelectorAll('.filter-tope-group button');
-                const priceLinks = document.querySelectorAll('#filter-price .filter-link');
-                const sortFilters = document.querySelectorAll('#filter-sort .filter-link');
-                const searchInput = document.querySelector('#search-product');
-                const loadMoreBtn = document.querySelector('#load-more-button');
+                loadProductsBySort(currentSortType, currentPage);
+            });
+        });
+    }
 
-                if (sortFilters.length > 0) {
-                    sortFilters.forEach(link => {
-                        link.addEventListener('click', function (event) {
-                            event.preventDefault();
-                            currentSortType = link.dataset.sort;
-                            currentPage = 1;
-                            currentLoadMoreType = 'sort';
-                            loadProductsBySort(currentSortType, currentPage);
-                        });
-                    });
-                }
-
-                // loc su kien theo danh muc
-                if (filterCategories.length > 0) {
-                    filterCategories.forEach(button => {
-                        button.addEventListener('click', function () {
-                            currentCategoryId = button.dataset.filter;
-                            currentPage = 1;
-                            currentLoadMoreType = 'category';
-                            loadProducts(currentCategoryId, currentPage);
-                        });
-                    });
-                }
-
-                // loc su kien theo gia tien
-                if (priceLinks.length > 0) {
-                    priceLinks.forEach(link => {
-                        link.addEventListener('click', function (event) {
-                            event.preventDefault();
-
-                            const priceRange = link.innerText;
-                            [currentMinPrice, currentMaxPrice] = parsePriceRange(priceRange);
-                            currentPage = 1;
-                            currentLoadMoreType = 'price';
-
-                            loadProductsByPrice(currentMinPrice, currentMaxPrice, currentPage);
-                        });
-                    });
-                }
-
-                // Lay gia tri tien lon nhat va nho nhat
-                function parsePriceRange(priceRange) {
-                    if (priceRange === 'All') return [0, 9999999999];
-
-                    const range = priceRange.split('-').map(price => parseInt(price.replace(/\D/g, '')));
-                    return range.length === 2 ? range : [range[0], 9999999999];
-                }
-
-                function debounce(func, delay) {
-                    let timeout;
-                    return function (...args) {
-                        clearTimeout(timeout);
-                        timeout = setTimeout(() => func.apply(this, args), delay);
-                    };
-                }
-
-                searchInput.addEventListener('input', debounce(function () {
-                    currentSearchQuery = searchInput.value.trim();
-                    currentPage = 1;
-                    currentLoadMoreType = 'search';
-                    searchProducts(currentSearchQuery, currentPage);
-                }, 300));
-
-
-                // Load thêm sản phẩm khi nhấn nút "Load More"
-                loadMoreBtn.addEventListener('click', function () {
-                    currentPage++;
-                    if (currentLoadMoreType === 'category') {
-                        loadProducts(currentCategoryId, currentPage);
-                    } else if (currentLoadMoreType === 'price') {
-                        loadProductsByPrice(currentMinPrice, currentMaxPrice, currentPage);
-                    } else if (currentLoadMoreType === 'search') {
-                        searchProducts(currentSearchQuery, currentPage);
-                    } else if (currentLoadMoreType === 'sort') {
-                        loadProductsBySort(currentSortType, currentPage);
-                    }
-                });
+    // loc su kien theo danh muc
+    if (filterCategories.length > 0) {
+        filterCategories.forEach(button => {
+            button.addEventListener('click', function () {
+                currentCategoryId = button.dataset.filter;
+                currentPage = 1;
+                currentLoadMoreType = 'category';
 
                 loadProducts(currentCategoryId, currentPage);
             });
@@ -127,10 +56,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Lay gia tri tien lon nhat va nho nhat
     function parsePriceRange(priceRange) {
-        if (priceRange === 'All') return [0, Infinity];
+        if (priceRange === 'All') return [0, 9999999999];
 
         const range = priceRange.split('-').map(price => parseInt(price.replace(/\D/g, '')));
-        return range.length === 2 ? range : [range[0], Infinity];
+        return range.length === 2 ? range : [range[0], 9999999999];
     }
 
     function debounce(func, delay) {
@@ -140,31 +69,28 @@ document.addEventListener('DOMContentLoaded', function () {
             timeout = setTimeout(() => func.apply(this, args), delay);
         };
     }
-    if (searchInput) {
-        searchInput.addEventListener('input', debounce(function () {
-            currentSearchQuery = searchInput.value.trim();
-            currentPage = 1;
-            currentLoadMoreType = 'search';
-            searchProducts(currentSearchQuery, currentPage);
-        }, 300));
-    }
+
+    searchInput.addEventListener('input', debounce(function () {
+        currentSearchQuery = searchInput.value.trim();
+        currentPage = 1;
+        currentLoadMoreType = 'search';
+        searchProducts(currentSearchQuery, currentPage);
+    }, 300));
 
 
     // Load thêm sản phẩm khi nhấn nút "Load More"
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', function () {
-            currentPage++;
-            if (currentLoadMoreType === 'category') {
-                loadProducts(currentCategoryId, currentPage);
-            } else if (currentLoadMoreType === 'price') {
-                loadProductsByPrice(currentMinPrice, currentMaxPrice, currentPage);
-            } else if (currentLoadMoreType === 'search') {
-                searchProducts(currentSearchQuery, currentPage);
-            } else if (currentLoadMoreType === 'sort') {
-                loadProductsBySort(currentSortType, currentPage);
-            }
-        });
-    }
+    loadMoreBtn.addEventListener('click', function () {
+        currentPage++;
+        if (currentLoadMoreType === 'category') {
+            loadProducts(currentCategoryId, currentPage);
+        } else if (currentLoadMoreType === 'price') {
+            loadProductsByPrice(currentMinPrice, currentMaxPrice, currentPage);
+        } else if (currentLoadMoreType === 'search') {
+            searchProducts(currentSearchQuery, currentPage);
+        } else if (currentLoadMoreType === 'sort') {
+            loadProductsBySort(currentSortType, currentPage);
+        }
+    });
 
     // Loc san pham theo dang sap xep gia
     function loadProductsBySort(sortType, page) {
@@ -210,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': csrfToken
             },
-            body: JSON.stringify({ id_category: categoryId, page: page })
+            body: JSON.stringify({ category_id: categoryId, page: page })
         })
             .then(response => response.json())
             .then(data => {
@@ -244,8 +170,8 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.log('Error:', error));
     }
 
-
     function renderProducts(products, total, page) {
+        console.log(products);
         const productContainer = document.querySelector('.product-grid');
         const loadMoreBtn = document.querySelector('#load-more-button');
 
@@ -261,7 +187,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
-
                         <img src="../uploads/product/${product.product_image}">
                         <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View

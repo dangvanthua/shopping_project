@@ -22,11 +22,5 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::table('product', function (Blueprint $table) {
-            $table->dropColumn('discounted_image');
-        });
-    }
-    
+    public function down(): void {}
 };

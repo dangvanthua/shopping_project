@@ -10,17 +10,18 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::table('product', function (Blueprint $table) {
-        $table->integer('discounted_price')->default(0)->after('product_price');
-    });
-}
+    {
+        Schema::table('product', function (Blueprint $table) {
+            $table->integer('discounted_price')->default(0)->after('product_price');
+        });
+    }
 
-public function down(): void
-{
-    Schema::table('product', function (Blueprint $table) {
-        $table->dropColumn('discounted_price');
-    });
-}
-
+    public function down(): void
+    {
+        Schema::table('product', function (Blueprint $table) {
+            if (Schema::hasColumn('product', 'discounted_price')) {
+                $table->dropColumn('discounted_price');
+            }
+        });
+    }
 };

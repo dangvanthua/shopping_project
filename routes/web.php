@@ -154,14 +154,7 @@ Route::post('/auth/forgot_password', [UserController::class, 'submitFormForgetPa
 Route::get('/auth/get_password/{customer}/{token}', [UserController::class, 'showGetPassword'])->name('auth.getPassword');
 Route::post('/auth/get_password/{customer}/{token}', [UserController::class, 'submitGetPassword'])->name('auth.submitPassword');
 
-// Route::get('/oke',TestController::class,'testcai');
-// Route::get('demo',[Demo_OderController::class,'showData']);
-// Route::get('view',[Demo_OderController::class,'showView'])->name("view");
-
 Route::get('category', [CategoryViewController::class, 'index']);
 
 
 Route::get('/attibute', [AttributeViewController::class, 'showThemmeAttributeIndex']);
-
-// Route::get('/demo', [RegistController::class, 'showRegistrationForm'])->name('register');
-// Route::post('/demo', [RegistController::class, 'register'])->name('index.register');
