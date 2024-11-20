@@ -15,7 +15,9 @@ class CategoryPostViewController extends Controller
         {
             $key_word = $request->input('keyword');
         }
-        $category_post = CategoryPost::where('name','LIKE',"%$key_word%")->paginate(5);
+        $category_post = CategoryPost::where('name','LIKE',"%$key_word%")
+                                    ->orWhere('describe', 'LIKE', "%$key_word%")
+                                    ->paginate(5);
 
         return view('Front-end-Admin.categorypost.index', compact('category_post'));
     }
@@ -29,16 +31,15 @@ class CategoryPostViewController extends Controller
     public function addDataCategoryPost(Request $request)
     {
         $request->validate([
-            'namecategory' => 'required|string',
-            'descriptioncategory' => 'required|string',
+            'namecategory' => 'required|string|max:255|unique:category_posts,name',
+            'descriptioncategory' => 'required|string|max:500',
         ]);
         CategoryPost::create([
             'name' => $request->input('namecategory'),
-            'discription' => $request->input('descriptioncategory'),
+            'describe' => $request->input('descriptioncategory'),
         ]);
         return redirect()->route('indexcategorypost')->with('status', 'Thêm thành công rồi nè');
     }
-
 
     //Xoá
     public function deleteDataCategoryPost($id)
@@ -60,13 +61,13 @@ class CategoryPostViewController extends Controller
     {
         $categorypost = CategoryPost::find($id);
         if (!$categorypost) {
-            return redirect()->route('indexattribute')->withErrors(['status' => 'Thuộc tính không tồn tại']);
+            return redirect()->route('indexcategorypost')->withErrors(['status' => 'Thuộc tính không tồn tại']);
         }
 
         // Cập nhật thuộc tính
         $categorypost->update([
             'name' => $request->input('namecategory'),
-            'discription' => $request->input('descriptioncategory'),
+            'describe' => $request->input('descriptioncategory'),
         ]);
 
         return redirect()->route('indexcategorypost')->with('status', 'Bạn cập nhật thành công');
