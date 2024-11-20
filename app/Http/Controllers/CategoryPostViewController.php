@@ -49,6 +49,9 @@ class CategoryPostViewController extends Controller
             $id_category_post->delete();
             return redirect()->route('indexcategorypost')->with('status', "Bạn đã xoá thành công");
         }
+        else{
+            return redirect()->route('indexcategorypost')->with('status',"Không có dữ liệu để xóa");
+        }
     }
 
     public function showUpdateDataCategoryPost($id)
@@ -63,13 +66,11 @@ class CategoryPostViewController extends Controller
         if (!$categorypost) {
             return redirect()->route('indexcategorypost')->withErrors(['status' => 'Thuộc tính không tồn tại']);
         }
-
         // Cập nhật thuộc tính
         $categorypost->update([
             'name' => $request->input('namecategory'),
             'describe' => $request->input('descriptioncategory'),
         ]);
-
         return redirect()->route('indexcategorypost')->with('status', 'Bạn cập nhật thành công');
     }
 }
