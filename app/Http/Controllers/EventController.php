@@ -33,6 +33,7 @@ class EventController extends Controller
             'content' => [
                 'required',
                 'string',
+                'max:255',
                 'regex:/^(?!.*\s{2,}).+$/',
             ],
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -122,6 +123,7 @@ class EventController extends Controller
             'content' => [
                 'required',
                 'string',
+                'max:255',
                 'regex:/^(?!.*\s{2,}).+$/',
             ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
