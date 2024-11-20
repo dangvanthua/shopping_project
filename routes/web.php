@@ -133,8 +133,7 @@ Route::delete('/events/{id}/delete', [EventController::class, 'destroy'])->name(
 
 
 // Route Review
-// Hàm này mục đích chỉ để hiển thị trang chi tiết sản phẩm sẽ bị thay thế
-Route::get('/product-detail', [ReviewController::class, 'index'])->name('product_detail');
+Route::get('/product-detail/{id_product}', [ReviewController::class, 'index'])->name('product_detail');
 Route::post('/submit-review', [ReviewController::class, 'saveReview']);
 Route::delete('/reviews/{id}', [ReviewController::class, 'removeReview']);
 Route::put('/reviews/{id}', [ReviewController::class, 'updateReview']);

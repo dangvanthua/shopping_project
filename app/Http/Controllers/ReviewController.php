@@ -6,16 +6,29 @@ use App\Models\Customer;
 use App\Models\OrderItem;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ReviewController extends Controller
 {
-    public function index()
+    public function index($id_product)
     {
-        $reviews = Review::where('id_product', 1)
-            ->with('customer')
+        // Truy xuất thông tin sản phẩm
+        $product = DB::table('product')->where('id_product', $id_product)->first();
+
+        if (!$product) {
+            abort(404, 'Product not found');
+        }
+
+        // Lấy đánh giá của sản phẩm
+        $reviews = DB::table('review')
+            ->where('id_product', $id_product)
+            ->join('customers', 'review.id_customer', '=', 'customers.id_customer')
+            ->select('review.*', 'customers.name as customer_name')
             ->get();
-        return view('Front-end-Shopping.product_detail', compact('reviews'));
+
+        return view('Front-end-Shopping.product_detail', compact('product', 'reviews'));
     }
 
     public function saveReview(Request $request)
@@ -45,7 +58,7 @@ class ReviewController extends Controller
         // Kiểm tra nếu sản phẩm thuộc đơn hàng đã giao của người dùng
         $orderItem = OrderItem::where('id_product', $request->id_product)
             ->whereHas('order', function ($query) {
-                $query->where('id_customer', 1) // Giả sử ID của khách hàng hiện tại là 1
+                $query->where('id_customer', Auth::id()) // Giả sử ID của khách hàng hiện tại là 1
                     ->where('status', 'đã giao hàng'); // Trạng thái giao hàng
             })
             ->first();
@@ -58,10 +71,10 @@ class ReviewController extends Controller
         }
 
         // Tạo đánh giá mới
-        $reviewData = array_merge($validator->validated(), ['id_customer' => 1]);
+        $reviewData = array_merge($validator->validated(), ['id_customer' => Auth::id()]);
         $review = Review::create($reviewData);
 
-        $customer = Customer::find(1);
+        $customer = Customer::find(Auth::id());
 
         return response()->json([
             'success' => true,
@@ -92,6 +105,21 @@ class ReviewController extends Controller
                 'success' => false,
                 'errors' => $validator->errors(),
             ], 422);
+        }
+
+        // Kiểm tra nếu sản phẩm thuộc đơn hàng đã giao của người dùng
+        $orderItem = OrderItem::where('id_product', $request->id_product)
+            ->whereHas('order', function ($query) {
+                $query->where('id_customer', Auth::id()) // Giả sử ID của khách hàng hiện tại là 1
+                    ->where('status', 'đã giao hàng'); // Trạng thái giao hàng
+            })
+            ->first();
+
+        if (!$orderItem) {
+            return response()->json([
+                'success' => false,
+                'error' => 'You can only review products from delivered orders.',
+            ], 403);
         }
 
         $review = Review::find($id);
