@@ -7,22 +7,27 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+session_start();
+
 class HomeController extends Controller
 {
     public function index()
     {
-        // lay danh muc
-        $categories = Category::all();
+        $cate_product = DB::table('category')->where('category_status', '0')->orderby('id_category', 'desc')->get();
 
-        //lay san pham
-        $products = Product::paginate(8);
 
-        return view('Front-end-Shopping.shopping-index.shopping_index', compact('products', 'categories'));
+        $all_product = DB::table('product')
+            ->join('category', 'category.id_category', '=', 'product.id_category')
+
+            ->orderby('product.id_product', 'desc')->get();
+
+        $all_product = DB::table('product')->where('product_status', '0')->orderby(DB::raw('RAND()'))->paginate(6);
+        return view('Front-end-Shopping.shopping-index.shopping_index')->with('category', $cate_product)->with('all_product', $all_product);
     }
 
     public function filter(Request $request)
     {
-        $categoryId = $request->input('category_id');
+        $categoryId = $request->input('id_category');
 
         if ($categoryId == 0) {
             $products = Product::paginate(8);
@@ -66,6 +71,11 @@ class HomeController extends Controller
             $products = Product::whereBetween('price', [$minPrice, $maxPrice])
                 ->paginate(8, ['*'], 'page', $request->input('page', 1));
         }
+        $maxPrice = $request->input('max_price', INF);
+        $page = $request->input('page', 1);
+
+        $products = Product::whereBetween('price', [$minPrice, $maxPrice])
+            ->paginate(8, ['*'], 'page', $page);
 
         return response()->json([
             'products' => $products->items(),
@@ -91,6 +101,12 @@ class HomeController extends Controller
         $products = Product::where('name', 'like', "%$query%")
             ->orWhere('describe', 'like', "%$query%")
             ->paginate($perPage, ['*'], 'page', $page);
+        $query = $request->input('query');
+        $page = $request->input('page', 1);
+
+        $products = Product::where('name', 'LIKE', "%$query%")
+            ->orWhere('describe', 'LIKE', "%$query%")
+            ->paginate(8, ['*'], 'page', $page);
 
         return response()->json([
             'products' => $products->items(),

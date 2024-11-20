@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Shopping</title>
     {{-- @todo lai --}}
     @if (session('toastr'))
@@ -38,6 +38,14 @@
     <link rel="stylesheet" href="{{ asset('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <link rel="stylesheet" href="{{ asset('admin/bower_components/select2/dist/css/select2.min.css') }}">
+ 
+<!-- //bootstrap-css -->
+<!-- Custom CSS -->
+
+<!-- font CSS -->
+<link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -202,11 +210,12 @@
             </li>
 
              {{-- @comment --}}
-            <li class="{{ Request::is('admin-datn/menu*') ? 'active' : '' }}">
-              <a href="">
-                  <i class="fa fa-list"></i> <span>Danh mục</span>
-              </a>
-            </li>
+                     <li class="sub-menu">
+    <a href="{{ URL::to('all-category-product') }}">
+        <i class="fa fa-book"></i>
+        <span>Danh mục sản phẩm</span>
+    </a>
+</li> 
 
             <li class="{{ Request::is('admin-datn/type-product*') ? 'active' : '' }}">
                 <a href="">
@@ -218,12 +227,19 @@
                     <i class="glyphicon glyphicon-asterisk"></i> <span>Phân loại(tt)</span>
                 </a>
             </li>
-
-            <li class="{{ Request::is('admin-datn/product*') ? 'active' : '' }}">
-              <a href="">
-                    <i class="fa fa-fw fa-anchor"></i> <span>Sản phẩm</span>
-                </a>
-            </li>
+            <a href="{{ URL::to('all-product') }}">
+            <i class="fa fa-fw fa-anchor"></i> 
+            <span>Sản phẩm</span>
+        
+    </a>
+</li> 
+    
+            <!-- <li class="sub-menu">
+    <a href="{{ URL::to('all-category-product') }}">
+        <i class="fa fa-book"></i>
+        <span>Danh mục sản phẩm</span>
+    </a>
+</li> -->
 
             <li class="{{ Request::is('admin-datn/transaction*') ? 'active' : '' }}">
                 <a href="">
@@ -256,7 +272,7 @@
             </li>
 
             <li class="{{ Request::is('admin-datn/rating*') ? 'active' : '' }}">
-                <a href="{{route('events.index')}}">
+                <a href="">
                     <i class="fa fa-commenting"></i> <span>Envents</span>
                 </a>
             </li>
@@ -289,7 +305,6 @@
       <div class="content-wrapper">
         @yield('content')
       </div>
-      <!-- /.content-wrapper -->
 
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
@@ -298,6 +313,8 @@
         <strong>Copyright &copy; 2023 <a href="#">Cao Anh Vũ</a>.</strong> All rights
         reserved.
       </footer>
+      <!-- /.content-wrapper -->
+
       <!-- Control Sidebar -->
 
       <!-- /.control-sidebar -->
@@ -311,6 +328,12 @@
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('admin/bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <section><script src="{{asset('backend/js/bootstrap.js')}}"></script>
+
+
+
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
+
     <script>
       $.widget.bridge('uibutton', $.ui.button);
     </script>
@@ -348,6 +371,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <script src="https://codeseven.github.io/toastr/build/toastr.min.js"></script>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="{{ asset("shopping/data_rest/dashboard.js") }}"></script>
     <script>
         if(typeof TYPE_MESSAGE != "undefined"){
             switch(TYPE_MESSAGE){
@@ -411,30 +435,7 @@
           {{-- @todo lai --}}
 
     <script>
-        $(document).ready(function(){
-            $('.js-delete-confirm').click(function(event){
-                event.preventDefault();
-                let URL=$(this).attr('href');
-                $.confirm({
-                    title: ' Bạn Muốn Xóa Chứ ?',
-                    content: 'Đã Xóa Thì Không Lấy Lại Được Đâu !',
-                    type: 'red',
-                    buttons: {
-                        ok: {
-                            text: "ok!",
-                            btnClass: 'btn-primary',
-                            keys: ['enter'],
-                            action: function(){
-                                 window.location.href=URL;
-                            }
-                        },
-                        cancel: function(){
-                            console.log('the user clicked cancel');
-                        }
-                    }
-                });
-            })
-        });
+      
 
         $(document).ready(function(){
             $(document).on('click','#js-notification',function(e){
@@ -516,7 +517,7 @@
 
         });
     </script>
-    @yield('script')
+   <script type="text/javascript" src="{{asset('backend/js/monthly.js')}}"></script>
 
   </body>
 </html>
