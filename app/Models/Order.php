@@ -64,13 +64,13 @@ class Order extends Model
     //@viết tính tổng số đơn hàng thành công
     public static function modelCountSuccesItems()
     {
-        return self::where('status','Đã Bàn Giao')->count();
+        return self::where('status', 'Đã Bàn Giao')->count();
     }
 
     //@viết phương thức lấy toàn bộ doanh thu từ order
     public static function getAllTotal_itemOrder()
     {
-        return self::where('status','Đã Bàn Giao')->sum('total_item');
+        return self::where('status', 'Đã Bàn Giao')->sum('total_item');
     }
 
     // mã hoá id

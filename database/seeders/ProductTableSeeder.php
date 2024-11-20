@@ -10,7 +10,6 @@ class ProductTableSeeder extends Seeder
     public function run()
     {
         DB::table('product')->insert([
-
             'product_name' => ' Vi nu mau den',
             'id_category' => 1,
             'product_desc' => 'mo ta',
@@ -21,10 +20,8 @@ class ProductTableSeeder extends Seeder
             'sale' => 0,
             'product_quantity' => 50,
             'product_status' => 0,
-
-
-
         ]);
+
         DB::table('product')->insert(
             [
                 'product_name' => 'vi nu mau hong',
@@ -37,11 +34,9 @@ class ProductTableSeeder extends Seeder
                 'sale' => 0,
                 'product_quantity' => 50,
                 'product_status' => 0,
-
-
-
             ]
         );
+
         DB::table('product')->insert(
             [
                 'product_name' => 'Giay vip',
@@ -105,11 +100,9 @@ class ProductTableSeeder extends Seeder
                 'sale' => 0,
                 'product_quantity' => 50,
                 'product_status' => 0,
-
-
-
             ]
         );
+
         DB::table('product')->insert(
             [
                 'product_name' => 'Sieu pham giay',
@@ -122,11 +115,9 @@ class ProductTableSeeder extends Seeder
                 'sale' => 0,
                 'product_quantity' => 50,
                 'product_status' => 0,
-
-
-
             ]
         );
+
         DB::table('product')->insert(
             [
                 'product_name' => 'Giay dep',
@@ -144,6 +135,7 @@ class ProductTableSeeder extends Seeder
 
             ]
         );
+
         DB::table('product')->insert(
             [
                 'product_name' => 'Giay nu den',
@@ -156,11 +148,9 @@ class ProductTableSeeder extends Seeder
                 'sale' => 0,
                 'product_quantity' => 50,
                 'product_status' => 0,
-
-
-
             ]
         );
+
         DB::table('product')->insert(
             [
                 'product_name' => 'giay nam',
@@ -173,11 +163,9 @@ class ProductTableSeeder extends Seeder
                 'sale' => 0,
                 'product_quantity' => 50,
                 'product_status' => 0,
-
-
-
             ]
         );
+
         DB::table('product')->insert(
             [
                 'product_name' => 'Vi da cao cap',
@@ -207,11 +195,9 @@ class ProductTableSeeder extends Seeder
                 'sale' => 0,
                 'product_quantity' => 50,
                 'product_status' => 0,
-
-
-
             ]
         );
+
         DB::table('product')->insert(
             [
                 'product_name' => 'Ao duy nhat',
