@@ -14,22 +14,36 @@ class CustomersTableSeeder extends Seeder
         // Thêm khách hàng vào bảng customers
         DB::table('customers')->insert([
             [
-                'name' => 'John Doe',
-                'email' => 'john.doe@example.com',
-                'password' => Hash::make('password123'),
-                'phone' => '1234567890',
-                'address' => '123 Street, City',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'name' => 'Đỗ Tiến Đại',
+                'email' => 'dotiendai789@gmail.com',
+                'password' => bcrypt('password123'),
+                'phone' => '0123456789',
+                'address' => '123 Đường ABC, TP. Hồ Chí Minh',
+                'token' => strtoupper(Str::random(10)), // Không có token khi tạo mới
             ],
             [
-                'name' => 'Jane Smith',
-                'email' => 'jane.smith@example.com',
-                'password' => Hash::make('password123'),
-                'phone' => '0987654321',
-                'address' => '456 Avenue, City',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'name' => 'Lê Hoàng Thịnh',
+                'email' => 'le.hamthang21@gmail.com',
+                'password' => bcrypt('password123'), // Mật khẩu đã được mã hóa
+                'phone' => '0123456789',
+                'address' => '123 Đường ABC, TP. Hồ Chí Minh',
+                'token' => strtoupper(Str::random(10)), // Không có token khi tạo mới
+            ],
+            [
+                'name' => 'Trần Anh Tuấn',
+                'email' => 'anhtuan2551104@gmail.com',
+                'password' => bcrypt('password123'), // Mật khẩu đã được mã hóa
+                'phone' => '0123456789',
+                'address' => '123 Đường ABC, TP. Hồ Chí Minh',
+                'token' => strtoupper(Str::random(10)), // Không có token khi tạo mới
+            ],
+            [
+                'name' => 'Dang Van Thuan',
+                'email' => 'thuandang021102@gmail.com',
+                'password' => bcrypt('password123'), // Mật khẩu đã được mã hóa
+                'phone' => '0123456789',
+                'address' => '123 Đường ABC, TP. Hồ Chí Minh',
+                'token' => strtoupper(Str::random(10)), // Không có token khi tạo mới
             ]
         ]);
     }
