@@ -31,8 +31,8 @@ class CategoryPostViewController extends Controller
     public function addDataCategoryPost(Request $request)
     {
         $request->validate([
-            'namecategory' => 'required|string|max:255|unique:category_posts,name',
-            'descriptioncategory' => 'required|string|max:500',
+            'namecategory' => 'required|string|max:20|unique:category_posts,name',
+            'descriptioncategory' => 'required|string|max:50',
         ]);
         CategoryPost::create([
             'name' => $request->input('namecategory'),
@@ -66,6 +66,10 @@ class CategoryPostViewController extends Controller
         if (!$categorypost) {
             return redirect()->route('indexcategorypost')->withErrors(['status' => 'Thuộc tính không tồn tại']);
         }
+        $request->validate([
+            'namecategory' => 'required|string|max:20|unique:category_posts,name',
+            'descriptioncategory' => 'required|string|max:50',
+        ]);
         // Cập nhật thuộc tính
         $categorypost->update([
             'name' => $request->input('namecategory'),
