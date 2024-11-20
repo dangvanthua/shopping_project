@@ -25,6 +25,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VerificationController;
 use App\Mail\VerifyEmail;
@@ -72,19 +73,9 @@ Route::get('/product', [ShoppingCartViewController::class, 'showDemoNha'])->name
 Route::get('/pay-money', [PayMonneyViewController::class, 'showViewPayMoney'])->name('payMoney');
 // thực thị thanh toán
 Route::get('/make-payment', [PayMonneyController::class, 'makePaymentAllItems']);
-// Route::get('/demo',TestController::class,'testcai');
-
-// Route::get('demo', [Demo_OderController::class, 'showData']);
-// Route::get('view', [Demo_OderController::class, 'showView'])->name("view");
 
 
 Route::get('demo', [TestController::class, 'testcai']);
-
-//Route::get('index',[CategoryProductView::class, 'index'])->name('index');
-
-//Route::get('/category/create',[CategoryProductView::class, 'create'])->name('create');
-//Route::post('/category/store',[CategoryProductView::class, 'store'])->name('category.store');
-
 
 //Sanpham
 Route::get('all-product', [ProductView::class, 'all_product'])->name('all_product');
@@ -154,7 +145,7 @@ Route::post('/auth/forgot_password', [UserController::class, 'submitFormForgetPa
 Route::get('/auth/get_password/{customer}/{token}', [UserController::class, 'showGetPassword'])->name('auth.getPassword');
 Route::post('/auth/get_password/{customer}/{token}', [UserController::class, 'submitGetPassword'])->name('auth.submitPassword');
 
-Route::get('category', [CategoryViewController::class, 'index']);
 
+Route::get('category', [CategoryViewController::class, 'index']);
 
 Route::get('/attibute', [AttributeViewController::class, 'showThemmeAttributeIndex']);
