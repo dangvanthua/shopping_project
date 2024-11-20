@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\GetCartShoppingController;
 use App\Http\Controllers\AttributeViewController;
 use App\Http\Controllers\CategoryProductController;
-
+use App\Http\Controllers\CategoryPostViewController;
 use App\Http\Controllers\CategoryProductView;
 use App\Http\Controllers\ProductView;
 use App\Http\Controllers\CategoryViewController;
@@ -53,3 +53,11 @@ Route::get('view-detail/{id}', [AdminDashboardViewController::class, 'showViewDa
 Route::get('register', [RegistController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegistController::class, 'register'])->name('index.register');
 Route::get('/verify/{token}', [RegistController::class, 'verify'])->name('verify');
+
+//Danh mục bài viết
+Route::get('/category-post',[CategoryPostViewController::class, 'showViewCategoryPost'])->name('indexcategorypost');
+Route::get('/add-categorypost',[CategoryPostViewController::class,'showViewAddCategoryPost'])->name('category-post-showadd');
+Route::post('/add-categorypost',[CategoryPostViewController::class, 'addDataCategoryPost'])->name('adddatacategorypost');
+Route::get('/delete-category-post/{id}',[CategoryPostViewController::class, 'deleteDataCategoryPost'])->name('delete-category-post');
+Route::get('/update-category-post/{id}',[CategoryPostViewController::class, 'showUpdateDataCategoryPost'])->name('update-category-post');
+Route::post('/update-category-post/{id}',[CategoryPostViewController::class, 'UpdateDataCategoryPost'])->name('updatecategorypost');
