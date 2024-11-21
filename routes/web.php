@@ -141,21 +141,23 @@ Route::get('/about', [AboutController::class, 'about'])->name('about');
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/create', [EventController::class, 'create'])->name('create');
 Route::post('/events/store', [EventController::class, 'store'])->name('events.store');
+Route::get('/events/{id}/edit', [EventController::class, 'edit'])->name('events.edit');
+Route::put('/events/{id}', [EventController::class, 'update'])->name('events.update');
 Route::delete('/events/{id}/delete', [EventController::class, 'destroy'])->name('deleteEvent');
+Route::get('/events/search', [EventController::class, 'search'])->name('events.search');
 
 // Route Review
-// Hàm này mục đích chỉ để hiển thị trang chi tiết sản phẩm sẽ bị thay thế @note lại
-// Route::get('/product-detail', [ReviewController::class, 'index'])->name('product_detail');
-// Route::post('/submit-review', [ReviewController::class, 'saveReview']);
-// Route::delete('/reviews/{id}', [ReviewController::class, 'removeReview']);
-// Route::put('/reviews/{id}', [ReviewController::class, 'updateReview']);
+Route::get('/product-detail/{id_product}', [ReviewController::class, 'index'])->name('product_detail');
+Route::post('/submit-review', [ReviewController::class, 'saveReview']);
+Route::delete('/reviews/{id}', [ReviewController::class, 'removeReview']);
+Route::put('/reviews/{id}', [ReviewController::class, 'updateReview']);
+
 
 // Route User
 Route::get('/auth/forgot_password', [UserController::class, 'showForgotPassword'])->name('auth.password');
 Route::post('/auth/forgot_password', [UserController::class, 'submitFormForgetPassword'])->name('auth.sumitReset');
 Route::get('/auth/get_password/{customer}/{token}', [UserController::class, 'showGetPassword'])->name('auth.getPassword');
 Route::post('/auth/get_password/{customer}/{token}', [UserController::class, 'submitGetPassword'])->name('auth.submitPassword');
-
 
 
 //Của Thịnh
@@ -199,8 +201,6 @@ Route::post('/add-categorypost', [CategoryPostViewController::class, 'addDataCat
 Route::get('/delete-category-post/{id}', [CategoryPostViewController::class, 'deleteDataCategoryPost'])->name('delete-category-post');
 Route::get('/update-category-post/{id}', [CategoryPostViewController::class, 'showUpdateDataCategoryPost'])->name('update-category-post');
 Route::post('/update-category-post/{id}', [CategoryPostViewController::class, 'UpdateDataCategoryPost'])->name('updatecategorypost');
-
-
 
 
 Route::get('/attibute', [AttributeViewController::class, 'showThemmeAttributeIndex']);
