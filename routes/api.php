@@ -3,12 +3,14 @@ use App\Http\Controllers\Api\AtributeController;
 use App\Http\Controllers\Api\AttributeController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\FavoriteApiController;
 use App\Http\Controllers\Api\GetAllItemsShoppingCart;
 use App\Http\Controllers\Api\GetCartShoppingController;
 use App\Http\Controllers\Api\HistoryBuyItems;
 use App\Http\Controllers\Api\PayMonneyController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\RatingController;
+use App\Http\Controllers\Api\ShippingMethodController;
 use App\Http\Controllers\Api\ShoppingCartController;
 use App\Http\Controllers\Api\VnPayController;
 use App\Http\Controllers\RatingViewController;
@@ -97,4 +99,18 @@ Route::post('/payment-vnpay', [VnPayController::class, 'createPayment'])->name('
 Route::get('/vnpay-return', function (Request $request) {
     return response()->json(['status' => 'success', 'message' => 'VNPAY Return is working!'])
         ->header('ngrok-skip-browser-warning', 'true');
+});
+
+
+//Của Thanh Phong
+Route::get('/favorites/{customerId}', [FavoriteApiController::class, 'index']); // Lấy danh sách yêu thíchRoute::post('/favorites', [FavoriteApiController::class, 'store']); // Thêm sản phẩm yêu thích
+Route::get('/favorites/{customerId}/{favoriteId}', [FavoriteApiController::class, 'show']); // Xem sản phẩm yêu thích
+Route::delete('/favorites/{customerId}/{favoriteId}', [FavoriteApiController::class, 'destroy']); // Xóa sản phẩm yêu thích
+
+Route::prefix('shipping-methods')->group(function() {
+    Route::get('/', [ShippingMethodController::class, 'index']);
+    Route::post('/', [ShippingMethodController::class, 'store']);
+    Route::get('{id}', [ShippingMethodController::class, 'show']);
+    Route::put('{id}', [ShippingMethodController::class, 'update']);
+    Route::delete('{id}', [ShippingMethodController::class, 'destroy']);
 });
