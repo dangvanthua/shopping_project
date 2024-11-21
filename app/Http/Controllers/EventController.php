@@ -33,6 +33,7 @@ class EventController extends Controller
             'content' => [
                 'required',
                 'string',
+                'max:255',
                 'regex:/^(?!.*\s{2,}).+$/',
             ],
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -83,15 +84,106 @@ class EventController extends Controller
         return redirect()->route('events.index')->with('success', 'Event created successfully!');
     }
 
+    public function edit($encodedId)
+    {
+
+        $decoded = base64_decode($encodedId);
+
+
+        list($id_event, $secretKey) = explode(':', $decoded);
+
+        if ($secretKey !== env('SECRET_KEY', 'secret_key')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $event = Event::where('id_event', $id_event)->firstOrFail();
+
+        // Return the create view with the event data
+        return view('Front-end-Admin.event.create', compact('event'));
+    }
+
+    public function update(Request $request, $encodedId)
+    {
+        $decoded = base64_decode($encodedId);
+
+        list($id_event, $secretKey) = explode(':', $decoded);
+
+        if ($secretKey !== env('SECRET_KEY', 'secret_key')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                'regex:/^(?!.*\s{2,}).+$/',
+                'unique:event,name,' . $id_event . ',id_event',
+            ],
+            'content' => [
+                'required',
+                'string',
+                'max:255',
+                'regex:/^(?!.*\s{2,}).+$/',
+            ],
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'check_active' => 'required|boolean',
+            'start_day' => 'required|date',
+            'end_day' => 'required|date|after_or_equal:start_day',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $event = Event::where('id_event', $id_event)->firstOrFail();
+
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images/events'), $imageName);
+            $event->image = $imageName;
+        }
+
+        $event->update([
+            'name' => $request->input('name'),
+            'content' => $request->input('content'),
+            'check_active' => $request->input('check_active'),
+            'start_day' => $request->input('start_day'),
+            'end_day' => $request->input('end_day'),
+        ]);
+
+        return redirect()->route('events.index')->with('success', 'Event updated successfully!');
+    }
+
     public function destroy($id)
     {
-        // Tìm sự kiện theo id
-        $event = Event::findOrFail($id);
+        $event = Event::find($id);
 
-        // Xóa sự kiện
+        if (!$event) {
+            return redirect()->route('events.index')->with('error', 'Event no longer exists.');
+        }
+
         $event->delete();
 
-        // Điều hướng lại trang danh sách sự kiện với thông báo thành công
         return redirect()->route('events.index')->with('success', 'Event deleted successfully!');
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('key', '');
+        $events = Event::query();
+
+
+        if (!empty($query)) {
+            $events = $events->where('name', 'like', '%' . $query . '%')
+                ->orWhere('content', 'like', '%' . $query . '%')
+                ->orWhereRaw("SOUNDEX(name) = SOUNDEX(?)", [$query]);
+        }
+
+        $events = $events->paginate(10);
+
+        return view('Front-end-Admin.event.index', compact('events'));
     }
 }

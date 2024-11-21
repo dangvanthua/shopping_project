@@ -29,6 +29,7 @@ class OrderItemSeeder extends Seeder
                 'id_product' => 2,
                 'quantity' => 1,
                 'price' => 500000,
+                'id_order_item' => 1,
                 'status' => 'In Stock',
                 'created_at' => now(),
                 'updated_at' => now(),

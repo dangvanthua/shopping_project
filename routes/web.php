@@ -24,19 +24,22 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Api\PaymentByVNPayController;
 use App\Http\Controllers\Api\ProfileCustomerViewController;
 use App\Http\Controllers\Api\VnPayController;
-use App\Http\Controllers\CategoryPostViewController;
-
 use App\Http\Controllers\DetailViewBuyItems;
+use App\Http\Controllers\Error404ViewController;
+use App\Http\Controllers\CategoryPostViewController;
 use App\Http\Controllers\HistotyViewBuyItems;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentByVnPay;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\StatisticalViewController;
+use App\Http\Controllers\SuccessBuyItemsViewController;
 use App\Http\Controllers\SuccessPaymoneyViewController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\VerificationController;
-use App\Mail\VerifyEmail;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\ShippingMethodController; // Đảm bảo bạn đã import đúng namespac
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +55,17 @@ use App\Mail\VerifyEmail;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+Route::get('/testcai', [TestController::class, 'testcai']);
+// Route::get('/demo',TestController::class,'testcai');
+Route::get('demo', [TestController::class, 'testcai']);
+
+// Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
+// Route::post('/login', [LoginController::class, 'login'])->name('login');
+// Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 
 
 Route::get('category', [CategoryViewController::class, 'index']);
@@ -85,13 +99,12 @@ Route::get('/pay-money', [PayMonneyViewController::class, 'showViewPayMoney'])->
 Route::get('all-product', [ProductView::class, 'all_product'])->name('all_product');
 Route::get('add-product', [ProductView::class, 'add_product'])->name('add_product');
 Route::post('save-product', [ProductView::class, 'save_product'])->name('save_product');
-
+Route::get('search-product', [ProductView::class, 'searchProduct'])->name('search.product');
 Route::get('unactive-product/{product_id}', [ProductView::class, 'unactive_product'])->name('unactive_product');
 Route::get('active-product/{product_id', [ProductView::class, 'active_product'])->name('active_product');
 Route::get('edit-product/{product_id}', [ProductView::class, 'edit_product'])->name('edit_product');
 Route::post('update-product/{product_id}', [ProductView::class, 'update_product'])->name('updatate_product');
 Route::get('delete-product/{product_id}', [ProductView::class, 'delete_product'])->name('delete_product');
-
 
 //Category_product
 Route::get('/add-category-product', [CategoryProductView::class, 'add_category_product'])->name('add_category_product');
@@ -105,10 +118,10 @@ Route::get('active-category-product/{category_product_id}', [CategoryProductView
 Route::get('edit-category-product/{category_product_id}', [CategoryProductView::class, 'edit_category_product'])->name('edit_category_product');
 Route::post('update-category-product/{category_product_id}', [CategoryProductView::class, 'update_category_product'])->name('update_category_product');
 // //Xoa
-
+Route::get('delete-category-product/{category_product_id}', [CategoryProductView::class, 'delete_category_product'])->name('delete_category_product');
 Route::get('delete-category-product/{category_product_id}', [CategoryProductView::class, 'delete_category_product'])->name('delete_category_product');
 
-Route::get('delete-category-product/{category_product_id}', [CategoryProductView::class, 'delete_category_product'])->name('delete_category_product');
+
 
 
 
@@ -124,7 +137,6 @@ Route::post('/load-more/products', [HomeController::class, 'loadMore']);
 
 
 //Route About
-
 Route::get('/about', [AboutController::class, 'about'])->name('about');
 
 // Route Event
@@ -134,11 +146,11 @@ Route::post('/events/store', [EventController::class, 'store'])->name('events.st
 Route::delete('/events/{id}/delete', [EventController::class, 'destroy'])->name('deleteEvent');
 
 // Route Review
-// Hàm này mục đích chỉ để hiển thị trang chi tiết sản phẩm sẽ bị thay thế
-Route::get('/product-detail', [ReviewController::class, 'index'])->name('product_detail');
-Route::post('/submit-review', [ReviewController::class, 'saveReview']);
-Route::delete('/reviews/{id}', [ReviewController::class, 'removeReview']);
-Route::put('/reviews/{id}', [ReviewController::class, 'updateReview']);
+// Hàm này mục đích chỉ để hiển thị trang chi tiết sản phẩm sẽ bị thay thế @note lại
+// Route::get('/product-detail', [ReviewController::class, 'index'])->name('product_detail');
+// Route::post('/submit-review', [ReviewController::class, 'saveReview']);
+// Route::delete('/reviews/{id}', [ReviewController::class, 'removeReview']);
+// Route::put('/reviews/{id}', [ReviewController::class, 'updateReview']);
 
 // Route User
 Route::get('/auth/forgot_password', [UserController::class, 'showForgotPassword'])->name('auth.password');
@@ -147,30 +159,58 @@ Route::get('/auth/get_password/{customer}/{token}', [UserController::class, 'sho
 Route::post('/auth/get_password/{customer}/{token}', [UserController::class, 'submitGetPassword'])->name('auth.submitPassword');
 
 
-Route::get('/register', [RegistController::class, 'showRegistrationForm'])->name('register');
+
+//Của Thịnh
+Route::get('register', [RegistController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegistController::class, 'register'])->name('index.register');
 Route::get('/verify/{token}', [RegistController::class, 'verify'])->name('verify');
 
 
+// Đánh giá bên Admin
 
-Route::get('/admin-rating',[RatingViewController::class, 'showViewRating']); // hiển thị view rating
 
 
-Route::get('/about-me',[ProfileCustomerViewController::class, 'showViewProfileCustomer']); // hiển thị view chi tiết của khách hàng
-Route::get('/history-buy',[HistotyViewBuyItems::class,'showViewHistoryBuyItems'])->name('history-buy'); // hiển thị lịch sử mua hàng
-Route::get('/detail-history/{id_order}',[DetailViewBuyItems::class, 'viewDetailBuyItems'])->name('order.details'); //hiển thị chi tiết sản phẩm đã mua
+Route::get('/admin-rating', [RatingViewController::class, 'showViewRating']); // hiển thị view rating
+
+
+Route::get('/about-me', [ProfileCustomerViewController::class, 'showViewProfileCustomer']); // hiển thị view chi tiết của khách hàng
+Route::get('/history-buy', [HistotyViewBuyItems::class, 'showViewHistoryBuyItems'])->name('history-buy'); // hiển thị lịch sử mua hàng
+Route::get('/detail-history/{id_order}', [DetailViewBuyItems::class, 'viewDetailBuyItems'])->name('order.details'); //hiển thị chi tiết sản phẩm đã mua
 
 
 // Demo thanh toán
 // Route::get('/testcai', [TestController::class, 'testcai']);
-Route::get('/payment-buy-vnpay',[PaymentByVnPay::class, 'showViewPayByVNPay']);
-Route::get('/success-buy-items',[SuccessPaymoneyViewController::class, 'showViewSuccessPaymoney']); // trả về view thanh toán thành công
+Route::get('/payment-buy-vnpay', [PaymentByVnPay::class, 'showViewPayByVNPay']);
 
-//Danh mục bài viết
-Route::get('/category-post',[CategoryPostViewController::class, 'showViewCategoryPost'])->name('indexcategorypost');
-Route::get('/add-categorypost',[CategoryPostViewController::class,'showViewAddCategoryPost'])->name('category-post-showadd');
-Route::post('/add-categorypost',[CategoryPostViewController::class, 'addDataCategoryPost'])->name('adddatacategorypost');
-Route::get('/delete-category-post/{id}',[CategoryPostViewController::class, 'deleteDataCategoryPost'])->name('delete-category-post');
-Route::get('/update-category-post/{id}',[CategoryPostViewController::class, 'showUpdateDataCategoryPost'])->name('update-category-post');
-Route::post('/update-category-post/{id}',[CategoryPostViewController::class, 'UpdateDataCategoryPost'])->name('updatecategorypost');
 
+// thanh toán thành công
+Route::get('/success-buy-items', [SuccessBuyItemsViewController::class, 'showViewSuccessBuyItems'])->name('success.buy');
+
+//Thống kê bên admin
+Route::get('/statistical', [StatisticalViewController::class, 'showStatisticalView'])->name('statistical');
+
+Route::get('/404', [Error404ViewController::class, 'showViewError404'])->name('page-404');
+
+Route::get('/success-buy-items', [SuccessPaymoneyViewController::class, 'showViewSuccessPaymoney']); // trả về view thanh toán thành công
+
+
+//Category_product
+Route::get('/add-category-product', [CategoryProductView::class, 'add_category_product'])->name('add_category_product');
+Route::get('/all-category-product', [CategoryProductView::class, 'all_category_product'])->name('all_category_product');
+Route::post('save-category-product', [CategoryProductView::class, 'save_category_product'])->name('save_category_product');
+//Route::get('/api/all-category-product', [CategoryProductController::class, 'api_all_category_product'])->name('api.all_category_product');
+Route::get('search-category', [CategoryProductView::class, 'search'])->name('search_category');
+
+
+Route::get('/attibute', [AttributeViewController::class, 'showThemmeAttributeIndex']);
+
+//Route của Phong
+Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index'); // Trang hiển thị danh sách
+Route::get('/favorites/{customerId}/{favoriteId}', [FavoriteController::class, 'show'])->name('favorites.show'); // Trang xem chi tiết
+//Method
+Route::get('/shipping-methods', [ShippingMethodController::class, 'indexView'])->name('shipping-methods.index');
+Route::get('shipping-method/create', [ShippingMethodController::class, 'create'])->name('shipping-method.create');
+Route::post('/shipping-methods', [ShippingMethodController::class, 'store'])->name('shipping-methods.store');
+Route::get('/shipping-method/{id}/edit', [ShippingMethodController::class, 'edit'])->name('shipping-method.edit');
+Route::put('/shipping-method/{id}', [ShippingMethodController::class, 'update'])->name('shipping-method.update');
+Route::delete('/shipping-method/{id}', [ShippingMethodController::class, 'destroy'])->name('shipping-method.destroy');

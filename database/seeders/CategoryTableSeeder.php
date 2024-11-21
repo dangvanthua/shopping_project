@@ -7,37 +7,48 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryTableSeeder extends Seeder
 {
-    public function run()
+
+    // Thêm dữ liệu mẫu vào bảng category dành cho shop quần áo
+    public function run(): void
     {
-        // Thêm dữ liệu mẫu vào bảng category dành cho shop quần áo
         DB::table('category')->insert([
             [
-                'name' => 'Men',
-                'description' => 'Clothing for men including shirts, pants, and jackets',
+                'id_category' => 1,
+                'category_name' => 'Vi cao cap',
+                'category_desc' => 'Danhmuc ',
+                'category_status' => 0,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => 'Women',
-                'description' => 'Clothing for women including dresses, skirts, and blouses',
+                'id_category' => 2,
+                'category_name' => 'Giay thoi thuong',
+                'category_desc' => 'Danhmuc ',
+                'category_status' => 0,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => 'Bags',
-                'description' => 'Different types of bags including handbags, backpacks, and wallets',
+                'id_category' => 3,
+                'category_name' => 'Thoi trang nam',
+                'category_desc' => 'Danhmuc ',
+                'category_status' => 0,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => 'Shoes',
-                'description' => 'Various types of shoes including sneakers, boots, and sandals',
+                'id_category' => 4,
+                'category_name' => 'Thoi trang nu',
+                'category_desc' => 'danh cho nu',
+                'category_status' => 0,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => 'Watches',
-                'description' => 'Various types of watches including digital and analog models',
+                'id_category' => 5,
+                'category_name' => 'Phu kien',
+                'category_desc' => 'Danh muc',
+                'category_status' => 0,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

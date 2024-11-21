@@ -6,7 +6,6 @@ let currentLoadMoreType = 'category';
 let currentSearchQuery = '';
 
 document.addEventListener('DOMContentLoaded', function () {
-
     const filterCategories = document.querySelectorAll('.filter-tope-group button');
     const priceLinks = document.querySelectorAll('#filter-price .filter-link');
     const sortFilters = document.querySelectorAll('#filter-sort .filter-link');
@@ -57,10 +56,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Lay gia tri tien lon nhat va nho nhat
     function parsePriceRange(priceRange) {
-        if (priceRange === 'All') return [0, Infinity];
+        if (priceRange === 'All') return [0, 9999999999];
 
         const range = priceRange.split('-').map(price => parseInt(price.replace(/\D/g, '')));
-        return range.length === 2 ? range : [range[0], Infinity];
+        return range.length === 2 ? range : [range[0], 9999999999];
     }
 
     function debounce(func, delay) {
@@ -130,15 +129,15 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(err => console.log('Error: ', err));
     }
 
-    // loc san pham theo danh muc 
+    // loc san pham theo danh muc
     function loadProducts(categoryId, page) {
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        // const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
         fetch('/load-more/products', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             body: JSON.stringify({ category_id: categoryId, page: page })
         })
@@ -174,8 +173,8 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.log('Error:', error));
     }
 
-
     function renderProducts(products, total, page) {
+        console.log(products);
         const productContainer = document.querySelector('.product-grid');
         const loadMoreBtn = document.querySelector('#load-more-button');
 
@@ -191,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
-                        <img src="${product.images}">
+                        <img src="../uploads/product/${product.product_image}">
                         <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
                         </a>
@@ -199,12 +198,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     <div class="block2-txt flex-w flex-t p-t-14">
                         <div class="block2-txt-child1 flex-col-l ">
-                            <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                ${product.name}
+                            <a href="/product-detail/${product.id_product}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                ${product.product_name}
                             </a>
 
                             <span class="stext-105 cl3">
-                                ${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price)}
+                                ${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.product_price)}
                             </span>
                         </div>
 

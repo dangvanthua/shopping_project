@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\Api\AtributeController;
 use App\Http\Controllers\Api\AttributeController;
 use App\Http\Controllers\Api\CategoryController;
@@ -11,12 +12,17 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\ShoppingCartController;
 use App\Http\Controllers\Api\VnPayController;
+use App\Http\Controllers\Api\StatisticalOrderController;
+use App\Http\Controllers\Api\StatisticalProductController;
 use App\Http\Controllers\RatingViewController;
 use App\Models\Attribute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\CategoryProductView;
+use App\Http\Controllers\Api\FavoriteApiController;
+use App\Http\Controllers\Api\ShippingMethodController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +56,7 @@ Route::delete('delete-product/{id}', [ProductController::class, 'delete']);
 Route::get('/category', [CategoryController::class, 'index']);
 
 // Thực thi với attribute
+
 Route::get('/attribute', [AttributeController::class, 'getDataJson']);
 Route::delete('/attribute/{id}', [AttributeController::class, 'deteleDataAttribute']);
 Route::get('/attribute/create', [AttributeController::class, 'showCreateAttribute']);
@@ -78,17 +85,18 @@ Route::get('/get-product/{id_product}', [ProductController::class, 'getItemsProd
 // thực thị thanh toán
 // Route::get('/make-payment',[PayMonneyController::class, 'makePaymentAllItems'])->name('makepaymoney');
 Route::get('/make-payment', [PayMonneyController::class, 'makePaymentAllItems']);
-Route::post('/order-items',[PayMonneyController::class, 'paymentAllItems']); //tiến hành đặt hàng
+Route::post('/order-items', [PayMonneyController::class, 'paymentAllItems']); //tiến hành đặt hàng
 //Thực thi Rating bên admin
-Route::get('/admin-rating',[RatingController::class,'getAllRatings']); //hiên thị dữ liệu rating
-Route::delete('/delete-admin-rating/{id}',[RatingController::class, 'deleteItemsReview']); // thực thi xoá dữ liệu
-Route::get('/search-rating',[RatingController::class, 'fullTextSearchRatings'])->name('fulltextsearchRating');
+Route::get('/admin-rating', [RatingController::class, 'getAllRatings']); //hiên thị dữ liệu rating
+Route::delete('/delete-admin-rating/{id}', [RatingController::class, 'deleteItemsReview']); // thực thi xoá dữ liệu
+Route::get('/search-rating', [RatingController::class, 'fullTextSearchRatings'])->name('fulltextsearchRating');
 
 //Lịch sử mua hàng
-Route::get('/history-buy-items',[HistoryBuyItems::class,'getAllBuyItemsHistory']); //danh sách lịch sử mua hàng
-Route::get('/detail-history-items/{id_order}',[HistoryBuyItems::class,'getOrderHistoryDetails']); // chi tiết sản phẩm đã mua
-Route::post('/cancel-status-items/{id_order}',[HistoryBuyItems::class, 'cancelOrderItems']); // Huỷ đơn hàng khi không mua nữa
-Route::get('/search-history-items',[HistoryBuyItems::class,'fullTextSearchHistoryItems']); // tìm kiếm cho lịch sử mua hàng
+Route::get('/history-buy-items', [HistoryBuyItems::class, 'getAllBuyItemsHistory']); //danh sách lịch sử mua hàng
+Route::get('/detail-history-items/{id_order}', [HistoryBuyItems::class, 'getOrderHistoryDetails']); // chi tiết sản phẩm đã mua
+Route::post('/cancel-status-items/{id_order}', [HistoryBuyItems::class, 'cancelOrderItems']); // Huỷ đơn hàng khi không mua nữa
+Route::get('/search-history-items', [HistoryBuyItems::class, 'fullTextSearchHistoryItems']); // tìm kiếm cho lịch sử mua hàng
+
 
 
 
@@ -97,4 +105,33 @@ Route::post('/payment-vnpay', [VnPayController::class, 'createPayment'])->name('
 Route::get('/vnpay-return', function (Request $request) {
     return response()->json(['status' => 'success', 'message' => 'VNPAY Return is working!'])
         ->header('ngrok-skip-browser-warning', 'true');
+});
+
+//Thống kê cho bên admin
+Route::get('/product-staticital', [StatisticalProductController::class, 'productStatistical']); //thống kê sản phẩm
+Route::get('/out-stock-product', [StatisticalProductController::class, 'outOfStockProduct']); //thống kê sản phẩm nào gần hết
+Route::get('/top-sell-product', [StatisticalProductController::class, 'bestSellProduct']); // thống kê top 10 sản phẩm bán chạy nhất
+Route::get('/order-by-status', [StatisticalOrderController::class, 'orderByStatus']); // thống kê theo trạng thái sản phẩm
+
+// Biểu đồ theo tháng
+Route::get('/revenue-by-month', [StatisticalOrderController::class, 'revenueByMonth']); // thóng kê theo tháng
+Route::get('/revenue-by-days', [StatisticalOrderController::class, 'revenueByDays']); //thống kê theo ngày
+
+
+
+Route::get('/attribute', [AttributeController::class, 'getDataJson']);
+Route::delete('/attribute/{id}', [AttributeController::class, 'deteleDataAttribute']);
+Route::get('/attribute/create', [AttributeController::class, 'showCreateAttribute']);
+
+
+// Api của Phong
+Route::get('/favorites/{customerId}', [FavoriteApiController::class, 'index']); // Lấy danh sách yêu thíchRoute::post('/favorites', [FavoriteApiController::class, 'store']); // Thêm sản phẩm yêu thích
+Route::get('/favorites/{customerId}/{favoriteId}', [FavoriteApiController::class, 'show']); // Xem sản phẩm yêu thích
+Route::delete('/favorites/{customerId}/{favoriteId}', [FavoriteApiController::class, 'destroy']); // Xóa sản phẩm yêu thích
+Route::prefix('shipping-methods')->group(function () {
+    Route::get('/', [ShippingMethodController::class, 'index']);
+    Route::post('/', [ShippingMethodController::class, 'store']);
+    Route::get('{id}', [ShippingMethodController::class, 'show']);
+    Route::put('{id}', [ShippingMethodController::class, 'update']);
+    Route::delete('{id}', [ShippingMethodController::class, 'destroy']);
 });

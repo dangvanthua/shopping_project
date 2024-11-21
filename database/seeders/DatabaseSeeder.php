@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         //Gọi các seeder ở đây để chạy seeder
-        $this->call(CustomerSeeder::class);
+        $this->call(CustomersTableSeeder::class);
         $this->call(CategoryTableSeeder::class);
         $this->call(CategoryPostsTableSeeder::class);
         $this->call(PostsTableSeeder::class);
@@ -27,8 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductAttributeTableSeeder::class);
         $this->call(FavoriteTableSeeder::class);
         $this->call(ProductTableSeeder::class);
-        $this->call(ReviewSeeder::class); //chua hoan thanh ảnh
-        $this->call(ProductDiscountsTableSeeder::class);
+        $this->call(ReviewSeeder::class);
         $this->call(OrderItemAttributesTableSeeder::class);
         $this->call(PostProductTableSeeder::class);
     }

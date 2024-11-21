@@ -41,12 +41,6 @@
     <link rel="stylesheet" href="{{ asset('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <link rel="stylesheet" href="{{ asset('admin/bower_components/select2/dist/css/select2.min.css') }}">
-
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
         @yield('css')
 </head>
@@ -211,7 +205,7 @@
 
              {{-- @comment --}}
             <li class="{{ Request::is('admin-datn/menu*') ? 'active' : '' }}">
-              <a href="">
+              <a href="{{Route('all_category_product')}}">
                   <i class="fa fa-list"></i> <span>Danh mục</span>
               </a>
             </li>
@@ -228,7 +222,7 @@
             </li>
 
             <li class="{{ Request::is('admin-datn/product*') ? 'active' : '' }}">
-              <a href="">
+              <a href="{{Route('all_product')}}">
                     <i class="fa fa-fw fa-anchor"></i> <span>Sản phẩm</span>
                 </a>
             </li>
@@ -258,8 +252,8 @@
             </li>
 
             <li class="{{ Request::is('admin-datn/article*') ? 'active' : '' }}">
-              <a href="">
-                  <i class="fa fa-circle-o-notch"></i> <span>Nhà cung cấp</span>
+              <a href="{{ Route('shipping-methods.index') }}">
+                  <i class="fa fa-circle-o-notch"></i> <span>Nhà vận chuyển</span>
               </a>
             </li>
 
@@ -272,7 +266,7 @@
             <li class="header">Hệ Thống</li>
 
             <li class="{{ Request::is('admin-datn/statistical*') ? 'active' : '' }}">
-              <a href="">
+              <a href="{{ Route('statistical') }}">
                   <i class="fa fa-circle-o text-red"></i> <span>Thống Kê</span>
               </a>
             </li>

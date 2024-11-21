@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Hàm hiển thị sản phẩm trong giỏ hàng và cập nhật số lượng
     function showFetchItems() {
-        fetch('/api/get-cart', {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
+        fetch('/get/cart', {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);

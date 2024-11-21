@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +23,7 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('shopping/vendor/perfect-scrollbar/perfect-scrollbar.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{asset('shopping/css/util.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{asset('shopping/css/main.css') }}">
+
 	{{-- --}}
 </head>
 

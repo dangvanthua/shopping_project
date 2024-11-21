@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class CategoryProductView extends Controller
@@ -25,11 +29,11 @@ class CategoryProductView extends Controller
 
     public function all_category_product()
     {
-        $all_category_product = DB::table('tbl_category_product')->paginate(5);
+        $all_category_product = DB::table('category')->paginate(5);
 
         // Mã hóa category_id và tạo khóa ngẫu nhiên
         foreach ($all_category_product as $category) {
-            $category->category_id = base64_encode($category->category_id); // Mã hóa category_id
+            $category->id_category = base64_encode($category->id_category); // Mã hóa category_id
             $category->random_key = Str::random(16); // Tạo khóa ngẫu nhiên dài 16 ký tự
         }
 
@@ -76,7 +80,7 @@ class CategoryProductView extends Controller
             'category_status' => $request->category_product_status,
         ];
 
-        DB::table('tbl_category_product')->insert($data);
+        DB::table('category')->insert($data);
 
         // Set success message and redirect
         Session::put('message', 'Thêm danh mục sản phẩm thành công');
@@ -89,7 +93,7 @@ class CategoryProductView extends Controller
         // Giải mã category_product_id
         $decoded_category_product_id = base64_decode($category_product_id);
 
-        DB::table('tbl_category_product')->where('category_id', $decoded_category_product_id)->update(['category_status' => 1]);
+        DB::table('category')->where('id_category', $decoded_category_product_id)->update(['category_status' => 1]);
         Session::put('message', 'Không kích hoạt danh mục sản phẩm thành công');
         return Redirect::to('all-category-product');
     }
@@ -99,7 +103,7 @@ class CategoryProductView extends Controller
         // Giải mã category_product_id
         $decoded_category_product_id = base64_decode($category_product_id);
 
-        DB::table('tbl_category_product')->where('category_id', $decoded_category_product_id)->update(['category_status' => 0]);
+        DB::table('category')->where('id_category', $decoded_category_product_id)->update(['category_status' => 0]);
         Session::put('message', 'Kích hoạt danh mục sản phẩm thành công');
         return Redirect::to('all-category-product');
     }
@@ -109,7 +113,7 @@ class CategoryProductView extends Controller
         // Giải mã category_product_id
         $decoded_category_product_id = base64_decode($category_product_id);
 
-        $edit_category_product = DB::table('tbl_category_product')->where('category_id', $decoded_category_product_id)->get();
+        $edit_category_product = DB::table('category')->where('id_category', $decoded_category_product_id)->get();
         $manager_category_product = view('Front-end-Admin.menu.edit_category_product')->with('edit_category_product', $edit_category_product);
 
         return view('Front-end-Admin.index')->with('Front-end-Admin.menu.edit_category_product', $manager_category_product);
@@ -157,16 +161,27 @@ class CategoryProductView extends Controller
             'category_status' => $request->category_product_status,
         ];
 
-        DB::table('tbl_category_product')->where('category_id', $category_product_id)->update($data);
+        DB::table('category')->where('id_category', $category_product_id)->update($data);
 
         // Set success message and redirect
         return Redirect::to('all-category-product')->with('message', 'Cập nhật danh mục sản phẩm thành công');
     }
+    public function search(Request $request)
+    {
+        $query = $request->input('table_search'); // Lấy từ khóa từ ô tìm kiếm
 
+        // Tìm kiếm full-text
+        $all_category_product = DB::table('category')
+            ->select('id_category', 'category_name', 'category_status')
+            ->whereRaw("MATCH(category_name) AGAINST(? IN BOOLEAN MODE)", [$query])
+            ->paginate(10);
+
+        return view('Front-end-Admin.menu.all_category_product', compact('all_category_product'));
+    }
     public function api_all_category_product()
     {
 
-        $all_category_product = DB::table('tbl_category_product')->paginate(2);
+        $all_category_product = DB::table('category')->paginate(2);
 
 
         return response()->json($all_category_product);
@@ -176,38 +191,33 @@ class CategoryProductView extends Controller
         // Giải mã category_product_id
         $decoded_category_product_id = base64_decode($category_product_id);
 
-        // Thực hiện xóa danh mục với ID đã được giải mã
-        DB::table('tbl_category_product')->where('category_id', $decoded_category_product_id)->delete();
+        // Kiểm tra danh mục có tồn tại hay không
+        $category = DB::table('category')->where('id_category', $decoded_category_product_id)->first();
 
-        Session::put('message', 'Xóa danh mục sản phẩm thành công');
+        if ($category) {
+            // Nếu danh mục tồn tại, thực hiện xóa
+            DB::table('category')->where('id_category', $decoded_category_product_id)->delete();
+            Session::put('message', 'Xóa danh mục sản phẩm thành công');
+        } else {
+            // Nếu không tìm thấy danh mục, thông báo lỗi
+            Session::put('message', 'Danh mục không tồn tại hoặc đã bị xóa trước đó');
+        }
+
+        // Chuyển hướng về trang danh sách danh mục sản phẩm
         return Redirect::to('all-category-product');
     }
 
+    //  public function delete_category_product($category_product_id) {
+    //     // Giải mã category_product_id
+    //     $decoded_category_product_id = base64_decode($category_product_id);
 
-    //  public function delete_category_product($category_product_id){
+    //     // Thực hiện xóa danh mục với ID đã được giải mã
+    //     DB::table('category')->where('id_category', $decoded_category_product_id)->delete();
 
-    //     DB::table('tbl_category_product')->where('category_id',$category_product_id)->delete();
-    //     Session::put('message','Xóa danh mục sản phẩm thành công');
+    //     Session::put('message', 'Xóa danh mục sản phẩm thành công');
     //     return Redirect::to('all-category-product');
-    //  }
-
-
-
-
-
-    // public function show_category_home($category_id){
-    //    //slide
-    //     //$slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
-
-    //     $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get(); 
-    //     $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get(); 
-
-    //     $category_by_id = DB::table('tbl_product')->join('tbl_category_product','tbl_product.category_id','=','tbl_category_product.category_id')->get();
-
-    //     $category_name = DB::table('tbl_category_product')->where('tbl_category_product.category_id',$category_id)->get();
-
-    //     return view('pages.category.show_category')->with('category',$cate_product)->with('brand',$brand_product)->with('category_by_id',$category_by_id)->with('category_name',$category_name);
-
     // }
+
+
 
 }

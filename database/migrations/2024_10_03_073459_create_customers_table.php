@@ -19,7 +19,8 @@ return new class extends Migration {
             $table->string('phone');
             $table->string('verification_token', 64)->nullable();
             $table->boolean('is_verified')->default(false);
-            $table->string('address')->nullable();
+            $table->string('address')->nullable()->default('');
+            $table->string('token')->nullable();
             $table->timestamps();
         });
     }

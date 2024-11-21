@@ -46,7 +46,7 @@ RUN { \
     echo "opcache.revalidate_freq=0"; \
     echo "opcache.fast_shutdown=1"; \
     echo "opcache.validate_timestamps=0"; \
-} > /usr/local/etc/php/conf.d/opcache.ini
+    } > /usr/local/etc/php/conf.d/opcache.ini
 
 # Chạy PHP-FPM
 CMD ["php-fpm"]

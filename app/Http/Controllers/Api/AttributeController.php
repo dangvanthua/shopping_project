@@ -78,19 +78,19 @@ class AttributeController extends Controller
         return response()->json([
             'message' => "Cập nhật thành công",
             'data' => $attribute
-        ],200);
+        ], 200);
     }
 
     // tìm kiếm danh sách attribute
     public function searchAttribute(Request $request)
     {
         $query = $request->input('query');
-        $attributes = Attribute::where('name','LIKE',"%$query")->get();
+        $attributes = Attribute::where('name', 'LIKE', "%$query")->get();
 
         // trả về dạng json
         return response()->json([
             'message' => "Tìm kiếm thành công",
             'data' => $attributes
-        ],200);
+        ], 200);
     }
 }

@@ -41,11 +41,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function showFetchAllItems() {
         fetch('/api/get-cart', {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => response.json())
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.json())
             .then(data => {
                 if (data.length > 0) {
                     displayCartItems(data); // Hiển thị giỏ hàng khi có sản phẩm
@@ -99,16 +99,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // viết hàm cập nhật số lượng của giỏ hàng
     function updateQuantityOnServer(productId, quantity) {
         fetch(`api/update-cart`, {
-                method: "PUT",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({
-                    id_product: productId,
-                    quantity: quantity
-                })
-            }).then(response => response.json())
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+                id_product: productId,
+                quantity: quantity
+            })
+        }).then(response => response.json())
             .then(data => {
                 if (data.success) {
                     showFetchAllItems();
@@ -142,15 +142,15 @@ document.addEventListener('DOMContentLoaded', function () {
     function deteleItemsShoppingCart(productId) {
         const Id_session = localStorage.getItem('id_session');
         fetch(`api/delete-cart/${productId}`, {
-                method: "DELETE",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({
-                    session_id: Id_session
-                })
-            }).then(response => response.json())
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+                session_id: Id_session
+            })
+        }).then(response => response.json())
             .then(data => {
                 if (data.success) {
                     showFetchAllItems();

@@ -24,6 +24,12 @@
             </div>
         @endif
 
+        @if(session('error'))
+            <div class="alert alert-error">
+                {{ session('error') }}
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
@@ -32,7 +38,8 @@
                             <a href="{{route('create')}}" class="btn btn-primary">Thêm mới </a>
                         </h3>
                         <div class="box-tools">
-                            <form action="#">
+                            <form action="{{ route('events.search') }}" method="GET">
+                                @csrf
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                     <input type="text" name="key" value="{{ request()->input('key') }}" class="form-control pull-right" placeholder="Search">
                                     <div class="input-group-btn">
@@ -80,7 +87,18 @@
                                             <td>{{ $event->created_at }}</td>
                                             <td>{{ $event->updated_at }}</td>
                                             <td style="display: flex; gap: 4px;">
-                                                <a href="#" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>
+                                                @php
+                                                    $id_event = $event->id_event;
+
+                                                    $secretKey = env('SECRET_KEY', 'secret_key');
+
+                                                    $combined = $id_event . ':' . $secretKey;
+
+                                                    $encodedId = base64_encode($combined);
+                                                @endphp
+                                                <a href="{{ route('events.edit', ['id' => $encodedId]) }}" class="btn btn-xs btn-primary">
+                                                    <i class="fa fa-pencil"></i> Edit
+                                                </a>
                                                 <form action="{{ route('deleteEvent', ['id' => $event->id_event]) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')

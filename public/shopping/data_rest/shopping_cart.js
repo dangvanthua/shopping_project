@@ -10,24 +10,23 @@ document.addEventListener('DOMContentLoaded', function () {
         const size = document.querySelector('select[name="size"]').value;
         const color = document.querySelector('select[name="color"]').value;
 
-        if(!size && !color )
-        {
+        if (!size && !color) {
             alert("Vui lòng chọn kích thước và màu sắc");
             console.error("Đã có lỗi khi thêm");
         }
-        fetch(`/api/cart-add/${Idproduct}`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({
-                    quantity: quantity,
-                    session_id: sessionId,
-                    size: size,
-                    color: color
-                })
+        fetch(`/api/cart/add/${Idproduct}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+                quantity: quantity,
+                session_id: sessionId,
+                size: size,
+                color: color
             })
+        })
             .then(response => response.json())
             .then(data => {
                 if (data.message === "Đã thêm dữ liệu thành công") {
@@ -47,12 +46,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Hàm hiển thị sản phẩm trong giỏ hàng và cập nhật số lượng
     function showFetchItems() {
-        fetch('/api/get-cart', {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
+        fetch('/get/cart', {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 if (data.message) {
@@ -72,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
         cartContent.innerHTML = '';
         let totalPrice = 0;
         // chỉ cho in ra 3 sản phẩm thôi nè
-        const itemsCartShopping = items.slice(0,3);
+        const itemsCartShopping = items.slice(0, 3);
         itemsCartShopping.forEach(data => {
             totalPrice += parseFloat(data.total_price);
             const row = `<li class="header-cart-item flex-w flex-t m-b-12">

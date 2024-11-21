@@ -12,6 +12,7 @@ use App\Http\Requests\Authrequest;
 use App\Mail\VerifyEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+
 class RegistController extends Controller
 {
     // Hiển thị form đăng ký
@@ -32,7 +33,7 @@ class RegistController extends Controller
 
         // Gửi email xác thực
         Mail::to($customer->email)->send(new VerifyEmail($customer));
-        echo"Mời bạn kiểm tra email xác thực";
+        echo "Mời bạn kiểm tra email xác thực";
     }
     public function verify($token)
     {
@@ -44,5 +45,5 @@ class RegistController extends Controller
         } else {
             return redirect()->route('register')->with('error', 'Token không hợp lệ hoặc đã hết hạn.');
         }
-    }   
+    }
 }

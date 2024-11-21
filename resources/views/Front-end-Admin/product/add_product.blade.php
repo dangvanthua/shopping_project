@@ -76,7 +76,7 @@
                             <label for="exampleInputPassword1">Danh mục sản phẩm</label>
                             <select name="product_cate" class="form-control input-sm m-bot15">
                                 @foreach($cate_product as $key => $cate)
-                                    <option value="{{ $cate->category_id }}" {{ old('product_cate') == $cate->category_id ? 'selected' : '' }}>{{ $cate->category_name }}</option>
+                                    <option value="{{ $cate->id_category }}" {{ old('product_cate') == $cate->id_category ? 'selected' : '' }}>{{ $cate->category_name }}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('product_cate'))

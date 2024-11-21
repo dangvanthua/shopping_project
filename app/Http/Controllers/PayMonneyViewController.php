@@ -13,6 +13,6 @@ class PayMonneyViewController extends Controller
     {
         $payment = Payment::get();
         $shipping = ShippingMethod::get();
-        return view('Front-end-Shopping.paymoney',compact('payment','shipping'));
+        return view('Front-end-Shopping.paymoney', compact('payment', 'shipping'));
     }
 }
