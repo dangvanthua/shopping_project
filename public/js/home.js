@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(err => console.log('Error: ', err));
     }
 
-    // loc san pham theo danh muc 
+    // loc san pham theo danh muc
     function loadProducts(categoryId, page) {
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
