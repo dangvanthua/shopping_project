@@ -23,7 +23,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Api\PaymentByVNPayController;
 use App\Http\Controllers\Api\ProfileCustomerViewController;
-use App\Http\Controllers\Api\ShippingMethodController;
+use App\Http\Controllers\ShippingMethodController;
 use App\Http\Controllers\Api\VnPayController;
 use App\Http\Controllers\CategoryPostViewController;
 use App\Http\Controllers\Auth\LoginController;

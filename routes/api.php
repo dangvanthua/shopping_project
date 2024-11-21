@@ -10,7 +10,6 @@ use App\Http\Controllers\Api\HistoryBuyItems;
 use App\Http\Controllers\Api\PayMonneyController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\RatingController;
-use App\Http\Controllers\Api\ShippingMethodController;
 use App\Http\Controllers\Api\ShoppingCartController;
 use App\Http\Controllers\Api\VnPayController;
 use App\Http\Controllers\Api\StatisticalOrderController;
@@ -21,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\CategoryProductView;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -109,23 +109,4 @@ Route::get('/vnpay-return', function (Request $request) {
 Route::get('/favorites/{customerId}', [FavoriteApiController::class, 'index']); // Lấy danh sách yêu thíchRoute::post('/favorites', [FavoriteApiController::class, 'store']); // Thêm sản phẩm yêu thích
 Route::get('/favorites/{customerId}/{favoriteId}', [FavoriteApiController::class, 'show']); // Xem sản phẩm yêu thích
 Route::delete('/favorites/{customerId}/{favoriteId}', [FavoriteApiController::class, 'destroy']); // Xóa sản phẩm yêu thích
-
-Route::prefix('shipping-methods')->group(function() {
-    Route::get('/', [ShippingMethodController::class, 'index']);
-    Route::post('/', [ShippingMethodController::class, 'store']);
-    Route::get('{id}', [ShippingMethodController::class, 'show']);
-    Route::put('{id}', [ShippingMethodController::class, 'update']);
-    Route::delete('{id}', [ShippingMethodController::class, 'destroy']);
-});
-
-//Thống kê cho bên admin
-Route::get('/product-staticital',[StatisticalProductController::class, 'productStatistical']); //thống kê sản phẩm
-Route::get('/out-stock-product',[StatisticalProductController::class, 'outOfStockProduct']); //thống kê sản phẩm nào gần hết
-Route::get('/top-sell-product',[StatisticalProductController::class,'bestSellProduct']); // thống kê top 10 sản phẩm bán chạy nhất
-Route::get('/order-by-status',[StatisticalOrderController::class, 'orderByStatus']); // thống kê theo trạng thái sản phẩm
-
-// Biểu đồ theo tháng
-Route::get('/revenue-by-month',[StatisticalOrderController::class, 'revenueByMonth']); // thóng kê theo tháng
-Route::get('/revenue-by-days',[StatisticalOrderController::class, 'revenueByDays']); //thống kê theo ngày
-
 

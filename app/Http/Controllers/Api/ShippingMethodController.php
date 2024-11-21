@@ -103,14 +103,14 @@ class ShippingMethodController extends Controller
     // Xóa phương thức vận chuyển
     public function destroy($id)
     {
-        $shippingMethod = ShippingMethod::findOrFail($id);
+        // $shippingMethod = ShippingMethod::findOrFail($id);
 
-        // Xóa phương thức vận chuyển
-        $shippingMethod->delete();
+        // // Xóa phương thức vận chuyển
+        // $shippingMethod->delete();
 
-        return view response()->json([
-            'status' => 'success',
-            'message' => 'Phương thức vận chuyển đã được xóa.'
-        ]);
+        // return view response()->json([
+        //     'status' => 'success',
+        //     'message' => 'Phương thức vận chuyển đã được xóa.'
+        // ]);
     }
 }
