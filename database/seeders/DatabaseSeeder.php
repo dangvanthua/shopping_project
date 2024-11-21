@@ -27,8 +27,8 @@ class DatabaseSeeder extends Seeder
                 $this->call(ProductAttributeTableSeeder::class);
                 $this->call(FavoriteTableSeeder::class);
                 $this->call(ProductTableSeeder::class);
-                $this->call(ReviewTableSeeder::class); //chua hoan thanh ảnh
-                $this->call(OrdersTableSeeder::class); //cái này khách hàng nhập vào
+                $this->call(ReviewTableSeeder::class);
+                $this->call(OrdersTableSeeder::class);
                 $this->call(OrderItemsTableSeeder::class);
                 $this->call(OrderItemAttributesTableSeeder::class);
                 $this->call(OrderStatusHistoryTableSeeder::class);
