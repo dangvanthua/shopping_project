@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
+use App\Models\Review;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -21,15 +22,21 @@ class DetailProductViewController extends Controller
         $expectedSlug = Str::slug($product->name);
         // dd($slug); die();
         // dd($expectedSlug);
-        if($slug !== $expectedSlug)
-        {
+        if ($slug !== $expectedSlug) {
             abort(404);
         }
+
         // thực thi lấy các thuộc tính attribute_value
         $sizeAttribute = Attribute::where('name', 'Kích thước')->first();
-        $size = $sizeAttribute ? AttributeValue::where('id_attribute',$sizeAttribute->id_attribute)->get() : collect();
-        $colorAttribute = Attribute::where('name','Màu sắc')->first();
-        $color = $colorAttribute ? AttributeValue::where('id_attribute',$colorAttribute->id_attribute)->get() : collect();
-        return view('Front-end-Shopping.product_detail', compact('product','size','color'));
+        $size = $sizeAttribute ? AttributeValue::where('id_attribute', $sizeAttribute->id_attribute)->get() : collect();
+        $colorAttribute = Attribute::where('name', 'Màu sắc')->first();
+        $color = $colorAttribute ? AttributeValue::where('id_attribute', $colorAttribute->id_attribute)->get() : collect();
+        $reviews = Review::where('id_product', $id_product)
+            ->with(['customer' => function ($query) {
+                $query->select('id_customer', 'name');
+            }])
+            ->get();
+
+        return view('Front-end-Shopping.product_detail', compact('product', 'size', 'color','reviews'));
     }
 }
