@@ -131,13 +131,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // loc san pham theo danh muc
     function loadProducts(categoryId, page) {
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        // const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
         fetch('/load-more/products', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             body: JSON.stringify({ category_id: categoryId, page: page })
         })
