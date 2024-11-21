@@ -41,7 +41,7 @@ class RegistController extends Controller
 
         if ($customer) {
             $customer->update(['is_verified' => true, 'verification_token' => null]);
-            return redirect()->route('register')->with('status', 'Tài khoản đã được xác thực!');
+            return redirect()->route('login.form')->with('status', 'Tài khoản đã được xác thực!');
         } else {
             return redirect()->route('register')->with('error', 'Token không hợp lệ hoặc đã hết hạn.');
         }
