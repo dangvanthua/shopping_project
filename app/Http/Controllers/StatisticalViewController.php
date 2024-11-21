@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
-
-class TestController extends Controller
+class StatisticalViewController extends Controller
 {
     //
-    public function testcai()
+    public function showStatisticalView()
     {
         return view('Front-end-Admin.statistical.index');
     }

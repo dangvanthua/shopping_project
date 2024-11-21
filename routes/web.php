@@ -34,6 +34,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentByVnPay;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SuccessPaymoneyViewController;
+use App\Http\Controllers\StatisticalViewController;
+use App\Http\Controllers\SuccessBuyItemsViewController;
+
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +58,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/testcai',[TestController::class, 'testcai']);
 
 Route::get('category', [CategoryViewController::class, 'index']);
 Route::get('/attribute', [AttributeViewController::class, 'showThemmeAttributeIndex'])->name('attribute');
@@ -94,7 +98,6 @@ Route::get('edit-product/{product_id}', [ProductView::class, 'edit_product'])->n
 Route::post('update-product/{product_id}', [ProductView::class, 'update_product'])->name('updatate_product');
 Route::get('delete-product/{product_id}', [ProductView::class, 'delete_product'])->name('delete_product');
 
-
 //Category_product
 Route::get('/add-category-product', [CategoryProductView::class, 'add_category_product'])->name('add_category_product');
 Route::get('/all-category-product', [CategoryProductView::class, 'all_category_product'])->name('all_category_product');
@@ -107,9 +110,7 @@ Route::get('active-category-product/{category_product_id}', [CategoryProductView
 Route::get('edit-category-product/{category_product_id}', [CategoryProductView::class, 'edit_category_product'])->name('edit_category_product');
 Route::post('update-category-product/{category_product_id}', [CategoryProductView::class, 'update_category_product'])->name('update_category_product');
 // //Xoa
-
 Route::get('delete-category-product/{category_product_id}', [CategoryProductView::class, 'delete_category_product'])->name('delete_category_product');
-
 Route::get('delete-category-product/{category_product_id}', [CategoryProductView::class, 'delete_category_product'])->name('delete_category_product');
 
 
@@ -126,7 +127,6 @@ Route::post('/load-more/products', [HomeController::class, 'loadMore']);
 
 
 //Route About
-
 Route::get('/about', [AboutController::class, 'about'])->name('about');
 
 // Route Event
@@ -154,7 +154,7 @@ Route::post('/register', [RegistController::class, 'register'])->name('index.reg
 Route::get('/verify/{token}', [RegistController::class, 'verify'])->name('verify');
 
 
-
+// Đánh giá bên Admin
 Route::get('/admin-rating',[RatingViewController::class, 'showViewRating']); // hiển thị view rating
 
 
@@ -194,3 +194,8 @@ Route::get('/shipping-method/{id}/edit', [ShippingMethodController::class, 'edit
 Route::put('/shipping-method/{id}', [ShippingMethodController::class, 'update'])->name('shipping-method.update');
 Route::delete('/shipping-method/{id}', [ShippingMethodController::class, 'destroy'])->name('shipping-method.destroy');
 
+// thanh toán thành công
+Route::get('/success-buy-items',[SuccessBuyItemsViewController::class, 'showViewSuccessBuyItems'])->name('success.buy');
+
+//Thống kê bên admin
+Route::get('/statistical',[StatisticalViewController::class, 'showStatisticalView']);

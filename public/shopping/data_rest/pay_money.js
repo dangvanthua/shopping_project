@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <span>${parseFloat(items.total_price).toLocaleString()} đ</span>
                 </div>
             </div>`;
-                        container.insertAdjacentHTML('beforeend', row);
+                    container.insertAdjacentHTML('beforeend', row);
                     });
                     // hiển thị tổng tiền và giảm giá tạm thời cho 0
                     showAllMoneyItems(totalPrice, 0);
@@ -55,10 +55,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     <span>Cần thanh toán:</span>
                     <span>${total_payment.toLocaleString()} đ</span>
                 </div>
-            </div>`;
+            </div>
+        `;
+        // <button class="btn btn-order btn-block mt-4">Đặt hàng</button>
         getElement.insertAdjacentHTML('beforeend', summaryHTML);
-
     }
+
     // // //@thực thi viết hàm đặt hàng
     // function orderAllItemsShoppingCart() {
     //     // Lấy dữ liệu từ form
@@ -138,11 +140,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // }
 
     //fix validation
+    // //@thực thi viết hàm đặt hàng
+
     function orderAllItemsShoppingCart() {
         // Lấy dữ liệu từ form
         const name = document.querySelector('input[name="customer_name"]').value;
         const phone = document.querySelector('input[name="customer_phone"]').value;
         const email = document.querySelector('input[name="customer_email"]').value;
+
         const province = document.querySelector('select[name="method_province"]').selectedOptions[0].text;
         const district = document.querySelector('select[name="method_district"]').selectedOptions[0].text;
         const commune = document.querySelector('select[name="method_ward"]').selectedOptions[0].text;
@@ -177,6 +182,23 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         // Kết hợp thành địa chỉ đầy đủ
         const shipping_address = `${address_details}, ${commune}, ${district}, ${province}`;
+
+        // Lấy giá trị từ api phường,quận,thành phố
+        const province = document.querySelector('select[name="method_province"]').selectedOptions[0].text;
+        const district = document.querySelector('select[name="method_district"]').selectedOptions[0].text;
+        const commune = document.querySelector('select[name="method_ward"]').selectedOptions[0].text;
+        // Lấy địa chỉ chi tiết
+        const address_details = document.querySelector('textarea[name="shipping_address"]').value;
+        // Kết hợp thành địa chỉ đầy đủ
+        const shipping_address = `${address_details}, ${commune}, ${district}, ${province}`;
+        if (province === "0" || district === "0" || commune === "0" || !address_details) {
+            alert("Vui lòng điền đầy đủ thông tin địa chỉ.");
+            return;
+        }
+        // Lấy phương thức thanh toán và phương thức vận chuyển
+        const payment_method = document.querySelector('input[name="payment_method"]:checked').value;
+        const shipping_method = document.querySelector('input[name="shipping_method"]:checked').value;
+
         // Dữ liệu đặt hàng
         const orderData = {
             customer_name: name,
@@ -186,6 +208,7 @@ document.addEventListener('DOMContentLoaded', function () {
             shipping_method: shipping_method,
             payment_method: payment_method,
         };
+
         if (payment_method === '2') {
             fetch('/api/payment-vnpay', {
                     method: 'POST',
@@ -227,17 +250,38 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
                 .catch(error => console.error('Đã có lỗi xảy ra', error));
         }
-    }
 
+        console.log("Dữ liệu orderData: ", orderData);
+        // Thực thi gọi API để đặt hàng
+        fetch(`/api/order-items`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(orderData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message == "Đặt hàng thành công") {
+                    alert("Bạn đã đặt hàng thành công");
+                    window.location.href = data.redirect_url;
+                    console.log("Đã đặt hàng thành công rồi nè");
+                } else {
+                    alert("Lỗi đặt hàng rồi bạn ơi");
+                    console.log(data.error);
+                }
+            })
+            .catch(error => console.error('Đã có lỗi xảy ra', error));
+
+    }
     //@ Lắng nghe sự kiện đặt hàng
     document.addEventListener('click', function (event) {
         if (event.target && event.target.id == 'btn-order') {
             event.preventDefault();
-            console.log("Đang thực hiện đặt hàng");
+            console.log("Đang thực hiện việc đặt hàng");
             orderAllItemsShoppingCart();
         }
     });
-
     //@ thực thi viết phương thức đặt hàng
     showAllItemsPayMoney();
 });
