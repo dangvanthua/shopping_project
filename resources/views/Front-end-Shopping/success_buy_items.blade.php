@@ -16,7 +16,7 @@
             Một email xác nhận đơn hàng đã được gửi tới <strong></strong>.
         </div>
         <div class="buttons">
-            <a href="/Home" class="button button-primary">Quay về trang chủ</a>
+            <a href="{{ Route('home') }}" class="button button-primary">Quay về trang chủ</a>
             <a href="{{ Route('history-buy') }}" class="button button-secondary">Xem đơn hàng</a>
         </div>
     </div>

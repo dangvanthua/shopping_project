@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <ul>
                                     <li>Name: ${item.order.customer_name ? item.order.customer_name : item.order.customer.name}</li>
                                     <li>Email: ${item.order.customer_email ? item.order.customer_email : item.order.customer.email}</li>
-                                    <li>Phone: ${item.order.customer_email ? item.order.customer_email : item.order.customer.phone}</li>
+                                    <li>Phone: ${item.order.customer_phone ? item.order.customer_phone : item.order.customer.phone}</li>
                                     <li>Address: ${item.order.shipping_address ? item.order.shipping_address : item.order.customer.address}</li>
                                 </ul>
                             </td>

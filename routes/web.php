@@ -54,7 +54,7 @@ use App\Http\Controllers\ShippingMethodController; // Đảm bảo bạn đã im
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('/home');
 
 
 
