@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\GetCartShoppingController;
 use App\Http\Controllers\AttributeViewController;
 use App\Http\Controllers\CategoryProductController;
-
 use App\Http\Controllers\CategoryProductView;
 use App\Http\Controllers\ProductView;
 use App\Http\Controllers\CategoryViewController;
@@ -25,6 +24,8 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Api\PaymentByVNPayController;
 use App\Http\Controllers\Api\ProfileCustomerViewController;
 use App\Http\Controllers\Api\VnPayController;
+use App\Http\Controllers\CategoryPostViewController;
+
 use App\Http\Controllers\DetailViewBuyItems;
 use App\Http\Controllers\HistotyViewBuyItems;
 use App\Http\Controllers\HomeController;
@@ -146,12 +147,14 @@ Route::get('/auth/get_password/{customer}/{token}', [UserController::class, 'sho
 Route::post('/auth/get_password/{customer}/{token}', [UserController::class, 'submitGetPassword'])->name('auth.submitPassword');
 
 
+Route::get('/register', [RegistController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegistController::class, 'register'])->name('index.register');
+Route::get('/verify/{token}', [RegistController::class, 'verify'])->name('verify');
 
 
-// Route::get('/register', [RegistController::class, 'showRegistrationForm'])->name('register');
-// Route::post('/register', [RegistController::class, 'register'])->name('index.register');
 
 Route::get('/admin-rating',[RatingViewController::class, 'showViewRating']); // hiển thị view rating
+
 
 Route::get('/about-me',[ProfileCustomerViewController::class, 'showViewProfileCustomer']); // hiển thị view chi tiết của khách hàng
 Route::get('/history-buy',[HistotyViewBuyItems::class,'showViewHistoryBuyItems'])->name('history-buy'); // hiển thị lịch sử mua hàng
@@ -162,3 +165,12 @@ Route::get('/detail-history/{id_order}',[DetailViewBuyItems::class, 'viewDetailB
 // Route::get('/testcai', [TestController::class, 'testcai']);
 Route::get('/payment-buy-vnpay',[PaymentByVnPay::class, 'showViewPayByVNPay']);
 Route::get('/success-buy-items',[SuccessPaymoneyViewController::class, 'showViewSuccessPaymoney']); // trả về view thanh toán thành công
+
+//Danh mục bài viết
+Route::get('/category-post',[CategoryPostViewController::class, 'showViewCategoryPost'])->name('indexcategorypost');
+Route::get('/add-categorypost',[CategoryPostViewController::class,'showViewAddCategoryPost'])->name('category-post-showadd');
+Route::post('/add-categorypost',[CategoryPostViewController::class, 'addDataCategoryPost'])->name('adddatacategorypost');
+Route::get('/delete-category-post/{id}',[CategoryPostViewController::class, 'deleteDataCategoryPost'])->name('delete-category-post');
+Route::get('/update-category-post/{id}',[CategoryPostViewController::class, 'showUpdateDataCategoryPost'])->name('update-category-post');
+Route::post('/update-category-post/{id}',[CategoryPostViewController::class, 'UpdateDataCategoryPost'])->name('updatecategorypost');
+
