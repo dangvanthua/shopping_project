@@ -202,13 +202,13 @@ class ProductView extends Controller
         }
 
         // Xử lý ảnh sản phẩm
-        $get_image = $request->file('product_image');
+        $get_image = $request->file('images');
         if ($get_image) {
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = pathinfo($get_name_image, PATHINFO_FILENAME);
             $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
             $get_image->move('uploads/product', $new_image);
-            $data['product_image'] = $new_image;
+            $data['images'] = $new_image;
         }
 
         // Cập nhật dữ liệu sản phẩm

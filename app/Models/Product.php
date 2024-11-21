@@ -19,6 +19,8 @@ class Product extends Model
         'describe',
         'price',
         'images',
+        'category_status',
+        'product_status',
         'hot',
         'is_active',
         'sale',

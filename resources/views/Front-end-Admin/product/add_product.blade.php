@@ -48,9 +48,9 @@
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hình ảnh sản phẩm</label>
-                            <input type="file" name="product_image" class="form-control">
-                            @if ($errors->has('product_image'))
-                                <span class="text-danger">{{ $errors->first('product_image') }}</span>
+                            <input type="file" name="images" class="form-control">
+                            @if ($errors->has('images'))
+                                <span class="text-danger">{{ $errors->first('images') }}</span>
                             @endif
                         </div>
 

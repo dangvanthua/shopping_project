@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_category');
             $table->string('images');
             $table->string('category_status')->default(0);
+            $table->string('product_status')->default(0);
             $table->boolean('is_active')->default(1);
             $table->integer('number_of_purchases')->default(0);
             $table->integer('price');

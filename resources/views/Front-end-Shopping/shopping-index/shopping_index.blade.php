@@ -280,7 +280,7 @@
             <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 product-item watches">
                 <div class="block2">
                     <div class="block2-pic hov-img0">
-                        <img src="{{ URL::to('uploads/product/'.$product->product_image) }}" alt="IMG-PRODUCT">
+                        <img src="{{ URL::to('uploads/product/'.$product->images) }}" alt="IMG-PRODUCT">
 
                         <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
@@ -291,11 +291,11 @@
                         <div class="block2-txt-child1 flex-col-l">
                            <a href="{{ URL::to('product-detail/'.$product->id_product) }}" 
                             class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                            {{ $product->product_name }}
+                            {{ $product->name }}
                             </a>
 
                             <span class="stext-105 cl3">
-                                {{ number_format($product->product_price, 0, ',', '.') }} đ
+                                {{ number_format($product->price, 0, ',', '.') }} đ
                             </span>
                         </div>
 
