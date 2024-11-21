@@ -8,7 +8,6 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
     <div class="logo">
         <img class="hinh hinh1" src="{{ asset("images/black_logo.png") }}" alt="">
@@ -20,10 +19,16 @@
             <strong>Register</strong>
         </div>
 
-        <form method="post" action="{{ route('index.register') }}" autocomplete="on">
+        <!-- Hiển thị thông báo status -->
+        @if(session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
 
+        <form method="post" action="{{ route('index.register') }}" autocomplete="on">
             @csrf
-            <!--First name-->
+            <!-- First name -->
             <div class="box">
                 <label for="userName" class="fl fontLabel"> UserName: </label>
                 <div class="new iconBox">
@@ -38,8 +43,7 @@
                     {{$errors->first('username')}}
                 </div>
             @endif
-            <!--First name-->
-            <!---Email ID---->
+            <!-- Email ID -->
             <div class="box">
                 <label for="email" class="fl fontLabel"> Email ID: </label>
                 <div class="fl iconBox"><i class="fa fa-envelope" aria-hidden="true"></i></div>
@@ -52,28 +56,20 @@
                     {{$errors->first('email')}}
                 </div>
             @endif
-            <!--Email ID----->
-
-            <!---Phone No.------>
+            <!-- Phone No. -->
             <div class="box">
                 <label for="phone" class="fl fontLabel"> Phone No.: </label>
                 <div class="fl iconBox"><i class="fa fa-phone-square" aria-hidden="true"></i></div>
                 <div class="fr">
                     <input type="text" required name="phoneNo" maxlength="10" placeholder="Phone No." class="textBox">
                 </div>
-                @if ($errors->has('phone'))
-                    <span class="text-danger">{{ $errors->first('phone') }}</span>
+                @if ($errors->has('phoneNo'))
+                    <div class="error-message" class="alert alert-danger">
+                        {{$errors->first('phoneNo')}}
+                    </div>
                 @endif
             </div>
-            @if ($errors->has('phoneNo'))
-                <div class="error-message" class="alert alert-danger">
-                    {{$errors->first('phoneNo')}}
-                </div>
-            @endif
-            <!---Phone No.---->
-
-
-            <!---Password------>
+            <!-- Password -->
             <div class="box">
                 <label for="password" class="fl fontLabel"> Password: </label>
                 <div class="fl iconBox"><i class="fa fa-key" aria-hidden="true"></i></div>
@@ -86,9 +82,7 @@
                     {{$errors->first('password')}}
                 </div>
             @endif
-            <!---Password---->
-
-            <!---Confirm Password------>
+            <!-- Confirm Password -->
             <div class="box">
                 <label for="Confirmpassword" class="fl fontLabel"> Confirm Password: </label>
                 <div class="fl iconBox"><i class="fa fa-key" aria-hidden="true"></i></div>
@@ -102,16 +96,12 @@
                     {{$errors->first('confirmpassword')}}
                 </div>
             @endif
-            <!---ConfirmPassword---->
-
-            <!---Submit Button------>
+            <!-- Submit Button -->
             <div class="box box-submit">
                 <input type="submit" name="Submit" class="submit" value="SUBMIT">
             </div>
-            <!---Submit Button----->
         </form>
     </div>
-    <!--Body of Form ends--->
 </body>
 
 </html>
