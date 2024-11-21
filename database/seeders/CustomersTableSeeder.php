@@ -12,7 +12,7 @@ class CustomersTableSeeder extends Seeder
     public function run()
     {
         // Thêm khách hàng vào bảng customers
-        DB::table('customers')->insert([
+        DB::table('customers')->insert(
             [
                 'name' => 'Đỗ Tiến Đại',
                 'email' => 'dotiendai789@gmail.com',
@@ -45,6 +45,6 @@ class CustomersTableSeeder extends Seeder
                 'address' => '123 Đường ABC, TP. Hồ Chí Minh',
                 'token' => strtoupper(Str::random(10)), // Không có token khi tạo mới
             ]
-        ]);
+        );
     }
 }

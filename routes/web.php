@@ -62,9 +62,9 @@ Route::get('/testcai', [TestController::class, 'testcai']);
 // Route::get('/demo',TestController::class,'testcai');
 Route::get('demo', [TestController::class, 'testcai']);
 
-// Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
-// Route::post('/login', [LoginController::class, 'login'])->name('login');
-// Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 
@@ -107,10 +107,12 @@ Route::post('update-product/{product_id}', [ProductView::class, 'update_product'
 Route::get('delete-product/{product_id}', [ProductView::class, 'delete_product'])->name('delete_product');
 
 //Category_product
+//Category_product
 Route::get('/add-category-product', [CategoryProductView::class, 'add_category_product'])->name('add_category_product');
 Route::get('/all-category-product', [CategoryProductView::class, 'all_category_product'])->name('all_category_product');
 Route::post('save-category-product', [CategoryProductView::class, 'save_category_product'])->name('save_category_product');
 //Route::get('/api/all-category-product', [CategoryProductController::class, 'api_all_category_product'])->name('api.all_category_product');
+Route::get('search-category', [CategoryProductView::class, 'search'])->name('search_category');
 
 Route::get('unactive-category-product/{category_product_id}', [CategoryProductView::class, 'unactive_category_product'])->name('unactive_category_product');
 Route::get('active-category-product/{category_product_id}', [CategoryProductView::class, 'active_category_product'])->name('active_category_product');
@@ -118,13 +120,9 @@ Route::get('active-category-product/{category_product_id}', [CategoryProductView
 Route::get('edit-category-product/{category_product_id}', [CategoryProductView::class, 'edit_category_product'])->name('edit_category_product');
 Route::post('update-category-product/{category_product_id}', [CategoryProductView::class, 'update_category_product'])->name('update_category_product');
 // //Xoa
+
 Route::get('delete-category-product/{category_product_id}', [CategoryProductView::class, 'delete_category_product'])->name('delete_category_product');
 Route::get('delete-category-product/{category_product_id}', [CategoryProductView::class, 'delete_category_product'])->name('delete_category_product');
-
-
-
-
-
 Route::get('category', [CategoryViewController::class, 'index']);
 
 // Route home
@@ -194,12 +192,15 @@ Route::get('/404', [Error404ViewController::class, 'showViewError404'])->name('p
 Route::get('/success-buy-items', [SuccessPaymoneyViewController::class, 'showViewSuccessPaymoney']); // trả về view thanh toán thành công
 
 
-//Category_product
-Route::get('/add-category-product', [CategoryProductView::class, 'add_category_product'])->name('add_category_product');
-Route::get('/all-category-product', [CategoryProductView::class, 'all_category_product'])->name('all_category_product');
-Route::post('save-category-product', [CategoryProductView::class, 'save_category_product'])->name('save_category_product');
-//Route::get('/api/all-category-product', [CategoryProductController::class, 'api_all_category_product'])->name('api.all_category_product');
-Route::get('search-category', [CategoryProductView::class, 'search'])->name('search_category');
+//Danh mục bài viết
+Route::get('/category-post', [CategoryPostViewController::class, 'showViewCategoryPost'])->name('indexcategorypost');
+Route::get('/add-categorypost', [CategoryPostViewController::class, 'showViewAddCategoryPost'])->name('category-post-showadd');
+Route::post('/add-categorypost', [CategoryPostViewController::class, 'addDataCategoryPost'])->name('adddatacategorypost');
+Route::get('/delete-category-post/{id}', [CategoryPostViewController::class, 'deleteDataCategoryPost'])->name('delete-category-post');
+Route::get('/update-category-post/{id}', [CategoryPostViewController::class, 'showUpdateDataCategoryPost'])->name('update-category-post');
+Route::post('/update-category-post/{id}', [CategoryPostViewController::class, 'UpdateDataCategoryPost'])->name('updatecategorypost');
+
+
 
 
 Route::get('/attibute', [AttributeViewController::class, 'showThemmeAttributeIndex']);

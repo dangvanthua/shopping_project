@@ -1,0 +1,41 @@
+.highcharts-figure {
+    margin: 0 auto; /* Căn giữa các biểu đồ */
+    padding: 15px; /* Thêm khoảng cách giữa các biểu đồ */
+}
+
+#revenue-chart, #order-status-chart {
+    width: 100%; /* Đảm bảo biểu đồ chiếm hết chiều rộng cột */
+}
+
+.table-bordered th, .table-bordered td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.box {
+    margin-bottom: 20px; /* Khoảng cách giữa các box */
+}
+
+.box .box-header {
+    background-color: #f5f5f5; /* Màu nền header */
+    padding: 10px;
+}
+
+.box-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.table th {
+    background-color: #d9edf7; /* Màu nền của tiêu đề bảng */
+}
+
+.table-responsive {
+    max-height: 400px; /* Giới hạn chiều cao bảng */
+    overflow-y: auto; /* Cuộn dọc nếu bảng quá cao */
+}
+
+.mt-3 {
+    margin-top: 30px;
+}

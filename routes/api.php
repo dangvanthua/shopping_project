@@ -24,6 +24,7 @@ use App\Http\Controllers\Api\FavoriteApiController;
 use App\Http\Controllers\Api\ShippingMethodController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -100,6 +101,7 @@ Route::get('/search-history-items', [HistoryBuyItems::class, 'fullTextSearchHist
 
 
 
+
 //Demo thanh toán bằng api VNPAY
 Route::post('/payment-vnpay', [VnPayController::class, 'createPayment'])->name('create.payment');
 Route::get('/vnpay-return', function (Request $request) {
@@ -135,3 +137,7 @@ Route::prefix('shipping-methods')->group(function () {
     Route::put('{id}', [ShippingMethodController::class, 'update']);
     Route::delete('{id}', [ShippingMethodController::class, 'destroy']);
 });
+//Của Thanh Phong
+Route::get('/favorites/{customerId}', [FavoriteApiController::class, 'index']); // Lấy danh sách yêu thíchRoute::post('/favorites', [FavoriteApiController::class, 'store']); // Thêm sản phẩm yêu thích
+Route::get('/favorites/{customerId}/{favoriteId}', [FavoriteApiController::class, 'show']); // Xem sản phẩm yêu thích
+Route::delete('/favorites/{customerId}/{favoriteId}', [FavoriteApiController::class, 'destroy']); // Xóa sản phẩm yêu thích
