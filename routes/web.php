@@ -23,10 +23,12 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Api\PaymentByVNPayController;
 use App\Http\Controllers\Api\ProfileCustomerViewController;
+use App\Http\Controllers\Api\ShippingMethodController;
 use App\Http\Controllers\Api\VnPayController;
 use App\Http\Controllers\CategoryPostViewController;
-
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DetailViewBuyItems;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\HistotyViewBuyItems;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentByVnPay;
@@ -166,6 +168,7 @@ Route::get('/detail-history/{id_order}',[DetailViewBuyItems::class, 'viewDetailB
 Route::get('/payment-buy-vnpay',[PaymentByVnPay::class, 'showViewPayByVNPay']);
 Route::get('/success-buy-items',[SuccessPaymoneyViewController::class, 'showViewSuccessPaymoney']); // trả về view thanh toán thành công
 
+
 //Danh mục bài viết
 Route::get('/category-post',[CategoryPostViewController::class, 'showViewCategoryPost'])->name('indexcategorypost');
 Route::get('/add-categorypost',[CategoryPostViewController::class,'showViewAddCategoryPost'])->name('category-post-showadd');
@@ -173,4 +176,21 @@ Route::post('/add-categorypost',[CategoryPostViewController::class, 'addDataCate
 Route::get('/delete-category-post/{id}',[CategoryPostViewController::class, 'deleteDataCategoryPost'])->name('delete-category-post');
 Route::get('/update-category-post/{id}',[CategoryPostViewController::class, 'showUpdateDataCategoryPost'])->name('update-category-post');
 Route::post('/update-category-post/{id}',[CategoryPostViewController::class, 'UpdateDataCategoryPost'])->name('updatecategorypost');
+
+
+//Của Phong
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index'); // Trang hiển thị danh sách
+Route::get('/favorites/{customerId}/{favoriteId}', [FavoriteController::class, 'show'])->name('favorites.show'); // Trang xem chi tiết
+
+//Method
+Route::get('/shipping-methods', [ShippingMethodController::class, 'indexView'])->name('shipping-methods.index');
+Route::get('shipping-method/create', [ShippingMethodController::class, 'create'])->name('shipping-method.create');
+Route::post('/shipping-methods', [ShippingMethodController::class, 'store'])->name('shipping-methods.store');
+Route::get('/shipping-method/{id}/edit', [ShippingMethodController::class, 'edit'])->name('shipping-method.edit');
+Route::put('/shipping-method/{id}', [ShippingMethodController::class, 'update'])->name('shipping-method.update');
+Route::delete('/shipping-method/{id}', [ShippingMethodController::class, 'destroy'])->name('shipping-method.destroy');
 
