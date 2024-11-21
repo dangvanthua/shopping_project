@@ -64,4 +64,5 @@ class CustomerSeeder extends Seeder
             ],
         ]);
     }
+    
 }

@@ -84,6 +84,6 @@ class UserController extends Controller
         $password_hash = bcrypt($request->input('password'));
         $customer->update(['password' => $password_hash, 'token' => null]);
 
-        // return redirect()->route('auth.password')->with('status', 'Mật khẩu đã được cập nhật thành công!');
+        return redirect()->route('login.form')->with('status', 'Mật khẩu đã được cập nhật thành công!');
     }
 }

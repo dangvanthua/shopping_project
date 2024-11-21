@@ -28,7 +28,7 @@ class ReviewController extends Controller
             ->select('review.*', 'customers.name as customer_name')
             ->get();
 
-        return view('Front-end-Shopping.product_detail', compact('product', 'reviews'));
+        return view('Front-end-Shopping.product.product_detail', compact('product', 'reviews'));
     }
 
     public function saveReview(Request $request)
