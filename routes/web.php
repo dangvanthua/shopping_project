@@ -29,6 +29,7 @@ use App\Http\Controllers\CategoryPostViewController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DetailViewBuyItems;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\Error404ViewController;
 use App\Http\Controllers\HistotyViewBuyItems;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentByVnPay;
@@ -198,4 +199,6 @@ Route::delete('/shipping-method/{id}', [ShippingMethodController::class, 'destro
 Route::get('/success-buy-items',[SuccessBuyItemsViewController::class, 'showViewSuccessBuyItems'])->name('success.buy');
 
 //Thống kê bên admin
-Route::get('/statistical',[StatisticalViewController::class, 'showStatisticalView']);
+Route::get('/statistical',[StatisticalViewController::class, 'showStatisticalView'])->name('statistical');
+
+Route::get('/404',[Error404ViewController::class, 'showViewError404'])->name('page-404');
