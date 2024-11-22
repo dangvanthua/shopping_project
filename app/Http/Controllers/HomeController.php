@@ -14,15 +14,11 @@ class HomeController extends Controller
     public function index()
     {
         $cate_product = DB::table('category')->where('category_status', '0')->orderby('id_category', 'desc')->get();
-
-
-        $all_product = DB::table('product')
+        $product = DB::table('product')
             ->join('category', 'category.id_category', '=', 'product.id_category')
-
             ->orderby('product.id_product', 'desc')->get();
-
-        $all_product = DB::table('product')->where('product_status', '0')->orderby(DB::raw('RAND()'))->paginate(8);
-        return view('Front-end-Shopping.shopping-index.shopping_index')->with('category', $cate_product)->with('all_product', $all_product);
+        $product = DB::table('product')->where('product_status', '0')->orderby(DB::raw('RAND()'))->paginate(8);
+        return view('Front-end-Shopping.shopping-index.shopping_index')->with('category', $cate_product)->with('product', $product);
     }
 
     public function filter(Request $request)

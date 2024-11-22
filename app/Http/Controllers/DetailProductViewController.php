@@ -12,7 +12,6 @@ use Illuminate\Support\Str;
 
 class DetailProductViewController extends Controller
 {
-    //
     // hiển thị giao diện chi tiết sản phẩm và mã hoá lại id+product
     public function showViewProductDetail($id_slug)
     {
@@ -20,12 +19,9 @@ class DetailProductViewController extends Controller
         $product = Product::findOrFail($id_product);
         // thực hiện tạo slug
         $expectedSlug = Str::slug($product->name);
-        // dd($slug); die();
-        // dd($expectedSlug);
         if ($slug !== $expectedSlug) {
             abort(404);
         }
-
         // thực thi lấy các thuộc tính attribute_value
         $sizeAttribute = Attribute::where('name', 'Kích thước')->first();
         $size = $sizeAttribute ? AttributeValue::where('id_attribute', $sizeAttribute->id_attribute)->get() : collect();

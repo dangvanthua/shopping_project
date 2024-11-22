@@ -58,6 +58,24 @@ class ProductSeeder extends Seeder
                 'quantity_available' => 90,
             ],
         ]);
+
+        // Tạo thêm nhiều sản phẩm với vòng lặp
+        for ($i = 4; $i <= 35; $i++) {
+            DB::table('product')->insert([
+                'id_category' => rand(1, 5), // Random từ 1 đến 5 danh mục
+                'name' => 'Sản phẩm mẫu ' . $i,
+                'describe' => 'Mô tả sản phẩm mẫu ' . $i,
+                'price' => rand(100000, 500000), // Random giá trong khoảng
+                'images' => 'product' . $i . '.jpg',
+                'category_status' => rand(0, 1),
+                'product_status' => rand(0, 1),
+                'hot' => rand(0, 1),
+                'is_active' => 1,
+                'sale' => rand(0, 1),
+                'number_of_purchases' => rand(10, 100),
+                'quantity_available' => rand(20, 150),
+            ]);
+        }
     }
 
 }

@@ -309,5 +309,4 @@
         }
     });
 </script>
-
 @endsection

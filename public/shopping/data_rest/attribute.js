@@ -214,7 +214,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         </td>`;
             attributeList.appendChild(tr);
         });
-
     }
 
     // @ xử lý sự kiện nhấn tìm kiếm
@@ -233,28 +232,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => {
                 console.error('Có lỗi xảy ra:', error);
             });
-    })
-
-
-    // document.getElementById('btn-search').addEventListener('click',function(){
-    //     const query = document.getElementById('search-key').value;
-
-    //     fetch(`api/attribute/search?query=${query}`).then(response => response.json())
-    //     .then(data => {
-    //         if(data.data.length > 0)
-    //         {
-    //             showDataSearch(data.data);
-    //         }
-    //         else{
-    //             document.getElementById('attribute-list').innerHTML = '<tr><td colspan="5">Không tìm thấy kết quả</td></tr>';
-    //         }
-    //     }).catch(error => {
-    //         console.error('Đã có lỗi xảy ra',error)
-    //     });
-
-    // })
-
-
+    });
     // Gọi hàm để load dữ liệu lần đầu
     fetchAttributes();
 
