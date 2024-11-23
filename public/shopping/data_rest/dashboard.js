@@ -175,10 +175,10 @@ function showViewSearchDashboard(data_dashboard) {
             <td>${index+1}</td>
             <td>
                 <ul>
-                    <li>Name: ${item.customer ? item.customer.name : 'N/A'}</li>
-                    <li>Email: ${item.customer ? item.customer.email : 'N/A'}</li>
-                    <li>Phone: ${item.customer ? item.customer.phone : 'N/A'}</li>
-                    <li>Address: ${item.customer ? item.customer.address : 'N/A'}</li>
+                    <li>Name: ${item.customer_name ? item.customer_name : item.order.customer.name}</li>
+                    <li>Email: ${item.customer_email ? item.customer_email : 'N/A'}</li>
+                    <li>Phone: ${item.customer_phone ? item.customer_phone : 'N/A'}</li>
+                    <li>Address: ${item.shipping_address ? item.shipping_address : 'N/A'}</li>
                 </ul>
             </td>
             <td>${formatMoney}</td>
@@ -249,12 +249,6 @@ document.getElementById('btn-search').addEventListener('click', function (event)
         })
         .catch(error => console.error("Đã có lỗi xảy ra", error));
 });
-
-
-
-
-
-
 
 
 
