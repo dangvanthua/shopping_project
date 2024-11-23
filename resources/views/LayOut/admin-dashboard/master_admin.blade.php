@@ -219,14 +219,9 @@
                     <i class="fa fa-cart-arrow-down"></i> <span>Đánh giá</span>
                 </a>
             </li>
-          <li class="{{ Request::is('admin-datn/article*') ? 'active' : '' }}">
-            <a href="">
-                <i class="fa fa-circle-o-notch"></i> <span>Danh sách bài viết</span>
-            </a>
-          </li>
             <li class="{{ Request::is('admin-datn/article*') ? 'active' : '' }}">
-              <a href="">
-                  <i class="fa fa-circle-o-notch"></i> <span>Bài viết</span>
+              <a href="{{ Route('indexcategorypost') }}">
+                  <i class="fa fa-circle-o-notch"></i> <span>Danh mục bài viết</span>
               </a>
             </li>
             <li class="{{ Request::is('admin-datn/article*') ? 'active' : '' }}">
