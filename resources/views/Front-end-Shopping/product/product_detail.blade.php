@@ -246,7 +246,7 @@
                                             <div class="size-207">
                                                 <div class="flex-w flex-sb-m p-b-17">
                                                     <span class="mtext-107 cl2 p-r-20">
-                                                       {{ $review->customer->name }}
+                                                       {{-- {{ $review->customer->name }} --}}
                                                     </span>
     
                                                     <span class="fs-18 cl11">
@@ -255,11 +255,9 @@
                                                         @endfor
                                                     </span>
                                                 </div>
-    
                                                 <p class="stext-102 cl6">
                                                       {{ $review->comment }}
                                                 </p>
-
                                                 <div class="review-actions">
                                                     <i class="zmdi zmdi-edit edit-icon" data-id="{{ $review->id_review }}" style="cursor: pointer;"></i>
                                                     <i class="zmdi zmdi-delete delete-icon" data-id="{{ $review->id_review }}" style="cursor: pointer; margin-left: 10px;"></i>

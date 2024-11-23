@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
             totalPrice += parseFloat(data.total_price);
             const row = `<li class="header-cart-item flex-w flex-t m-b-12">
                 <div class="header-cart-item-img">
-                    <img src="/path/to/your/image/item-cart-01.jpg" alt="IMG">
+                    <img src="/images/3-2.jpg" alt="IMG">
                 </div>
                 <div class="header-cart-item-txt p-t-8">
                     <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">

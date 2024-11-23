@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         order.order_items.forEach(item => {
                             productsHtml += `
                             <div class="product-item">
-                                <img src="${item.product.image_url}" alt="${item.product.name}">
+                                <img src="/images/3-2.jpg" alt="${item.product.name}">
                                 <div class="product-info">
                                     <p class="product-name">${item.product.name}</p>
                                     <p>Số lượng: ${item.quantity}</p>
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             <h4>Tổng cộng: ${Number(order.total_item).toLocaleString()}₫</h4>
                         </div>
                         <div class="text-center mt-4">
-                            <a href="" class="btn btn-secondary">Quay lại lịch sử mua hàng</a>
+                            <a href="/" class="btn btn-secondary">Trở về trang chủ</a>
                         </div>`;
 
                         getDataElement.insertAdjacentHTML('beforeend', row);

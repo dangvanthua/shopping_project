@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <tr class="table_row">
             <td class="column-1">
                 <div class="how-itemcart1">
-                    <img src="images/item-cart-04.jpg" alt="IMG">
+                    <img src="images/3-2.jpg" alt="IMG">
                 </div>
             </td>
             <td class="column-2">${data.product_name}</td>

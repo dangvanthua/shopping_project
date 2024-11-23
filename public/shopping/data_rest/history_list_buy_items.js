@@ -14,9 +14,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         const formattedDate = `${day}/${month}/${year}`;
                         const row = `
                         <div class="order-item">
-                            <div class="order-img">
-                                <img src="https://via.placeholder.com/100" alt="Product Image" class="img-fluid">
-                            </div>
                             <div class="order-info">
                                 <p><strong>${items.customer_name}</strong></p>
                                 <p>Địa chỉ: ${items.shipping_address}</p>

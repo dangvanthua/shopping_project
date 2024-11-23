@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
-                        <img src="../uploads/product/${product.images}">
+                        <img src="/images/${product.images}">
                     </div>
                     <div class="block2-txt flex-w flex-t p-t-14">
                         <div class="block2-txt-child1 flex-col-l ">

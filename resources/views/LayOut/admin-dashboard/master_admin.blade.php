@@ -187,9 +187,6 @@
               </span>
             </div>
           </form>
-          <!-- /.search form -->
-          <!-- sidebar menu: : style can be found in sidebar.less -->
-          {{-- @todo lai --}}
           <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <li class="{{ Request::is('admin-datn') ? 'active' : '' }}">
@@ -202,55 +199,36 @@
                   <i class="fa fa-list"></i> <span>Thuộc tính</span>
               </a>
             </li>
-
-             {{-- @comment --}}
             <li class="{{ Request::is('admin-datn/menu*') ? 'active' : '' }}">
               <a href="{{Route('all_category_product')}}">
                   <i class="fa fa-list"></i> <span>Danh mục</span>
               </a>
             </li>
-
             <li class="{{ Request::is('admin-datn/type-product*') ? 'active' : '' }}">
                 <a href="">
                     <i class="fa fa-spinner"></i> <span>Danh mục liên quan</span>
                 </a>
             </li>
-            <li class="{{ Request::is('admin-datn/attribute*') ? 'active' : '' }}">
-                <a href="">
-                    <i class="glyphicon glyphicon-asterisk"></i> <span>Phân loại(tt)</span>
-                </a>
-            </li>
-
             <li class="{{ Request::is('admin-datn/product*') ? 'active' : '' }}">
               <a href="{{Route('all_product')}}">
                     <i class="fa fa-fw fa-anchor"></i> <span>Sản phẩm</span>
                 </a>
             </li>
-
             <li class="{{ Request::is('admin-datn/transaction*') ? 'active' : '' }}">
-                <a href="">
-                    <i class="fa fa-cart-arrow-down"></i> <span>Đơn hàng</span>
+                <a href="{{ Route('admin-rating') }}">
+                    <i class="fa fa-cart-arrow-down"></i> <span>Đánh giá</span>
                 </a>
             </li>
-
-            <li class="{{ Request::is('admin-datn/transaction*') ? 'active' : '' }}">
-              <a href="">
-                  <i class="fa fa-cart-arrow-down"></i> <span>Loại sản phẩm</span>
-              </a>
-          </li>
-
           <li class="{{ Request::is('admin-datn/article*') ? 'active' : '' }}">
             <a href="">
                 <i class="fa fa-circle-o-notch"></i> <span>Danh sách bài viết</span>
             </a>
           </li>
-
             <li class="{{ Request::is('admin-datn/article*') ? 'active' : '' }}">
               <a href="">
                   <i class="fa fa-circle-o-notch"></i> <span>Bài viết</span>
               </a>
             </li>
-
             <li class="{{ Request::is('admin-datn/article*') ? 'active' : '' }}">
               <a href="{{ Route('shipping-methods.index') }}">
                   <i class="fa fa-circle-o-notch"></i> <span>Nhà vận chuyển</span>
@@ -262,7 +240,6 @@
                     <i class="fa fa-commenting"></i> <span>Envents</span>
                 </a>
             </li>
-
             <li class="header">Hệ Thống</li>
 
             <li class="{{ Request::is('admin-datn/statistical*') ? 'active' : '' }}">
@@ -281,13 +258,9 @@
                   <i class="fa fa-users"></i> <span>Tài Khoản</span>
               </a>
           </li>
-
-
           </ul>
         </section>
-        <!-- /.sidebar -->
       </aside>
-      <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         @yield('content')
       </div>
@@ -296,15 +269,8 @@
           <b>Version</b> 2.4.0
         </div>
       </footer>
-      <!-- Control Sidebar -->
-
-      <!-- /.control-sidebar -->
-      <!-- Add the sidebars background. This div must be placed
-        immediately after the control sidebar -->
       <div class="control-sidebar-bg"></div>
     </div>
-    <!-- ./wrapper -->
-    <!-- jQuery 3 -->
     <script src="{{ asset('admin/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('admin/bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
