@@ -61,7 +61,7 @@
                 @foreach ($shipping as $items)
                 <div class="payment-option">
                     <input type="radio" name="shipping_method" value="{{ $items->id_shipping_method }}">
-                    <label for="cod"><img src="" alt="COD">{{ $items->method_name }}</label>
+                    <label for="cod"><img src="">{{ $items->method_name }}</label>
                 </div>
                 @endforeach
             </div>
