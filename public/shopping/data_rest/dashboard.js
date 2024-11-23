@@ -159,11 +159,10 @@ function updateStatusDashBoard(idOrder, newStatus) {
         })
         .catch(error => console.error('Đã có lỗi xảy ra:', error));
 }
-// Hàm hiện thị view cho tìm kiếm dashboard @chua fix
+// Hàm hiện thị view cho tìm kiếm dashboard
 function showViewSearchDashboard(data_dashboard) {
     const data_view = document.getElementById('list_item');
     data_view.innerHTML = ''; // Xóa nội dung cũ
-
     data_dashboard.forEach((item,index) => {
         const row = document.createElement('tr');
         // Định dạng tiền tệ
