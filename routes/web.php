@@ -41,17 +41,6 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ShippingMethodController; // Đảm bảo bạn đã import đúng namespac
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 })->name('/home');
@@ -73,7 +62,7 @@ Route::get('/product', [ShoppingCartViewController::class, 'showDemoNha'])->name
 // hiển thị thanh toán
 Route::get('/pay-money', [PayMonneyViewController::class, 'showViewPayMoney'])->name('payMoney');
 // Đánh giá bên Admin
-Route::get('/admin-rating', [RatingViewController::class, 'showViewRating']); // hiển thị view rating
+Route::get('/admin-rating', [RatingViewController::class, 'showViewRating'])->name('admin-rating'); // hiển thị view rating
 Route::get('/about-me', [ProfileCustomerViewController::class, 'showViewProfileCustomer']); // hiển thị view chi tiết của khách hàng
 Route::get('/history-buy', [HistotyViewBuyItems::class, 'showViewHistoryBuyItems'])->name('history-buy'); // hiển thị lịch sử mua hàng
 Route::get('/detail-history/{id_order}', [DetailViewBuyItems::class, 'viewDetailBuyItems'])->name('order.details'); //hiển thị chi tiết sản phẩm đã mua
@@ -116,6 +105,9 @@ Route::post('/auth/get_password/{customer}/{token}', [UserController::class, 'su
 Route::get('register', [RegistController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegistController::class, 'register'])->name('index.register');
 Route::get('/verify/{token}', [RegistController::class, 'verify'])->name('verify');
+//
+
+
 
 //@Trần Thanh Phong
 Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index'); // Trang hiển thị danh sách
@@ -160,24 +152,6 @@ Route::get('delete-category-product/{category_product_id}', [CategoryProductView
 Route::get('category', [CategoryViewController::class, 'index']);
 //Route About
 Route::get('/about', [AboutController::class, 'about'])->name('about');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //Danh mục bài viết
 Route::get('/category-post', [CategoryPostViewController::class, 'showViewCategoryPost'])->name('indexcategorypost');
 Route::get('/add-categorypost', [CategoryPostViewController::class, 'showViewAddCategoryPost'])->name('category-post-showadd');

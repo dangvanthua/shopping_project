@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         totalPrice += parseFloat(items.total_price);
                         const row = `
             <div class="product-info">
-                <img src="" alt="Product Image">
+                <img src="images/3-2.jpg" alt="Product Image">
                 <div class="ml-12">
                     <h6>${items.product_name}</h6>
                     <h7>Màu sắc: ${items.color}</h7><br>
