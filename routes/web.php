@@ -81,6 +81,7 @@ Route::post('/filter/price', [HomeController::class, 'filterByPrice'])->name('fi
 Route::post('/filter/sort', [HomeController::class, 'filterSort'])->name('filter.sort');
 Route::post('/search/products', [HomeController::class, 'searchProducts']);
 Route::post('/load-more/products', [HomeController::class, 'loadMore']);
+
 // Route Event
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/create', [EventController::class, 'create'])->name('create');

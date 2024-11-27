@@ -276,7 +276,7 @@
             </div>
         </div>
         <div class="row product-grid">
-            @foreach ($product as $items)
+            @foreach ($all_product as $items)
             <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
                 <div class="block2">
                     <div class="block2-pic hov-img0">

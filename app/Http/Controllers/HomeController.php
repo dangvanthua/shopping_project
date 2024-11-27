@@ -14,11 +14,15 @@ class HomeController extends Controller
     public function index()
     {
         $cate_product = DB::table('category')->where('category_status', '0')->orderby('id_category', 'desc')->get();
-        $product = DB::table('product')
+
+
+        $all_product = DB::table('product')
             ->join('category', 'category.id_category', '=', 'product.id_category')
+
             ->orderby('product.id_product', 'desc')->get();
-        $product = DB::table('product')->where('product_status', '0')->orderby(DB::raw('RAND()'))->paginate(8);
-        return view('Front-end-Shopping.shopping-index.shopping_index')->with('category', $cate_product)->with('product', $product);
+
+        $all_product = DB::table('product')->where('product_status', '0')->orderby(DB::raw('RAND()'))->paginate(8);
+        return view('Front-end-Shopping.shopping-index.shopping_index')->with('category', $cate_product)->with('all_product', $all_product);
     }
 
     public function filter(Request $request)
@@ -44,9 +48,9 @@ class HomeController extends Controller
         $query = DB::table('product');
 
         if ($sort === 'asc') {
-            $query->orderBy('product_price', 'asc');
+            $query->orderBy('price', 'asc');
         } elseif ($sort === 'desc') {
-            $query->orderBy('product_price', 'desc');
+            $query->orderBy('price', 'desc');
         }
 
         $products = $query->paginate(8, ['*'], 'page', $page);
@@ -64,7 +68,7 @@ class HomeController extends Controller
         $maxPrice = $request->input('max_price', 9999999999);
 
         $products = DB::table('product')
-            ->whereBetween('product_price', [$minPrice, $maxPrice])
+            ->whereBetween('price', [$minPrice, $maxPrice])
             ->paginate(8, ['*'], 'page', $request->input('page', 1));
 
         return response()->json([
@@ -89,8 +93,8 @@ class HomeController extends Controller
         }
 
         $products = DB::table('product')
-            ->where('product_name', 'like', "%$query%")
-            ->orWhere('product_desc', 'like', "%$query%")
+            ->where('name', 'like', "%$query%")
+            ->orWhere('describe', 'like', "%$query%")
             ->paginate($perPage, ['*'], 'page', $page);
 
         return response()->json([
